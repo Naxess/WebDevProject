@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Forms</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_forms_anchor"><h1>Django <span class="door">-</span> Forms</h1></a>
+<!--https://docs.djangoproject.com/en/5.0/topics/forms/-->
+<div class="form-control">
+    <p class="mb-1">
+        Django's form functionality can be used to simplify and automate the process of handling forms and can do it
+        more securely. Django handles three distinct parts of the work involved in forms:
+    </p>
+    <ul class="mb-1">
+        <li>Preparing and restructuring data to make it ready for rendering</li>
+        <li>Creating HTML forms for the data</li>
+        <li>Receiving and processing submitted forms and the data from the client</li>
+    </ul>
+    <p class="mt-0">
+        While it's certainly possible to write the code manually, Django already has this functionality built-in so it's
+        more time and labor efficient to make use of it.
+    </p>
+
+    <div class="form-control mb-2">
+        <a id="html_forms_anchor"><h2>HTML Forms</h2></a>
+        <p class="mb-1">
+            In HTML, a form is a collection of elements inside &lt;form&gt; tag that allow users to do things like
+            entering text, selecting options, manipulating objects/controls, etc.. and then send that information back
+            to the server. Some of these elements are built-in and self-contained, while others may require CSS or
+            Javascript to function. Like <em>&lt;input&gt;</em> elements, forms must specify two things:
+        </p>
+        <ul class="mb-1">
+            <li>
+                <em>where</em>. This is the URL to which the data corresponding to the user's input should be returned.
+            </li>
+            <li>
+                <em>how</em>. This is the HTTP method the data should be returned by.
+            </li>
+        </ul>
+        <p>
+            As an example, the login form for the Django admin contains three &lt;input&gt; elements. The input for the
+            username has the <em>type</em> attribute set to <u>"text"</u>, the password input has the <em>type</em>
+            attribute set to <u>"password"</u>, and the submit button has the <em>type</em> attribute set to
+            <u>"submit"</u>. it also tells the browser that the form data should be sent to the URL specified in the
+            &lt;form&gt;'s <em>action</em> attribute - <u>"/admin/"</u> - and that it should be sent using the HTTP
+            mechanism specified by the <em>method</em> attribute: <u>"post"</u>. When the submit button is pressed, the
+            data is sent to <em>/admin/</em>.
+        </p>
+
+        <div class="form-control mb-1">
+            <a id="get_and_post_anchor"><h3><em>GET</em> and <em>POST</em></h3></a>
+            <p>
+                <em>GET</em> and <em>POST</em> are the only HTTP methods to use when dealing with forms.
+            </p>
+            <p class="mb-1">
+                When a form is returned via the <em>POST</em> method, the browser bundles up the form data, encodes it
+                for transmission, send it to the server, and then receives back its response.
+            </p>
+            <p>
+                The <em>GET</em> method, by contrast, bundles the submitted data into a string, and uses this to compose
+                a URL. The URL contains the address where the data must be sent, as well as the data keys and values.
+            </p>
+            <p>
+                <em>GET</em> and <em>POST</em> are typically used for different purposes. Any request that could be used
+                to change the state of the system (e.g. changes to the database) should use <em>POST</em>. <em>GET</em>
+                should be used only for requests that do not affect the state of the system.
+            </p>
+            <p>
+                <em>GET</em> is also unsuitable for a password form, because the password would appear in the URL, and
+                thus, also in the browser history and server logs, all in plain text. It's also unsuitable for large
+                quantities of data, or for binary data, such as an image. A web application that uses <em>GET</em>
+                requests for admin forms is a security risk: it can be easy for an attacker to mimic a form's request to
+                gain access to sensitive parts of the system.
+                <br>
+                <em>POST</em>, coupled with other protections like Django's <em>CSRF protection</em> offers more control
+                over access. <em>GET</em> is more suitable for things like a web search form, because the URLs that
+                represent a <em>GET</em> request can easily be bookmarked, shared, or resubmitted.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="form_class_anchor"><h2>The <em>Form</em> Class</h2></a>
+        <p>
+            Central to this system of functionality is the <em>Form</em> class. This class describes a form and
+            determines how it works and how it appears. The fields in a form class map to HTML form
+            <em>&lt;input&gt;</em> elements. These fields are classes as well; they manage form data and perform
+            validation when a form is submitted. (e.g. Datefield, FileField, CharField, etc..). A form field is
+            represented to the user in the browser as an HTML widget - a piece of UI machinery. Each field type has a
+            corresponding <em>Widget</em> class, but can be overriden as needed.
+        </p>
+
+        <div class="form-control mb-1">
+            <a id="inst_proc_rend_forms_anchor"><h3>Instantiating, Processing, and Rendering Forms</h3></a>
+            <p class="mb-1">
+                Rendering an object in Django typically follows this schema:
+            </p>
+            <ul class="mb-1">
+                <li>Retrieve the object into the views.py class</li>
+                <li>Pass the object into the template context</li>
+                <li>Expand it to HTML markup using template variables</li>
+            </ul>
+            <p class="mb-1">
+                The way a form is rendered is very similar to the way other objects but there are some differences:
+            </p>
+            <ul class="mb-1">
+                <li>
+                    If a model instance contains no data, there's little that can be done with it, whereas an
+                    unpopulated form is typically rendered without any value.
+                </li>
+                <li>
+                    When handling a model instance in the view, it's typically retrieved from the database. When dealing
+                    with a form, it's typically instantiated in the view.
+                </li>
+                <li>
+                    When instantiating a form, it can be left empty or prepopulated with data from the following
+                    sources:
+                    <ul>
+                        <li>Data from a saved model instance</li>
+                        <li>Data that has been collated from other sources</li>
+                        <li>Data received from a previous HTML form submission</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="build_form_anchor"><h2>Building a Form</h2></a>
+        <div class="form-control mb-2">
+            <h5>An example of a manually-created form:</h5>
+            <pre>{% verbatim example_manual_form %}
+    &lt;form action="/your-name/" method="post"&gt;
+        &lt;label for="your_name"&gt;Your name: &lt;/label&gt;
+        &lt;input id="your_name" type="text" name="your_name" value="{{ current_name }}"&gt;
+        &lt;input type="submit" value="OK"&gt;
+    &lt;/form&gt;
+{% endverbatim example_manual_form %}</pre>
+            <p class="mt-1">
+                The above example tells the browser to return the form data to the URL: <em>/your-name/</em>, using the
+                <em>POST</em> method. It will display a text field, labeled <u>"Your name:"</u>, and a button marked
+                <u>"OK"</u>. If the template context contains a <em>current_name</em> variable, that will be used to
+                pre-fill the <em>your_name</em> field. The view that renders this template containing the HTML form
+                needs to supply the value for the <em>current_name</em> variable.
+            </p>
+            <p>
+                When the form is submitted, the <em>POST</em> request that is sent to the server will contain the form
+                data. It needs a view corresponding to the <em>/your-name/</em> URL, which will find the appropriate
+                key-value pairs in the request and then process them.
+            </p>
+            <p>
+                This is a simple form but fairly time-consuming. Some more advanced features that could be added are
+                browser-side validation and more complex fields (e.g. datepicker). In the below sections, we'll
+                demonstrate a faster and easier way to accomplish the same task using Django's form creation feature.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="create_form_anchor"><h3>Creating the form class</h3></a>
+            <p class="mb-1">
+                The first step to using the Forms feature is to create a Python file named <em>forms.py</em> in the
+                root directory of the desired application. Then, in the <em>forms.py</em> file, import <em>forms</em>
+                from the <em>django</em> module:
+            </p>
+            <pre>
+    from django import forms
+</pre>
+            <p class="mb-1">
+                The next step is to define a Form class. Create a class with your desired name that inherits from the
+                <em>forms.Form</em> class. Syntax:
+            </p>
+            <pre>
+    from django import forms
+    <strong>class <em>ExNameForm</em>(forms.Form):</strong>
+</pre>
+            <p class="mb-1">
+                Finally, we need to add input fields to the class we just created; these fields should correspond to an
+                HTML input element type (e.g. an input element with type="text" should use a CharField, type="email"
+                should use EmailField, etc..).
+            </p>
+            <pre class="mb-1">
+    from django import forms
+    class <em>ExNameForm</em>(forms.Form):
+        <strong>your_name = forms.CharField(label="Enter your name:", max_length=100)</strong>
+</pre>
+            <p class="my-1">
+                In the CharField, the <em>label</em> parameter fulfills the same role as the &lt;label&gt; element,
+                providing a description for the label. The <em>max_length</em> parameter specifies the upper limit for
+                the number of characters permitted for the input. There are other optional CharField parameters:
+                <em>min_length</em>, <em>strip</em>, and <em>empty_value</em>.
+            </p>
+            <p class="my-1">
+                <em>Form</em> instances also have an <em>is_valid()</em> method, which runs validation routines for all
+                its fields. When this method is called, if all fields contain valid data, it will do two things: return
+                <em>True</em> and place the form's data in its <em>cleaned_data</em> attribute.
+            </p>
+            <p class="mb-1">
+                The form, when rendered, will be the equivalent of the following HTML (minus the &lt;form&gt; tags,
+                we'll have to supply those ourselves):
+            </p>
+            <pre>
+    &lt;label for="your_name"&gt;Enter your name: &lt;/label&gt;
+    &lt;input id="your_name" type="text" name="your_name" maxlength="100" required&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="edit_viewspy_anchor"><h3>Editing the views.py</h3></a>
+            <p>
+                The form data of a webpage sent back to a Django website will be processed by a corresponding view,
+                typically the same view that rendered the template for that webpage. This permits reuse of some of the
+                same logic.
+            </p>
+            <p class="mb-1">
+                To handle the form, we need to instantiate it in the view for the URL where we want it to be published:
+            </p>
+            <pre>
+    from django.http import HttpResponseRedirect
+    from django.shortcuts import render
+
+    from ExampleApp.forms import ExNameForm <strong># The form needs to be imported before it can be used</strong>
+
+    def get_name(request):
+        if request.method == "POST": <strong># Processes the form data if it's a POST request</strong>
+            name_form = NameForm(request.POST) <strong># Creates a form instance and populates its with data from the request</strong>
+            if form.is_valid(): <strong># Checks whether the form instance's fields are valid</strong>
+                ...
+                <strong># In the code body, we can process the data using <em>form.cleaned_data</em> if needed</strong>
+                form_data = name_form.cleaned_data
+                name = form_data['your_name']
+                ...
+                return HttpResponseRedirect("/thanks/") <strong># Redirects to a new URL when processing is finished</strong>
+        else: <strong># If its a GET request, then we return an unpopulated form</strong>
+            ex_name_form = ExNameForm()
+        return render(request, "name.html", {"exnameform": ex_name_form}
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="edit_template_anchor"><h3>Editing the template</h3></a>
+            <p class="mb-1">
+                To add the form to the HTML page, add a csrf_token, then create a template tag, supplying it with the
+                name of the desired form. Create an &lt;input&gt; element tag with a <em>type</em> attribute set
+                to <u>"submit"</u>. Enclose the above elements with &lt;form&gt; element tags, setting its
+                <em>action</em> attribute to the desired URL and <em>method</em> attribute to <u>"post"</u>. See example
+                below:
+            </p>
+            <pre class="mb-1">{% verbatim template_example %}
+    &lt;form action="<em>/first_app/your-name/</em>" method="post"&gt;
+        {% csrf_token %}
+        {{ <em>exnameform</em> }}
+        &lt;input type="submit" value="Submit"&gt;
+    &lt;/form&gt;
+{% endverbatim template_example %}</pre>
+            <p class="mb-2">
+                All of the example form's fields and their attributes will be unpacked into HTML markup from that
+                {% verbatim exnameform %}{{ exnameform }}{% endverbatim exnameform %} by Django's
+                template language. Optionally, the template variable can also call the <em>as_p</em> method, which will
+                allow the form to be presented in the format of a &lt;p&gt; tag. If used, it should improve the layout
+                of the form (preferences may vary, obviously). Example: <br>
+                <code>{% verbatim exnameform %}{{ exnameform.<strong>as_p</strong> }}{% endverbatim exnameform %}</code>
+            </p>
+            <p class="mb-1">
+                The {% verbatim csrf_token %}{% csrf_token %}{% endverbatim csrf_token %} that we added is used for
+                protection against CSRF (Cross Site Request Forgeries). This is a type of attack that occurs when a
+                malicious website contains a link, a form button, or some JavaScript that is intended to perform some
+                action on your website, using the credentials of a logged-in user who visits the malicious site in their
+                browser.
+            </p>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="edit_urlspy_anchor"><h3>Editing the urls.py</h3></a>
+            <p class="mb-1">Example urls.py:</p>
+            <pre class="mb-1">
+    from first_app import views
+    from django.urls import path
+    urlpatterns = [
+        path('your-name', views.get_name, name='your_name_form'),
+        path('thanks', views.thanks, name='thanks'),
+    ]
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="more_django_info_anchor"><h2>More information about Django Form classes</h2></a>
+        <p>
+            All form classes are created as subclasses of either django.forms.Form or django.forms.ModelForm. (ModelForm
+            will be discussed in a different chapter.)
+        </p>
+
+        <div class="form-control mb-2">
+            <a id="bound_vs_unbound_anchor"><h3>Bound vs Unbound form instances</h3></a>
+            <ul>
+                <li>
+                    A unbound form has no data associated with it. When displayed to the user, it will be empty or
+                    contain default values.
+                </li>
+                <li>
+                    A bound form has submitted data, and hence can be used to tell if that data is valid. If an invalid
+                    bound form is rendered, it can include inline error messages telling the user what data to correct.
+                </li>
+            </ul>
+            <p class="mb-1">
+                The form's <em>is_bound</em> attribute can used to ascertain whether a form has data bound
+                to it.
+            </p>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="form_field_reference_anchor"><h3>Form Fields</h3></a>
+            <p>
+                The <em>forms</em> library comes with form fields other than CharField, such as BooleanField, DateField,
+                ImageField, etc.. These fields utilize a <a href="#widgets_anchor">widget</a>, that, if not specified
+                explicitly will use a default one. For each field, we can enable or disable settings that force an
+                input, or edit the label/help text/error messages, as well as whether or not to enable/disable the field
+                itself by editing its arguments (e.g. required, label, help_text, error_messages, disabled, etc..).
+                There are also field-specific arguments that edit things such as max/min length, regex pattern matching,
+                stripping, etc.. These field-specific ones may be individual to a particular field or to a type of
+                field.
+            </p>
+            <p class="mb-1">
+                Core field arguments describe arguments that are common to all form fields. See below table for the full
+                list:
+            </p>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#common_field_args_id">
+                            Core Field Arguments
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="common_field_args_id">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <tr class="table-primary">
+                                        <th>Argument</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    <tr>
+                                        <th>required</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                Forces the user to supply an input. Attempting to pass in a <u>None</u>
+                                                or <u>""</u> (empty string) will raise a <em>ValidationError.</em>
+                                            </p>
+                                            <pre style="font-size:0.9em;">
+f = forms.CharField(required=False)
+</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>label</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                Creates a text description that will be displayed next to the form
+                                                field's input, functions the same as how the &lt;label&gt; works.
+                                            </p>
+                                            <pre style="font-size:0.9em;">
+url = forms.URLField(label="Your website", required=False)
+</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>label_suffix</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                A string that is appended after the label is rendered, typically a
+                                                semicolon ( : ). Can be customized to display another character.
+                                            </p>
+                                            <pre style="font-size:0.9em;">
+captcha_answer = forms.IntegerField(label="2 + 2", label_suffix=" =")
+</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>initial</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This argument allows us to specify a default value for the input field.
+                                            </p>
+                                            <pre style="font-size:0.9em;">
+url = forms.URLField(initial="http://")
+</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>widget</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This argument allows us to specify the desired widget to use when
+                                                rendering the field.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>help_text</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This argument allows us to specify the descriptive text for the field.
+                                                If this value is provided, the text will be displayed next to the field
+                                                when it is rendered.
+                                            </p>
+                                            <pre style="font-size:0.9em;">
+sender = forms.EmailField(help_text="A valid email address, please.")
+</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>error_messages</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This argument allows overriding the default messages that the field will
+                                                raise. To use it, we need to pass in a dictionary with keys matching the
+                                                error messages to be overriden. Example usage:
+                                            </p>
+                                            <pre style="font-size:0.9em;">
+name = forms.CharField(error_messages={"required": "Please enter your name"})</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>validators</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This argument allows us to provide a list of validation functions for
+                                                this field.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>localize</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This argument enables the localization of form data input, as well as
+                                                the rendered output.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>disabled</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                If this argument is set to <u>True</u>, disables the form field using
+                                                the <em>disabled</em> HTML attribute. Prevents the user from editing the
+                                                field.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>template_name</th>
+                                        <td>
+                                            <p class="mb-1">
+                                                This agrument allows us to specify a custom template to be used when the
+                                                field is rendered with <em>as_field_group()</em>. By default, this value
+                                                is set to "django/forms/field.html". Can be changed per field by
+                                                overriding this attribute or more generally by overriding the default
+                                                template.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <h5>Form Field Reference</h5>
+            <div class="accordion mb-1">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#form_fields_id">
+                            Built-in Form Fields
+                        </button>
+                    </div>
+                    <div class="accordion-collapse collapse" id="form_fields_id">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <tr class="table-primary">
+                                        <th class="col-2">Form Field</th>
+                                        <th class="col-10">Description</th>
+                                    </tr>
+                                    <tr>
+                                        <th>BooleanField</th>
+                                        <td>
+                                            <p>class BooleanField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>CheckboxInput</em></li>
+                                                <li>Empty value: <em>False</em></li>
+                                                <li>Normalizes to: <em><u>True</u> or <u>False</u></em></li>
+                                                <li>
+                                                    Validates that the value if <u>True</u> if <em>required=True</em>
+                                                </li>
+                                                <li>Error message keys: <em>required</em></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>CharField</th>
+                                        <td>
+                                            <p>class CharField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TextInput</em></li>
+                                                <li>Empty value: <em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: <em>a string</em></li>
+                                                <li>
+                                                    Uses MaxLengthValidator and MinlengthValidator if max_length and
+                                                    min_length are provided. Otherwise, all inputs are valid.
+                                                </li>
+                                                <li>Error message keys: <em>required, max_length, min_length</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>max_length, min_length</em>. These specify the upper and lower
+                                                    limit on characters, respectively.
+                                                </li>
+                                                <li>
+                                                    <em>strip</em>. If <u>True</u> (default), the value will be stripped
+                                                    of leading and trailing whitespaces.
+                                                </li>
+                                                <li>
+                                                    <em>empty_value</em>. The value to use to represent "empty".
+                                                    Defaults to an empty string.
+                                                </li>
+                                            </ul>
+                                            <p></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>ChoiceField</th>
+                                        <td>
+                                            <p>class ChoiceField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>Select</em></li>
+                                                <li>Empty value: <em>''</em> (empty string)</li>
+                                                <li>Normalizes to: <em>a string</em></li>
+                                                <li>Validates that the given value exists in the list of choices.</li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>choices</em>. Either an iterable of 2-tuples to use as choices
+                                                    for this field, enumeration type, or a callable tha returns such an
+                                                    iterable. This argument accepts the same formats as the
+                                                    <em>choices</em> argument to a model field (see
+                                                    <a href="https://docs.djangoproject.com/en/5.0/ref/forms/fields/#choicefield">here</a>
+                                                    for additional details). If it is callable, it is evaluated every
+                                                    time the field's form is initialized, in addition to during
+                                                    rendering. Defaults to an empty list.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>DateField</th>
+                                        <td>
+                                            <p>class DateField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>DateInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>datetime.date</em> object</li>
+                                                <li>Validates that the given value is either a datetime.date,
+                                                    datetime.datetime or string formatted in a particular date format.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>input_formats</em>. An iterable of formats used to attempt to
+                                                    convert a string to a valid datetime.date object.
+                                                </li>
+                                            </ul>
+                                            <p>
+                                                If no input_formats argument is provided, the default input formats are
+                                                taken from the active locale format <em>DATE_INPUT_FORMATS</em> key, or
+                                                from <em>DATE_INPUT_FORMATS</em> if localization is disabled.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>DateTimeField</th>
+                                        <td>
+                                            <p>class DateTimeField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>DateTimeInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>datetime.datetime</em> object</li>
+                                                <li>
+                                                    Validates that the given value is either a datetime.datetime,
+                                                    datetime.date or string formatted in a particular datetime format.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>input_formats</em>. An iterable of formats used to attempt to
+                                                    convert a string to a valid datetime.datetime object, in addition to
+                                                    ISO 8601 formats. The field always accepts strings in ISO 8601
+                                                    formatted dates or similar recognized by <em>parse_datetime()</em>.
+                                                    Examples:
+                                                    <ul class="mb-1">
+                                                        <li>2006-10-25 14:30:59'</li>
+                                                        <li>2006-10-25T14:30:59'</li>
+                                                        <li>2006-10-25 14:30'</li>
+                                                        <li>2006-10-25T14:30'</li>
+                                                        <li>2006-10-25T14:30Z'</li>
+                                                        <li>2006-10-25T14:30+02:00'</li>
+                                                        <li>2006-10-25'</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <p class="my-1">
+                                                If no <em>input_formats</em> argument is provided, the default input
+                                                formats are taken from the active locale format
+                                                <em>DATETIME_INPUT_FORMATS</em> and <em>DATETIME_INPUT_FORMATS</em>
+                                                keys, or from <em>DATETIME_INPUT_FORMATS</em> and
+                                                <em>DATETIME_INPUT_FORMATS</em> if localization is disabled.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>DecimalField</th>
+                                        <td>
+                                            <p>class DecimalField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    Default widget: <em>NumberInput</em> when <em>Field.localize</em> is
+                                                    <u>False</u>, else <em>TextInput</em>.
+                                                </li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>decimal</em></li>
+                                                <li>Validates that the given value is a decimal. Uses
+                                                    MaxValueValidator/MinValueValidator if max_value/min_value arguments
+                                                    are provided. If step_size is provided, uses StepValueValidator.
+                                                    Leading/trailing whitespaces are ignored.
+                                                </li>
+                                                <li>
+                                                    Error message keys: <em>required, invalid, max_value, min_value,
+                                                    max_digits, max_decimal_places, max_whole_digits, step_size</em>
+                                                </li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                The max_value and min_value error messages may contain %(limit_value)s,
+                                                which will be substituted by the appropriate limit. Similarly, the
+                                                max_digits, max_decimal_places, and max_whole_digits error messages may
+                                                contains %(max)s.
+                                                <br>
+                                                Optional arguments:
+                                            </p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>max_value, min_value</em>. Sets the upper and lower limit on the
+                                                    value.
+                                                </li>
+                                                <li><em>max_digits</em>. Specifies that maximum number of digits.</li>
+                                                <li>
+                                                    <em>decimal_places</em>. Specifies the maximum number of decimal
+                                                    places.
+                                                </li>
+                                                <li>
+                                                    <em>step_size</em>. Limits valid inputs to multiples of the
+                                                    step_size.
+                                                </li>
+                                            </ul>
+                                            <p></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>DurationField</th>
+                                        <td>
+                                            <p>class DurationField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TextInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>timedelta</em></li>
+                                                <li>Validates that the given value is a string which can be converted
+                                                    into a timedelta. The value must be between datetime.timedelta.min
+                                                    and datetime.timedelta.max.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid, overflow</em></li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                Accepts any format understood by <em>parse_duration()</em>.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>EmailField</th>
+                                        <td>
+                                            <p>class EmailField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>EmailInput</em></li>
+                                                <li>Empty value: <em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: a <em>string</em></li>
+                                                <li>
+                                                    Uses EmailValidator to validate that the given value is a valid
+                                                    email address.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>max_length, min_length</em>.</li>
+                                                <li>
+                                                    <em>empty_value</em>. The value to use to represent "empty".
+                                                    Defaults to an empty string.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>FileField</th>
+                                        <td>
+                                            <p>class FileField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>ClearableFileInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>
+                                                    Normalizes to: an <em>UploadedFile</em> object that wraps the file
+                                                    content and file name into a single object.
+                                                </li>
+                                                <li>
+                                                    Can validate that non-empty file data has been bound to the form.
+                                                </li>
+                                                <li>
+                                                    Error message keys: <em>required, invalid, missing, empty,
+                                                    max_length</em>
+                                                </li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>max_length</em>. Specifies the max number of characters in the
+                                                    file name.
+                                                </li>
+                                                <li>
+                                                    <em>allow_empty_file</em>. Ensures that validation will succeed even
+                                                    if the file content is empty.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>FilePathField</th>
+                                        <td>
+                                            <p>class FilePathField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>Select</em></li>
+                                                <li>Empty value: <em>''</em> (empty string)</li>
+                                                <li>Normalizes to: a <em>string</em></li>
+                                                <li>Validates that the selected choice exists in the list of choices.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid_choice</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>path</em>. The absolute path to the directory whose contents to
+                                                    be listed. This directory must exist.
+                                                </li>
+                                                <li><em>recursive</em>. If <u>False</u> (default), only the direct
+                                                    contents of <em>path</em> will be offered as choices. If <u>True</u>,
+                                                    the directory will be descended into recursively and all descendants
+                                                    will be listed as choices.
+                                                </li>
+                                                <li><em>match</em>. A regular expression pattern; only filenames that
+                                                    match this expression will be allowed as choices.
+                                                </li>
+                                                <li><em>allow_files</em>. Optional. Either <u>True</u> (default) or
+                                                    <u>False</u>. Specifies whether files in the specified location
+                                                    should be included. Either this or <em>allow_folders</em> must be
+                                                    set to <u>True</u>.
+                                                </li>
+                                                <li><em>allow_folders</em>. Optional. Either <u>True</u> or <u>False</u>
+                                                    (default). Specifies whether folders in the specified location
+                                                    should be included. Either this or <em>allow_files</em> must be set
+                                                    to <u>True</u>.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>FloatField</th>
+                                        <td>
+                                            <p>class FloatField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>NumberInput</em> when <em>Field.localize</em> is
+                                                    <u>False</u>, else <em>TextInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>float</em></li>
+                                                <li>Validates that the given value is a float. Uses
+                                                    MaxValueValidator/MinValueValidator if max_value/min_value are
+                                                    provided. Uses StepValueValidator if step_size
+                                                </li>
+                                                <li>Error message keys: <em>required, valid, max_value, min_value,
+                                                    step_size</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>max_value, min_value</em>. Sets the upper and lower limit on the
+                                                    value.
+                                                </li>
+                                                <li>
+                                                    <em>step_size</em>. Limits valid inputs to multiples of the
+                                                    step_size.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>GenericIPAddressField</th>
+                                        <td>
+                                            <p>class GenericIPAddressField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TextInput</em></li>
+                                                <li>Empty value: <em>''</em> (empty string)</li>
+                                                <li>Normalizes to: a string</li>
+                                                <li>Validates that the given value is a valid IP address</li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                The IPv6 address normalization follows RFC 4291#section-2.2 section 2.2,
+                                                including using the IPv4 format suggested in paragraph 3 of that
+                                                section, like ::ffff:192.0.2.0. For example, 2001:0::0:01 would be
+                                                normalized to 2001::1, and ::ffff:0a0a:0a0a to ::ffff:10.10.10.10. All
+                                                characters are converted to lowercase.
+                                                <br>
+                                                Optional arguments:
+                                            </p>
+                                            <ul class="mb-1">
+                                                <li><em>protocol</em>. Limits valid inputs to the specified protocol.
+                                                    Accepted values are both (default), IPv4 or IPv6. Matching is case
+                                                    insensitive.
+                                                </li>
+                                                <li><em>unpack_ipv4</em>. Unpacks IPv4 mapped addresses like
+                                                    ::ffff:192.0.2.1. If this option is enabled that address would be
+                                                    unpacked to 192.0.2.1. Default is disabled. Can only be used when
+                                                    protocol is set to 'both'.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>ImageField</th>
+                                        <td>
+                                            <p>class ImageField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>ClearableFileInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: <em>UploadedFile</em> object that wraps the file
+                                                    content and file name into a single object.
+                                                </li>
+                                                <li>Validates that file data has been bound to the form. Also uses
+                                                    FileExtensionValidator to validate that the file extension is
+                                                    supported by Pillow.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid, missing, empty,
+                                                    invalid_image</em></li>
+                                            </ul>
+                                            <p class="my-1">
+                                                Requires that the <em>Pillow</em> library is installed with support for
+                                                the desired image formats. An image upload that results in a "corrupt
+                                                image" error usually means that Pillow doesn't understand its format.
+                                            </p>
+                                            <p class="mb-1">
+                                                Additionally, when using an ImageField, we must bind the file data to
+                                                the form. See
+                                                <a href="https://docs.djangoproject.com/en/5.0/ref/forms/api/#binding-uploaded-files-to-a-form">
+                                                    here</a> for an explanation.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>IntegerField</th>
+                                        <td>
+                                            <p>class IntegerField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>NumberInput</em> when <em>Field.localize</em> is
+                                                    <u>False</u>, else <em>TextInput</em>.
+                                                </li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>integer</em></li>
+                                                <li>Validates that the given value is an integer. Uses
+                                                    MaxValueValidator/MinValueValidator if max_value/min_value arguments
+                                                    are provided. If step_size is provided, uses StepValueValidator.
+                                                    Leading/trailing whitespaces are allowed.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid, max_value, min_value,
+                                                    step_size</em></li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                The <em>max_value, min_value</em> and <em>step-size</em> error messages
+                                                may contain %(limit_value)s, which will be substituted by the
+                                                appropriate limit.
+                                                <br>
+                                                Optional arguments:
+                                            </p>
+                                            <ul class="mb-1">
+                                                <li>
+                                                    <em>max_value, min_value</em>. Sets the upper and lower limit on the
+                                                    value.
+                                                </li>
+                                                <li>
+                                                    <em>step_size</em>. Limits valid inputs to multiples of the
+                                                    step_size.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>JSONField</th>
+                                        <td>
+                                            <p>class JSONField(encoder=None, decoder=None, **kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>Textarea</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: A Python representation of the JSON value (usually as
+                                                    a dict, list, or None), depending on JSONField.decoder.
+                                                </li>
+                                                <li>Validates that the given value is a valid JSON.</li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>encoder</em>. A json.JSONEncoder subclass to serialize data
+                                                    types not supported by the standard JSON serializer (e.g.
+                                                    datetime.datetime or UUID). For example, you can use the
+                                                    DjangoJSONEncoder class. Defaults to json.JSONEncoder.
+                                                </li>
+                                                <li><em>decoder</em>. A json.JSONDecoder subclass to deserialize the
+                                                    input. Your deserialization may need to account for the fact that
+                                                    you can’t be certain of the input type. For example, you run the
+                                                    risk of returning a datetime that was actually a string that just
+                                                    happened to be in the same format chosen for datetimes. The decoder
+                                                    can be used to validate the input. If json.JSONDecodeError is raised
+                                                    during the deserialization, a ValidationError will be raised.
+                                                    Defaults to json.JSONDecoder.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>MultipleChoiceField</th>
+                                        <td>
+                                            <p>class MultipleChoiceField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>SelectMultiple</em></li>
+                                                <li>Empty value: <em>[]</em> (empty list)</li>
+                                                <li>Normalizes to: a list of strings</li>
+                                                <li>Validates that every value in the given list of values exists in the
+                                                    list of choices.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid_choice, invalid_list</em>
+                                                </li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                The <em>invalid_choice</em> error message may contain %(value)s, which
+                                                will be replaced with the selected choice.
+                                                <br>
+                                                Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>choices</em>.</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>NullBooleanField</th>
+                                        <td>
+                                            <p>class NullBooleanField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>NullBooleanSelect</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: a Python <em>True, False, </em> or <em>None</em></li>
+                                                <li>Validates nothing (i.e. never raises a ValidationError)</li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                May be used with widgets such as <em>Select</em> or <em>RadioSelect</em>
+                                                by providing the widget choices:
+                                            </p>
+                                            <pre style="font-size:0.9em;" class="mb-1">
+    NullBooleanField(
+        widget=Select(
+            choices=[
+                ("", "Unknown"),
+                (True, "Yes"),
+                (False, "No"),
+            ]
+        )
+    )
+</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>RegexField</th>
+                                        <td>
+                                            <p>class RegexField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TextInput</em></li>
+                                                <li>Empty value: <em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: a string</li>
+                                                <li>Uses RegexValidator to validate that the given value matches a
+                                                    certain regular expression.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>regex</em>. Required. A regular expression specified as either a
+                                                    string or a compiled regular expression object.
+                                                </li>
+                                                <li><em>max_length, min_length, strip, empty_value</em>. Optional.</li>
+                                                <li><em>strip</em>. Defaults to <u>False</u>. If enabled, stripping will
+                                                    be applied before the regex validation.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>SlugField</th>
+                                        <td>
+                                            <p>class SlugField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TextInput</em></li>
+                                                <li>Empty value: <em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: a string</li>
+                                                <li>Uses <em>validate_slug</em> or <em>validate_unicode_slug</em> to
+                                                    validate that the given value contains only letters, numbers,
+                                                    underscores, and hyphens.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>allow_unicode</em>. If set to <u>True</u>, instructs the field
+                                                    to accepts Unicode letters in addition to ASCII letters. Default is
+                                                    <u>False</u>.
+                                                </li>
+                                                <li><em>empty_value</em>. The value to use to represent "empty".
+                                                    Defaults to an empty string.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>TimeField</th>
+                                        <td>
+                                            <p>class TimeField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TimeInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: A Python <em>datetime.time</em> object</li>
+                                                <li>Validates that the given value is either a datetime.time or string
+                                                    formatted in a particular time format.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>input_formats</em>. An iterable of formats used to attempt to
+                                                    convert a string to a valid datetime.time object.
+                                                </li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                If no input_formats argument is provided, the default input formats are
+                                                taken from the active locale format TIME_INPUT_FORMATS key, or from
+                                                TIME_INPUT_FORMATS if localization is disabled.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>TypedChoiceField</th>
+                                        <td>
+                                            <p>class TypedChoiceField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>Select</em></li>
+                                                <li>Empty value: <em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: a value of the type provided by the <em>coerce</em>
+                                                    argument.
+                                                </li>
+                                                <li>Validates that the given value exists in the list of choices and can
+                                                    be coerced.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid_choice</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>coerce</em>. A function that takes one argument and returns a
+                                                    coerced value. Examples include the built-in int, float, bool and
+                                                    other types. Defaults to an identity function. Note that coercion
+                                                    happens after input validation, so it is possible to coerce to a
+                                                    value not present in choices.
+                                                </li>
+                                                <li><em>empty_value</em>. The value to use to represent “empty.”
+                                                    Defaults to the empty string; None is another common choice here.
+                                                    Note that this value will not be coerced by the function given in
+                                                    the coerce argument, so choose it accordingly.
+                                                </li>
+                                            </ul>
+                                            <p></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>TypedMultipleChoiceField</th>
+                                        <td>
+                                            <p>class TypedMultipleChoiceField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>SelectMultiple</em></li>
+                                                <li>Empty value: em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: A list of values of the type provided by the coerce
+                                                    argument
+                                                </li>
+                                                <li>Validates that the given values exists in the list of choices and
+                                                    can be coerced.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid_choice</em></li>
+                                            </ul>
+                                            <p class="mb-1">
+                                                The <em>invalid_choice</em> error message may contain %(value)s, which
+                                                will be replaced with the selected choice.
+                                                <br>
+                                                Optional arguments:
+                                            </p>
+                                            <ul class="mb-1">
+                                                <li><em>coerce</em>. A function that takes one argument and returns a
+                                                    coerced value. Examples include the built-in int, float, bool and
+                                                    other types. Defaults to an identity function. Note that coercion
+                                                    happens after input validation, so it is possible to coerce to a
+                                                    value not present in choices.
+                                                </li>
+                                                <li><em>empty_value</em>. The value to use to represent “empty.”
+                                                    Defaults to the empty string; None is another common choice here.
+                                                    Note that this value will not be coerced by the function given in
+                                                    the coerce argument, so choose it accordingly.
+                                                </li>
+                                            </ul>
+                                            <p></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>URLField</th>
+                                        <td>
+                                            <p>class URLField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>URLInput</em></li>
+                                                <li>Empty value: em><u>empty_value</u> (see below)</em></li>
+                                                <li>Normalizes to: a string</li>
+                                                <li>Uses URLValidator to validate that the given value is a valid URL.
+                                                </li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">Optional arguments:</p>
+                                            <ul class="mb-1">
+                                                <li><em>max_length, min_length, empty_value</em>.</li>
+                                                <li><em>assume_scheme</em>. The scheme assumed for URLs provided without
+                                                    one. Defaults to "http" (will be "https" in Django 6.0). For
+                                                    example, if the provided value is "example.com", then it will be
+                                                    modified to "https://example.com".
+                                                </li>
+                                            </ul>
+                                            <p></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>UUIDField</th>
+                                        <td>
+                                            <p>class UUIDField(**kwargs)</p>
+                                            <ul class="mb-1">
+                                                <li>Default widget: <em>TextInput</em></li>
+                                                <li>Empty value: <em>None</em></li>
+                                                <li>Normalizes to: <em>UUID</em> object</li>
+                                                <li>Error message keys: <em>required, invalid</em></li>
+                                            </ul>
+                                            <p class="mb-1">This field will accept any string format accepted as the
+                                                <em>hex</em> argument to the UUID constructor.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion mb-1">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#complex_form_fields_id">
+                            Complex Built-in Form Fields <strong>(Section is a Work-in-Progress)</strong>
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="complex_form_fields_id">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <tr class="table-primary">
+                                        <th class="col-2">Form Field</th>
+                                        <th class="col-10">Description</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ComboField</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>MultiValueField</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>SplitDateTimeField</th>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion mb-3">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#relationship_form_fields_id">
+                            Relationship Form Fields <strong>(Section is a Work-in-Progress)</strong>
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="relationship_form_fields_id">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <tr class="table-primary">
+                                        <th class="col-3">Form Field</th>
+                                        <th class="col-9">Description</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ModelChoiceField</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ModelMultipleChoiceField</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" colspan="2">Iterating Relationship Choices:</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ModelChoiceIterator</th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>ModelChoiceIteratorValue</th>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="custom_form_fields_anchor"><h4>Creating Custom Form Fields</h4></a>
+                <p class="mb-2">
+                    If the built-in Field classes don’t meet your needs, you can create custom Field classes. To do
+                    this, create a subclass of django.forms.Field. Its only requirements are that it implement a
+                    <em>clean()</em> method and that its <em>__init__()</em> method accept the core arguments mentioned
+                    above (required, label, initial, widget, help_text).
+                </p>
+                <p class="mb-1">
+                    You can also customize how a field will be accessed by overriding <em>get_bound_field()</em>.
+                </p>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="widgets_anchor"><h4>Widgets</h4></a>
+                <p class="mb-2">
+                    As seen in the <a href="#form_field_reference_anchor">Form Field Reference</a> section, each field
+                    has a corresponding <em>Widget</em> class, which in turn corresponds to an HTML form widget such as
+                    <em>&lt;input type="text"&gt;</em> in the HTML. In most cases, the field will have a sensible
+                    default widget. For example, by default, a CharField will have a TextInput widget, that produces a
+                    <em>&lt;input type="text"&gt;</em> in the HTML. But if we needed &lt;textarea&gt; instead, we would
+                    need to specify the appropriate widget when defining the form field.
+                </p>
+                <p class="mb-1">Example usage of the <em>widget</em> parameter:</p>
+                <pre class="mb-1">
+    from django import forms
+
+    class ExampleForm(forms.ModelForm):
+        username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+        email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+        password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <a id="field_data_anchor"><h4>Field Data</h4></a>
+                <p class="mb-2">
+                    Whatever data is submitted with a form, once it has been validated by calling <em>is_valid()</em>
+                    and if it returns <u>True</u>, the validated form data will be accessible from the
+                    <em>form.cleaned_data</em> dictionary. Technically the invalidated data is accessible via
+                    <em>request.POST</em> but it is not recommended to use the data in this state.
+                </p>
+                <p class="mb-2">
+                    The data stored in the <em>form.cleaned_data</em> dictionary will have been converted into Python
+                    types for ease of use. Fields such as IntegerField and FloatField will be converted into Python
+                    <em>int</em> and <em>float</em>, respectively.
+                </p>
+                <p class="mb-1">
+                    Some field types need to be handled differently - such as files. For uploaded files, we need to
+                    access them via <em>request.FILES</em> instead.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <!--https://docs.djangoproject.com/en/5.0/topics/forms/#working-with-form-templates-->
+        <h2>Working with form templates</h2>
+        <div class="form-control mb-2">
+            <h3>Reusable form templates</h3>
+        </div>
+        <div class="form-control mb-2">
+            <h3>Reusable field group templates</h3>
+        </div>
+        <div class="form-control mb-2">
+            <h3>Rendering fields manually</h3>
+            <div class="form-control mb-1">
+                <h4>Rendering form error messages</h4>
+            </div>
+        </div>
+        <div class="form-control mb-1">
+            <h3>Looping over the form's fields</h3>
+            <div class="form-control mb-1">
+                <h4>Looping over hidden and visible field</h4>
+            </div>
+        </div>
+    </div>
+
+    {% verbatim %}
+    <!--    <br>-->
+    <!--    <h1>Testing Area</h1>-->
+    <!--    <form action="/tenappone/html_basics/">-->
+    <!--        <p>{% url 'tenappone:html_basics' %}</p>-->
+    <!--        <button type="submit">Click me!</button>-->
+    <!--    </form>-->
+    {% endverbatim %}
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Forms
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_forms_anchor"><strong>Django - Forms</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#html_forms_anchor">
+        HTML Forms
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#get_and_post_anchor">
+        &nbsp;&nbsp;&nbsp;<em>GET</em> and <em>POST</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_class_anchor">
+        The <em>Form</em> Class
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inst_proc_rend_forms_anchor">
+        &nbsp;&nbsp;&nbsp;Instantiating, Processing, and Rendering Forms
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#build_form_anchor">
+        Building a Form
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#create_form_anchor">
+        &nbsp;&nbsp;&nbsp;Creating the form class
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#edit_viewspy_anchor">
+        &nbsp;&nbsp;&nbsp;Editing the views.py
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#edit_template_anchor">
+        &nbsp;&nbsp;&nbsp;Editing the template
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#edit_urlspy_anchor">
+        &nbsp;&nbsp;&nbsp;Editing the urls.py
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#more_django_info_anchor">
+        More information about Django Form classes
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#bound_vs_unbound_anchor">
+        &nbsp;&nbsp;&nbsp;Bound vs Unbound form instances
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_field_reference_anchor">
+        &nbsp;&nbsp;&nbsp;Form Fields
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#custom_form_fields_anchor">
+        &nbsp;&nbsp;&nbsp;Creating Custom Form Fields
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#widgets_anchor">
+        &nbsp;&nbsp;&nbsp;Widgets
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#field_data_anchor">
+        &nbsp;&nbsp;&nbsp;Field Data
+    </a>
+</li>
+{% endblock %}

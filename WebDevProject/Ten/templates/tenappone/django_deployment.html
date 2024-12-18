@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Deployment</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_deployment_anchor"><h1>Django <span class="door">-</span> Deployment</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="intro_django_deployment_anchor"><h2>Intro to deploying Django projects</h2></a>
+        <p class="mb-2">
+            There are a variety of places where we can host our Django project online, such as <em>PythonAnywhere</em>,
+            <em>Heroku</em>, <em>Amazon Web Services (AWS)</em>, <em>Digital Ocean</em>, etc.. Each of this include
+            online resources which detail how to set up and deploy Django projects on their servers.
+        </p>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Cloud Hosting Service</th>
+                <th>Deployment Guide</th>
+            </tr>
+            <tr>
+                <th>PythonAnywhere</th>
+                <td>
+                    <a href="https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/">
+                        https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Heroku</th>
+                <td>
+                    <a href="https://devcenter.heroku.com/articles/deploying-python">
+                        https://devcenter.heroku.com/articles/deploying-python
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Amazon Web Services (AWS)</th>
+                <td>
+                    <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html">
+                        https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Digital Ocean</th>
+                <td>
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-deploy-a-local-django-app-to-a-vps">
+                        https://www.digitalocean.com/community/tutorials/how-to-deploy-a-local-django-app-to-a-vps
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="pythonanywhere_deployment_anchor"><h2>Deploying on PythonAnywhere</h2></a>
+        <p class="mb-2">
+            In PythonAnywhere, there are multiple tabs: <em>Consoles, Files, Web, Databases</em>, etc.. The
+            <em>Consoles</em> tab allows developers to interact with Python and Bash console instances. The
+            <em>Files</em> tab allows uploading and organization of files. The <em>Web</em> tab allows you to configure
+            settings for your host and web applications. The <em>Tasks (AKA 'Schedule')</em> tab allows scheduling tasks
+            to be executed at a designated time. The <em>Databases</em> tab allows configuring a MySQL (or POSTGreSQL
+            (requires a paid subscription)) database.
+        </p>
+        <div class="form-control mb-1">
+            <h3>Steps to deploying on PythonAnywhere</h3>
+            <ol class="mb-1">
+                <li>
+                    <h6>Retrieve the Git repo's HTTPS url:</h6>
+                    <p class="mb-1">Locate and save the HTTPS url from your Django project's GitHub repository.</p>
+                </li>
+                <li>
+                    <h6>Log into PythonAnywhere</h6>
+                    <p class="mb-1">
+                        Log into your PythonAnywhere account. (Sign up for a free "Beginner" account if you don't have
+                        an account already.)
+                    </p>
+                </li>
+                <li>
+                    <h6>Open a Bash console, setup/use a virtual environment:</h6>
+                    <p class="mb-0">
+                        In the <em>Consoles</em> tab, we need to set up a virtual environment. Click on the
+                        <em>Bash</em> hyperlink to open a Bash (Unix) console. Now create a virtual environment using
+                        the following command with syntax:
+                    </p>
+                    <pre class="mb-2">
+mkvirtualenv --python=<em>python_version</em> <em>project_name</em></pre>
+                    <p class="mb-2">
+                        For the Python argument, supply the desired version of Python. Check to make sure that
+                        PythonAnywhere supports that version of Python.
+                    </p>
+                    <div class="form-control mb-1">
+                        <h6>To use an existing virtualenv:</h6>
+                        <p class="mb-0">
+                            To see a list of existing virtual environments, use this command:
+                        </p>
+                        <pre class="mb-2">lsvirtualenv</pre>
+
+                        <p class="mb-0">
+                            To start using an existing virtual environment, use this command:
+                        </p>
+                        <pre class="mb-0">workon <em>virtual_env_name</em></pre>
+                    </div>
+                </li>
+                <li>
+                    <h6>View installed packages:</h6>
+                    <p class="mb-0">
+                        To view all installed packages, enter the following command:
+                    </p>
+                    <pre class="mb-2">pip list</pre>
+
+                    <p class="mb-0">
+                        Example of expected result:
+                    </p>
+                    <pre class="mb-1">
+Package    Version
+---------- -------
+pip        22.1.2
+setuptools 62.6.0
+wheel      0.37.
+</pre>
+                </li>
+                <li>
+                    <h6>Installing Django:</h6>
+                    <p class="mb-0">
+                        Next step involves installing Django in the virtual environment. Ideally, select a version of
+                        Django that matches the version used by the Django project to be deployed. To see what version
+                        of Django is installed, enter the following commands into your computer's Command Prompt:
+                    </p>
+                    <pre class="mb-2">
+python          # if 'python' doesn't work, use 'py' or whatever Python is named in the PATH variable
+import django
+django.__version__
+</pre>
+
+                    <p class="mb-0">
+                        Example of expected result:
+                    </p>
+                    <pre class="mb-2">
+'4.2.7'
+</pre>
+                    <p class="mb-0">
+                        Returning to PythonAnywhere's Bash console, install Django using the following command:
+                    </p>
+                    <pre>
+pip install -U django==<em>django_version</em>
+</pre>
+
+                    <p class="mb-0">
+                        After Django is finished installing, verify that it was installed by running the following
+                        command:
+                    </p>
+                    <pre class="mb-0">
+which django-admin.py
+</pre>
+
+                    <p class="mb-1">
+                        (This command didn't work for me. It's supposed to show the path where Django was installed to.)
+                    </p>
+                </li>
+                <li>
+                    <h6>Clone the Django Project's remote Git repo:</h6>
+                    <p class="mb-0">
+                        In this step, we clone the remote Git repo into the PythonAnywhere server via the Bash console
+                        using the <em>git clone</em> command. It may prompt you to sign in. This sign-in attempt may
+                        result in an authentication error - if this is the case, refer to the instructions
+                        <a href="#">here</a>. The following command clones the remote Git repo:
+                    </p>
+                    <pre class="mb-2">
+git clone <em>https_url</em>
+</pre>
+                    <p class="mb-0">Example usage:</p>
+                    <pre class="mb-2">
+git clone https://github.com/<em>&lt;ExampleUser&gt;</em>/example-remote-repo.git
+</pre>
+
+                    <div class="form-control mb-1">
+                        <h6>Error: "support for password authentication was removed" - resolution steps:</h6>
+                        <p class="mb-1">
+                            The above error may not be the result of an incorrect username/password combination
+                            (well, sort of) but because instead of a "password", it requires the associated PAT
+                            (Personal Access Token). This may happen because the repo is set to private access and/or
+                            the (read/write/etc..) privileges are insufficient The owner needs to generate this token
+                            for you (or themselves) in order to clone the repo. Follow the steps below to hopefully
+                            resolve the issue:
+                        </p>
+                        <ul>
+                            <li>
+                                First step is to generate an access token. In GitHub, navigate to: Settings > Developer
+                                Settings > Personal Access Token > Tokens (classic) > Generate New Token > Fillout the
+                                form > Generate token.
+                            </li>
+                            <li>
+                                Next step is to copy the generated token (GitHub Personal Access Token). It should look
+                                something like this: "github_pat_11AEBFAZA0...".
+                            </li>
+                            <li>
+                                Run the 'git clone' command in the Bash console again but this time use the generated
+                                token as the password.
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <h6>Migrate the Django project:</h6>
+                    <p class="mb-2">
+                        Now, we need to migrate the Django project to generate the database and/or update the database
+                        schema in accordance to the models' definitions using the <em>makemigrations</em> and
+                        <em>migrate</em> commands. Doing this necessitates knowing how to navigate directories in
+                        Bash/Unix - refer to the below chart as needed:
+                    </p>
+                    <table class="table table-bordered mb-2">
+                        <tr class="table-dark">
+                            <th>Linux Command:</th>
+                            <th>Description:</th>
+                        </tr>
+                        <tr>
+                            <th><em>clear</em></th>
+                            <td>
+                                Clears the Bash/Unix console of text. Essentially declutters the console.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em>pwd</em></th>
+                            <td>
+                                Displays the full path of the current directory.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em>ls</em> or <em>dir</em></th>
+                            <td>
+                                Displays the contents of the current directory.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><em>cd</em> <em>&lt;destination_path&gt;</em></th>
+                            <td>
+                                Changes the directory to the specified destination.
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="mb-0">
+                        In the Bash console, navigate to the root directory of the Django project, where the
+                        <em>manage.py</em> file is located, then run the following command to setup the database:
+                    </p>
+                    <pre class="mb-2">
+python manage.py migrate
+</pre>
+                    <p class="mb-2">
+                        Running the command may prompt some errors, likely from missing libraries. For example, if your
+                        models use ImageFields, then you may need to install the <em>Pillow</em> library to the virtual
+                        environment using <em>pip install Pillow</em>.
+                    </p>
+                    <p class="mb-0">
+                        Next, for each application in the project, run this command:
+                    </p>
+                    <pre class="mb-2">
+python manage.py makemigrations <em>&lt;app_name&gt;</em>
+</pre>
+                </li>
+                <li>
+                    <h6>Creating a superuser:</h6>
+                    <p class="mb-0">
+                        (Optional) create a superuser using the following command:
+                    </p>
+                    <pre class="mb-2">
+python manage.py createsuperuser
+</pre>
+                </li>
+                <li>
+                    <h6>Setting up the WSGI settings:</h6>
+                    <p class="mb-2">
+                        In PythonAnywhere, navigate to the <em>Web</em> tab and click on the 'Add a new web app' button.
+                    </p>
+                    <p class="mb-2">
+                        It will first prompt you to supply a custom domain name, but if using a free "Beginner" account,
+                        skip this step and click 'Next'. An automatically generated one will be created that follows the
+                        following syntax: <code><em>exampleuser</em>.pythonanywhere.com</code>
+                    </p>
+                    <p class="mb-1">
+                        The next prompt is for selecting the desired web framework. Instead of selecting 'Django',
+                        select 'Manual configuration'. The reason for this is that we have an existing Django project.
+                        Selecting 'Django' would create a new Django project. Once configuration is complete, the
+                        application and a WSGI file will be created.
+                    </p>
+                </li>
+                <li>
+                    <h6>Setting the virtualenv path:</h6>
+                    <p class="mb-2">
+                        In the <em>Web</em> tab, locate the 'Virtualenv' section, click on 'Enter path...'. Supply it
+                        with the path of the virtual environment being used in the Bash console. Example syntax:
+                        <code>/home/<em>&lt;ExampleUser&gt;</em>/.virtualenvs/<em>&lt;virtual_env_name&gt;</em></code>
+                    </p>
+                    <p class="mb-0">
+                        Example virtualenv path:
+                    </p>
+                    <pre class="mb-2">
+/home/ExampleUser/.virtualenvs/virtual_env_name
+</pre>
+                    <div class="form-control mb-1">
+                        <h6>Reminder:</h6>
+                        <p class="mb-0">
+                            To look up the list of existing virtual environments, use this command in the Bash console:
+                            <code>lsvirtualenv</code>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <h6>Setting the path of the Django project:</h6>
+                    <p class="mb-0">
+                        In the <em>Web</em> tab, locate the 'Code' section, click on 'Enter path...'. Supply it with the
+                        path of the Django project. To get the full path of the Django project in the Bash console,
+                        navigate to the root directory and run the <code>pwd</code> command. Example path:
+                    </p>
+                    <pre class="mb-2">
+/home/ExampleUser/ExampleRepo/ProjectName
+</pre>
+                </li>
+                <li>
+                    <h6>Editing the WSGI file:</h6>
+                    <p class="mb-2">
+                        In the <em>Web</em> tab, locate, then click on the link labeled 'WSGI configuration file:' -
+                        this opens a file editor.
+                    </p>
+                    <p class="mb-2">
+                        Locate the 'Hello World' example (starting with the +++HELLO WORLD+++ comment and down to and
+                        including the application() function. Approximately lines: 13-47). Delete this section of code.
+                    </p>
+                    <p class="mb-0">Locate the 'Django' section. Uncomment these lines of code:</p>
+                    <ul class="mb-1">
+                        <li>
+                            <em>os</em> and <em>sys</em> imports
+                        </li>
+                        <li>
+                            The <em>path</em> variable
+                        </li>
+                        <li>
+                            The <em>if</em> statement
+                        </li>
+                        <li>
+                            <em>from django.core.wsgi import get_wsgi_application</em>
+                        </li>
+                        <li>
+                            <em>application = get_wsgi_application()</em>.
+                        </li>
+                    </ul>
+                    <p class="mb-2">
+                        For the <em>path</em> variable that was just uncommented, change the value to point to the root
+                        directory of the Django project.
+                    </p>
+                    <p class="mb-1">
+                        Add the following statements below the <em>if</em> statement (not in the body of it):
+                    </p>
+                    <pre>
+os.chdir(path)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '<em>&lt;project_name&gt;</em>.settings') # Edit to reflect your project's name
+
+import django
+django.setup()
+</pre>
+                    <p class="mb-1">When completed, your project should look like the example below:</p>
+                    <img src="{% static 'media/images/examples/django_deployment.wsgi_edits.png' %}"
+                         alt="django_deployment.wsgi_edits.png" width="650px" class="mb-2">
+                    <p class="mb-1">
+                        Click 'Save' when the edits are completed.
+                    </p>
+                </li>
+                <li>
+                    <h6>Editing the Django project's <em>settings.py</em> file:</h6>
+                    <p class="mb-2">
+                        In the <em>Files</em> tab, navigate to the Django project's <em>settings.py</em> file, then
+                        click on the file to open it in a file editor.
+                    </p>
+                    <p class="mb-0">
+                        Locate the <em>ALLOWED_HOSTS</em> list, then add the domain name to it. If using a "Beginner"
+                        account, this would be the domain name automatically generated after creating the web
+                        application - or if a custom domain was supplied during creation, then use that. Example:
+                    </p>
+                    <pre class="mb-2">
+ALLOWED_HOSTS = ['<em>&lt;exampleuser&gt;</em>.pythonanywhere.com']
+</pre>
+                    <p class="mb-0">
+                        Next, locate a variable named <em>DEBUG</em>. Set the value equal to <u>False</u>. Example:
+                    </p>
+                    <pre class="mb-2">
+DEBUG = False
+</pre>
+                    <p class="mb-1">
+                        Click 'Save' when the edits are completed.
+                    </p>
+                </li>
+                <li>
+                    <h6>Setting up the static/media files:</h6>
+                    <p class="mb-1">
+                        In the <em>Web</em> tab, locate the 'Static files:' section. This will require two paths: one to
+                        the '/static/' folder in our Django project and another path to the
+                        '/django/contrib/admin/static/admin' folder inside of our Python installation. Adding the
+                        '/media/' path is optional.
+                    </p>
+                    <table class="table table-bordered mb-1">
+                        <tr class="table-dark">
+                            <th>URL</th>
+                            <th>Directory</th>
+                        </tr>
+                        <tr>
+                            <td>/static/</td>
+                            <td>
+                                /home/<em>&lt;ExampleUser&gt;</em>/<em>&lt;ExampleRepo&gt;</em>/<em>&lt;ExampleProject&gt;</em>/static
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>/static/admin</td>
+                            <td>
+                                /home/<em>&lt;ExampleUser&gt;</em>/.virtualenvs/<em>&lt;ExampleVirtualEnv&gt;</em>/lib/<em>python3.9</em>/site-packages/django/contrib/admin/static/admin
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>/media/</td>
+                            <td>
+                                /home/<em>&lt;ExampleUser&gt;</em>/<em>&lt;ExampleRepo&gt;</em>/<em>&lt;ExampleProject&gt;</em>/media
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+                <li>
+                    <h6>Reload the web application:</h6>
+                    <p class="mb-1">
+                        The final step involves reloading the web app. Open the <em>Web</em> tab and click on the button
+                        labeled "Reload ...". Once done, the website should be ready to use.
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Deployment
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_deployment_anchor"><strong>Django - Deployment</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#intro_django_deployment_anchor">Intro to deploying Django projects</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#pythonanywhere_deployment_anchor">Deploying on PythonAnywhere</a>
+</li>
+{% endblock %}

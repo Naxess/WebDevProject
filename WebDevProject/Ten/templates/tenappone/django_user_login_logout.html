@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Authentication</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_user_auth_anchor"><h1>Django <span class="door">-</span> User Authentication (Login/Logout Functionality)</h1></a>
+<!--https://docs.djangoproject.com/en/5.0/topics/auth/default/#authentication-in-web-requests-->
+<div class="form-control">
+    <div class="form-control mt-1 mb-1">
+        <a id="login_logout_anchor"><h2>Login/Logout Functionality</h2></a>
+        <div class="form-control mb-2">
+            <a id="init_setup_anchor"><h3>Initial Setup</h3></a>
+            <p class="mb-1">
+                The first thing we need to do is to edit the <em>settings.py</em> file and let it know which url
+                path to use for the login page.
+            </p>
+            <p class="mb-0">
+                In the <em>settings.py</em> file, add a class variable named "LOGIN_URL". Set the value
+                to a string of your choosing. This value will be the path of the login url. You'll be
+                able to reach it in the browser using this url format:
+            </p>
+            <code><em>&lt;domain_name&gt;/&lt;login_url&gt;</em></code>
+            <p class="mb-1">Example usages:</p>
+            <pre>
+<em>127.0.0.1:8000/login_page</em>
+<em>127.0.0.1:8000/first_app/user_login</em></pre>
+            <p class="mb-1">
+                For our demonstration, we'll be setting it to:
+            </p>
+            <pre class="mb-1">
+<mark>LOGIN_URL = '/first_app/user_login'</mark>
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="edit_proj_app_urlspy_anchor"><h3>Editing the project and application <em>urls.py</em> files</h3></a>
+            <p class="mb-2">
+                In this section, we add the URL patterns that will call the associated view when the user submits the
+                login_logout.html form as well as add the logout pattern. Optionally, map a webpage that is viewable
+                only to logged-in users. See example below:
+            </p>
+            <div class="form-control mb-2">
+                <h5 class="mb-1">Example project <em>urls.py</em>:</h5>
+                <pre class="mb-1">
+from django.contrib import admin
+from django.urls import path, include
+from basic_app import views
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path('', views.index, name='index'),
+    path('first_app/', include('first_app.urls')),
+    <mark>path('user_logout/', views.user_logout_view, name='logout')</mark>,
+    <mark>path('logged_in_only/', views.logged_in_only_view, name='logged_in_only')</mark>,
+]
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5 class="mb-1">Example application <em>urls.py</em>:</h5>
+                <pre class="mb-1">
+from django.urls import path
+from basic_app import views
+
+<mark>app_name = 'first_app'</mark>
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('register/', views.register, name='register'),
+    <mark>path('user_login/', views.user_login_view, name='login')</mark>, # Note that the path matches the LOGIN_URL that we specified earlier
+]
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="edit_viewspy_anchor"><h3>Editing <em>views.py</em></h3></a>
+            <p class="mb-2">
+                The next file we need to set up is the <em>views.py</em> file. We will need to import multiple
+                modules and then create the login and logout functions. Optionally, we can create a page that only
+                logged-in users can see.
+            </p>
+
+            <div class="form-control mb-2">
+                <h5 class="mb-2">Required import statements:</h5>
+                <pre class="mb-1">
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5 class="mb-2">Example login function:</h5>
+                <pre class="mb-1">
+def user_login_view(request):
+    if request.method == 'POST':
+        <mark>username = request.POST.get('username')</mark> # Retrieves the user's input for the username field
+        <mark>password = request.POST.get('password')</mark> # Retrieves the user's input for the password field
+
+        <mark>user = authenticate(username=username, password=password)</mark>
+            # <em>authenticate</em> verifies the supplied credentials and returns a User if valid
+
+        if user:
+            <mark>if user.is_active:</mark> # <em>is_active</em> verifies that the account is marked as active
+                <mark>login(request, user)</mark> # Logs the user into the system
+                return HttpResponseRedirect(reverse('index')) # Tells the browser which page to open after logging in
+            else:
+                return HttpResponse('Account not active.') # Creates a blank webpage with only the supplied text displayed
+        else:
+            return HttpResponse('Invalid username/password combination. Please check your spelling.')
+                # Creates a blank webpage with only the supplied text displayed
+    return render(request, 'first_app/login_logout.html')
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5 class="mb-2">Example logout function:</h5>
+                <pre class="mb-1">
+<mark>@login_required</mark> # This requires that the user be logged in before it will execute
+def user_logout_view(request):
+    <mark>logout(request)</mark> # Logs the user out of the system
+    return HttpResponseRedirect(reverse('index')) # Tells the browser which page to open after logging out
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5 class="mb-2">Example function that renders a webpage only viewable to logged in users:</h5>
+                <pre class="mb-1">
+<mark>@login_required</mark> # This requires that the user be logged in before it will execute
+def logged_in_only_view(request):
+    return HttpResponse("You are logged in! You can only see this page if you are logged in already!")
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="sample_loginlogout_anchor"><h3>Creating a Login/Logout page</h3></a>
+            <p class="mb-2">
+                A login form needs to have a form element with a CSRF token, at least 2 inputs for username and
+                password, and a submit button. The form's <em>method</em> attribute needs to be set to "POST" and the
+                <em>action</em> attribute pointed at the associated named URL in the <em>urls.py</em>'s
+                <em>urlpatterns</em>.
+            </p>
+            <p class="mb-2">
+                Logging out doesn't require any additional information so we can simply supply a link to call the
+                user_logout_view function.
+            </p>
+
+            <div class="form-control mb-2">
+                <a id="is_authenticated_anchor"><h5>Using the <em>is_authenticated</em> template tag function:</h5></a>
+                <p class="mb-1">
+                    Returns <u>True</u> if the user has been authenticated. This does not however, tell if the user has
+                    any permissions or has an active or valid session. In the following template example, it is used to
+                    check if a user is logged in. With this in mind, we can automate the kind of content we want the
+                    user to see, based on whether or not they are logged in.
+                </p>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5>Example HTML template:</h5>
+                <p class="mb-1">
+                    The below example utilizes the <em>is_authenticated</em> function to check whether a user is logged
+                    in and uses that to determine whether to show the login form or a logout link. (Usage of this
+                    function is optional.)
+                </p>
+                <pre class="mb-1">{% verbatim %}
+# .../templates/first_app/login_logout.html
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Login/Logout Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        <mark>{% if user.is_authenticated %}</mark> # Checks if a user is logged in. If so, then show the logout link
+            &lt;h1&gt;Logout Page&lt;/h1&gt;
+            <mark>&lt;a href="{% url 'logout' %}"&gt;Click this link to log out.&lt;/a&gt;</mark>
+                # Note that the template tag doesn't use the app name, because 'logout' is mapped in the project urls.py not the app
+        <mark>{% else %}</mark> # If no user is logged in, then show a login form
+            &lt;h1&gt;Login Page&lt;/h1&gt;
+            <mark>&lt;form method="POST" action="{% url 'first_app:login' %}"&gt;</mark>
+                # <em>action</em> tells the browser to return the form data to the named url ('login'), which calls views.user_login_view
+
+            <mark>{% csrf_token %}</mark>
+
+            &lt;label for="username"&gt;Username:&lt;/label&gt;
+            <mark>&lt;input type="text" id="username" name="username" placeholder="Enter username"&gt;</mark> # Input for the username
+
+            &lt;label for="password"&gt;Password:&lt;/label&gt;
+            <mark>&lt;input type="password" id="password" name="password" placeholder="********"&gt;</mark> # Input for the password
+
+            <mark>&lt;input type="submit" value="Login"&gt;</mark> # Submit button for submitting the form
+        &lt;/form&gt;
+        <mark>{% endif %}</mark>
+    &lt;/body&gt;
+&lt;/html&gt;
+{% endverbatim %}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block chapter_block %}
+Django - User Authentication
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_user_auth_anchor">
+        <strong>Django - User Authentication</strong>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#login_logout_anchor">Login/Logout Functionality</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#init_setup_anchor">&nbsp;&nbsp;&nbsp;Initial Setup</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#edit_proj_app_urlspy_anchor">
+        &nbsp;&nbsp;&nbsp;Editing the project and application <em>urls.py</em> files
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#edit_viewspy_anchor">&nbsp;&nbsp;&nbsp;Editing <em>views.py</em></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#sample_loginlogout_anchor">&nbsp;&nbsp;&nbsp;Creating a Login/Logout page</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#is_authenticated_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the <em>is_authenticated</em> template tag function:
+    </a>
+</li>
+{% endblock %}

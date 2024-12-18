@@ -1,0 +1,77 @@
+{% extends 'base_template_home.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+    <title>Metacrypha</title>
+{% endblock %}
+
+{% block body_block %}
+    <!--<h1 class="text-center mb-4"><strong>Welcome to the &rppolint;<span class="door">&rpargt;</span>&rnmid;&rtrif;</strong></h1>-->
+    <div class="bg-body-tertiary rounded-3 p-5 mb-4 ">
+        <div class="container-fluid py-5">
+            <h1 class="display-4 fw-bold">
+                {#            <strong>Welcome to the &rppolint;<span class="door">&rpargt;</span>&rnmid;&rtrif;</strong>#}
+                <strong>Welcome to the <span class="key">Metacrypha</span>.</strong>
+            </h1>
+            <p class="col-mb-8 fs-4">
+                Here you'll find guides for a variety of topics. If you're looking to read up and potentially add some
+                new coding skills to your portfolio, check out the <a href="{% url 'tenappone:language_guides_home' %}">
+                Coders' Corner</a>. Looking to gain some insight into the stock market? Try out the stock history
+                tracker
+                tool in the <a href="{% url 'stockapp:stock_history' %}">Stockbrocker's Study</a>. If you're looking for
+                some game guides and references, head over to the <a href="{% url 'gameguides:game_guides_home' %}">Gamers'
+                Grove</a>.
+            </p>
+            <hr>
+            <p class="col-mb-8 fs-5">
+                Please click below if you would like to know about the developer.
+            </p>
+            <a class="btn btn-danger btn-lg" role="button" href="{% url 'about' %}">About</a>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card h-100">
+                    <a href="{% url 'tenappone:language_guides_home' %}">
+                        <div class="card-body">
+                            <h4 class="card-title">Coders' Corner</h4>
+                            <p class="card-text">
+                                Click here to check out some programming languages/framework guides!
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <a href="{% url 'gameguides:game_guides_home' %}">
+                        <div class="card-body">
+                            <h4 class="card-title">Gamers' Grove</h4>
+                            <p class="card-text">
+                                Click here to check out some game guides!
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card h-100">
+                    <a href="{% url 'stockapp:stock_app_home' %}">
+                        <div class="card-body">
+                            <h4 class="card-title">Stockbrokers' Study</h4>
+                            <p class="card-text">
+                                Click here to check out some stock utilities/tools!
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

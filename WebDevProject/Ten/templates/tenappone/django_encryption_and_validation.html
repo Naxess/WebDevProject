@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Encryption & Validation</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_encrypt_validate_anchor"><h1>Django <span class="door">-</span> Encryption & Validation</h1></a>
+<div class="form-control">
+    <p class="mb-2">
+        Passwords should never been stored as plain text. This is a massive security risk that is vulnerable to hackers
+        and still poses a risk even if only developers can read them. The below sections cover password encryption and
+        the use of validators to set password requirements.
+    </p>
+    <div class="form-control mb-2">
+        <a id="pw_encrypt_hash_anchor"><h2>Password Encryption/Hashing</h2></a>
+        <div class="form-control mb-2">
+            <a id="init_setup_anchor"><h3>Initial Setup</h3></a>
+            <p class="mb-1">
+                Before we can start authenticating Users, we need to make sure the following built-in apps are
+                registered: <em>django.contrib.admin</em>, <em>django.contrib.auth</em> and
+                <em>django.contrib.contenttypes</em>. This is done by editing the <em>settings.py</em> file's
+                <em>INSTALLED_APPS</em> list to include the (string name of the) modules we just mentioned. In newer
+                versions of Django, these modules may be listed by default. See example:
+            </p>
+            <pre class="mb-1">
+    INSTALLED_APPS = [
+        <mark>"django.contrib.admin"</mark>, # Note that these are strings and not the module itself.
+        <mark>"django.contrib.auth"</mark>,
+        <mark>"django.contrib.contenttypes"</mark>,
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+        'first_app',
+    ]
+</pre>
+        </div>
+        <div class="form-control mb-1">
+            <a id="install_register_hash_alg_anchor"><h3>Installing/Registering Hashing Algorithms</h3></a>
+            <p class="mb-1">
+                Django has some built-in hashing algorithms: <em>PBKDF2</em> and <em>SHA256</em>. There are stronger
+                algorithms, such as <em>bcrypt</em> and <em>Argon2</em>, but they are external to Django and must be
+                installed before they can be used. To install these (into our virtual environment, ideally), use the
+                following commands in the command prompt:
+            </p>
+            <pre class="mb-1">
+    pip install bcrypt
+    pip install django[argon2]
+</pre>
+            <p class="mb-1">
+                Before we can use these hashing algorithms, we need to create a class-level list in the
+                <em>settings.py</em> file named <em>PASSWORD_HASHERS</em>. Then we need to populate it with the string
+                names of the modules we want to use. See below example. Include/exclude modules as needed.
+            </p>
+            <pre class="mb-1">
+    PASSWORD_HASHERS = [
+        'django.contrib.auth.hashers.Argon2PasswordHasher',
+        'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+        'django.contrib.auth.hashers.BCryptPasswordHasher',
+        'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+        'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    ]
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="pw_validators_anchor"><h2>Password Validators</h2></a>
+        <!--https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators-->
+        <p class="mb-2">
+            Django has the following built-in validators:
+        </p>
+
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th>Validator</th>
+                <th>Parameters</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>MinimumLengthValidator</th>
+                <td>
+                    <p class="mb-2">min_length=8</p>
+                </td>
+                <td>
+                    Validates that the password is of a minimum length. The minimum length can be customized with
+                    the <em>min_length</em> parameter.
+                </td>
+            </tr>
+            <tr>
+                <th>UserAttributeSimilarityValidator</th>
+                <td>
+                    <p class="mb-2">user_attributes=DEFAULT_USER_ATTRIBUTES</p>
+                    <p class="mb-2">max_similarity=0.7</p>
+                </td>
+                <td>
+                    <p class="mb-2">
+                        Validates that the password is sufficiently different from certain attributes of the user.
+                    </p>
+                    <p class="mb-2">
+                        The <em>user_attributes</em> parameter should be an iterable of names of user attributes to
+                        compare to. If this argument is not provided, the default is used: 'username', 'first_name',
+                        'last_name', 'email'. Attributes that don’t exist are ignored.
+                    </p>
+                    <p class="mb-2">
+                        The maximum allowed similarity of passwords can be set on a scale of 0.1 to 1.0 with the
+                        <em>max_similarity</em> parameter. This is compared to the result of
+                        difflib.SequenceMatcher.quick_ratio(). A value of 0.1 rejects passwords unless they are
+                        substantially different from the user_attributes, whereas a value of 1.0 rejects only
+                        passwords that are identical to an attribute’s value.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>CommonPasswordValidator</th>
+                <td>
+                    <p class="mb-2">password_list_path=DEFAULT_PASSWORD_LIST_PATH</p>
+                </td>
+                <td>
+                    <p class="mb-2">
+                        Validates that the password is not a common password. This converts the password to
+                        lowercase (to do a case-insensitive comparison) and checks it against a list of 20,000
+                        <a href="https://gist.github.com/roycewilliams/226886fd01572964e1431ac8afc999ce">common
+                            passwords</a>.
+                    </p>
+                    <p class="mb-2">
+                        The <em>password_list_path</em> can be set to the path of a custom file of common passwords.
+                        This file should contain one lowercase password per line and may be plain text or gzipped.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>NumericPasswordValidator</th>
+                <td></td>
+                <td>Validates that the password is not entirely numeric.</td>
+            </tr>
+        </table>
+
+        <div class="form-control mb-2">
+            <a id="edit_validator_settings_anchor"><h3>Editing Validator Settings</h3></a>
+            <div class="form-control mb-2">
+                <h6>Example of an unmodified <em>AUTH_PASSWORD_VALIDATORS</em>:</h6>
+                <p class="mb-1">
+                    All of the parameters here will default to the default parameters. Note that this list may also be
+                    created with no validators added.
+                </p>
+                <pre class="mb-1">
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        },
+    ]
+</pre>
+            </div>
+            <p class="mb-2">
+                To edit a validator, we need to add another key-value pair to the desired validator's dictionary. The
+                key needs to be set to <em>"OPTIONS"</em> and the value as a dict. You need to know the name of the
+                parameter either from memory or by referencing a chart (such as above), as these parameters are
+                validator-specific and may have limitations/restrictions.
+            </p>
+            <p class="mb-2">
+                If you know the name of the parameter(s), then create/insert the key-value pair(s) into the "OPTIONS"
+                dict, consisting of the parameter(s) as the key(s) and the desired values as the value. Syntax:
+            </p>
+            <pre>
+AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "<em>&lt;validator_1_name&gt;</em>",
+            "OPTIONS": {
+                "<em>&lt;parameter_1_name&gt;</em>": "<em>&lt;param_1_value&gt;</em>",
+                "<em>&lt;parameter_2_name&gt;</em>": "<em>&lt;param_2_value&gt;</em>",
+                ...
+                "<em>&lt;parameter_x_name&gt;</em>": "<em>&lt;param_x_value&gt;</em>",
+            },
+        },
+        {
+            "NAME": "<em>&lt;validator_2_name&gt;</em>",
+            "OPTIONS": {
+                "<em>&lt;parameter_1_name&gt;</em>": "<em>&lt;param_1_value&gt;</em>",
+                "<em>&lt;parameter_2_name&gt;</em>": "<em>&lt;param_2_value&gt;</em>",
+                ...
+                "<em>&lt;parameter_x_name&gt;</em>": "<em>&lt;param_x_value&gt;</em>",
+            },
+        },
+        ...
+    ]
+</pre>
+            <p class="mb-2">
+                In the below example, we edit the <em>MinimumLengthValidator</em> so that any supplied passwords must
+                meet the minimum required length of 12. Additionally, if we don't want to use a validator, we can simply
+                remove it. Since we don't care if the supplied password is all numbers, we removed the
+                <em>NumericPasswordValidator</em>.
+            </p>
+            <pre class="mb-1">
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+            <mark>"OPTIONS": {"min_length": 12,}</mark>,
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        },
+    ]
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="custom_validators_anchor"><h3>Custom Validators</h3></a>
+            <p class="mb-2">
+                If the built-in validators are insufficient, we can create our own. Classes must include two method
+                signatures:
+            </p>
+            <ul class="mb-2">
+                <li>
+                    <em>validate(self, password, user=None)</em>
+                    <br>
+                    Validates the password. Returns <u>None</u> if the password is valid, else raises a
+                    <em>ValidationError</em> with an error message if the password is invalid. If the <u>user</u> is
+                    <u>None</u> - it should return <u>None</u>.
+                </li>
+                <li>
+                    <em>get_help_text()</em>
+                    <br>
+                    Provides a help text to explain the password requirements to the user.
+                </li>
+            </ul>
+
+            <div class="form-control mb-1">
+                <h6>Example of a custom validator:</h6>
+                <pre class="mb-2">
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
+
+class MinimumLengthValidator:
+    def __init__(self, min_length=8):
+        self.min_length = min_length
+
+    def validate(self, password, user=None):
+        if len(password) < self.min_length:
+            raise ValidationError(
+                _("This password must contain at least %(min_length)d characters."),
+                code="password_too_short",
+                params={"min_length": self.min_length},
+            )
+
+    def get_help_text(self):
+        return _(
+            "Your password must contain at least %(min_length)d characters."
+            % {"min_length": self.min_length}
+        )
+</pre>
+                <div class="form-control mb-1">
+                    <p class="mb-1">
+                        Note: the <em>gettext()</em> module from <em>django.utils.translation</em> is used to specify a
+                        translation string. The below example marks a string as a translation string:
+                        <code>output = gettext("Welcome to my site.")</code>
+                    </p>
+                    <p class="highlight mb-1">
+                        [This is a work in progress. gettext() is used in internationalization which I'm presently
+                        unfamiliar with but will be covering later. From a brief glance at the material, my current
+                        understanding is that it is used to indicate that the text can be replaced with a different set
+                        of text, depending on the current locale value.]
+                        <!--https://phrase.com/blog/posts/quick-guide-django-i18n/-->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Encryption & Validation
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_encrypt_validate_anchor">
+        <strong>Django - Encryption & Validation</strong>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#pw_encrypt_hash_anchor">Password Encryption/Hashing</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#init_setup_anchor">&nbsp;&nbsp;&nbsp;Initial Setup</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#install_register_hash_alg_anchor">&nbsp;&nbsp;&nbsp;Installing/Registering Hashing Algorithms</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#pw_validators_anchor">Password Validators</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#edit_validator_settings_anchor">&nbsp;&nbsp;&nbsp;Editing Validator Settings</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#custom_validators_anchor">&nbsp;&nbsp;&nbsp;Custom Validators</a>
+</li>
+{% endblock %}

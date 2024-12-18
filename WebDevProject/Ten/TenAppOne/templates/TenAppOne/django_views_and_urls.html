@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Views and URLs</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_views_urls_anchor"><h1>Django <span class="door">-</span> Views and URLs</h1></a>
+<div class="form-control mb-2">
+    <a id="map_view_urls_anchor"><h2>Mapping from views.py to urls.py</h2></a>
+    <div class="form-control mb-2">
+        <p class="mb-1">
+            The <u><strong>views.py</strong></u> file stores Python functions or classes that receive a web request and
+            return a web response. This response can be a simple HttpResponse, HttpResponseRedirect, or an HTML template
+            response. Example view function:
+        </p>
+        <pre>
+def home_view(request):
+    return render(request, 'example_app/home.html')
+</pre>
+        <p class="mb-1">
+            The <u><strong>urls.py</strong></u> file is used to store url patterns. One of these is created
+            automatically when the project is created. Then each app can have its own urls.py file that links back to
+            the project's urls.py file. Each file has a <em>urlpatterns</em> list that can be populated with
+            <em>path</em> objects. These path objects are typically comprised of a path (route), view, and can
+            optionally include a name. Example urlpatterns list:
+        </p>
+        <pre class="mb-1">
+urlpatterns = [path('home/', views.home_view), path('registry', views.reg_view, name='registry'),]
+</pre>
+    </div>
+    <div class="form-control mb-1">
+        <h4>Creating a basic example view:</h4>
+        <ul>
+            <li>In the Django app, locate and open the views.py file</li>
+            <li>
+                <p class="mb-0">
+                    Add an import statement to import HttpResponse from the django.http module:
+                </p>
+                <pre class="mb-1">from django.http import HttpResponse</pre>
+            </li>
+            <li>
+                Create a function named <em>index</em> that accepts a single parameter, named <em>request</em> (any name
+                is allowed but <em>request</em> is typically used).
+            </li>
+            <li>In the body of the function, return an HttpResponse() and pass in "Hello Horld!" as an argument.</li>
+            <li>
+                <p class="mb-1">
+                    Your views.py should now look something like this:
+                </p>
+                <img src="{% static 'media/images/examples/django_setup.view_function.png' %}"
+                     alt="django_setup.view_function.png">
+            </li>
+            <li>
+                <p class="mb-0">
+                    Now, the function needs to be mapped to the project's urls.py (AKA the "main" urls.py). Because the
+                    views.py file is in the app, it needs to be imported:
+                </p>
+                <pre class="mb-1">from first_app import views</pre>
+            </li>
+            <li>
+                <p class="mb-1">
+                    In the urlpatterns list, add a path object, pass in two parameters: an empty string for the route
+                    and <em>views.index</em>.
+                </p>
+                <img src="{% static 'media/images/examples/django_setup.add_view_function_to_urls.png' %}"
+                     alt="django_setup.add_view_function_to_urls.png">
+            </li>
+            <li>
+                <p class="mb-1">
+                    Run the server using the command prompt using <em>manage.py</em> and the <em>runserver</em> command.
+                    Then, in your browser, navigate to <a href="http://127.0.0.1:8000/">127.0.0.1:8000</a>. Once loaded,
+                    it should display a message that says "Hello World!".
+                </p>
+                <img src="{% static 'media/images/examples/django_setup.loading_httpresponse.png' %}"
+                     alt="django_setup.loading_httpresponse.png">
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="map_app_to_project_urls_anchor"><h2>Mapping an app urls.py to project urls.py</h2></a>
+    <p class="mb-2">
+        Mapping in the previous section is done by directly mapping from the views.py to the main (project's)
+        urls.py.
+    </p>
+    <p class="mb-2">
+        In this section, instead of using the main (project's) urls.py, we will create a urls.py for the app and use
+        that for mapping the views instead. The app's urls.py will link back to the main urls.py file by using the
+        <em>django.urls</em> module, particularly its <em>include</em> function.
+    </p>
+    <p class="mb-2">
+        The <em>include</em> function that when added to the main urls.py imports the urls from the app's urls.py to
+        itself. This has the advantage of keeping the main urls.py file from getting too large and allows
+        organization for easier readability.
+    </p>
+    <div class="form-control mb-1">
+        <h4>Steps to enable mapping:</h4>
+        <ul class="mb-1">
+            <li>
+                <p class="mb-1">
+                    Django apps do not automatically create a urls.py file when they are created. Inside of app
+                    directory, create a Python file named "urls". Import the <em>path</em> and <em>include</em>
+                    functions from the <em>django.urls</em> module. Then import the <em>views</em> from the app.
+                    Finally, add an empty list object named <em>urlpatterns</em>. Example:
+                </p>
+                <pre class="mb-1">
+from django.urls import path, include
+from first_app import views
+
+urlpatterns = []
+</pre>
+                <p class="mb-1">
+                    With that done, we now have two urls.py: one in the project directory (AKA 'main urls.py'), and one
+                    in the app directory that we just created.
+                </p>
+            </li>
+            <li>
+                <p class="mb-1">
+                    In the <strong>main</strong> urls.py (<u>not the app urls.py that we just created</u>), import the
+                    <em>include</em> function from the <em>django.urls</em>
+                    module.
+                </p>
+                <pre class="mb-1">from django.urls import path, <mark>include</mark></pre>
+            </li>
+            <li>
+                Now, add a new <em>path</em> object to the (main urls.py) <em>urlpatterns</em> list.
+                <ul>
+                    <li>
+                        For the <em>path</em> object's first argument (route), pass in a string. This string will act as
+                        a subdirectory for any URLs imported from the app's urls.py.
+                        (Example: http://127.0.0.1:8000/&lt;<u>subdirectory</u>&gt;/&lt;<u>imported_url_path</u>&gt;/)
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            For the <em>path</em> object's second argument (view), pass in an <em>include</em> object.
+                            As for the argument, pass in the name of the app followed by "urls", delimited by a period
+                            ( . ). The syntax looks like this: "&lt;app_name&gt;.urls". Example:
+                        </p>
+                        <pre class="mb-1">path('first_app', include('first_app.urls'))</pre>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p class="mb-1">
+                    In the app's urls.py file, we can now add <em>path</em> objects to the <em>urlpatterns</em> list. If
+                    continuing from the example in the previous section, then we can map the index() function from the
+                    views.py file.
+                </p>
+                <pre class="mb-1">
+from django.urls import path, include
+from first_app import views
+
+urlpatterns = [
+    <mark>path('home/', views.index),</mark>
+]
+</pre>
+                <p class="mb-1">
+                    Now, if we navigate to
+                    <a href="http://127.0.0.1:8000/first_app/home/">127.0.0.1:8000/first_app/home/</a> in the browser,
+                    we should see the same <em>Hello World!</em> that we saw earlier in the previous section's example.
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Views & URLs
+{% endblock %}
+
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_views_urls_anchor"><strong>Django - Views and URLs</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#map_view_urls_anchor">Mapping from views.py to urls.py</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#map_app_to_project_urls_anchor">Mapping an app urls.py to project urls.py</a>
+</li>
+{% endblock %}

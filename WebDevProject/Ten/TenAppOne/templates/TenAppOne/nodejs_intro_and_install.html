@@ -1,0 +1,215 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <title>Node.js - Introduction</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id="nodejs_anchor"><h1>Node.js <span class="door">-</span> Introduction and Installation</h1></a>
+    <div class="form-control mb-2">
+        <div class="form-control mt-1 mb-2">
+            <a id="nodejs_intro_anchor"><h2>Introduction</h2></a>
+            <p class="mb-2">
+                Node.js is an open-source, cross-platform runtime environment that allows developers to create all kinds
+                of server-side tools and applications in JavaScript. The runtime is intended for use outside of a
+                browser context (i.e. running directory on a computer or server OS). As such, the environment doesn't
+                have access to browser-specific Javascript APIs. Examples of browser-specific features such as: access
+                to the DOM (e.g. <em>document.querySelector()</em> will not work), functions like <em>alert()</em> or
+                the <em>window</em> object, or even <em>localStorage</em>. However, it does add support for more
+                traditional OS APIs including HTTP and file system libraries, so it can perform actions like file
+                handling, creating servers, etc.. Again, Node.js is meant for server-side programming whereas those
+                browser-specific features are meant for client-side programmming.
+            </p>
+            <p class="mb-2">
+                It uses Google's V8 engine, the core of Google Chrome, to convert Javascript code to machine code.
+                A Node.js app runs in a single process, without creating a new thread for every request. It provides a
+                set of synchronous I/O primitives in its standard library that prevents Javascript code from blocking
+                and generally, libraries in Node.js are written using non-blocking paradigms, making blocking behavior
+                the exception rather than the norm.
+            </p>
+            <p class="mb-2">
+                When Node.js performs an I/O operation, such as reading from the network, accessing a database or the
+                filesystem, instead of blocking the thread and wasting CPU cycles waiting, Node.js will resume the
+                operations when the response comes back. This allows Node.js to handle thousands of concurrent
+                connections with a single server without introducing the burden of managing thread concurrency, which
+                can be signficant source of bugs.
+            </p>
+            <p class="mb-1">
+                Node.js has a unique advantage because front-end developers that write Javascript are now able to write
+                server-side code in addition to the client-side code without the need to learn a completely different
+                language.
+            </p>
+        </div>
+        <div class="form-control mb-2">
+            <a id="nodejs_advantages_anchor"><h2>Advantages of using Node.js</h2></a>
+            <ul class="mb-0">
+                <li>
+                    <strong>Performance</strong>. Node was designed to optimize throughput and scalability in web
+                    applications and is a good solution for many common web-development problems (e.g. real-time web
+                    applications).
+                </li>
+                <li>
+                    <strong>Code is written in "plain old Javascript"</strong>. This means less time is spent dealing
+                    with "context shift" between languages when writing both client-side and server-side code.
+                </li>
+                <li>
+                    <strong>Javascript is a relatively new programming language</strong>. It benefits from improvements
+                    in language design when compared to other traditional web-server languages (like Python, PHP,
+                    etc..). Many other new/popular languages can compile/convert into Javascript so we can use
+                    TypeScript, CoffeeScript, Scala, etc..
+                </li>
+                <li>
+                    <strong>The node package manager provides access to hundreds of thousands of reusable
+                        packages</strong>. It also has the best-in-class dependency resolution and can also be used to
+                    automate most of the build toolchain.
+                </li>
+                <li>
+                    <strong>Node.js is portable</strong>. It is available on Windows, MacOS, Linux, Solaris, WebOS,
+                    etc.. Additionally, it is well-supported by many web-hosting providers that may provide specific
+                    infrastructure and documentation for hosting Node sites.
+                </li>
+                <li>
+                    <strong>Has a very active third-party ecosystem and developer community</strong>.
+                </li>
+            </ul>
+        </div>
+        <div class="form-control mb-2">
+            <a id="nodejs_install_anchor"><h2>Installation Options</h2></a>
+            <ul class="mb-2">
+                <li>
+                    <strong>Using an installer</strong>. Navigate to
+                    <a href="https://nodejs.org/en/download/prebuilt-installer">
+                        https://nodejs.org/en/download/prebuilt-installer</a> in your browser. Then locate and download
+                    the installer appropriate for your system.
+                </li>
+                <li>
+                    <strong>Using a package manager</strong>. Alternatively, instead of using an installer, it can be
+                    installed using the package manager and OS of your choice. The steps for each can be found here:
+                    <a href="https://nodejs.org/en/download/package-manager">
+                        https://nodejs.org/en/download/package-manager</a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-control mb-1">
+            <a id="nodejs_code_breakdown_anchor"><h2>Node.js Code Examples Breakdown</h2></a>
+            <div class="form-control mb-2">
+                <h5>Example Node.js app:</h5>
+                <p class="mb-1">
+                    To run this snippet, save it as "server.js" and run this command in your terminal:
+                    <code>node server.js</code>
+                </p>
+                <pre class="mb-1">
+const { createServer } = require('node:http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+</pre>
+                <p class="mb-2">
+                    The first line includes/imports the Node.js <strong>http</strong> module. Node.js has a standard
+                    library
+                    which includes first-class support for networking.
+                </p>
+                <p class="mb-2">
+                    The <em>createServer()</em> method of the <strong>http</strong> module creates a new HTTP server and
+                    returns it. With that done, the server is then set to listen on the specified port and hostname.
+                    When the server is ready, the callback function is called. In this case, it informs us that the
+                    server is up and running.
+                </p>
+                <p class="mb-0">
+                    Whenever a new request is received, the <em>request</em> event is called, providing 2 objects:
+                </p>
+                <ul>
+                    <li>
+                        <strong>request</strong> (http.IncomingMessage object)
+                    </li>
+                    <li>
+                        <strong>response</strong> (http.ServerResponse object)
+                    </li>
+                </ul>
+                <p class="mb-0">
+                    These 2 objects are essential to handling HTTP calls.
+                </p>
+                <ul>
+                    <li>
+                        The <strong>request</strong> provides the request details. (Not shown in this example, but it
+                        does contain various details).
+                    </li>
+                    <li>
+                        The <strong>response</strong> is used to return data to the caller. In this example. the
+                        <em>res.statusCode = 200;</em>, we set the value to '200', which indicates a successful
+                        response.
+                    </li>
+                </ul>
+                <p class="mb-2">
+                    In <em>res.setheader('Content-Type', 'text/plain');</em>, we set the header type to 'text/plain'.
+                </p>
+                <p class="mb-2">
+                    In <em>res.end('Hello World\n')</em>, we close the response, while passing a string into it.
+                </p>
+            </div>
+            <div class="form-control mb-1">
+                <h5>Example Node.js app #2:</h5>
+                <p class="mb-1">
+                    Save the below file as "hello.js". Run in the terminal with this command: <code>node hello.js</code>.
+                </p>
+                <pre>
+// Load HTTP module
+const http = require("http");
+
+const hostname = "127.0.0.1";
+const port = 8000;
+
+// Create HTTP server
+const server = http.createServer(function (req, res) {
+  // Set the response HTTP header with HTTP status and Content type
+  res.writeHead(200, { "Content-Type": "text/plain" });
+
+  // Send the response body "Hello World"
+  res.end("Hello World\n");
+});
+
+// Prints a log once the server starts listening
+server.listen(port, hostname, function () {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+</pre>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+    Node.js - Introduction & Installation
+{% endblock %}
+
+{% block glossary_block %}
+    <li>
+        <a class="dropdown-item" href="#nodejs_anchor">Node.js - Introduction & Installation</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#nodejs_intro_anchor">&nbsp;&nbsp;&nbsp;Introduction</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#nodejs_advantages_anchor">&nbsp;&nbsp;&nbsp;Advantages of using Node.js</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#nodejs_install_anchor">&nbsp;&nbsp;&nbsp;Installation Options</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#nodejs_code_breakdown_anchor">&nbsp;&nbsp;&nbsp;Code Examples Breakdown</a>
+    </li>
+{% endblock %}

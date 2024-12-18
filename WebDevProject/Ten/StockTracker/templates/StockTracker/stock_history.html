@@ -1,0 +1,110 @@
+{% extends 'StockTracker/base_template_stockapp.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <title>Stock Historical Visualizer</title>
+{% endblock %}
+
+{% block body_block %}
+    <h1>Stock <span class="door">-</span> Historical Data</h1>
+    <div class="form-control">
+        <form action="" method="POST" class="mt-1 mb-2">
+            {% csrf_token %}
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    {{ stock_data_form.ticker_one }}
+                </div>
+                <div class="col-md">
+                    {{ stock_data_form.ticker_two }}
+                </div>
+                <div class="col-md">
+                    {{ stock_data_form.ticker_three }}
+                </div>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md">
+                    <div class="input-group">
+                        <span class="input-group-text">Start date:</span>
+                        {{ stock_data_form.start_date }}
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="input-group">
+                        <span class="input-group-text">End date:</span>
+                        {{ stock_data_form.end_date }}
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Apply Changes" class="btn btn-secondary">
+            <!--        <input type="reset" value="Reset Fields" class="btn btn-secondary"> Doesn't work after the form is submitted-->
+        </form>
+        <!--    <hr class="my-2">-->
+        <form action="" method="POST" class="mt-2 mb-1">
+            <label class="form-label" for="download_stock_group_id">
+                If the desired ticker(s) is not listed in the above dropdowns, please enter the desired ticker(s) in the
+                below text box and click the <strong>Download</strong> button. The server will retrieve the data for
+                those
+                tickers and they should be selectable from the dropdown menu. For tickers with especially large
+                histories or
+                multiple tickers, there may be a slight delay.
+            </label>
+            {% csrf_token %}
+            <div class="input-group" id="download_stock_group_id">
+                <span class="input-group-text">Retrieve data for the following tickers:</span>
+                {{ download_stock_data_form }}
+                <button type="submit" value="Submit" class="btn btn-secondary">Download</button>
+            </div>
+        </form>
+
+        {% if ticker_one_name or ticker_two_name or ticker_three_name %}
+            <hr class="mt-3 mb-3">
+            <div class="form-control mt-2 mb-2">
+                {% if ticker_one_name %}
+                    {{ ticker_one_name | json_script:"ticker_one_name" }}
+                    {{ ticker_one_dates | json_script:"ticker_one_dates" }}
+                    {{ ticker_one_opens | json_script:"ticker_one_opens" }}
+                    {{ ticker_one_closes | json_script:"ticker_one_closes" }}
+                    {{ ticker_one_adj_closes | json_script:"ticker_one_adj_closes" }}
+                    {{ ticker_one_volumes | json_script:"ticker_one_volumes" }}
+                    <div id="stock_chart_one" style="width:100%;height:350px;"></div>
+                {% endif %}
+                {% if ticker_two_name %}
+                    <hr>
+                    {{ ticker_two_name | json_script:"ticker_two_name" }}
+                    {{ ticker_two_dates | json_script:"ticker_two_dates" }}
+                    {{ ticker_two_opens | json_script:"ticker_two_opens" }}
+                    {{ ticker_two_closes | json_script:"ticker_two_closes" }}
+                    {{ ticker_two_adj_closes | json_script:"ticker_two_adj_closes" }}
+                    {{ ticker_two_volumes | json_script:"ticker_two_volumes" }}
+                    <div id="stock_chart_two" style="width:100%;height:350px;"></div>
+                {% endif %}
+                {% if ticker_three_name %}
+                    <hr>
+                    {{ ticker_three_name | json_script:"ticker_three_name" }}
+                    {{ ticker_three_dates | json_script:"ticker_three_dates" }}
+                    {{ ticker_three_opens | json_script:"ticker_three_opens" }}
+                    {{ ticker_three_closes | json_script:"ticker_three_closes" }}
+                    {{ ticker_three_adj_closes | json_script:"ticker_three_adj_closes" }}
+                    {{ ticker_three_volumes | json_script:"ticker_three_volumes" }}
+                    <div id="stock_chart_three" style="width:100%;height:350px;"></div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="form-control mb-1 mt-2">
+            <h2 class="highlight">Latest Update:</h2>
+            <p class="mb-1">
+                As of 2024/09/06, the source data used for this application is paywalled behind a $40 monthly fee. So,
+                until I find a free, alternative source for this data, the application will not be able to provide
+                historical information for any stock beyond the date of 2024/09/05. Additionally, no new stock tickers
+                can be added, for the same reasons above.
+            </p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/stock_charts.js' %}"></script>
+{% endblock %}

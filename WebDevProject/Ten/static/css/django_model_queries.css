@@ -1,0 +1,10 @@
+.unfamiliar_topic{
+    color:green;
+    background-color:yellow;
+    padding:1px;
+    border:2px dotted pink;
+}
+
+th {
+   white-space:nowrap; /* prevents text wrapping */
+}

@@ -1,0 +1,5 @@
+div.grid_example div div[class|="col"]{
+    border:1px solid lightgray;
+    background-color:ghostwhite;
+    text-align:center;
+}

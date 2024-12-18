@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Sample Data</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_sample_data_anchor"><h1>Django <span class="door">-</span> Creating/Editing Sample Data/Rows</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="viewing_adding_entries_python_anchor"><h2>Example of Viewing/Adding entries via Python:</h2></a>
+        <pre class="mb-0">
+from example_app.models import Albums
+
+albums_entries = Albums.objects.all()               # Retrieves all entries in the Albums table into a QuerySet object
+print(albums_entries)                               # Output should be an empty QuerySet
+
+new_row = Albums(artist="John Doe", tracks=5)       # Creates a row with populated column. (NOT saved into the table yet!)
+
+print(new_row.artist)                               # Returns the value of the row's artist column
+print(new_row.tracks)                               # Returns the value of the row's tracks column
+
+new_row.tracks = 12                                 # Updates the value of the tracks column
+
+new_row.save()                                      # Saves the row into the database
+
+print(Albums.objects.all())                         # The output should have a single entry: QuerySet[&lt;Album: Album object(1)&gt;]
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="viewing_adding_entries_faker_anchor"><h2>Viewing/Adding Entries via the Faker Module (Basic Guide)</h2>
+        </a>
+        <div class="form-control mb-2">
+            <h3>Installing the <em>Faker</em> Module</h3>
+            <p class="mb-1">
+                The <em>Faker</em> library can be installed by running the following command in the command prompt:
+            </p>
+            <pre class="mb-0">pip install Faker</pre>
+        </div>
+        <div class="form-control mb-2">
+            <h3>Importing and Setting Up the <em>Faker</em> Module</h3>
+            <p class="mb-1">
+                The first step to using the library in your Py script is to import it using the following command:
+            </p>
+            <pre>from faker import Faker</pre>
+            <p class="mb-1">The second step is to create a "generator" with this command:</p>
+            <pre class="mb-0">faker_generator = Faker()</pre>
+        </div>
+        <div class="form-control mb-2">
+            <h3>Generating Data from the Faker Module</h3>
+            <p class="mb-1">
+                After creating the generator, we can use its built-in methods to generate various types of data, such as
+                names, first names, last names, addresses, urls, emails, company names, etc.. Example usage:
+            </p>
+            <pre>
+from faker import Faker
+faker_generator = Faker()
+
+fake_name = faker_generator.name()              # Randomly selects a name
+fake_url = faker_generator.url()                # Randomly generates a url
+fake_date = faker_generator.date()              # Randomly generates a date
+fake_company = faker_generator.company()        # Randomly generates a company
+</pre>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Provider Category</th>
+                    <th>Included Providers</th>
+                </tr>
+                <tr>
+                    <td>faker.providers.address</td>
+                    <td>
+                        address, building_number, city, city_suffix, country, country_code, current_country,
+                        current_country_code, postcode, street_address, street_name, street_suffix
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.automotive</td>
+                    <td>license_plate, vin</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.bank</td>
+                    <td>aba, bank_country, bban, iban, swift, swift11, swift8</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.barcode</td>
+                    <td>ean, ean13, ean8, localized_ean, localized_ean13, localized_ean8</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.color</td>
+                    <td>
+                        color, color_hsl, color_hsv, color_name, color_rgb, color_rgb_float, hex_color, rgb_color,
+                        rgb_css_color, safe_color_name, safe_hex_color
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.company</td>
+                    <td>bs, catch_phrase, company, company_suffix,</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.credit_card</td>
+                    <td>
+                        credit_card_expire, credit_card_full, credit_card_number, credit_card_provider,
+                        credit_card_security_code
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.currency</td>
+                    <td>
+                        cryptocurrency, cryptocurrency_code, cryptocurrency_name, currency, currency_code,
+                        currency_name, currency_symbol, pricetag
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.date_time</td>
+                    <td>
+                        am_pm, century, date, date_between, date_between_dates, date_object, date_of_birth,
+                        date_this_century, date_this_decade, date_this_month, date_this_year, date_time, date_time_ad,
+                        date_time_between, date_time_between_dates, date_time_this_century, date_time_this_decade,
+                        date_time_this_month, date_time_this_year, day_of_month, day_of_week, future_date,
+                        future_datetime, iso8601, month, month_name, past_date, past_datetime, pytimezone, time,
+                        time_delta, time_object, time_series, timezone, unix_time, year
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.emoji</td>
+                    <td>emoji</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.file</td>
+                    <td>file_extension, file_name, file_path, mime_type, unix_device, unix_partition</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.geo</td>
+                    <td>coordinate, latitude, latlng, local_latlng, location_on_land, longitude</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.internet</td>
+                    <td>
+                        ascii_company_email, ascii_email, ascii_free_email, ascii_safe_email, company_email, dga,
+                        domain_name, domain_word, email, free_email, free_email_domain, hostname, http_method,
+                        https_status_code, iana_id, image_url, ipv4, ipv4_network_class, ipv4_private, ipv4_public,
+                        ipv6, mac_address, nic_handle, nic_handles, port_number, ripe_id, safe_domain_name, safe_email,
+                        slug, tld, uri, uri_extension, uri_page, uri_path, url, user_name
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.isbn</td>
+                    <td>isbn10, isbn13</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.job</td>
+                    <td>job</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.lorem</td>
+                    <td>paragraph, paragraphs, sentence, sentences, text, texts, word, words</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.person</td>
+                    <td>
+                        first_name, first_name_female, first_name_male, first_name_nonbinary, language_name, last_name,
+                        last_name_female, last_name_male, last_name_nonbinary, name, name_female, name_male,
+                        name_nonbinary, prefix, prefix_female, prefix_male, prefix_nonbinary, suffix, suffix_female,
+                        suffix_male, suffix_nonbinary
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.profile</td>
+                    <td>profile, simple_profile</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.misc</td>
+                    <td>
+                        binary, boolean, csv, dsv, fixed_width, images, json, json_bytes, md5, null_boolean, password,
+                        psv, sha1, sha256, tar, tsv, uuid4, xml, zip
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.passport</td>
+                    <td>passport_dob, passport_number, passport_owner</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.phone_number</td>
+                    <td>country_calling_code, msisdn, phone_number</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.python</td>
+                    <td>
+                        enum, pybool, pydecimal, pydict, pyfloat, pyint, pyiterable, pylist, pyobject, pyset, pystr,
+                        pystr_format, pystruct, pytuple
+                    </td>
+                </tr>
+                <tr>
+                    <td>faker.providers.sbn</td>
+                    <td>sbn9</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.ssn</td>
+                    <td>ssn</td>
+                </tr>
+                <tr>
+                    <td>faker.providers.user_agent</td>
+                    <td>
+                        android_platform_token, chrome, firefox, internet_explorer, ios_platform_token,
+                        linux_platform_token, linux_processor, mac_platform_token, mac_processor, opera, safari,
+                        user_agent, windows_platform_token
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-control mb-1">
+            <a id="django_faker_anchor"><h2>Using Faker with Django</h2></a>
+            <div class="form-control mb-2">
+                <h3>Python Script Setup</h3>
+                <p class="mb-1">
+                    Before a Py script can start manipulating models, it needs to import the <em>os</em> and
+                    <em>django</em>
+                    modules. Then it needs to set an environmental variable using the imported <em>os</em> module. The
+                    variable name (<em>'DJANGO_SETTINGS_MODULE'</em>) should be pointed to the project's settings file
+                    (formatted like so: '<em>project_name</em>.settings'). The last step is to call the <em>django</em>
+                    module's <em>setup</em> method, like so: <em>django.setup()</em>.
+                </p>
+                <p class="mb-1">
+                    Example:
+                </p>
+                <pre>
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '<em>first_project</em>.settings')
+import django
+django.setup()
+</pre>
+                <p class="mb-1">
+                    After the initial setup is complete, the next step is to import the models from the app. Example:
+                </p>
+                <pre class="mb-0">
+from <em>first_app</em>.models import <em>Album</em>, <em>Artist</em>, <em>Song</em>
+</pre>
+            </div>
+            <div class="form-control mb-2">
+                <h4>Retrieving All Entries:</h4>
+                <p class="mb-1">
+                    Example:
+                </p>
+                <pre class="mb-0">
+Album.objects.all()
+</pre>
+            </div>
+            <div class="form-control mb-1">
+                <h4>Creating and Saving a New Entry:</h4>
+                <pre class="mb-0">
+t = Album.objects.get_or_create(title="SuperBeats", artist="John Bam", songs="Sad|Happy|Melancholy")[0]
+t.save() # Saves the entry to the database
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Creating Sample Data
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_sample_data_anchor">
+        <strong>Django - Creating/Editing Sample Data/Rows</strong>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#viewing_adding_entries_python_anchor">
+        Example of Viewing/Adding entries via Python
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#viewing_adding_entries_faker_anchor">
+        Viewing/Adding Entries via the Faker Module
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#django_faker_anchor">
+        Using Faker with Django
+    </a>
+</li>
+{% endblock %}

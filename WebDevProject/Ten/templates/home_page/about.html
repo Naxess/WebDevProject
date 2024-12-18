@@ -1,0 +1,372 @@
+{% extends 'base_template_home.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <!--<script src="{% static 'dependencies/js/jquery-3.7.1.js' %}"></script>-->
+    <!--<script src="{% static 'dependencies/js/bootstrap.js' %}"></script>-->
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <title>About Me</title>
+{% endblock %}
+
+{% block body_block %}
+    <!--<h1>About Me</h1>-->
+    <div class="form-control mb-1">
+        <h2>Hello<span class="door">,</span> there!</h2>
+        <p class="mb-2">
+            Hi, thanks for visiting my website. My name is Siu Li and I initially built this website to practice and
+            learn
+            web development (...and to have a little corner of my own on the interwebs). Admittedly, it's not the best
+            looking website and could benefit from an artistic touchup but... that's a task for another time - function
+            takes precedence over form (for now).
+        </p>
+        <p class="mb-2">
+            Anyhow, if you like what you see and are looking to fill a position on your team, please let me know by
+            e-mailing me at <a href="mailto: siuli.mail@gmail.com">siuli.mail@gmail.com</a>.
+        </p>
+        <p class="mb-3">
+            Job history/experience below (alternatively, see <a href="{% url 'resume' %}">PDF/printer-friendly
+            version</a>):
+        </p>
+
+        <div class="tab-content mt-0" id="tabcontent_id">
+            <ul class="nav nav-tabs nav-fill" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#experience_tab_id" href="#">
+                        <span class="fs-4 fw-semibold">Experience</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#education_tab_id" href="#">
+                        <span class="fs-4 fw-semibold">Education</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#projects_tab_id" href="#">
+                        <span class="fs-4 fw-semibold">Projects</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-pane show active" id="experience_tab_id" role="tabpanel">
+                <div class="form-control bg-dark mb-2">
+                    <div class="form-control mt-1 mb-2">
+                        <div class="row mt-1 mb-2">
+                            <div class="col-12">
+                                <div class="card">
+                                    <img class="card-img-overlay" src="{% static 'media/images/work_icons/citi.svg' %}"
+                                         width="8%" height="100px" alt="citi.svg">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-end">Software Engineer (Contract)</h3>
+                                        <h5 class="card-subtitle text-end mb-2">Citi (Mar 2020 - Aug 2023)</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            Responsible for updating and maintaining an ETL framework, ensuring data
+                                            fidelity and availability for downstream consumers. Typically involved
+                                            working
+                                            with teams from various other departments, depending on the type of issue or
+                                            feature request.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Assisted in the construction of an internal website that allowed users to
+                                            visually track data availability for a given product/region/date/etc. and
+                                            provide access to process logs for each entry to facilitate debugging when
+                                            needed.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Created and implemented a utility module for streamlining the publication of
+                                            status reports at multiple stages in the data ingestion pipeline. Utilizes a
+                                            SQL
+                                            database for storing key details of each report allowing that same module to
+                                            automate the creation and re-publication for any given product.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Provided guidance and wrote documentation on the (recommended) use of
+                                            various
+                                            technologies as well as any code written by our own team.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Tested the code for bugs and debugging/updating it as needed to address any
+                                            found bugs, vulnerabilities, or inefficiencies.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Skills, technologies, and frameworks utilized in this role: Java, Python,
+                                            Spark,
+                                            SQL, HTML, CSS, Django, Hive, Amazon S3, Git, Unix, JIRA.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-12">
+                                <div class="card">
+                                    <img class="card-img-overlay" src="{% static 'media/images/work_icons/lti.svg' %}"
+                                         width="25%" height="100px" alt="lti.svg">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-end">Software Engineer</h3>
+                                        <h5 class="card-subtitle text-end mb-2">Larsen & Toubro Infotech (Feb 2020 - Aug
+                                            2023)</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            Worked as a consultant for the company, engaging in multiple roles/functions
+                                            depending on the changing needs of the clients, such as, but not exclusive
+                                            to
+                                            writing/reviewing/testing code, training/assisting new hires, minor DevOps,
+                                            and
+                                            guidance/recommendations on the use of technologies such as AWS,
+                                            HDFS/Hive/Hadoop, and data engineering.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <img class="card-img-overlay" src="{% static 'media/images/work_icons/lti.svg' %}"
+                                     width="25%" height="100px" alt="lti.svg">
+                                <div class="card-body">
+                                    <h3 class="card-title text-end">Intern</h3>
+                                    <h5 class="card-subtitle text-end mb-2">Larsen & Toubro Infotech (Nov 2019 - Jan
+                                        2020)</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        Enrolled in a training program to familiarize interns with Big Data concepts and
+                                        technologies.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Wrote HiveQL queries in Hive to perform variables operations such as creating
+                                        tables
+                                        and external tables, loading data from various sources into those tables, and
+                                        modifying those tables by partitioning and/or bucketing.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Wrote JavaSpark and PySpark code to create dataframes, datasets, RDDs, and
+                                        modified/parsed them using transformations and actions.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Skills, technologies, and frameworks utilized in this role: Java, Python, SQL,
+                                        Spark, Hive, Unix.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-control mb-2">
+                        <div class="row mb-2 mt-1">
+                            <div class="col-12">
+                                <div class="card">
+                                    <img class="card-img-overlay" src="{% static 'media/images/work_icons/zebra.svg' %}"
+                                         width="14%" height="100px" alt="zebra.svg">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-end">Test Engineer (Contract)</h3>
+                                        <h5 class="card-subtitle text-end mb-2">Zebra Technologies (Nov 2016 - June
+                                            2018)</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            Created/executed test scenarios that implemented the various testing
+                                            methodologies (i.e. system, reliability, stress) to reproduce
+                                            software/hardware
+                                            faults and test fixes.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Worked in teams with software and electrical engineers to diagnose, document
+                                            and
+                                            develop test plans to reproduce reported issues and isolate the root causes.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Used JIRA and SharePoint to submit/update/resolve tickets and progress
+                                            reports.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Worked with Bluetooth, various barcode symbologies (UPC-A, PDF-417, QR,
+                                            Aztec,
+                                            Maxicode, etc..), and hand-held/hands-free scanners.
+                                        </li>
+                                        <li class="list-group-item">
+                                            Skills, technologies, and frameworks utilized in this role: Python, JIRA.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-12">
+                                <div class="card">
+                                    <img class="card-img-overlay"
+                                         src="{% static 'media/images/work_icons/teksystems.svg' %}"
+                                         width="18%" height="100px" alt="teksystems.svg">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-end">Consultant</h3>
+                                        <h5 class="card-subtitle text-end mb-2">TEKsystems (Nov 2016 - June 2018)</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title text-end">Intern</h3>
+                                    <h5 class="card-subtitle text-end mb-2">Quilksoft (Jul 2016 - Oct 2016)</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        Learned from senior web developers about best practices for writing, testing,
+                                        and
+                                        debugging code.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Assisted in writing code for the graphical elements of the login and
+                                        registration
+                                        pages as well as some back-end code for storing/updating registrants’
+                                        information in
+                                        the database and some logic code for the games.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Skills, technologies, and frameworks utilized in this role: HTML, C#, Angular.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="education_tab_id" role="tabpanel">
+                <div class="form-control bg-dark mb-3">
+                    <div class="row mt-1 mb-1">
+                        <div class="col-12">
+                            <div class="card">
+                                <img class="card-img-overlay"
+                                     src="{% static 'media/images/work_icons/st_josephs.webp' %}"
+                                     height="80px" alt="st_josephs.webp">
+                                <div class="card-body">
+                                    <h3 class="card-title text-end">Student</h3>
+                                    <h4 class="card-subtitle text-end mb-2">St. Joseph's College</h4>
+                                    <h5 class="card-subtitle text-end mb-2">B.S. Computer Science/Mathematics, 2016
+                                        (GPA: 3.6)</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <h5 class="mb-1">Coursework:</h5>
+                                        <p class="mb-1">
+                                            Computer Programming (Java), Data Structures & Algorithms (Java), Advanced
+                                            Computer Programming (Java), HCI (Human-Computer Interaction), Operating
+                                            Systems, Math Foundations of CS, Computer Graphics (C++), Advanced C++,
+                                            Mobile Applications (Android), Computer Organization & Assembly Language
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="projects_tab_id" role="tabpanel">
+                <div class="form-control bg-dark mb-3">
+                    <div class="row mt-1 mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title text-end">Personal website:</h3>
+                                    <h4 class="card-subtitle text-end">
+                                        <a href="https://www.metacrypha.com//">https://www.metacrypha.com/</a>
+                                    </h4>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <p class="card-text">
+                                            Built a website that currently hosts three applications: a reference for
+                                            programmers, which covers key languages/technologies in Django web
+                                            development, another which hosts references/guides for gamers, and another
+                                            which allows users to visually compare up to three stocks in a given
+                                            timeframe. Users, if they choose to, can register for an account, allowing
+                                            for privileged access to member-only pages. Users’ login information is
+                                            encrypted using the Argon2 hashing algorithm, ensuring a greater deal of
+                                            protection than Django’s built-in password-hashers. The site was developed
+                                            using the following languages/technologies: Django, Python, SQL, HTML, CSS,
+                                            Bootstrap, and JavaScript.
+                                        </p>
+                                    </li>
+                                </ul>
+                                <div class="card-footer text-center">
+                                    <!--<a class="card-link disabled" href="">Github link</a>-->
+                                    <p class="card-text text-secondary">Github link (set to private)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-2">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title text-end">Stock Data Trend Visualizer</h3>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <p class="card-text">
+                                            Developed an application in Java that downloads the stock data of any
+                                            publicly traded stock company, parses that data, stores it, and then renders
+                                            graphical charts that allow users to visualize the stock trends of the
+                                            company for any period that the user specifies. The data for each stock
+                                            company is stored locally on a SQL database and can be updated
+                                            simultaneously at the click of a button. Utilizes Apache Derby, SQL/Commons,
+                                            IO/Commons, Text/HttpComponents, and JFreeChart APIs.
+                                        </p>
+                                    </li>
+                                </ul>
+                                <div class="card-footer text-center">
+                                    <a class="card-link"
+                                       href="https://github.com/Naxess/Portfolio/tree/master/ProjectsPortfolio/src/StockReader">Github
+                                        link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-1">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title text-end">Personnel/Task Management System</h3>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <p class="card-text">
+                                            Developed an application in Java that allows users to access and manage a
+                                            registry of users and tasks using a graphical interface. Users can create
+                                            and assign tasks to themselves and/or others. These tasks can be updated to
+                                            reflect the completion level of the task, modify the description, change the
+                                            deadline, or to add or remove assignees. The data is stored locally on a SQL
+                                            database and the data can be exported onto an Excel spreadsheet. Utilizes
+                                            the
+                                            Apache POI/Derby SQL APIs.
+                                        </p>
+                                    </li>
+                                </ul>
+                                <div class="card-footer text-center">
+                                    <a class="card-link"
+                                       href="https://github.com/Naxess/Portfolio/tree/master/ProjectsPortfolio/src/PersonnelManager">Github
+                                        link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+{% endblock %}
+
+{% block glossary_block %}
+{% endblock %}

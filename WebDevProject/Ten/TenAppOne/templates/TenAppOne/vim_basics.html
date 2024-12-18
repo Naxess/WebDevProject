@@ -1,0 +1,99 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Vim - Basics</title>
+{% endblock %}
+
+{% block body_block %}
+<!--<a href="https://builtin.com/articles/how-to-exit-vim">https://builtin.com/articles/how-to-exit-vim</a>-->
+<a id="vim_basics_anchor"><h1>Vim <span class="door">-</span> Basics</h1></a>
+<div class="form-control mb-1">
+    <p class="mb-2">
+        Vim is a text editor for Unix/Linux that can run in a terminal. It comes preinstalled on most, if not all,
+        versions of Unix or Linux.
+    </p>
+    <table class="table table-bordered row mt-1 mb-1">
+        <tr class="table-dark">
+            <th class="col-4">Command</th>
+            <th class="col-8">Description</th>
+        </tr>
+        <tr>
+            <td><p class="mb-1">vim <em>&lt;example_file&gt;</em></p></td>
+            <td><p class="mb-1">From the Linux terminal, opens a file in a Vim editor</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">Press <kbd>i</kbd></p></td>
+            <td><p class="mb-1">Enable editing/insert mode</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">Press <kbd>Ctrl + c</kbd> or <kbd>Esc</kbd></p></td>
+            <td><p class="mb-1">Exit editing/insert mode</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">:wq</p></td>
+            <td><p class="mb-1">Save and quit the editor</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">:w</p></td>
+            <td><p class="mb-1">Save without quitting the editor</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">:q</p></td>
+            <td><p class="mb-1">Quit the editor without saving</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">:q!</p></td>
+            <td><p class="mb-1">Quit the editor without saving (ignores unsaved changes)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">set number</p></td>
+            <td><p class="mb-1">Shows line numbers in the editor</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">:<em>&lt;line_number&gt;</em></p></td>
+            <td><p class="mb-1">Jumps to a specific line number</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-1">:$</p></td>
+            <td><p class="mb-1">Jumps to the last line</p></td>
+        </tr>
+        <tr>
+            <td>dd</td>
+            <td><p class="mb-1">Deletes the current line.</p></td>
+        </tr>
+        <tr>
+            <td>:<em>&lt;start_position&gt;,&lt;end_position&gt;</em>d</td>
+            <td>
+                <p class="mb-1">
+                    Delete lines starting from the specified <em>start_position</em> and ending at the specified
+                    <em>end_position</em>.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>/<em>&lt;target_string&gt;</em><br>?<em>&lt;target_string&gt;</em></td>
+            <td>
+                <p class="mb-1">
+                    <em>/&lt;target_string&gt;</em> searches for matches forward from the current position while
+                    <em>?&lt;target_string&gt;</em> searches backwards from the current position. Navigate through the
+                    results using the <kbd>n</kbd> to move forwards and <kbd>N</kbd> to move backwards.
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Vim - Basics
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#vim_basics_anchor"><strong>Vim - Basics</strong></a>
+</li>
+{% endblock %}

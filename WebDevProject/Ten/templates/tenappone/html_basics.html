@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>HTML - Basics</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/html_basics.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="html_basics_anchor"><h1>HTML <span class="door">-</span> Basics</h1></a>
+<div class="form-control mb-2">
+    <a id="common_elements_usages_anchor"><h2>Commonly Used Elements and Usages</h2></a>
+    <p class="mb-2">
+        HTML (HyperText Markup Language) is a markup language that defines the structure of a webpage's content. It
+        consists of a series of elements, which are used to enclose, or wrap, different parts of the content to make it
+        appear or act a certain way.
+    </p>
+
+    <div class="form-control mb-2">
+        <a id="webpage_declaration_anchor"><h3>Webpage Declaration</h3></a>
+        <p class="mb-2">
+            All HTML documents must be prefaced with a document type declaration: <em>&lt;!DOCTYPE html&gt;</em>. It
+            needs to appear before anything else on the webpage.
+        </p>
+        <p class="mb-2">
+            The HTML document itself is created when the <em>&lt;html&gt;</em> tags are declared. This tag contains an
+            optional <em>lang</em> attribute.
+        </p>
+        <p class="mb-1">
+            After the document is created, it must then be supplied with the <em>&lt;head&gt;</em> and
+            <em>&lt;body&gt;</em> tags.
+        </p>
+        <ul>
+            <li>
+                <p class="mb-1">
+                    The <strong><u>&lt;head&gt;</u></strong> tag can be used as a container for the following elements:
+                    <em>&lt;title&gt;</em>, <em>&lt;style&gt;</em>, <em>&lt;link&gt;</em>, <em>&lt;script&gt;</em>, <em>&lt;base&gt;</em>,
+                    and <em>&lt;meta&gt;</em>.
+                </p>
+                <ul class="mb-0">
+                    <li>
+                        <p class="mb-1">
+                            The <strong><u>&lt;title&gt;</u></strong> tag is required. It defines the title of the
+                            webpage.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                The <strong><u>&lt;body&gt;</u></strong> tag encloses the visible part of the HTML document. There can
+                be only one <em>&lt;body&gt;</em> element on a HTML document at any given time.
+            </li>
+        </ul>
+        <div class="form-control mb-1">
+            <h5>Example usages:</h5>
+            <pre class="mb-1">
+<mark>&lt;!DOCTYPE html&gt;</mark>
+<mark>&lt;html lang="en-US"&gt;</mark>
+    <mark>&lt;head&gt;</mark>
+        <mark>&lt;title&gt;</mark>This is the title<mark>&lt;/title&gt;</mark>
+    <mark>&lt;/head&gt;</mark>
+    <mark>&lt;body&gt;</mark>
+        &lt;h1&gt;This is a header&lt;/h1&gt;
+    <mark>&lt;/body&gt;</mark>
+<mark>&lt;/html&gt;</mark>
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="title_tag_anchor"><h3>Title Tag</h3></a>
+        <p class="mb-2">
+            The <em>&lt;title&gt;</em> tag defines the title of the webpage.
+        </p>
+        <div class="form-control mb-1">
+            <h5>Example usage:</h5>
+            <pre class="mb-1">
+&lt;title&gt;Webpage Title&lt;/title&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="favicon_anchor"><h3>Adding a Favicon</h3></a>
+        <p class="mb-2">
+            A favicon is the icon displayed next to the webpage title. It does not have a tag of its own, but is instead
+            created by adding the <em>rel</em> attribute to <em>link</em> element and setting its value to <u>icon</u>.
+        </p>
+        <!--    <link rel="icon" href="{% static 'media/images/favicon_16x16.png' %}">-->
+        <div class="form-control mb-1">
+            <h5>Example usage:</h5>
+            <pre class="mb-1">
+<mark>&lt;link</mark> <mark>rel="icon"</mark> href="{% static 'media/images/youtube_favicon.png' %}"&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="header_tag_anchor"><h3>Header Tag</h3></a>
+        <p class="mb-2">
+            The <em>header</em> tag creates a header in varying sizes (from large to small):
+            <br>
+            <em>&lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;,&lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;</em>
+        </p>
+        <div class="form-control mb-1">
+            <h5>Examples:</h5>
+            <h1>&lt;h1&gt; tag &lt;/h1&gt;</h1>
+            <h2>&lt;h2&gt; tag &lt;/h2&gt;</h2>
+            <h3>&lt;h3&gt; tag &lt;/h3&gt;</h3>
+            <h4>&lt;h4&gt; tag &lt;/h4&gt;</h4>
+            <h5>&lt;h5&gt; tag &lt;/h5&gt;</h5>
+            <h6>&lt;h6&gt; tag &lt;/h6&gt;</h6>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="paragraph_tag_anchor"><h3>Paragraph Tag</h3></a>
+        <p class="mb-2">
+            The <em>&lt;p&gt;</em> tag creates a paragraph into which we can supply large sections of text. Has an
+            optional <em>title</em> attribute that, when supplied with a text value, will display a tooltip with the
+            given text when the <em>p</em> element is hovered over with a mouse.
+        </p>
+        <div class="form-control mb-1">
+            <h5>Example usages:</h5>
+            <p class="mb-1">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid asperiores, dolore
+                doloremque doloribus ducimus, esse eum exercitationem facere hic labore laborum magnam placeat possimus
+                quos rerum saepe voluptate! Blanditiis!
+            </p>
+            <pre>
+&lt;p&gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid asperiores, dolore
+doloremque doloribus ducimus, esse eum exercitationem facere hic labore laborum magnam placeat possimus quos
+rerum saepe voluptate! Blanditiis! &lt;/p&gt;
+</pre>
+            <p class="mb-1" title="This is a tooltip">Hover over this text to see the tooltip.</p>
+            <pre class="mb-1">
+&lt;p title="This is a tooltip"&gt; Hover over this text to see the tooltip. &lt;/p&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="anchor_tag_anchor"><h3>Anchor Tag</h3></a>
+        <p class="mb-2">
+            The <em>&lt;a&gt;</em> tag creates a hyperlink. It requires the use of the <em>href</em> attribute, which
+            needs to be supplied with the link destination.
+        </p>
+        <div class="form-control mb-1">
+            <h5>Example usage:</h5>
+            <pre class="mb-1">
+&lt;a href="https://www.google.com/"&gt;This link goes to Google.&lt;/a&gt;
+<a href="https://www.google.com/">This link goes to Google.</a>
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="image_tag_anchor"><h3>Image Tag</h3></a>
+        <p class="mb-2">
+            The <em>&lt;img&gt;</em> tag allows the webpage to display an image. It requires the use of the <em>src</em>
+            attribute, which needs to be supplied with the location of the image. Other additional attributes are
+            <em>width</em>, <em>height</em>, and <em>alt</em>. The first two attributes are used to specify the
+            dimensions of the image - but something to note is that the image will be stretched or shrink to match. The
+            aspect ratio is not preserved if both are supplied. The <em>alt</em> attribute displays the supplied text
+            only if there is a failure to retrieve the image.
+        </p>
+        <div class="form-control mb-1">
+            <h5 class="mb-0">Example usages:</h5>
+            <p class="mt-0"><sub>(Art by <a href="https://www.instagram.com/cam.estela">@cam.estela</a>)</sub></p>
+            <pre class="mb-1">
+    <img src="{% static 'media/images/catandraccoon.small.png' %}" alt="Uh oh, we couldn't find the image!">
+    &lt;img src="catandraccoon.small.png" alt="Uh oh, we couldn't find the image!"&gt;
+
+    <img src="{% static 'media/images/catandraccoon.small.png' %}" alt="Uh oh, we couldn't find the image!" width="200">
+    &lt;img src="catandraccoon.small.png" alt="Uh oh, we couldn't find the image!" <mark>width="100"</mark>&gt;
+
+    <img src="{% static 'media/images/catandraccoon.small.png' %}" alt="Uh oh, we couldn't find the image!"
+         height="200">
+    &lt;img src="catandraccoon.small.png" alt="Uh oh, we couldn't find the image!" <mark>height="200"</mark>&gt;
+
+    <img src="{% static 'media/images/catandraccoon.small.png' %}" alt="Uh oh, we couldn't find the image!" width="150"
+         height="150">
+    &lt;img src="catandraccoon.small.png" alt="Uh oh, we couldn't find the image!" <mark>width="200" height="200"</mark>&gt;
+
+    "Uh oh, we couldn't find the image!
+    &lt;img src="missing_image.png" alt="Uh oh, we couldn't find the image!"&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="break_tag_anchor"><h3>Break Tag</h3></a>
+        <p class="mb-2">
+            The <em>&lt;br&gt;</em> tag defines a line break.
+        </p>
+        <div class="form-control mb-1">
+            <h5>Example usages:</h5>
+            <div class="form-control mb-2">
+                <p>without break</p>
+                <pre class="mb-0">
+&lt;p&gt; without break &lt;/p&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-1">
+                <p>with <br> break</p>
+
+                <pre class="mb-0">
+&lt;p&gt; with &lt;br&gt; break &lt;/p&gt;
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="style_attribute_anchor"><h2>The <em>style</em> attribute</h2></a>
+    <p class="mb-2">
+        The <em>style</em> attribute is used to add styling to an element, such as background-color, font
+        style/size/color, height/width, spacing/padding/margins, alignment, etc.. It allows editing CSS properties
+        directly inside the element tag.
+    </p>
+    <div class="form-control mb-1">
+        <h5>Example usages:</h5>
+        <p style="font-size:150%; font-family:Times New Roman; color:green; background-color:ghostwhite; text-align:center;"
+           class="mb-3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus aliquam corporis dolor ducimus
+            eveniet hic illum modi molestias possimus praesentium quo quod, repellendus repudiandae rerum sequi
+            veritatis voluptatem voluptatum?
+        </p>
+        <pre class="mb-0">
+&lt;p style="font-size:150%; font-family:Times New Roman; color:green; background-color:ghostwhite; text-align:center;"&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus aliquam corporis dolor ducimus
+    eveniet hic illum modi molestias possimus praesentium quo quod, repellendus repudiandae rerum sequi
+    veritatis voluptatem voluptatum?
+&lt;/p&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="text_formatting_anchor"><h2>(HTML) Text Formatting</h2></a>
+    <p class="mb-2">
+        HTML contains several formatting elements that can be applied to text elements in order to apply the desired
+        styling such as bold, italic, underline, strikethrough, etc..
+    </p>
+    <table class="table table-bordered mb-1">
+        <tr class="table-dark">
+            <th>Tag</th>
+            <th>Effect</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td>&lt;b&gt; and &lt;strong&gt;</td>
+            <td>Makes the text bolded</td>
+            <td>Makes the text <strong>bolded</strong></td>
+        </tr>
+        <tr>
+            <td>&lt;i&gt; and &lt;em&gt;</td>
+            <td>Makes the text italic</td>
+            <td>Makes the text <em>italic</em></td>
+        </tr>
+        <tr>
+            <td>&lt;small&gt;</td>
+            <td>Makes the text smaller</td>
+            <td>Makes the text <small>smaller</small></td>
+        </tr>
+        <tr>
+            <td>&lt;mark&gt;</td>
+            <td>Applies the
+                <mark>highlight</mark>
+                effect to the text
+            </td>
+            <td>Applies the
+                <mark>highlight</mark>
+                effect
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;del&gt; or &lt;s&gt;</td>
+            <td>Applies the strikethrough effect on the text</td>
+            <td>Applies the <s>strikethrough</s> effect</td>
+        </tr>
+        <tr>
+            <td>&lt;ins&gt; or &lt;u&gt;</td>
+            <td>Applies an underline to the text</td>
+            <td>Applies an <u>underline</u> to the text</td>
+        </tr>
+        <tr>
+            <td>&lt;sup&gt;</td>
+            <td>Applies the superscript effect on the text</td>
+            <td>Applies the <sup>superscript</sup> effect on the text</td>
+        </tr>
+        <tr>
+            <td>&lt;sub&gt;</td>
+            <td>Applies the subscript effect on the text</td>
+            <td>Applies the <sub>subscript</sub> effect on the text</td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="list_tag_anchor"><h2>Ordered and Unordered Lists</h2></a>
+    <p class="mb-2">
+        HTML <em>lists</em> allow grouping of related data/items into lists.
+    </p>
+    <table class="table table-bordered row">
+        <tr>
+            <th class="col-2">Element/Tag</th>
+            <th class="col-6">Description</th>
+            <th class="col-2">Example Usage</th>
+            <th class="col-2">Example Output</th>
+        </tr>
+        <tr>
+            <td>&lt;ul&gt;</td>
+            <td>The <em>ul</em> tag creates a unordered/bulleted list. Each new item is labeled with a bullet point.
+            </td>
+            <td>
+                <pre class="mb-0">
+<mark>&lt;ul&gt;</mark>
+    &lt;li&gt;One&lt;/li&gt;
+    &lt;li&gt;Two&lt;/li&gt;
+<mark>&lt;/ul&gt;</mark>
+</pre>
+            </td>
+            <td>
+                <ul>
+                    <li>One</li>
+                    <li>Two</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;ol&gt;</td>
+            <td>The <em>ol</em> tag creates an ordered list, meaning each item will be incrementally numbered.</td>
+            <td>
+                <pre class="mb-0">
+<mark>&lt;ol&gt;</mark>
+    &lt;li&gt;One&lt;/li&gt;
+    &lt;li&gt;Two&lt;/li&gt;
+<mark>&lt;/ol&gt;</mark>
+</pre>
+            </td>
+            <td>
+                <ol>
+                    <li>One</li>
+                    <li>Two</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;li&gt;</td>
+            <td>Creates a list item inside an <em>unordered</em> or <em>ordered</em> list.</td>
+            <td>
+                <pre class="mb-0">
+&lt;ol&gt;
+    <mark>&lt;li&gt;One&lt;/li&gt;</mark>
+    <mark>&lt;li&gt;Two&lt;/li&gt;</mark>
+&lt;/ol&gt;
+</pre>
+            </td>
+            <td>
+                <ol>
+                    <li>One</li>
+                    <li>Two</li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <div class="example_section_div mb-1">
+        <h4>Example List</h4>
+        <ol>
+            <li>
+                Vegetables
+                <ul>
+                    <li>Carrots</li>
+                    <li>Broccoli</li>
+                    <li>Celery</li>
+                    <li>Cauliflower</li>
+                    <li>Potatoes</li>
+                </ul>
+            </li>
+            <li>
+                Fruits
+                <ul>
+                    <li>
+                        Berries
+                        <ul>
+                            <li>Cherries</li>
+                            <li>Blueberries</li>
+                            <li>Raspberries</li>
+                            <li>Blackberries</li>
+                        </ul>
+                    </li>
+                    <li>Grapes</li>
+                    <li>Oranges</li>
+                </ul>
+            </li>
+        </ol>
+        <hr>
+        <h5>HTML Code:</h5>
+        <pre class="mb-0">
+&lt;ol&gt;
+    &lt;li&gt;
+        Vegetables
+        &lt;ul&gt;
+            &lt;li&gt;Carrots&lt;/li&gt;
+            &lt;li&gt;Broccoli&lt;/li&gt;
+            &lt;li&gt;Celery&lt;/li&gt;
+            &lt;li&gt;Cauliflower&lt;/li&gt;
+            &lt;li&gt;Potatoes&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        Fruits
+        &lt;ul&gt;
+            &lt;li&gt;
+                Berries
+                &lt;ul&gt;
+                    &lt;li&gt;Cherries&lt;/li&gt;
+                    &lt;li&gt;Blueberries&lt;/li&gt;
+                    &lt;li&gt;Raspberries&lt;/li&gt;
+                    &lt;li&gt;Blackberries&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+            &lt;li&gt;Grapes&lt;/li&gt;
+            &lt;li&gt;Oranges&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="table_tag_anchor"><h2>Tables</h2></a>
+    <p class="mb-2">
+        The <em>table</em> tag allows the organization of data into rows and columns.
+    </p>
+    <table class="table table-bordered">
+        <tr class="table-dark">
+            <th>Element/Tag</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>&lt;table&gt;</td>
+            <td>Creates the table on which the rows and cells will be displayed.</td>
+        </tr>
+        <tr>
+            <td>&lt;tr&gt;</td>
+            <td>Defines a row on the table.</td>
+        </tr>
+        <tr>
+            <td>&lt;th&gt;</td>
+            <td>Defines a table header cell inside a table row.</td>
+        </tr>
+        <tr>
+            <td>&lt;td&gt;</td>
+            <td>Defines a table data cell inside a table row.</td>
+        </tr>
+    </table>
+    <div class="example_section_div mb-1">
+        <h5>Example Table</h5>
+        <table>
+            <tr>
+                <th>Element/Tag</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>
+                    &lt;table&gt;
+                </td>
+                <td>Creates the table on which the rows and cells will be displayed.</td>
+            </tr>
+            <tr>
+                <td>
+                    &lt;tr&gt;
+                </td>
+                <td>Defines a row on the table.</td>
+            </tr>
+            <tr>
+                <td>
+                    &lt;th&gt;
+                </td>
+                <td>Defines a table header cell inside a table row.</td>
+            </tr>
+            <tr>
+                <td>
+                    &lt;td&gt;
+                </td>
+                <td>Defines a table data cell inside a table row.</td>
+            </tr>
+        </table>
+        <hr>
+        <h6>HTML Code:</h6>
+        <pre class="mb-0">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Element/Tag&lt;/th&gt;
+        &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;table&gt;&lt;/td&gt;
+        &lt;td&gt;Creates the table on which the rows and cells will be displayed.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;tr&gt;&lt;/td&gt;
+        &lt;td&gt;Defines a row on the table.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;th&gt;&lt;/td&gt;
+        &lt;td&gt;Defines a table header cell inside a table row.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;Defines a table data cell inside a table row.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="form_basics_anchor"><h2>Form Basics</h2></a>
+    <p class="mb-2">
+        An HTML form is used to collect user input. To create a form, a <em>form</em> tag needs to be created, inside
+        which the input elements will be placed.
+    </p>
+    <p class="mb-2">
+        All input elements <strong>should</strong> specify the <em>name</em> attribute. This attribute is used to
+        identify input fields when it is sent to the server with a GET or POST. The <em>id</em> attribute can also be
+        used alongside or in place of a name field. The <em>name</em> attribute must be unique within a form, while the
+        <em>id</em> must be unique within the whole webpage.
+    </p>
+    <p class="mb-2">
+        The <em>label</em> tag is optional but provides better aesthetics. The label will appear to the left or right of
+        the input field depending on whether the tag is above or below the input tag in the HTML document.
+    </p>
+
+    <div class="form-control mb-2">
+        <a id="form_input_types"><h3>Form Input Types</h3></a>
+        <p>The <em>name</em> attribute must be included if the value is to be submitted. </p>
+        <form>
+            <div class="form-control mb-2">
+                <h4>Input Type: Text</h4>
+                <label for="username_input">Username:</label>
+                <input type="text" id="username_input" name="username_name" placeholder="Enter username..." required>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="username_input"&gt;Username:&lt;/label&gt;
+&lt;input type="text" id="username_input" name="username_name" placeholder="Enter username..." required&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Password</h4>
+                <label for="password_input">Password:</label>
+                <input type="password" id="password_input" name="password_name" placeholder="Enter password...">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="password_input"&gt;Password:&lt;/label&gt;
+&lt;input type="password" id="password_input" name="password_name" placeholder="Enter password..."&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Number</h4>
+                <label for="number_input">Enter age:</label>
+                <input type="number" id="number_input" name="age_name" placeholder="Enter age..." min="0" max="200">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="number_input"&gt;Enter age:&lt;/label&gt;
+&lt;input type="number" id="number_input" name="age_name" placeholder="Enter age..." min="0" max="200"&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Email</h4>
+                <label for="email_input">Email:</label>
+                <input type="email" id="email_input" name="user_email" placeholder="user@example.com">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="email_input"&gt;Email:&lt;/label&gt;
+&lt;input type="email" id="email_input" name="user_email" placeholder="user@example.com"&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Tel</h4>
+                <label for="tel_input">Telephone #:</label>
+                <input type="tel" id="tel_input" name="phone_num" pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}"
+                       placeholder="000-000-0000">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="tel_input"&gt;Telephone #:&lt;/label&gt;
+&lt;input type="tel" id="tel_input" name="phone_num" pattern="[0-9]{3}-[0-9]{3}-[0-9]{5}"
+       placeholder="000-000-0000"&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Radio</h4>
+                <input type="radio" name="language_selection" id="eng" value="ENGLISH" checked>
+                <label for="eng">English</label>
+                <input type="radio" name="language_selection" id="es" value="SPANISH">
+                <label for="es">Spanish</label>
+                <input type="radio" name="language selection" id="chi" value="CHINESE">
+                <label for="chi">Chinese</label>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;input type="radio" name="language_selection" id="eng" value="ENGLISH" checked&gt;
+&lt;label for="eng"&gt;English&lt;/label&gt;
+&lt;input type="radio" name="language_selection" id="es" value="SPANISH"&gt;
+&lt;label for="es"&gt;Spanish&lt;/label&gt;
+&lt;input type="radio" name="language selection" id="chi" value="CHINESE"&gt;
+&lt;label for="chi"&gt;Chinese&lt;/label&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Checkbox</h4>
+                <input type="checkbox" name="check_1" id="check_1" value="1" checked>
+                <label for="check_1">One</label><br>
+                <input type="checkbox" name="check_2" id="check_2" value="2">
+                <label for="check_2">Two</label><br>
+                <input type="checkbox" name="check_3" id="check_3" value="3">
+                <label for="check_3">Three</label>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;input type="checkbox" name="check_1" id="check_1" value="1" checked&gt;
+&lt;label for="check_1"&gt;One&lt;/label&gt;&lt;br&gt;
+&lt;input type="checkbox" name="check_2" id="check_2" value="2"&gt;
+&lt;label for="check_2"&gt;Two&lt;/label&gt;&lt;br&gt;
+&lt;input type="checkbox" name="check_3" id="check_3" value="3"&gt;
+&lt;label for="check_3"&gt;Three&lt;/label&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Button</h4>
+                <input type="button" onclick="alert('HELLO.')" value="Click me!">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;input type="button" onclick="alert('HELLO.')" value="Click me!"&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Color</h4>
+                <label for="color_input">Pick any color:</label><br>
+                <input type="color" id="color_input" name="fav_color">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="color_input"&gt;Pick any color:&lt;/label&gt;&lt;br&gt;
+&lt;input type="color" id="color_input" name="fav_color"&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Date</h4>
+                <label for="date_input">Pick any date in 2024:</label>
+                <input type="date" id="date_input" name="any_date" min="2024-01-01" max="2024-12-31">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="date_input"&gt;Pick any date in 2024:&lt;/label&gt;
+&lt;input type="date" id="date_input" name="any_date" min="2024-01-01" max="2024-12-31"&gt;
+</pre>
+
+            </div>
+            <div class="form-control mb-2">
+                <h4>Input Type: Datetime-Local</h4>
+                <label for="datetime_input">Pick any date and time:</label>
+                <input type="datetime-local" id="datetime_input" name="any_datetime">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="datetime_input"&gt;Pick any date and time:&lt;/label&gt;
+&lt;input type="datetime-local" id="datetime_input" name="any_datetime"&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Time</h4>
+                <label for="time_input">Pick any time:</label>
+                <input type="time" id="time_input" name="any_time">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="time_input"&gt;Pick any time:&lt;/label&gt;
+&lt;input type="time" id="time_input" name="any_time"&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Month</h4>
+                <label for="month_input">Pick a year and month:</label>
+                <input type="month" id="month_input" name="any_month">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="month_input"&gt;Pick a year and month:&lt;/label&gt;
+&lt;input type="month" id="month_input" name="any_month"&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Image</h4>
+                <input type="image" src="{% static 'media/images/catandraccoon.small.png' %}" alt="Submit" width="20%">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;input type="image" src="{% static 'media/images/catandraccoon.small.png' %}" alt="Submit" width="20%"&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: File</h4>
+                <label for="file_input">Select file:</label>
+                <input type="file" id="file_input" name="any_file" multiple>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="file_input"&gt;Select file:&lt;/label&gt;
+&lt;input type="file" id="file_input" name="any_file" multiple&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Hidden</h4>
+                <label for="hidden_input">Hidden:</label>
+                <input type="hidden" id="hidden_input" name="hidden_inp" value="123">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="hidden_input"&gt;Hidden:&lt;/label&gt;
+&lt;input type="hidden" id="hidden_input" name="hidden_inp" value="123"&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Range</h4>
+                <label for="range_input">Select a number from between 0 and 10:</label><br>
+                <input type="range" id="range_input" name="range_range" min="0" max="20" step="2"
+                       oninput="this.nextElementSibling.value = this.value">
+                <output>1</output>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="range_input"&gt;Select a number from between 0 and 10:&lt;/label&gt;&lt;br&gt;
+&lt;input type="range" id="range_input" name="range_range" min="0" max="20" step="2"
+       oninput="this.nextElementSibling.value = this.value"&gt;
+&lt;output&gt;1&lt;/output&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Search</h4>
+                <label for="search_input">Search: </label>
+                <input type="search" id="search_input" name="search_search" placeholder="Search for...">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="search_input"&gt;Search: &lt;/label&gt;
+&lt;input type="search" id="search_input" name="search_search" placeholder="Search for..."&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Url</h4>
+                <label for="url_input">URL: </label>
+                <input type="url" id="url_input" name="url_url" placeholder="https://www.google.com/">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="url_input"&gt;URL: &lt;/label&gt;
+&lt;input type="url" id="url_input" name="url_url" placeholder="https://www.google.com/"&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Select</h4>
+                <label for="select_id">Select a value:</label><br>
+                <select id="select_id" name="select_select">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                </select>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="select_id"&gt;Select a value:&lt;/label&gt;&lt;br&gt;
+&lt;select id="select_id" name="select_select"&gt;
+    &lt;option value="One"&gt;&lt;/option&gt;
+    &lt;option value="Two"&gt;&lt;/option&gt;
+    &lt;option value="Three"&gt;&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Datalist</h4>
+                <label for="datalist_id">Select a value:</label><br>
+                <input list="datalist_ex" name="datalist_datalist" id="datalist_id" placeholder="Click here to select">
+                <datalist id="datalist_ex">
+                    <option value="One"></option>
+                    <option value="Two"></option>
+                    <option value="Three"></option>
+                </datalist>
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;label for="datalist_id"&gt;Select a value:&lt;/label&gt;&lt;br&gt;
+&lt;input list="datalist_ex" name="datalist_datalist" id="datalist_id" placeholder="Click here to select"&gt;
+&lt;datalist id="datalist_ex"&gt;
+    &lt;option value="One"&gt;&lt;/option&gt;
+    &lt;option value="Two"&gt;&lt;/option&gt;
+    &lt;option value="Three"&gt;&lt;/option&gt;
+&lt;/datalist&gt;
+</pre>
+
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Reset</h4>
+                <p class="form-control">
+                    Resets the input fields in the form.
+                </p>
+                <input type="reset" value="Reset Fields">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;input type="reset" value="Reset Fields"&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h4>Input Type: Submit</h4>
+                <p class="form-control">
+                    Submits the form data to a form-handler. The form-handler is typically a server page with a script
+                    for processing input data. The <em>action</em> attribute, if specified,
+                </p>
+                <input type="submit" value="Submit Inputs">
+                <h6 class="mt-3">HTML Code:</h6>
+
+                <pre class="mb-1">
+&lt;input type="submit" value="Submit Inputs"&gt;
+</pre>
+            </div>
+        </form>
+
+        <div class="example_section_div mb-2">
+            <h4>Test Form</h4>
+            <form action="{% url 'tenappone:html_elements_reference' %}">
+                <label for="some_text">Username</label>
+                <input type="text" id="some_text" name="some_text" placeholder="Write anything...">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="input_attributes_anchor"><h3>Input Attributes</h3></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Attribute</th>
+                <th>Description</th>
+                <th>Only Applicable To</th>
+            </tr>
+            <tr>
+                <td>value</td>
+                <td>Specifies an initial value for the input field</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>readonly</td>
+                <td>Specifies that an input field is read-only<br> meaning it cannot be modified. The value of this
+                    field <strong>will</strong> still be sent.
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>Specifies that an input field is disabled<br> meaning it is unusable and unclickable. The value of
+                    this field will <strong>not</strong> be sent.
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>Specifies the visible width<br> in characters<br> of an input field</td>
+                <td>text, search, tel, url, email, password</td>
+            </tr>
+            <tr>
+                <td>maxlength</td>
+                <td>Specifies an upper limit of characters allowed in an input field. However<br> no feedback is
+                    provided by
+                    default<br> this must be coded in Javascript
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>min and max</td>
+                <td>Specifies the minimum and maximum acceptable values for an input field</td>
+                <td>number, range, date, datetime-local, month, time, week</td>
+            </tr>
+            <tr>
+                <td>multiple</td>
+                <td>Specifies that an input field can accept more than one value. Works with email and file fields</td>
+                <td>email, file</td>
+            </tr>
+            <tr>
+                <td>pattern</td>
+                <td>Specifies a regular expression that the input field's value is checked against. <br>
+                    Examples of regular expressions:
+                    <table class="table table-bordered mb-1 mt-1">
+                        <tr>
+                            <th>Example expression</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>[A-Za-z]{3}</td>
+                            <td>Letters-only (upper and lower case), no numbers. Must have 3 characters.</td>
+                        </tr>
+                        <tr>
+                            <td>[0-9]{2,5}</td>
+                            <td>Numbers only, no letters. Must have between 2 and 5 characters.</td>
+                        </tr>
+                        <tr>
+                            <td>c.t</td>
+                            <td>The period ( <strong>.</strong> ) is a wildcard that accepts any single value. This
+                                example accepts any 3 characters (letters and numbers) that start with the letter 'c'
+                                and end with the letter 't'. Examples of acceptable values: cat, cot, cut, c@t, c0t, c!t
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[a-zA-Z0-9_-]{5}</td>
+                            <td>Accepts upper and lowercase letters, numbers, and hypens. Must have 5 characters.</td>
+                        </tr>
+                        <tr>
+                            <td>(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8}</td>
+                            <td>The lookahead expression ( <strong>(?=)</strong> ) matches the following characters
+                                anywhere in the string without any regard to the order.
+                                <br>
+                                The wildcard ( <strong>.</strong> ) when followed by the greedy quantifier (
+                                <strong>*</strong> ) will match 0 or more times (unlimited, meaning it will find every
+                                match in the string instead of only the first).
+                                <br>
+                                The digits expression ( <strong>\d</strong> ) is another way to write (
+                                <strong>[0-9]</strong> ).
+                                <br><br>
+                                The example expression checks to see that there is at least one number, one lowercase
+                                letter, and one uppercase letter within the required 8 characters.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>([@#]{1})?([a-z]{8}|[A-Z]{4})</td>
+                            <td>The non-greedy quantifier ( <strong>?</strong> ) matches the preceding characters either
+                                0 or 1 times exactly.
+                                <br>
+                                A disjunction ( <strong>|</strong> ) is used between two expressions and specifies that
+                                if a string meets the criteria for a match with either the first or second expression of
+                                the group, then it will count as a match.
+                                <br><br>
+                                The example expression will match strings that start with @, #, or neither and are
+                                either:
+                                <br>8 characters in length and only contain lowercase letters, or
+                                <br>4 characters in length and only contain uppercase letters
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a href="https://code.tutsplus.com/8-regular-expressions-you-should-know--net-6149t">
+                                    Quick Guide to Regular Expressions
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>text, date, search, url, tel, email, password</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>Specifies a hint for the input field</td>
+                <td>text, search, url, tel, email, password</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>Specifies that an input field must be filled out before submitting the form</td>
+                <td>text, search, url, tel, email, password, datepickers, number, checkbox, radio, file</td>
+            </tr>
+            <tr>
+                <td>step</td>
+                <td>Specifies the legal number intervals for an input field</td>
+                <td>number, range, date, datetime-local, month, time, week</td>
+            </tr>
+            <tr>
+                <td>autofocus</td>
+                <td>Specifies that an input field should automatically get focus when the page loads</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>height and width</td>
+                <td>Specifies the height and width of an image element</td>
+                <td>image</td>
+            </tr>
+            <tr>
+                <td>list</td>
+                <td>Refers to a <em>datalist</em> element that contains pre-defined options for an <em>input</em>
+                    element
+                </td>
+                <td>datalist</td>
+            </tr>
+            <tr>
+                <td>autocomplete</td>
+                <td>Specifies whether a form or an input field should have autocomplete <u>on</u> or <u>off</u>. When
+                    turned on, it allows the browser to predict the value.
+                </td>
+                <td>text, search, url, tel, email, password, datepickers, range, color</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="media_anchor"><h2>Media</h2></a>
+    <div class="form-control mb-2">
+        <a id="video_tag_anchor"><h3>Video</h3></a>
+        <p class="mb-2">
+            The <em>video</em> tag is used to display a video on the page. Supported formats: mp4, webm, ogg.
+        </p>
+        <div class="form-control mb-2">
+            <h5>Example video:</h5>
+            <video src="{% static 'media/videos/beatboxing-hamsters.mp4' %}" width="30%" controls>
+                File Missing/Unsupported
+            </video>
+            <sub>(Animation by <a href="https://www.instagram.com/arimurataishi/">@arimurataishi</a>)</sub>
+            <h6 class="mt-3">HTML Code:</h6>
+            <pre class="mb-1">
+&lt;video src="{% static 'media/videos/beatboxing-hamsters.mp4' %}" width="30%" controls&gt;
+    File Missing/Unsupported
+&lt;/video&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <h5>Supported Attributes:</h5>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>height/width</td>
+                    <td>Resizes the video according to the desired dimensions</td>
+                </tr>
+                <tr>
+                    <td>controls</td>
+                    <td>Display video controls such as: play, pause, and volume</td>
+                </tr>
+                <tr>
+                    <td>autoplay</td>
+                    <td>Plays the video automatically when the page is opened</td>
+                </tr>
+                <tr>
+                    <td>muted</td>
+                    <td>Mutes the video if autoplay is enabled</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="audio_tag_anchor"><h3>Audio</h3></a>
+        <p class="mb-2">
+            The <em>audio</em> tag is used to play an audio file on the page. Supported formats: mp3, ogg, wav.
+        </p>
+
+        <div class="form-control mb-2">
+            <h5>Example audio:</h5>
+            <audio src="{% static 'media/audio/song_for_sienna.brian_crain.mp4' %}" controls>
+                File Missing/Unsupported
+            </audio>
+            <h6 class="mt-3">HTML Code:</h6>
+            <pre class="mb-1">
+&lt;audio src="{% static 'media/audio/song_for_sienna.brian_crain.mp4' %}" controls&gt;
+    File Missing/Unsupported
+&lt;/audio&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <h5>Supported Attributes</h5>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>controls</td>
+                    <td>Display video controls such as: play, pause, and volume</td>
+                </tr>
+                <tr>
+                    <td>autoplay</td>
+                    <td>Plays the video automatically when the page is opened</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="object_tag_anchor"><h3>Object</h3></a>
+        <p class="mb-2">
+            The <em>object</em> element defines an embedded object within an HTML document. Example plugins: Java
+            applets, PDF readers, Flash Players, and HTML.
+        </p>
+        <div class="form-control mb-1">
+            <h5>Example object:</h5>
+            <object width="35%" data="{% static 'media/images/catandraccoon.small.png' %}">Missing/Unsupported</object>
+
+            <!-- Was unable to get this to work with an HTML page. Little to no information regarding the use of the object
+            element with Django framework. -->
+            <!--        <br>-->
+            <!--        <object width="35%" data="{% url 'home' %}">Missing/Unsupported</object>-->
+            <!--        <br>-->
+            <!--        <object width="35%" data="home.html">Missing/Unsupported</object>-->
+            <h6 class="mt-3">HTML Code:</h6>
+            <pre class="mb-1">
+&lt;object width="35%" data="{% static 'media/images/catandraccoon.small.png' %}"&gt;Missing/Unsupported
+&lt;/object&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="embed_tag_anchor"><h3>Embed</h3></a>
+        <p class="mb-2">The <em>embed</em> element defines an embedded object within an HTML document.</p>
+        <div class="form-control mb-1">
+            <h5>Example embed:</h5>
+            <embed width="35%" src="{% static 'media/images/catandraccoon.small.png' %}"/>
+
+            <!-- Was unable to get this to work with an HTML page. Little to no information regarding the use of the embed
+            element with Django framework. -->
+            <!--        <br>-->
+            <!--        <embed width="35%" src="{% url 'home' %}"/>-->
+            <!--        <br>-->
+            <!--        <embed width="35%" src="home.html"/>-->
+            <h6 class="mt-3">HTML Code:</h6>
+            <pre class="mb-1">
+&lt;object width="35%" src="{% static 'media/images/catandraccoon.small.png' %}"/&gt;
+</pre>
+        </div>
+    </div>
+</div>
+
+<div class="form-control mb-1">
+    <a id="quotations_anchor"><h2>Quotations</h2></a>
+    <table class="table table-bordered mb-1">
+        <tr class="table-dark">
+            <th>Element</th>
+            <th>Effect Description</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td>&lt;blockquote&gt;</td>
+            <td>Defines the supplied text as a quote. The <em>cite</em> attribute is optional but can be used to store
+                the website from where the quote was supplied.
+            </td>
+            <td>
+                <blockquote cite="https://www.google.com/">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </blockquote>
+                <pre class="mb-0">
+&lt;blockquote cite="https://www.google.com/"&gt;
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+&lt;/blockquote&gt;
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;q&gt;</td>
+            <td>Defines the supplied text as a short quotation by enclosing the text with quotations.</td>
+            <td>
+                <p>Lorem ipsum dolor sit amet, <q>consectetur adipisicing</q> elit.</p>
+                <pre class="mb-0">
+&lt;p&gt;Lorem ipsum dolor sit amet, &lt;q&gt;consectetur adipisicing&lt;/q&gt; elit.&lt;/p&gt;
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;abbr&gt;</td>
+            <td>The abbreviation tag defines an abbreviation or acronym. (Useful for browsers, translation systems, and
+                search engines)
+            </td>
+            <td>
+                <p>
+                    <abbr title="Central Intelligence Agency">CIA</abbr> is short for Central Intelligence Agency.
+                </p>
+                <pre class="mb-0">
+&lt;p&gt;
+    &lt;abbr title="Central Intelligence Agency"&gt;CIA&lt;/abbr&gt; is short for (...).
+&lt;/p&gt;
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;address&gt;</td>
+            <td>This tag defines the text as a contact information. Contact information can include but not be limited
+                to: physical address, e-mail, URL, phone number, social media handle, etc..
+            </td>
+            <td>
+                <address>
+                    John Doe <br>
+                    johndoe@fake_email.com <br>
+                    (012)345-6789 <br>
+                    123 Main Street, FakeTown, USA
+                </address>
+                <pre class="mb-0">
+&lt;address&gt;
+    John Doe &lt;br&gt;
+    johndoe@fake_email.com &lt;br&gt;
+    (012)345-6789 &lt;br&gt;
+    123 Main Street, FakeTown, USA
+&lt;/address&gt;
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;cite&gt;</td>
+            <td>The <em>cite</em> tag defines the text as the title of a creative work.</td>
+            <td>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <cite>Lorem Ipsum</cite> by The IDE.
+                    Written in 2024.</p>
+                <pre class="mb-0">
+&lt;p&gt;Lorem ipsum (...). &lt;cite&gt;Lorem Ipsum&lt;/cite&gt; by The IDE. Written in 2024.&lt;/p>
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>&lt;bdo&gt;</td>
+            <td>The <em>Bi-Directional Override</em> tag is used to override the current text direction.</td>
+            <td>
+                <bdo dir="rtl">Hello, this is written backwards.</bdo>
+                <pre class="mb-0">
+&lt;bdo dir="rtl"&gt;Hello, this is written backwards.&lt;/bdo&gt;
+</pre>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--<script src="{% static 'js/' %}"></script>-->
+{% endblock %}
+
+{% block chapter_block %}
+HTML - Basics
+{% endblock %}
+
+&nbsp;&nbsp;&nbsp;
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#html_basics_anchor"><strong>HTML - Basics</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#common_elements_usages_anchor">Commonly Used Elements and Usages</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#webpage_declaration_anchor">&nbsp;&nbsp;&nbsp;Webpage Declaration</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#title_tag_anchor">&nbsp;&nbsp;&nbsp;Title Tag</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#favicon_anchor">&nbsp;&nbsp;&nbsp;Adding a Favicon</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#paragraph_tag_anchor">&nbsp;&nbsp;&nbsp;Paragraph Tag</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#anchor_tag_anchor">&nbsp;&nbsp;&nbsp;Anchor Tag</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#image_tag_anchor">&nbsp;&nbsp;&nbsp;Image Tag</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#break_tag_anchor">&nbsp;&nbsp;&nbsp;Break Tag</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#style_attribute_anchor">The <em>style</em> attribute</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_formatting_anchor">(HTML) Text Formatting</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#list_tag_anchor">Ordered and Unordered Lists</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#table_tag_anchor">Tables</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_basics_anchor">Form Basics</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_input_types">&nbsp;&nbsp;&nbsp;Form Input Types (Text, Password, Number, etc..)</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#input_attributes_anchor">&nbsp;&nbsp;&nbsp;Input Attributes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#media_anchor">Media</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#video_tag_anchor">&nbsp;&nbsp;&nbsp;Video</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#audio_tag_anchor">&nbsp;&nbsp;&nbsp;Audio</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#object_tag_anchor">&nbsp;&nbsp;&nbsp;Object</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#embed_tag_anchor">&nbsp;&nbsp;&nbsp;Embed</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#quotations_anchor">Quotations</a>
+</li>
+{% endblock %}

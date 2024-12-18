@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/card_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Coders' Corner</title>
+{% endblock %}
+
+{% block body_block %}
+<h1 class="text-center mb-4"><strong>Welcome to the Coders<span class="door">'</span> Corner</strong></h1>
+<div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:html_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">HTML</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:html_elements_reference' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">HTML</h4>
+                        <h5 class="card-subtitle">Elements Reference</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:css_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">CSS</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:css_layouts' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">CSS</h4>
+                        <h5 class="card-subtitle">Selectors</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:css_selectors' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">CSS</h4>
+                        <h5 class="card-subtitle">Layouts</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:bootstrap_forms' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Bootstrap</h4>
+                        <h5 class="card-subtitle">Forms</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:bootstrap_components' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Bootstrap</h4>
+                        <h5 class="card-subtitle">Components</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:bootstrap_styling' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Bootstrap</h4>
+                        <h5 class="card-subtitle">Styling</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:javascript_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Javascript</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:dom_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Document Object Model</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:dom_reference' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Document Object Model</h4>
+                        <h5 class="card-subtitle">Reference</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:dom_events_reference' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Document Object Model</h4>
+                        <h5 class="card-subtitle">Events Reference</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:jquery_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">JQuery</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:python' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Python</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_setup' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Initial Setup</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_views_and_urls' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Views & URL Mapping</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_static_files' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Static Files</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_templates' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Templates</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_relative_urls' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Relative URLs</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_cbvs' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Class-Based Views</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_models' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Models & Databases</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_model_queries' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Querying Models</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_admin_interface' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Admin Interface</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_creating_sample_data' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Creating/Updating Sample Data</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_mtv_paradigm' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Model-Template-View Paradigm</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_forms' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Forms</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_form_validation' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Form Validation</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_model_forms' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Model Forms</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_users' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">User Models</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_user_login_logout' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">User Login/Logout</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_encryption_and_validation' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Password Encryption & Validation</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:django_deployment' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Django</h4>
+                        <h5 class="card-subtitle">Deployment</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:sql_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">SQL</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:vim_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Vim</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:git_basics' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Git</h4>
+                        <h5 class="card-subtitle">Basics</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'tenappone:git_advanced' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Git</h4>
+                        <h5 class="card-subtitle">Advanced</h5>
+                        <p class="card-text mt-1">
+
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

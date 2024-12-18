@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Bootstrap - Styling</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="bootstrap_styling_anchor"><h1>Bootstrap <span class="door">-</span> Styling</h1></a>
+<div class="form-control mb-1">
+    <div class="form-control mt-1 mb-2">
+        <a id="spacing_anchor"><h2>Spacing</h2></a>
+        <a href="https://getbootstrap.com/docs/5.3/utilities/spacing/">
+            https://getbootstrap.com/docs/5.3/utilities/spacing/
+        </a>
+        <p>
+            The spacing utility allows developers to set the margin and padding of elements from an HTML elements' class
+            attribute. These properties can be further modified to specify the spacing level, desired side to edit, the
+            breakpoint level, etc..
+        </p>
+        <p class="mb-0">
+            Syntax formats:
+        </p>
+        <pre>
+&lt;<i>property</i>&gt;&lt;<i>sides</i>&gt;-&lt;<i>size</i>&gt;
+&lt;<i>property</i>&gt;&lt;<i>sides</i>&gt;&lt;<i>breakpoint</i>&gt;-&lt;<i>size</i>&gt;
+</pre>
+        <table class="table table-bordered mb-3">
+            <tr class="table-dark text-center">
+                <th colspan="2">
+                    Properties
+                </th>
+            </tr>
+            <tr class="table-secondary">
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>m</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for <i>margin</i>, which is responsible for setting the spacing directly outside of
+                        an element's border.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>p</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for <i>padding</i>, which is responsible for setting the spacing between an element's
+                        border and its text content.
+                    </p>
+                </td>
+            </tr>
+            <tr class="table-dark text-center">
+                <th colspan="2">
+                    Sides
+                </th>
+            </tr>
+            <tr class="table-secondary">
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>t</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set <i>margin-top</i> or <i>padding-top</i>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>b</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set <i>margin-bottom</i> or <i>padding-bottom</i>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>s</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set <i>margin-left</i> or <i>padding-left</i>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>e</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set <i>margin-right</i> or <i>padding-right</i>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>x</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set both <i>*-left</i> and <i>*-right</i>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>y</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set both <i>*-top</i> and <i>*-bottom</i>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>(<i>blank</i>)</th>
+                <td>
+                    <p class="mb-0">
+                        Shorthand for classes that set <i>margin</i> or <i>padding</i> on all sides of the element.
+                    </p>
+                </td>
+            </tr>
+            <tr class="table-dark text-center">
+                <th colspan="2">Breakpoints</th>
+            </tr>
+            <tr class="table-secondary">
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>xs</th>
+                <td>
+                    <p class="mb-0">
+                        Less than 576px.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>sm</th>
+                <td>
+                    <p class="mb-0">
+                        Greater than or equal to 576px.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>md</th>
+                <td>
+                    <p class="mb-0">
+                        Greater than or equal to 768px.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>lg</th>
+                <td>
+                    <p class="mb-0">
+                        Greater than or equal to 992.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>xl</th>
+                <td>
+                    <p class="mb-0">
+                        Greater than or equal to 1200px.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>xxl</th>
+                <td>
+                    <p class="mb-0">
+                        Greater than or equal to 1400px.
+                    </p>
+                </td>
+            </tr>
+            <tr class="table-dark text-center">
+                <th colspan="2">Size</th>
+            </tr>
+            <tr class="table-secondary">
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>0</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> or <i>padding</i> to <u>0</u>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>1</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> or <i>padding</i> to <u>$spacer * .25</u>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> or <i>padding</i> to <u>$spacer * .5</u>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> or <i>padding</i> to <u>$spacer</u>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> or <i>padding</i> to <u>$spacer * 1.5</u>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> or <i>padding</i> to <u>$spacer * 3</u>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>auto</th>
+                <td>
+                    <p class="mb-0">
+                        Sets <i>margin</i> to <u>auto</u>.
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+        <div class="form-control mb-2">
+            <a id="horizontal_centering_anchor"><h3>Horizontal Centering</h3></a>
+            <p class="mb-1">
+                You can center an element on the page by using <code>mx-auto</code>. Example:
+            </p>
+            <div class="mx-auto bg-secondary text-light px-1" style="width:200px;">
+                Centered Element
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="<mark>mx-auto</mark> bg-secondary text-light px-1" style="width:200px;"&gt;
+    Centered Element
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <h3>Example usages:</h3>
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 mb-2">
+                    <button class="btn btn-primary pe-5">A</button>
+                    <button class="btn btn-secondary ps-4">B</button>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1" style="font-size:0.82em;">
+&lt;button class="btn btn-primary <mark>pe-5</mark>"&gt;A&lt;/button&gt;
+&lt;button class="btn btn-secondary <mark>ps-4</mark>"&gt;B&lt;/button&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 mb-2">
+                    <button class="btn btn-primary ms-5">A</button>
+                    <button class="btn btn-secondary me-3">B</button>
+                    <button class="btn btn-info my-3">C</button>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;button class="btn btn-primary <mark>ms-5</mark>"&gt;A&lt;/button&gt;
+&lt;button class="btn btn-secondary <mark>me-3</mark>"&gt;B&lt;/button&gt;
+&lt;button class="btn btn-info <mark>my-3</mark>"&gt;C&lt;/button&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 mb-2">
+                    <button class="btn btn-primary px-5">A</button>
+                    <button class="btn btn-secondary my-3">B</button>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1" style="font-size:0.82em;">
+&lt;button class="btn btn-primary <mark>px-5</mark>"&gt;A&lt;/button&gt;
+&lt;button class="btn btn-secondary <mark>my-3</mark>"&gt;B&lt;/button&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <button class="btn btn-primary p-5">A</button>
+                    <button class="btn btn-secondary m-5">B</button>
+                    <button class="btn btn-info ms-5 px-5">C</button>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;button class="btn btn-primary <mark>p-5</mark>"&gt;A&lt;/button&gt;
+&lt;button class="btn btn-secondary <mark>m-5</mark>"&gt;B&lt;/button&gt;
+&lt;button class="btn btn-info <mark>ms-5 px-5</mark>"&gt;C&lt;/button&gt;
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <a id="vertical_align_anchor"><h2>Vertical Alignment</h2></a>
+        <a href="https://getbootstrap.com/docs/5.2/utilities/vertical-align/">
+            https://getbootstrap.com/docs/5.2/utilities/vertical-align/
+        </a>
+        <p>
+            The vertical align utility allows developers to set the vertical alignment of inline, inline-block,
+            inline-table, and table cell elements.
+        </p>
+
+        <div class="form-control mb-2">
+            <a id="vertical_align_inline_anchor"><h3>Vertical Alignment on Inline Elements</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <span class="align-baseline">baseline</span>
+                    <span class="align-top">top</span>
+                    <span class="align-middle">middle</span>
+                    <span class="align-bottom">bottom</span>
+                    <span class="align-text-top">text-top</span>
+                    <span class="align-text-bottom">text-bottom</span>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;span class="<mark>align-baseline</mark>"&gt;baseline&lt;/span&gt;
+&lt;span class="<mark>align-top</mark>"&gt;top&lt;/span&gt;
+&lt;span class="<mark>align-middle</mark>"&gt;middle&lt;/span&gt;
+&lt;span class="<mark>align-bottom</mark>"&gt;bottom&lt;/span&gt;
+&lt;span class="<mark>align-text-top</mark>"&gt;text-top&lt;/span&gt;
+&lt;span class="<mark>align-text-bottom</mark>"&gt;text-bottom&lt;/span&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="vertical_align_tables_anchor"><h3>Vertical Alignment on Table Cells</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <table style="height: 100px;">
+                        <tbody>
+                        <tr>
+                            <td class="align-baseline">baseline</td>
+                            <td class="align-top">top</td>
+                            <td class="align-middle">middle</td>
+                            <td class="align-bottom">bottom</td>
+                            <td class="align-text-top">text-top</td>
+                            <td class="align-text-bottom">text-bottom</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1" style="font-size:0.82em;">
+&lt;table style="height: 100px;"&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td class="<mark>align-baseline</mark>"&gt;baseline&lt;/td&gt;
+      &lt;td class="<mark>align-top</mark>"&gt;top&lt;/td&gt;
+      &lt;td class="<mark>align-middle</mark>"&gt;middle&lt;/td&gt;
+      &lt;td class="<mark>align-bottom</mark>"&gt;bottom&lt;/td&gt;
+      &lt;td class="<mark>align-text-top</mark>"&gt;text-top&lt;/td&gt;
+      &lt;td class="<mark>align-text-bottom</mark>"&gt;text-bottom&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="sizing_anchor"><h2>Sizing</h2></a>
+        <a href="https://getbootstrap.com/docs/5.3/utilities/sizing/">
+            https://getbootstrap.com/docs/5.3/utilities/sizing/
+        </a>
+        <p class="mb-2">
+            This utility can be used to edit the height and width of elements.
+        </p>
+
+        <div class="form-control mb-2">
+            <a id="relative_to_parent_anchor"><h3>Relative to the parent</h3></a>
+
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 mb-2">
+                    <div class="border border-dark w-25 px-1 m-1">Width - 25%</div>
+                    <div class="border border-dark w-50 px-1 m-1">Width - 50%</div>
+                    <div class="border border-dark w-75 px-1 m-1">Width - 75%</div>
+                    <div class="border border-dark w-100 px-1 m-1">Width - 100%</div>
+                    <div class="border border-dark w-auto px-1 m-1">Width - Auto</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="form-control mb-2"&gt;
+    &lt;div class="border border-dark <mark>w-25</mark> px-1 m-1"&gt;Width - 25%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>w-50</mark> px-1 m-1"&gt;Width - 50%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>w-75</mark> px-1 m-1"&gt;Width - 75%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>w-100</mark> px-1 m-1"&gt;Width - 100%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>w-auto</mark> px-1 m-1"&gt;Width - Auto&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 mb-2 p-2 pb-3" style="height:120px;">
+                    <div class="border border-dark h-25 d-inline-block px-1 my-1" style="width:120px;">Height - 25%
+                    </div>
+                    <div class="border border-dark h-50 d-inline-block px-1 my-1" style="width:120px;">Height - 50%
+                    </div>
+                    <div class="border border-dark h-75 d-inline-block px-1 my-1" style="width:120px;">Height - 75%
+                    </div>
+                    <div class="border border-dark h-100 d-inline-block px-1 my-1" style="width:120px;">Height - 100%
+                    </div>
+                    <div class="border border-dark h-auto d-inline-block px-1 my-1" style="width:120px;">Height - Auto
+                    </div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="form-control mb-2 p-2 pb-3" style="height:120px;"&gt;
+    &lt;div class="border border-dark <mark>h-25</mark> d-inline-block px-1 my-1" style="width:120px;"&gt;Height - 25%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>h-50</mark> d-inline-block px-1 my-1" style="width:120px;"&gt;Height - 50%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>h-75</mark> d-inline-block px-1 my-1" style="width:120px;"&gt;Height - 75%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>h-100</mark> d-inline-block px-1 my-1" style="width:120px;"&gt;Height - 100%&lt;/div&gt;
+    &lt;div class="border border-dark <mark>h-auto</mark> d-inline-block px-1 my-1" style="width:120px;"&gt;Height - Auto&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 p-2 mb-2" style="width:50%; height:100px;">
+                    <div class="border border-dark px-1 mw-100" style="width:200%">Max-width - 100%</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="form-control p-2 mb-2" style="width:50%; height:100px;"&gt;
+    &lt;div class="border border-dark px-1 <mark>mw-100</mark>" style="width:200%"&gt;Max-width - 100%&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 p-2 mb-2" style="height:100px;">
+                    <div class="border border-dark mh-100" style="width:100px; height:200px;">Max-height - 100%</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="form-control p-2 mb-2" style="height:100px;"&gt;
+    &lt;div class="border border-dark <mark>mh-100</mark>" style="width:100px; height:200px;"&gt;Max-height - 100%&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="relative_to_viewport_anchor"><h3>Relative to the viewport</h3></a>
+            <div class="form-control mb-2">
+                <div class="form-control mt-1 mb-2">
+                    <div class="border border-dark min-vw-100 px-1 my-1">Min-width - 100vw</div>
+                    <div class="border border-dark min-vh-100 px-1 my-1">Min-height - 100vh</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="form-control mb-1"&gt;
+    &lt;div class="border border-dark <mark>min-vw-100</mark> px-1 my-1"&gt;Min-width - 100vw&lt;/div&gt;
+    &lt;div class="border border-dark <mark>min-vh-100</mark> px-1 my-1"&gt;Min-height - 100vh&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <div class="border border-dark vw-100 px-1 my-1">Width - 100vw</div>
+                    <div class="border border-dark vh-100 px-1 my-1">Height - 100vh</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="form-control mb-1"&gt;
+    &lt;div class="border border-dark <mark>vw-100</mark> px-1 my-1"&gt;Width - 100vw&lt;/div&gt;
+    &lt;div class="border border-dark <mark>vh-100</mark> px-1 my-1"&gt;Height - 100vh&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="gutters_anchor"><h2>Gutters</h2></a>
+        <a href="https://getbootstrap.com/docs/5.3/forms/layout/#gutters">
+            https://getbootstrap.com/docs/5.3/forms/layout/#gutters
+        </a>
+        <p>
+            Utility to edit the padding between columns of content in Bootstrap's grid system. Gutters are the gaps
+            between column content, created by horizontal padding (<i>padding-right</i> and <i>padding-left</i>).
+            Negative <i>margin</i> is used to offset the start and end of each row to align content.
+            Horizontal/vertical, and all other gutters can be adjusted.
+        </p>
+        <div class="form-control mb-2">
+            <a id="horizontal_gutters_anchor"><h3>Horizontal Gutters</h3></a>
+            <p>
+                <i>gx-*</i> is used to control the horizontal gutter widths.
+            </p>
+            <div class="form-control mb-2">
+                <div class="container px-4 text-center">
+                    <div class="row gx-5">
+                        <div class="col">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre>
+&lt;div class="container px-4 text-center"&gt;
+    &lt;div class="row <mark>gx-5</mark>"&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+            <hr class="mb-3">
+            <p class="mb-1">Alternative way of writing the code above:</p>
+            <div class="form-control mb-2">
+                <div class="container overflow-hidden text-center">
+                    <div class="row gx-5">
+                        <div class="col">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="container <mark>overflow-hidden</mark> text-center"&gt;
+    &lt;div class="row <mark>gx-5</mark>"&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="vertical_gutters_anchor"><h3>Vertical Gutters</h3></a>
+            <p>
+                <i>gy-*</i> is used to control the vertical gutter widths.
+            </p>
+            <div class="form-control mb-2">
+                <div class="container overflow-hidden text-center">
+                    <div class="row gy-5">
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="container overflow-hidden text-center"&gt;
+    &lt;div class="row <mark>gy-5</mark>"&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="horiz_and_vert_gutters_anchor"><h3>Horizontal & Vertical Gutters</h3></a>
+            <div class="form-control mb-2">
+                <div class="container text-center">
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="border border-dark p-3">Custom column padding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="container text-center"&gt;
+    &lt;div class="row <mark>g-2</mark>"&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="border border-dark p-3"&gt;Custom column padding&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="row_col_gutters_anchor"><h3>Row Columns Gutters</h3></a>
+            <div class="form-control mb-2">
+                <div class="container text-center">
+                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                        <div class="col">
+                            <div class="border border-dark p-3">Row column</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="container text-center"&gt;
+    &lt;div class="row row-cols-2 row-cols-lg-5 <mark>g-2</mark> <mark>g-lg-3</mark>"&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            &lt;div class="border border-dark p-3"&gt;Row column&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="no_gutters_anchor"><h3>No Gutters</h3></a>
+            <div class="form-control mb-2">
+                <div class="row g-0 text-center">
+                    <div class="border border-dark col-sm-6 col-md-8">.col-sm-6 .col-md-8</div>
+                    <div class="border border-dark col-6 col-md-4">.col-6 .col-md-4</div>
+                </div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="row <mark>g-0</mark> text-center"&gt;
+    &lt;div class="border border-dark col-sm-6 col-md-8"&gt;.col-sm-6 .col-md-8&lt;/div&gt;
+    &lt;div class="border border-dark col-6 col-md-4"&gt;.col-6 .col-md-4&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="typography_anchor"><h2>Typography</h2></a>
+        <p class="mb-2">
+            <a href="https://getbootstrap.com/docs/5.3/content/typography/">
+                https://getbootstrap.com/docs/5.3/content/typography/
+            </a>
+        </p>
+        <div class="form-control mb-2">
+            <a id="headings_anchor"><h3>Headings</h3></a>
+            <div class="form-control mb-2">
+                <h1>h1. Bootstrap heading</h1>
+                <h2>h2. Bootstrap heading</h2>
+                <h3>h3. Bootstrap heading</h3>
+                <h4>h4. Bootstrap heading</h4>
+                <h5>h5. Bootstrap heading</h5>
+                <h6>h6. Bootstrap heading</h6>
+                <p class="h1">h1. Bootstrap heading</p>
+                <p class="h2">h2. Bootstrap heading</p>
+                <p class="h3">h3. Bootstrap heading</p>
+                <p class="h4">h4. Bootstrap heading</p>
+                <p class="h5">h5. Bootstrap heading</p>
+                <p class="h6">h6. Bootstrap heading</p>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre>
+&lt;h1&gt;h1. Bootstrap heading&lt;/h1&gt;
+&lt;h2&gt;h2. Bootstrap heading&lt;/h2&gt;
+&lt;h3&gt;h3. Bootstrap heading&lt;/h3&gt;
+&lt;h4&gt;h4. Bootstrap heading&lt;/h4&gt;
+&lt;h5&gt;h5. Bootstrap heading&lt;/h5&gt;
+&lt;h6&gt;h6. Bootstrap heading&lt;/h6&gt;
+&lt;p class="<mark>h1</mark>"&gt;h1. Bootstrap heading&lt;/p&gt;
+&lt;p class="<mark>h2</mark>"&gt;h2. Bootstrap heading&lt;/p&gt;
+&lt;p class="<mark>h3</mark>"&gt;h3. Bootstrap heading&lt;/p&gt;
+&lt;p class="<mark>h4</mark>"&gt;h4. Bootstrap heading&lt;/p&gt;
+&lt;p class="<mark>h5</mark>"&gt;h5. Bootstrap heading&lt;/p&gt;
+&lt;p class="<mark>h6</mark>"&gt;h6. Bootstrap heading&lt;/p&gt;
+</pre>
+
+            <div class="form-control mb-1">
+                <a id="customize_headings_anchor"><h3>Customizing Headings</h3></a>
+                <div class="form-control mb-2">
+                    <h3 class="mb-1">
+                        Fancy display heading
+                        <small class="text-body-secondary">With faded secondary text</small>
+                    </h3>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;h3&gt;
+  Fancy display heading
+  &lt;<mark>small</mark> class="<mark>text-body-secondary</mark>"&gt;With faded secondary text&lt;<mark>/small</mark>&gt;
+&lt;/h3&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="display_headings_anchor"><h3>Display Headings</h3></a>
+            <div class="form-control mb-2">
+                <h1 class="display-1">Display 1</h1>
+                <h1 class="display-2">Display 2</h1>
+                <h1 class="display-3">Display 3</h1>
+                <h1 class="display-4">Display 4</h1>
+                <h1 class="display-5">Display 5</h1>
+                <h1 class="display-6">Display 6</h1>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;h1 class="<mark>display-1</mark>"&gt;Display 1&lt;/h1&gt;
+&lt;h1 class="<mark>display-2</mark>"&gt;Display 2&lt;/h1&gt;
+&lt;h1 class="<mark>display-3</mark>"&gt;Display 3&lt;/h1&gt;
+&lt;h1 class="<mark>display-4</mark>"&gt;Display 4&lt;/h1&gt;
+&lt;h1 class="<mark>display-5</mark>"&gt;Display 5&lt;/h1&gt;
+&lt;h1 class="<mark>display-6</mark>"&gt;Display 6&lt;/h1&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="lead_anchor"><h3>Lead</h3></a>
+            <p>Graphical effect to make a paragraph stand out.</p>
+            <div class="form-control mb-2">
+                <p class="lead">This is a lead paragraph. It stands out from regular paragraphs.</p>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;p class="<mark>lead</mark>"&gt;This is a lead paragraph. It stands out from regular paragraphs.&lt;/p&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="inline_text_elements_anchor"><h3>Inline Text Elements</h3></a>
+            <div class="form-control mb-2">
+                <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+                <p>
+                    <del>This line of text is meant to be treated as deleted text.</del>
+                </p>
+                <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+                <p>
+                    <ins>This line of text is meant to be treated as an addition to the document.</ins>
+                </p>
+                <p><u>This line of text will render as underlined.</u></p>
+                <p><small>This line of text is meant to be treated as fine print.</small></p>
+                <p><strong>This line rendered as bold text.</strong></p>
+                <p><em>This line rendered as italicized text.</em></p>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;p&gt;You can use the mark tag to &lt;<mark>mark</mark>&gt;highlight&lt;<mark>/mark</mark>&gt; text.&lt;/p&gt;
+&lt;p&gt;&lt;<mark>del</mark>&gt;This line of text is meant to be treated as deleted text.&lt;<mark>/del</mark>&gt;&lt;/p&gt;
+&lt;p&gt;&lt;<mark>s</mark>&gt;This line of text is meant to be treated as no longer accurate.&lt;<mark>/s</mark>&gt;&lt;/p&gt;
+&lt;p&gt;&lt;<mark>ins</mark>&gt;This line of text is meant to be treated as an addition to the document.&lt;<mark>/ins</mark>&gt;&lt;/p&gt;
+&lt;p&gt;&lt;<mark>u</mark>&gt;This line of text will render as underlined.&lt;<mark>/u</mark>&gt;&lt;/p&gt;
+&lt;p&gt;&lt;<mark>small</mark>&gt;This line of text is meant to be treated as fine print.&lt;<mark>/small</mark>&gt;&lt;/p&gt;
+&lt;p&gt;&lt;<mark>strong</mark>&gt;This line rendered as bold text.&lt;<mark>/strong</mark>&gt;&lt;/p&gt;
+&lt;p&gt;&lt;<mark>em</mark>&gt;This line rendered as italicized text.&lt;<mark>/em</mark>&gt;&lt;/p&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="text_utilities_anchor"><h3>Text Utilities</h3></a>
+            <p class="mb-1">
+                The <a href="https://getbootstrap.com/docs/5.3/utilities/text/">text</a> and <a
+                    href="https://getbootstrap.com/docs/5.3/utilities/colors/">color</a> utilities are used to change
+                the text alignment, transform, style, weight, line-height, decoration, and color:
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="abbreviations_anchor"><h3>Abbreviations</h3></a>
+            <p class="mb-1">
+                The &lt;abbr&gt; element applies an underline effect to the enclosed text. If the <i>title</i>
+                attribute is supplied, then it will be displayed when the mouse pointer is hovered over the element.
+            </p>
+            <div class="form-control mb-2">
+                <p><abbr title="Hello!">Hover over me!</abbr></p>
+                <p class="mb-1"><abbr title="This has a different looking underline!" class="initialism">Hover over
+                    me!</abbr></p>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1" style="font-size:0.82em;">
+&lt;p&gt;&lt;<mark>abbr</mark> <mark>title="Hello!"</mark>&gt;Hover over me!&lt;<mark>/abbr</mark>&gt;&lt;/p&gt;
+&lt;p class="mb-1"&gt;&lt;<mark>abbr</mark> <mark>title="This has a different looking underline!"</mark> class="initialism"&gt;Hover over me!&lt;<mark>/abbr</mark>&gt;&lt;/p&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="blockquotes_anchor"><h3>Blockquotes</h3></a>
+            <div class="form-control mb-2">
+                <blockquote class="blockquote mb-1">
+                    <p class="mb-1">A well-known quote, contained in a blockquote element.</p>
+                </blockquote>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre>
+&lt;<mark>blockquote</mark> class="<mark>blockquote</mark>"&gt;
+  &lt;p&gt;A well-known quote, contained in a blockquote element.&lt;/p&gt;
+&lt;<mark>/blockquote</mark>&gt;
+</pre>
+            <div class="form-control mb-2">
+                <a id="figure_figcaption_cite_anchor"><h4>Figure, Figcaption, and Cite</h4></a>
+                <p class="mb-2">
+                    Blockquotes are typically used in conjunction with &lt;figure&gt; and &lt;figcaption elements&gt;,
+                    specifically, enclosed within the former and preceding the latter. &lt;cite&gt; is typically within
+                    the &lt;figcaption&gt;, enclosed around the source title.
+                </p>
+                <div class="form-control mb-2">
+                    <figure class="mb-1">
+                        <blockquote class="blockquote">
+                            <p>A well-known quote, contained in a blockquote element.</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer mb-1">
+                            Someone famous in <cite title="Source Title">Source Title</cite>
+                        </figcaption>
+                    </figure>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;<mark>figure</mark>&gt;
+  &lt;<mark>blockquote</mark> class="<mark>blockquote</mark>"&gt;
+    &lt;p&gt;A well-known quote, contained in a blockquote element.&lt;/p&gt;
+  &lt;<mark>/blockquote</mark>&gt;
+  &lt;<mark>figcaption</mark> class="<mark>blockquote-footer</mark>"&gt;
+    Someone famous in &lt;<mark>cite</mark> <mark>title</mark>="Source Title"&gt;Source Title&lt;<mark>/cite</mark>&gt;
+  &lt;<mark>/figcaption</mark>&gt;
+&lt;<mark>/figure</mark>&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="alignment_anchor"><h4>Alignment</h4></a>
+                <p>
+                    Alignment of the text content can be done by editing the class to <i>text-start</i>,
+                    <i>text-center</i>, and <i>text-end</i>.
+                </p>
+                <div class="form-control mb-2">
+                    <figure class="text-center mb-1">
+                        <blockquote class="blockquote">
+                            <p>A well-known quote, contained in a blockquote element.</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer mb-1">
+                            Someone famous in <cite title="Source Title">Source Title</cite>
+                        </figcaption>
+                    </figure>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;figure class="<mark>text-center</mark>"&gt;
+    &lt;blockquote class="blockquote"&gt;
+        &lt;p&gt;A well-known quote, contained in a blockquote element.&lt;/p&gt;
+    &lt;/blockquote&gt;
+    &lt;figcaption class="blockquote-footer"&gt;
+        Someone famous in &lt;cite title="Source Title"&gt;Source Title&lt;/cite&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="lists_anchor"><h3>Lists</h3></a>
+            <div class="form-control mb-2">
+                <a id="unstyled_lists_anchor"><h4>Unstyled Lists</h4></a>
+                <p class="mb-2">
+                    Setting the <i>class</i> attribute to <u>list-unstyled</u> removes the bullet point from (direct)
+                    list-items. Nested lists are unaffected.
+                </p>
+                <div class="form-control mb-2">
+                    <ul class="list-unstyled mb-1">
+                        <li>This is a list.</li>
+                        <li>It appears completely unstyled.</li>
+                        <li>Structurally, it's still a list.</li>
+                        <li>However, this style only applies to immediate child elements.</li>
+                        <li>Nested lists:
+                            <ul>
+                                <li>are unaffected by this style</li>
+                                <li>will still show a bullet</li>
+                                <li>and have appropriate left margin</li>
+                            </ul>
+                        </li>
+                        <li>This may still come in handy in some situations.</li>
+                    </ul>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;ul class="<mark>list-unstyled</mark>"&gt;
+    &lt;li&gt;This is a list.&lt;/li&gt;
+    &lt;li&gt;It appears completely unstyled.&lt;/li&gt;
+    &lt;li&gt;Structurally, it's still a list.&lt;/li&gt;
+    &lt;li&gt;However, this style only applies to immediate child elements.&lt;/li&gt;
+    &lt;li&gt;Nested lists:
+        &lt;ul&gt;
+            &lt;li&gt;are unaffected by this style&lt;/li&gt;
+            &lt;li&gt;will still show a bullet&lt;/li&gt;
+            &lt;li&gt;and have appropriate left margin&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;This may still come in handy in some situations.&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+            </div>
+            <div class="form-control mb-2">
+                <a id="inline_lists_anchor"><h4>Inline Lists</h4></a>
+                <p>
+                    Removes bullet points and list items are displayed inline (elements displayed horizontally from
+                    other affected elements) instead of vertically (until overflow).
+                </p>
+                <div class="form-control mb-2">
+                    <ul class="list-inline mb-1">
+                        <li class="list-inline-item">This is a list item.</li>
+                        <li class="list-inline-item">And another one.</li>
+                        <li class="list-inline-item">But they're displayed inline.</li>
+                        <li class="list-inline-item">But they're displayed inline.</li>
+                        <li class="list-inline-item">But they're displayed inline.</li>
+                        <li class="list-inline-item">But they're displayed inline.</li>
+                        <li class="list-inline-item">But they're displayed inline.</li>
+                        <li class="list-inline-item">But they're displayed inline.</li>
+                    </ul>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;ul class="<mark>list-inline</mark>"&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;This is a list item.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;And another one.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;But they're displayed inline.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;But they're displayed inline.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;But they're displayed inline.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;But they're displayed inline.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;But they're displayed inline.&lt;/li&gt;
+    &lt;li class="<mark>list-inline-item</mark>"&gt;But they're displayed inline.&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+            </div>
+            <div class="form-control mb-1">
+                <a id="description_lists_alignment_anchor"><h4>Description List Alignment</h4></a>
+                <p>
+                    List items can utilize Bootstrap's grid system to align terms and descriptions horizontally.
+                </p>
+                <div class="form-control mb-2">
+                    <dl class="row mb-1">
+                        <dt class="col-sm-3">Description lists</dt>
+                        <dd class="col-sm-9">A description list is perfect for defining terms.</dd>
+
+                        <dt class="col-sm-3">Term</dt>
+                        <dd class="col-sm-9">
+                            <p>Definition for the term.</p>
+                            <p>And some more placeholder definition text.</p>
+                        </dd>
+
+                        <dt class="col-sm-3">Another term</dt>
+                        <dd class="col-sm-9">This definition is short, so no extra paragraphs or anything.</dd>
+
+                        <dt class="col-sm-3 text-truncate">Truncated term is truncated</dt>
+                        <dd class="col-sm-9">This can be useful when space is tight. Adds an ellipsis at the end.</dd>
+
+                        <dt class="col-sm-3">Nesting</dt>
+                        <dd class="col-sm-9">
+                            <dl class="row">
+                                <dt class="col-sm-4">Nested definition list</dt>
+                                <dd class="col-sm-8 mb-1">I heard you like definition lists. Let me put a definition
+                                    list
+                                    inside your definition list.
+                                </dd>
+                            </dl>
+                        </dd>
+                    </dl>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;dl class="<mark>row</mark>"&gt;
+    &lt;dt class="<mark>col-sm-3</mark>"&gt;Description lists&lt;/dt&gt;
+    &lt;dd class="<mark>col-sm-9</mark>"&gt;A description list is perfect for defining terms.&lt;/dd&gt;
+
+    &lt;dt class="<mark>col-sm-3</mark>"&gt;Term&lt;/dt&gt;
+    &lt;dd class="<mark>col-sm-9</mark>"&gt;
+        &lt;p&gt;Definition for the term.&lt;/p&gt;
+        &lt;p&gt;And some more placeholder definition text.&lt;/p&gt;
+    &lt;/dd&gt;
+
+    &lt;dt class="<mark>col-sm-3</mark>"&gt;Another term&lt;/dt&gt;
+    &lt;dd class="<mark>col-sm-9</mark>"&gt;This definition is short, so no extra paragraphs or anything.&lt;/dd&gt;
+
+    &lt;dt class="<mark>col-sm-3</mark> text-truncate"&gt;Truncated term is truncated&lt;/dt&gt;
+    &lt;dd class="<mark>col-sm-9</mark>"&gt;This can be useful when space is tight. Adds an ellipsis at the end.&lt;/dd&gt;
+
+    &lt;dt class="<mark>col-sm-3</mark>"&gt;Nesting&lt;/dt&gt;
+    &lt;dd class="<mark>col-sm-9</mark>"&gt;
+        &lt;dl class="row"&gt;
+            &lt;dt class="<mark>col-sm-4</mark>"&gt;Nested definition list&lt;/dt&gt;
+            &lt;dd class="<mark>col-sm-8</mark>"&gt;I heard you like definition lists. Let me put a definition list
+                inside your definition list.
+            &lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="responsible_font_sizes_anchor"><h3>Responsive Font Sizes</h3></a>
+            <p class="mb-1">
+                As of Bootstrap version 5, a feature was added that enabled responsible font sizes, which allows text to
+                scale more naturally across devices and viewport sizes.
+                Refer to this <a href="https://getbootstrap.com/docs/5.3/getting-started/rfs/">page</a> for
+                customization options.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="text_styling_anchor"><h2>Text Styling</h2></a>
+        <p class="mb-2">
+            <a href="https://getbootstrap.com/docs/5.3/utilities/text/">
+                https://getbootstrap.com/docs/5.3/utilities/text/
+            </a>
+        </p>
+        <div class="form-control mb-2">
+            <a id="_anchor"><h3>Text Alignment</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <p class="text-start">Aligns text to the left of the element on all viewport sizes.</p>
+                    <p class="text-center">Aligns text to the center of the element on all viewport sizes.</p>
+                    <p class="text-end">Aligns text to the right of the element on all viewport sizes.</p>
+                </div>
+                <h5>HTML Code:</h5>
+                <pre class="mb-2">
+&lt;p class="<mark>text-start</mark>"&gt;Aligns text to the left of the element on all viewport sizes.&lt;/p&gt;
+&lt;p class="<mark>text-center</mark>"&gt;Aligns text to the center of the element on all viewport sizes.&lt;/p&gt;
+&lt;p class="<mark>text-end</mark>"&gt;Aligns text to the right of the element on all viewport sizes.&lt;/p&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-1">
+                    <p class="text-sm-end">
+                        Aligns text to the right of the element on viewports sized SM (small) or wider.</p>
+                    <p class="text-md-end">
+                        Aligns text to the right of the element on viewports sized MD (medium) or wider.
+                    </p>
+                    <p class="text-lg-end">
+                        Aligns text to the right of the element on viewports sized LG (large) or wider.
+                    </p>
+                    <p class="text-xl-end">
+                        Aligns text to the right of the element on viewports sized XL (extra large) or wider.
+                    </p>
+                    <p class="text-xxl-end">
+                        Aligns text to the right of the element on viewports sized XXL (extra extra large) or wider.
+                    </p>
+                </div>
+                <h5>HTML Code:</h5>
+                <pre class="mb-2">
+&lt;p class="<mark>text-sm-end</mark>"&gt;Aligns text to the right of the element on viewports sized SM (small) or wider.&lt;/p&gt;
+&lt;p class="<mark>text-md-end</mark>"&gt;Aligns text to the right of the element on viewports sized MD (medium) or wider.&lt;/p&gt;
+&lt;p class="<mark>text-lg-end</mark>"&gt;Aligns text to the right of the element on viewports sized LG (large) or wider.&lt;/p&gt;
+&lt;p class="<mark>text-xl-end</mark>"&gt;Aligns text to the right of the element on viewports sized XL (extra large) or wider.&lt;/p&gt;
+&lt;p class="<mark>text-xxl-end</mark>"&gt;Aligns text to the right of the element on viewports sized XXL (extra extra large) or wider.&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="text_wrapping_overflow_anchor"><h3>Text Wrapping and Overflow</h3></a>
+            <div class="form-control mb-1">
+                <p class="mb-2">
+                    Wrap text by setting the <i>class</i> attribute to <u>text-wrap</u>.
+                </p>
+                <div class="form-control mt-1 mb-2">
+                    <div class="badge text-bg-primary text-wrap" style="width: 6rem;">
+                        This text should wrap.
+                    </div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="badge text-bg-primary <mark>text-wrap</mark>" style="width: 6rem;"&gt;
+    This text should wrap.
+&lt;/div&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <p class="mb-2">
+                    Setting <i>class</i> to <u>text-nowrap</u> prevents the text from wrapping.
+                </p>
+                <div class="form-control mt-1 mb-2">
+                    <div class="text-nowrap bg-body-secondary border" style="width: 8rem;">
+                        This text should overflow the parent.
+                    </div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="<mark>text-nowrap</mark> bg-body-secondary border" style="width: 8rem;"&gt;
+    This text should overflow the parent.
+&lt;/div&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="word_break_anchor"><h3>Word Break</h3></a>
+            <div class="form-control mb-1">
+                <p class="mb-2">
+                    <u>text-break</u> prevents long strings of text from breaking component layouts.
+                </p>
+                <div class="form-control mt-1 mb-2">
+                    <p class="text-break mb-1">
+                        mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>text-break</mark>"&gt;mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="text_transform_anchor"><h3>Text Transform</h3></a>
+            <div class="form-control mb-1">
+                <p class="mb-2">
+                    Capitalization options: <u>text-lowercase</u>, <u>text-uppercase</u>, <u>text-capitalize</u>
+                </p>
+                <div class="form-control mt-1 mb-2">
+                    <p class="text-lowercase">Lowercased text.</p>
+                    <p class="text-uppercase">Uppercased text.</p>
+                    <p class="text-capitalize mb-1">CapiTaliZed text.</p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>text-lowercase</mark>"&gt;Lowercased text.&lt;/p&gt;
+&lt;p class="<mark>text-uppercase</mark>"&gt;Uppercased text.&lt;/p&gt;
+&lt;p class="<mark>text-capitalize</mark>"&gt;CapiTaliZed text.&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="font_size_anchor"><h3>Font Size</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <p class="fs-1">.fs-1 text</p>
+                    <p class="fs-2">.fs-2 text</p>
+                    <p class="fs-3">.fs-3 text</p>
+                    <p class="fs-4">.fs-4 text</p>
+                    <p class="fs-5">.fs-5 text</p>
+                    <p class="fs-6">.fs-6 text</p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>fs-1</mark>"&gt;.fs-1 text&lt;/p&gt;
+&lt;p class="<mark>fs-2</mark>"&gt;.fs-2 text&lt;/p&gt;
+&lt;p class="<mark>fs-3</mark>"&gt;.fs-3 text&lt;/p&gt;
+&lt;p class="<mark>fs-4</mark>"&gt;.fs-4 text&lt;/p&gt;
+&lt;p class="<mark>fs-5</mark>"&gt;.fs-5 text&lt;/p&gt;
+&lt;p class="<mark>fs-6</mark>"&gt;.fs-6 text&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="font_weight_italics_anchor"><h3>Font Weight & Italics</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <p class="fw-bold">Bold text.</p>
+                    <p class="fw-bolder">Bolder weight text (relative to the parent element).</p>
+                    <p class="fw-semibold">Semibold weight text.</p>
+                    <p class="fw-medium">Medium weight text.</p>
+                    <p class="fw-normal">Normal weight text.</p>
+                    <p class="fw-light">Light weight text.</p>
+                    <p class="fw-lighter">Lighter weight text (relative to the parent element).</p>
+                    <p class="fst-italic">Italic text.</p>
+                    <p class="fst-normal">Text with normal font style</p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>fw-bold</mark>"&gt;Bold text.&lt;/p&gt;
+&lt;p class="<mark>fw-bolder</mark>"&gt;Bolder weight text (relative to the parent element).&lt;/p&gt;
+&lt;p class="<mark>fw-semibold</mark>"&gt;Semibold weight text.&lt;/p&gt;
+&lt;p class="<mark>fw-medium</mark>"&gt;Medium weight text.&lt;/p&gt;
+&lt;p class="<mark>fw-normal</mark>"&gt;Normal weight text.&lt;/p&gt;
+&lt;p class="<mark>fw-light</mark>"&gt;Light weight text.&lt;/p&gt;
+&lt;p class="<mark>fw-lighter</mark>"&gt;Lighter weight text (relative to the parent element).&lt;/p&gt;
+&lt;p class="<mark>fst-italic</mark>"&gt;Italic text.&lt;/p&gt;
+&lt;p class="<mark>fst-normal</mark>"&gt;Text with normal font style&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="line_height_anchor"><h3>Line Height</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <p class="lh-1">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                    <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                    <p class="lh-base">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                    <p class="lh-lg mb-1">This is a long paragraph written to show how the line-height of an element is
+                        affected by our utilities. Classes are applied to the element itself or sometimes the parent
+                        element. These classes can be customized as needed with our utility API.</p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>lh-1</mark>"&gt;
+    This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are
+    applied to the element itself or sometimes the parent element. These classes can be customized as needed with our
+    utility API.
+&lt;/p&gt;
+&lt;p class="<mark>lh-sm</mark>"&gt;
+    This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are
+    applied to the element itself or sometimes the parent element. These classes can be customized as needed with our
+    utility API.
+&lt;/p&gt;
+&lt;p class="<mark>lh-base</mark>"&gt;
+    This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are
+    applied to the element itself or sometimes the parent element. These classes can be customized as needed with our
+    utility API.
+&lt;/p&gt;
+&lt;p class="<mark>lh-lg</mark>"&gt;
+    This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are
+    applied to the element itself or sometimes the parent element. These classes can be customized as needed with our
+    utility API.
+&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="monospace_anchor"><h3>Monospace</h3></a>
+            <div class="form-control mb-1">
+                <div class="form-control mt-1 mb-2">
+                    <p class="font-monospace mb-1">This is in monospace</p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>font-monospace</mark>"&gt;This is in monospace&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="reset_color_anchor"><h3>Reset Color</h3></a>
+            <div class="form-control mb-1">
+                <p class="mb-2">
+                    <u>text-reset</u> is used to reset a text or link's color to the original inherited from its parent.
+                </p>
+                <div class="form-control mt-1 mb-2">
+                    <p class="text-body-secondary mb-1">
+                        Secondary body text with a <a href="#" class="text-reset">reset link</a>.
+                    </p>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="text-body-secondary"&gt;
+    Secondary body text with a &lt;a href="#" class="<mark>text-reset</mark>"&gt;reset link&lt;/a&gt;.
+&lt;/p&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="text_decoration_anchor"><h3>Text Decoration</h3></a>
+            <div class="form-control mb-1">
+                <p class="mb-2">
+                    Can apply one of the following effects: <u>text-decoration-underline</u>,
+                    <u>text-decoration-line-through</u>, <u>text-decoration-none</u>.
+                </p>
+                <div class="form-control mt-1 mb-2">
+                    <p class="text-decoration-underline">This text has a line underneath it.</p>
+                    <p class="text-decoration-line-through">This text has a line going through it.</p>
+                    <a href="#" class="text-decoration-none">This link has its text decoration removed</a>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;p class="<mark>text-decoration-underline</mark>"&gt;This text has a line underneath it.&lt;/p&gt;
+&lt;p class="<mark>text-decoration-line-through</mark>"&gt;This text has a line going through it.&lt;/p&gt;
+&lt;a href="#" class="<mark>text-decoration-none</mark>"&gt;This link has its text decoration removed&lt;/a&gt;
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="borders_anchor"><h2>Borders</h2></a>
+        <p class="mb-2">
+            <a href="https://getbootstrap.com/docs/5.3/utilities/borders/">
+                https://getbootstrap.com/docs/5.3/utilities/borders/
+            </a>
+        </p>
+        <div class="form-control mb-2">
+            <a id="border_sides_anchor"><h3>Sides</h3></a>
+            <div class="form-control mb-2">
+                <a id="border_sides_additive_anchor"><h4>Additive</h4></a>
+                <div class="form-control p-3 mb-2">
+                    <div class="border border-dark bg-warning border-5 p-2 mb-2">Default - All Sides Enabled</div>
+                    <div class="border-top border-dark bg-warning border-5 p-2 mb-2">Top Enabled</div>
+                    <div class="border-end border-dark bg-warning border-5 p-2 mb-2">Right Enabled</div>
+                    <div class="border-bottom border-dark bg-warning border-5 p-2 mb-2">Bottom Enabled</div>
+                    <div class="border-start border-dark bg-warning border-5 p-2">Left Enabled</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="<mark>border</mark> border-dark bg-warning border-5 p-2 mb-2">Default - All Sides Enabled&lt;/div>
+&lt;div class="<mark>border-top</mark> border-dark bg-warning border-5 p-2 mb-2">Top Enabled&lt;/div>
+&lt;div class="<mark>border-end</mark> border-dark bg-warning border-5 p-2 mb-2">Right Enabled&lt;/div>
+&lt;div class="<mark>border-bottom</mark> border-dark bg-warning border-5 p-2 mb-2">Bottom Enabled&lt;/div>
+&lt;div class="<mark>border-start</mark> border-dark bg-warning border-5 p-2">Left Enabled&lt;/div>
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="border_sides_subtractive_anchor"><h4>Subtractive</h4></a>
+                <div class="form-control p-3 mb-2">
+                    <div class="border border-0 border-dark bg-warning border-5 p-2 mb-2">All Borders Disabled</div>
+                    <div class="border border-top-0 border-dark bg-warning border-5 p-2 mb-2">Top Disabled</div>
+                    <div class="border border-end-0 border-dark bg-warning border-5 p-2 mb-2">Right Disabled</div>
+                    <div class="border border-bottom-0 border-dark bg-warning border-5 p-2 mb-2">Bottom Disabled</div>
+                    <div class="border border-start-0 border-dark bg-warning border-5 p-2">Left Disabled</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="<mark>border</mark> <mark>border-0</mark> border-dark bg-warning border-5 p-2 mb-2"&gt;All Borders Disabled&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-top-0</mark> border-dark bg-warning border-5 p-2 mb-2"&gt;Top Disabled&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-end-0</mark> border-dark bg-warning border-5 p-2 mb-2"&gt;Right Disabled&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-bottom-0</mark> border-dark bg-warning border-5 p-2 mb-2"&gt;Bottom Disabled&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-start-0</mark> border-dark bg-warning border-5 p-2"&gt;Left Disabled&lt;/div&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="border_color_anchor"><h3>Color</h3></a>
+            <div class="form-control p-3 mb-2">
+                <div class="border border-primary p-2 mb-2">Primary</div>
+                <div class="border border-primary-subtle p-2 mb-2">Primary-Subtle</div>
+                <div class="border border-secondary p-2 mb-2">Secondary</div>
+                <div class="border border-secondary-subtle p-2 mb-2">Secondary-Subtle</div>
+                <div class="border border-success p-2 mb-2">Success</div>
+                <div class="border border-success-subtle p-2 mb-2">Success-Subtle</div>
+                <div class="border border-danger p-2 mb-2">Danger</div>
+                <div class="border border-danger-subtle p-2 mb-2">Danger-Subtle</div>
+                <div class="border border-warning p-2 mb-2">Warning</div>
+                <div class="border border-warning-subtle p-2 mb-2">Warning-Subtle</div>
+                <div class="border border-info p-2 mb-2">Info</div>
+                <div class="border border-info-subtle p-2 mb-2">Info-Subtle</div>
+                <div class="border border-light p-2 mb-2">Light</div>
+                <div class="border border-light-subtle p-2 mb-2">Light-Subtle</div>
+                <div class="border border-dark p-2 mb-2">Dark</div>
+                <div class="border border-dark-subtle p-2 mb-2">Dark-Subtle</div>
+                <div class="border border-black p-2 mb-2">Black</div>
+                <div class="border border-white p-2">White</div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="<mark>border</mark> <mark>border-primary</mark> p-2 mb-2"&gt;Primary&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-primary-subtle</mark> p-2 mb-2"&gt;Primary-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-secondary</mark> p-2 mb-2"&gt;Secondary&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-secondary-subtle</mark> p-2 mb-2"&gt;Secondary-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-success</mark> p-2 mb-2"&gt;Success&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-success-subtle</mark> p-2 mb-2"&gt;Success-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-danger</mark> p-2 mb-2"&gt;Danger&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-danger-subtle</mark> p-2 mb-2"&gt;Danger-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-warning</mark> p-2 mb-2"&gt;Warning&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-warning-subtle</mark> p-2 mb-2"&gt;Warning-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-info</mark> p-2 mb-2"&gt;Info&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-info-subtle</mark> p-2 mb-2"&gt;Info-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-light</mark> p-2 mb-2"&gt;Light&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-light-subtle</mark> p-2 mb-2"&gt;Light-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-dark</mark> p-2 mb-2"&gt;Dark&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-dark-subtle</mark> p-2 mb-2"&gt;Dark-Subtle&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-black</mark> p-2 mb-2"&gt;Black&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-white</mark> p-2"&gt;White&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="border_opacity_anchor"><h3>Opacity</h3></a>
+            <div class="form-control mb-2">
+                <div class="form-control p-3 mt-1 mb-2">
+                    <div class="border border-success p-2 mb-2">This is default success border</div>
+                    <div class="border border-success p-2" style="--bs-border-opacity: .5;">This is 50% opacity success
+                        border
+                    </div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1" style="font-size:0.82em;">
+&lt;div class="<mark>border</mark> border-success p-2 mb-2"&gt;This is default success border&lt;/div&gt;
+&lt;div class="<mark>border</mark> border-success p-2" <mark>style="--bs-border-opacity: .5;"</mark>&gt;This is 50% opacity success border&lt;/div&gt;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <a id="border_opacity_utilities_anchor"><h4>Opacity Utilities</h4></a>
+                <div class="form-control p-3 mb-2">
+                    <div class="border border-success p-2 mb-2">This is default success border</div>
+                    <div class="border border-success border-opacity-75 p-2 mb-2">This is 75% opacity success border
+                    </div>
+                    <div class="border border-success border-opacity-50 p-2 mb-2">This is 50% opacity success border
+                    </div>
+                    <div class="border border-success border-opacity-25 p-2 mb-2">This is 25% opacity success border
+                    </div>
+                    <div class="border border-success border-opacity-10 p-2">This is 10% opacity success border</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="<mark>border</mark> border-success p-2 mb-2"&gt;This is default success border&lt;/div&gt;
+&lt;div class="<mark>border</mark> border-success <mark>border-opacity-75</mark> p-2 mb-2"&gt;This is 75% opacity success border&lt;/div&gt;
+&lt;div class="<mark>border</mark> border-success <mark>border-opacity-50</mark> p-2 mb-2"&gt;This is 50% opacity success border&lt;/div&gt;
+&lt;div class="<mark>border</mark> border-success <mark>border-opacity-25</mark> p-2 mb-2"&gt;This is 25% opacity success border&lt;/div&gt;
+&lt;div class="<mark>border</mark> border-success <mark>border-opacity-10</mark> p-2"&gt;This is 10% opacity success border&lt;/div&gt;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="border_width_anchor"><h3>Width</h3></a>
+            <div class="form-control p-3 mb-2">
+                <div class="border border-1 p-2 mb-2">Border-1</div>
+                <div class="border border-2 p-2 mb-2">Border-2</div>
+                <div class="border border-3 p-2 mb-2">Border-3</div>
+                <div class="border border-4 p-2 mb-2">Border-4</div>
+                <div class="border border-5 p-2">Border-5</div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-1">
+&lt;div class="<mark>border</mark> <mark>border-1</mark> p-2 mb-2"&gt;Border-1&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-2</mark> p-2 mb-2"&gt;Border-2&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-3</mark> p-2 mb-2"&gt;Border-3&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-4</mark> p-2 mb-2"&gt;Border-4&lt;/div&gt;
+&lt;div class="<mark>border</mark> <mark>border-5</mark> p-2"&gt;Border-5&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="border_radius_anchor"><h3>Radius</h3></a>
+            <div class="form-control p-3 mb-2">
+                <div class="rounded bg-warning p-2 mb-2">Rounded</div>
+                <div class="rounded-top bg-warning p-2 mb-2">Rounded-Top</div>
+                <div class="rounded-end bg-warning p-2 mb-2">Rounded-End</div>
+                <div class="rounded-bottom bg-warning p-2 mb-2">Rounded-Bottom</div>
+                <div class="rounded-start bg-warning p-2 mb-2">Rounded-Start</div>
+                <div class="rounded-circle bg-warning p-2 mb-2">Rounded-Circle</div>
+                <div class="rounded-pill bg-warning p-2">Rounded-Pill</div>
+            </div>
+            <h5 class="mb-1">HTML Code:</h5>
+            <pre class="mb-3">
+&lt;div class="<mark>rounded</mark> bg-warning p-2 mb-2"&gt;Rounded&lt;/div&gt;
+&lt;div class="<mark>rounded-top</mark> bg-warning p-2 mb-2"&gt;Rounded-Top&lt;/div&gt;
+&lt;div class="<mark>rounded-end</mark> bg-warning p-2 mb-2"&gt;Rounded-End&lt;/div&gt;
+&lt;div class="<mark>rounded-bottom</mark> bg-warning p-2 mb-2"&gt;Rounded-Bottom&lt;/div&gt;
+&lt;div class="<mark>rounded-start</mark> bg-warning p-2 mb-2"&gt;Rounded-Start&lt;/div&gt;
+&lt;div class="<mark>rounded-circle</mark> bg-warning p-2 mb-2"&gt;Rounded-Circle&lt;/div&gt;
+&lt;div class="<mark>rounded-pill</mark> bg-warning p-2"&gt;Rounded-Pill&lt;/div&gt;
+</pre>
+
+            <div class="form-control mb-1">
+                <a id="border_size_anchor"><h4>Size</h4></a>
+                <div class="form-control p-3 mb-2">
+                    <div class="rounded-0 bg-warning p-2 mb-2">Rounded-0</div>
+                    <div class="rounded-1 bg-warning p-2 mb-2">Rounded-1</div>
+                    <div class="rounded-2 bg-warning p-2 mb-2">Rounded-2</div>
+                    <div class="rounded-3 bg-warning p-2 mb-2">Rounded-3</div>
+                    <div class="rounded-4 bg-warning p-2 mb-2">Rounded-4</div>
+                    <div class="rounded-5 bg-warning p-2">Rounded-5</div>
+                </div>
+                <h5 class="mb-1">HTML Code:</h5>
+                <pre class="mb-1">
+&lt;div class="<mark>rounded-0</mark> bg-warning p-2 mb-2"&gt;Rounded-0&lt;/div&gt;
+&lt;div class="<mark>rounded-1</mark> bg-warning p-2 mb-2"&gt;Rounded-1&lt;/div&gt;
+&lt;div class="<mark>rounded-2</mark> bg-warning p-2 mb-2"&gt;Rounded-2&lt;/div&gt;
+&lt;div class="<mark>rounded-3</mark> bg-warning p-2 mb-2"&gt;Rounded-3&lt;/div&gt;
+&lt;div class="<mark>rounded-4</mark> bg-warning p-2 mb-2"&gt;Rounded-4&lt;/div&gt;
+&lt;div class="<mark>rounded-5</mark> bg-warning p-2"&gt;Rounded-5&lt;/div&gt;
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Bootstrap - Styling
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#bootstrap_styling_anchor"><strong>Bootstrap - Styling</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#spacing_anchor">Spacing</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#horizontal_centering_anchor">&nbsp;&nbsp;&nbsp;Horizontal Centering</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#vertical_align_anchor">Vertical Alignment</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#vertical_align_inline_anchor">&nbsp;&nbsp;&nbsp;Vertical Alignment on Inline
+        Elements</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#vertical_align_tables_anchor">&nbsp;&nbsp;&nbsp;Vertical Alignment on Table
+        Cells</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#sizing_anchor">Sizing</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relative_to_parent_anchor">&nbsp;&nbsp;&nbsp;Relative to the parent</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relative_to_viewport_anchor">&nbsp;&nbsp;&nbsp;Relative to the viewport</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#gutters_anchor">Gutters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#horizontal_gutters_anchor">&nbsp;&nbsp;&nbsp;Horizontal Gutters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#vertical_gutters_anchor">&nbsp;&nbsp;&nbsp;Vertical Gutters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#horiz_and_vert_gutters_anchor">&nbsp;&nbsp;&nbsp;Horizontal & Vertical Gutters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#row_col_gutters_anchor">&nbsp;&nbsp;&nbsp;Row Columns Gutters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#no_gutters_anchor">&nbsp;&nbsp;&nbsp;No Gutters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#typography_anchor">Typography</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#headings_anchor">&nbsp;&nbsp;&nbsp;Headings</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#customize_headings_anchor">&nbsp;&nbsp;&nbsp;Customizing Headings</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#display_headings_anchor">&nbsp;&nbsp;&nbsp;Display Headings</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#lead_anchor">&nbsp;&nbsp;&nbsp;Lead</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inline_text_elements_anchor">&nbsp;&nbsp;&nbsp;Inline Text Elements</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_utilities_anchor">&nbsp;&nbsp;&nbsp;Text Utilities</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#abbreviations_anchor">&nbsp;&nbsp;&nbsp;Abbreviations</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#blockquotes_anchor">&nbsp;&nbsp;&nbsp;Blockquotes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#figure_figcaption_cite_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure,
+        Figcaption, and Cite</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#alignment_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#lists_anchor">&nbsp;&nbsp;&nbsp;Lists</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#unstyled_lists_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unstyled Lists</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inline_lists_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inline Lists</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#description_lists_alignment_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description
+        List Alignment</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#responsible_font_sizes_anchor">&nbsp;&nbsp;&nbsp;Responsive Font Sizes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_styling_anchor">Text Styling</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_wrapping_overflow_anchor">&nbsp;&nbsp;&nbsp;Text Wrapping and Overflow</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#word_break_anchor">&nbsp;&nbsp;&nbsp;Word Break</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_transform_anchor">&nbsp;&nbsp;&nbsp;Text Transform</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#font_size_anchor">&nbsp;&nbsp;&nbsp;Font Size</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#font_weight_italics_anchor">&nbsp;&nbsp;&nbsp;Font Weight & Italics</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#line_height_anchor">&nbsp;&nbsp;&nbsp;Line Height</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#monospace_anchor">&nbsp;&nbsp;&nbsp;Monospace</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#reset_color_anchor">&nbsp;&nbsp;&nbsp;Reset Color</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_decoration_anchor">&nbsp;&nbsp;&nbsp;Text Decoration</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#borders_anchor">Borders</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_sides_anchor">&nbsp;&nbsp;&nbsp;Sides</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_sides_additive_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Additive</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_sides_subtractive_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subtractive</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_color_anchor">&nbsp;&nbsp;&nbsp;Color</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_opacity_anchor">&nbsp;&nbsp;&nbsp;Opacity</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_opacity_utilities_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opacity
+        Utilities</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_width_anchor">&nbsp;&nbsp;&nbsp;Width</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_radius_anchor">&nbsp;&nbsp;&nbsp;Radius</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#border_size_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size</a>
+</li>
+{% endblock %}

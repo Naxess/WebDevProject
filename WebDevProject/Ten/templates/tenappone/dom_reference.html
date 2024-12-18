@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>HTML DOM</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="form-control mb-2">
+    <a id="document_props_methods_anchor"><h2>HTML DOM<span class="door">:</span> Document <span class="door">-</span> Properties and Methods</h2></a>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property/Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">activeElement</p></td>
+            <td><p class="mb-0">Returns the currently focused element in the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">addEventListener()</p></td>
+            <td><p class="mb-0">Attaches an event handler to the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">adoptNode()</p></td>
+            <td><p class="mb-0">Adopts a node from another document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">anchors</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">applets</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">baseURI</p></td>
+            <td><p class="mb-0">Returns the absolute base URI of a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">body</p></td>
+            <td><p class="mb-0">Sets or returns the document's body (the &lt;body&gt; element)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">charset</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">characterSet</p></td>
+            <td><p class="mb-0">Returns the character encoding for the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">close()</p></td>
+            <td><p class="mb-0">Closes the output stream previously opened with document.open()</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">cookie</p></td>
+            <td><p class="mb-0">Returns all name/value pairs of cookies in the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">createAttribute()</p></td>
+            <td><p class="mb-0">Creates an attribute node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">createComment()</p></td>
+            <td><p class="mb-0">Creates a Comment node with the specified text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">createDocumentFragment()</p></td>
+            <td><p class="mb-0">Creates an empty DocumentFragment node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">createElement()</p></td>
+            <td><p class="mb-0">Creates an Element node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">createEvent()</p></td>
+            <td><p class="mb-0">Creates a new event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">createTextNode()</p></td>
+            <td><p class="mb-0">Creates a Text node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">defaultView</p></td>
+            <td><p class="mb-0">Returns the window object associated with a document, or null if none is available.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">designMode</p></td>
+            <td><p class="mb-0">Controls whether the entire document should be editable or not.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">doctype</p></td>
+            <td><p class="mb-0">Returns the Document Type Declaration associated with the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">documentElement</p></td>
+            <td><p class="mb-0">Returns the Document Element of the document (the &lt;html&gt; element)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">documentMode</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">documentURI</p></td>
+            <td><p class="mb-0">Sets or returns the location of the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">domain</p></td>
+            <td><p class="mb-0">Returns the domain name of the server that loaded the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">domConfig</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">embeds</p></td>
+            <td><p class="mb-0">Returns a collection of all &lt;embed&gt; elements the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">execCommand()</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">forms</p></td>
+            <td><p class="mb-0">Returns a collection of all &lt;form&gt; elements in the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getElementById()</p></td>
+            <td><p class="mb-0">Returns the element that has the ID attribute with the specified value</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getElementsByClassName()</p></td>
+            <td><p class="mb-0">Returns an HTMLCollection containing all elements with the specified class name</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getElementsByName()</p></td>
+            <td><p class="mb-0">Returns an live NodeList containing all elements with the specified name</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getElementsByTagName()</p></td>
+            <td><p class="mb-0">Returns an HTMLCollection containing all elements with the specified tag name</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hasFocus()</p></td>
+            <td><p class="mb-0">Returns a Boolean value indicating whether the document has focus</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">head</p></td>
+            <td><p class="mb-0">Returns the &lt;head&gt; element of the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">images</p></td>
+            <td><p class="mb-0">Returns a collection of all &lt;img&gt; elements in the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">implementation</p></td>
+            <td><p class="mb-0">Returns the DOMImplementation object that handles this document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">importNode()</p></td>
+            <td><p class="mb-0">Imports a node from another document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">inputEncoding</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">lastModified</p></td>
+            <td><p class="mb-0">Returns the date and time the document was last modified</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">links</p></td>
+            <td><p class="mb-0">Returns a collection of all &lt;a&gt; and &lt;area&gt; elements in the document that have a href
+                attribute
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">normalize()</p></td>
+            <td><p class="mb-0">Removes empty Text nodes, and joins adjacent nodes</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">normalizeDocument()</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">open()</p></td>
+            <td><p class="mb-0">Opens an HTML output stream to collect output from document.write()</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">querySelector()</p></td>
+            <td><p class="mb-0">Returns the first element that matches a specified CSS selector(s) in the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">querySelectorAll()</p></td>
+            <td><p class="mb-0">Returns a static NodeList containing all elements that matches a specified CSS selector(s) in the
+                document
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">readyState</p></td>
+            <td><p class="mb-0">Returns the (loading) status of the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">referrer</p></td>
+            <td><p class="mb-0">Returns the URL of the document that loaded the current document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">removeEventListener()</p></td>
+            <td><p class="mb-0">Removes an event handler from the document (that has been attached with the addEventListener()
+                method)
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">renameNode()</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scripts</p></td>
+            <td><p class="mb-0">Returns a collection of &lt;script&gt; elements in the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">strictErrorChecking</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">title</p></td>
+            <td><p class="mb-0">Sets or returns the title of the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">URL</p></td>
+            <td><p class="mb-0">Returns the full URL of the HTML document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">write()</p></td>
+            <td><p class="mb-0">Writes HTML expressions or JavaScript code to a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">writeln()</p></td>
+            <td><p class="mb-0">Same as write(), but adds a newline character after each statement</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="obj_props_methods_anchor"><h2>HTML DOM: Element Object - Properties and Methods</h2></a>
+    <p class="mb-2">
+        An Element object represents an HTML element (e.g. html, head, body, a, div, table, ul, li, etc..).
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property/Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">accessKey</p></td>
+            <td><p class="mb-0">Sets or returns the accesskey attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">addEventListener()</p></td>
+            <td><p class="mb-0">Attaches an event handler to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">appendChild()</p></td>
+            <td><p class="mb-0">Adds (appends) a new child node to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">attributes</p></td>
+            <td><p class="mb-0">Returns a NamedNodeMap of an element's attributes</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">blur()</p></td>
+            <td><p class="mb-0">Removes focus from an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">childElementCount</p></td>
+            <td><p class="mb-0">Returns an elements's number of child elements</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">childNodes</p></td>
+            <td><p class="mb-0">Returns a NodeList of an element's child nodes</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">children</p></td>
+            <td><p class="mb-0">Returns an HTMLCollection of an element's child elements</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">classList</p></td>
+            <td><p class="mb-0">Returns the class name(s) of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">className</p></td>
+            <td><p class="mb-0">Sets or returns the value of the class attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">click()</p></td>
+            <td><p class="mb-0">Simulates a mouse-click on an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clientHeight</p></td>
+            <td><p class="mb-0">Returns the height of an element, including padding</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clientLeft</p></td>
+            <td><p class="mb-0">Returns the width of the left border of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clientTop</p></td>
+            <td><p class="mb-0">Returns the width of the top border of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clientWidth</p></td>
+            <td><p class="mb-0">Returns the width of an element, including padding</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">cloneNode()</p></td>
+            <td><p class="mb-0">Clones an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">closest()</p></td>
+            <td><p class="mb-0">Searches the DOM tree for the closest element that matches a CSS selector</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">compareDocumentPosition()</p></td>
+            <td><p class="mb-0">Compares the document position of two elements</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">contains()</p></td>
+            <td><p class="mb-0">Returns true if a node is a descendant of a node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">contentEditable</p></td>
+            <td><p class="mb-0">Sets or returns whether the content of an element is editable or not</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dir</p></td>
+            <td><p class="mb-0">Sets or returns the value of the dir attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">firstChild</p></td>
+            <td><p class="mb-0">Returns the first child node of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">firstElementChild</p></td>
+            <td><p class="mb-0">Returns the first child element of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">focus()</p></td>
+            <td><p class="mb-0">Gives focus to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getAttribute()</p></td>
+            <td><p class="mb-0">Returns the value of an element's attribute</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getAttributeNode()</p></td>
+            <td><p class="mb-0">Returns an attribute node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getBoundingClientRect()</p></td>
+            <td><p class="mb-0">Returns the size of an element and its position relative to the viewport</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getElementsByClassName()</p></td>
+            <td><p class="mb-0">Returns a collection of child elements with a given class name</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getElementsByTagName()</p></td>
+            <td><p class="mb-0">Returns a collection of child elements with a given tag name</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hasAttribute()</p></td>
+            <td><p class="mb-0">Returns true if an element has a given attribute</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hasAttributes()</p></td>
+            <td><p class="mb-0">Returns true if an element has any attributes</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hasChildNodes()</p></td>
+            <td><p class="mb-0">Returns true if an element has any child nodes</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">id</p></td>
+            <td><p class="mb-0">Sets or returns the value of the id attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">innerHTML</p></td>
+            <td><p class="mb-0">Sets or returns the content of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">innerText</p></td>
+            <td><p class="mb-0">Sets or returns the text content of a node and its descendants</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">insertAdjacentElement()</p></td>
+            <td><p class="mb-0">Inserts a new HTML element at a position relative to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">insertAdjacentHTML()</p></td>
+            <td><p class="mb-0">Inserts an HTML formatted text at a position relative to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">insertAdjacentText()</p></td>
+            <td><p class="mb-0">Inserts text into a position relative to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">insertBefore()</p></td>
+            <td><p class="mb-0">Inserts a new child node before an existing child node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isContentEditable</p></td>
+            <td><p class="mb-0">Returns true if an element's content is editable</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isDefaultNamespace()</p></td>
+            <td><p class="mb-0">Returns true if a given namespaceURI is the default</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isEqualNode()</p></td>
+            <td><p class="mb-0">Checks if two elements are equal</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isSameNode()</p></td>
+            <td><p class="mb-0">Checks if two elements are the same node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isSupported()</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">lang</p></td>
+            <td><p class="mb-0">Sets or returns the value of the lang attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">lastChild</p></td>
+            <td><p class="mb-0">Returns the last child node of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">lastElementChild</p></td>
+            <td><p class="mb-0">Returns the last child element of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">matches()</p></td>
+            <td><p class="mb-0">Returns true if an element is matched by a given CSS selector</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">namespaceURI</p></td>
+            <td><p class="mb-0">Returns the namespace URI of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">nextSibling</p></td>
+            <td><p class="mb-0">Returns the next node at the same node tree level</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">nextElementSibling</p></td>
+            <td><p class="mb-0">Returns the next element at the same node tree level</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">nodeName</p></td>
+            <td><p class="mb-0">Returns the name of a node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">nodeType</p></td>
+            <td><p class="mb-0">Returns the node type of a node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">nodeValue</p></td>
+            <td><p class="mb-0">Sets or returns the value of a node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">normalize()</p></td>
+            <td><p class="mb-0">Joins adjacent text nodes and removes empty text nodes in an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetHeight</p></td>
+            <td><p class="mb-0">Returns the height of an element, including padding, border and scrollbar</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetWidth</p></td>
+            <td><p class="mb-0">Returns the width of an element, including padding, border and scrollbar</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetLeft</p></td>
+            <td><p class="mb-0">Returns the horizontal offset position of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetParent</p></td>
+            <td><p class="mb-0">Returns the offset container of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetTop</p></td>
+            <td><p class="mb-0">Returns the vertical offset position of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outerHTML</p></td>
+            <td><p class="mb-0">Sets or returns the content of an element (including the start tag and the end tag)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outerText</p></td>
+            <td><p class="mb-0">Sets or returns the outer text content of a node and its descendants</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ownerDocument</p></td>
+            <td><p class="mb-0">Returns the root element (document object) for an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">parentNode</p></td>
+            <td><p class="mb-0">Returns the parent node of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">parentElement</p></td>
+            <td><p class="mb-0">Returns the parent element node of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">previousSibling</p></td>
+            <td><p class="mb-0">Returns the previous node at the same node tree level</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">previousElementSibling</p></td>
+            <td><p class="mb-0">Returns the previous element at the same node tree level</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">querySelector()</p></td>
+            <td><p class="mb-0">Returns the first child element that matches a CSS selector(s)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">querySelectorAll()</p></td>
+            <td><p class="mb-0">Returns all child elements that matches a CSS selector(s)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">remove()</p></td>
+            <td><p class="mb-0">Removes an element from the DOM</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">removeAttribute()</p></td>
+            <td><p class="mb-0">Removes an attribute from an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">removeAttributeNode()</p></td>
+            <td><p class="mb-0">Removes an attribute node, and returns the removed node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">removeChild()</p></td>
+            <td><p class="mb-0">Removes a child node from an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">removeEventListener()</p></td>
+            <td><p class="mb-0">Removes an event handler that has been attached with the addEventListener() method</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">replaceChild()</p></td>
+            <td><p class="mb-0">Replaces a child node in an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scrollHeight</p></td>
+            <td><p class="mb-0">Returns the entire height of an element, including padding</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scrollIntoView()</p></td>
+            <td><p class="mb-0">Scrolls the an element into the visible area of the browser window</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scrollLeft</p></td>
+            <td><p class="mb-0">Sets or returns the number of pixels an element's content is scrolled horizontally</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scrollTop</p></td>
+            <td><p class="mb-0">Sets or returns the number of pixels an element's content is scrolled vertically</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scrollWidth</p></td>
+            <td><p class="mb-0">Returns the entire width of an element, including padding</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">setAttribute()</p></td>
+            <td><p class="mb-0">Sets or changes an attribute's value</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">setAttributeNode()</p></td>
+            <td><p class="mb-0">Sets or changes an attribute node</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">style</p></td>
+            <td><p class="mb-0">Sets or returns the value of the style attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">tabIndex</p></td>
+            <td><p class="mb-0">Sets or returns the value of the tabindex attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">tagName</p></td>
+            <td><p class="mb-0">Returns the tag name of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textContent</p></td>
+            <td><p class="mb-0">Sets or returns the textual content of a node and its descendants</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">title</p></td>
+            <td><p class="mb-0">Sets or returns the value of the title attribute of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">toString()</p></td>
+            <td><p class="mb-0">Converts an element to a string</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="attr_props_anchor"><h2>HTML DOM: Attr Object - Properties</h2></a>
+    <p class="mb-2">
+        An Attr object represents an HTML attribute. HTML attributes always belong to an HTML element. 1
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isId</p></td>
+            <td><p class="mb-0">Deprecated</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">name</p></td>
+            <td><p class="mb-0">Returns an attribute's name</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">value</p></td>
+            <td><p class="mb-0">Sets or returns an attribute's value</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">specified</p></td>
+            <td><p class="mb-0">Returns true if the attribute is specified</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="namednodemap_methods_anchor"><h2>HTML DOM: NamedNodeMap - Methods</h2></a>
+    <p class="mb-2">
+        A NamedNodeMap is an array-like unordered collection of an element's attributes. It is a list of Attr objects.
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getNamedItem()</p></td>
+            <td><p class="mb-0">Returns an attribute node (by name) from a NamedNodeMap</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">item()</p></td>
+            <td><p class="mb-0">Returns an attribute node (by index) from a NamedNodeMap</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">length</p></td>
+            <td><p class="mb-0">Returns the number of attributes in a NamedNodeMap</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">removeNamedItem()</p></td>
+            <td><p class="mb-0">Removes an attribute (node)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">setNamedItem()</p></td>
+            <td><p class="mb-0">Sets an attribute (node) by name</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="html_collection_props_methods_anchor"><h2>HTML DOM: HTMLCollection - Properties and Methods</h2></a>
+    <p class="mb-2">
+        An HTMLCollection is an array-like collection (list) of HTML elements. It is not an array - it does not have
+        built-in methods like push, pop, or join.
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property/Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">length</p></td>
+            <td><p class="mb-0">Returns the number of elements in an HTMLCollection</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">item()</p></td>
+            <td><p class="mb-0">Returns the element at a specified index</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">namedItem()</p></td>
+            <td><p class="mb-0">Returns the element with a specified id</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="nodelist_props_methods_anchor"><h2>HTML DOM: NodeList - Properties and Methods</h2></a>
+    <p class="mb-2">
+        An NodeList is an array-like collection (list) of Node objects. It is not an array - it does not have
+        built-in methods like push, pop, or join.
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property/Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">entries()</p></td>
+            <td><p class="mb-0">Returns an Iterator with the key/value pairs from the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">forEach()</p></td>
+            <td><p class="mb-0">Executes a callback function for each node in the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">item()</p></td>
+            <td><p class="mb-0">Returns the node at a specified index</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">keys()</p></td>
+            <td><p class="mb-0">Returns an Iterator with the keys from the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">length</p></td>
+            <td><p class="mb-0">Returns the number of nodes in a NodeList</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">values()</p></td>
+            <td><p class="mb-0">Returns an Iterator with the values from the list</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="htmlcollection_nodelist_differences_anchor"><h2>HTMLCollection & NodeList: Similarities and Differences</h2>
+    </a>
+    <ul class="list-group">
+        <li class="list-group-item">
+            HTMLCollections are similar to NodeLists in that they are both array-like collections (lists) of nodes
+            (elements) from a document.
+        </li>
+        <li class="list-group-item">
+            HTMLCollection items can be accessed by their name, id, or index number. NodeList items can only be
+            accessed by their index number.
+        </li>
+        <li class="list-group-item">
+            An HTMLCollection is a collection of document elements while NodeList is a collection of document nodes
+            (element/attribute/text nodes).
+        </li>
+        <li class="list-group-item">
+            Also, HTMLCollection is always a <strong>live</strong> collection (meaning that it will change along with
+            any additions/subtractions). A NodeList is usually a <strong>static</strong> collection (it will be
+            unaffected by any additions/subtractions).
+        </li>
+    </ul>
+</div>
+
+<div class="form-control mb-2">
+    <a id="style_props_anchor"><h2>HTML DOM: Style Object - Properties</h2></a>
+    <p class="mb-2">
+        The <strong>style</strong> attribute is available to HTMLElements. It returns the inline style of an element in
+        the form of a live CSSStyleDeclaration object that contains a list of all style properties for that element with
+        values assigned only for the attributes that are defined in the element's inline style attribute. Inline styles
+        can be applied by assigning a string directly to the style property. Use style in this manner will completely
+        overwrite all inline styles on the element.
+        <br>
+        <a href="https://www.w3schools.com/jsref/dom_obj_style.asp">Reference guide for style object properties</a>
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">alignContent</p></td>
+            <td><p class="mb-0">Sets or returns the alignment between the lines inside a flexible container when the items do not use
+                all available space
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">alignItems</p></td>
+            <td><p class="mb-0">Sets or returns the alignment for items inside a flexible container</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">alignSelf</p></td>
+            <td><p class="mb-0">Sets or returns the alignment for selected items inside a flexible container</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animation</p></td>
+            <td><p class="mb-0">A shorthand property for all the animation properties below, except the animationPlayState property
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationDelay</p></td>
+            <td><p class="mb-0">Sets or returns when the animation will start</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationDirection</p></td>
+            <td><p class="mb-0">Sets or returns whether or not the animation should play in reverse on alternate cycles</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationDuration</p></td>
+            <td><p class="mb-0">Sets or returns how many seconds or milliseconds an animation takes to complete one cycle</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationFillMode</p></td>
+            <td><p class="mb-0">Sets or returns what values are applied by the animation outside the time it is executing</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationIterationCount</p></td>
+            <td><p class="mb-0">Sets or returns the number of times an animation should be played</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationName</p></td>
+            <td><p class="mb-0">Sets or returns a name for the @keyframes animation</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationTimingFunction</p></td>
+            <td><p class="mb-0">Sets or returns the speed curve of the animation</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationPlayState</p></td>
+            <td><p class="mb-0">Sets or returns whether the animation is running or paused</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">background</p></td>
+            <td><p class="mb-0">Sets or returns all the background properties in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundAttachment</p></td>
+            <td><p class="mb-0">Sets or returns whether a background-image is fixed or scrolls with the page</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundColor</p></td>
+            <td><p class="mb-0">Sets or returns the background-color of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundImage</p></td>
+            <td><p class="mb-0">Sets or returns the background-image for an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundPosition</p></td>
+            <td><p class="mb-0">Sets or returns the starting position of a background-image</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundRepeat</p></td>
+            <td><p class="mb-0">Sets or returns how to repeat (tile) a background-image</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundClip</p></td>
+            <td><p class="mb-0">Sets or returns the painting area of the background</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundOrigin</p></td>
+            <td><p class="mb-0">Sets or returns the positioning area of the background images</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backgroundSize</p></td>
+            <td><p class="mb-0">Sets or returns the size of the background image</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">backfaceVisibility</p></td>
+            <td><p class="mb-0">Sets or returns whether or not an element should be visible when not facing the screen</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">border</p></td>
+            <td><p class="mb-0">Sets or returns borderWidth, borderStyle, and borderColor in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderBottom</p></td>
+            <td><p class="mb-0">Sets or returns all the borderBottom properties in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderBottomColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the bottom border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderBottomLeftRadius</p></td>
+            <td><p class="mb-0">Sets or returns the shape of the border of the bottom-left corner</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderBottomRightRadius</p></td>
+            <td><p class="mb-0">Sets or returns the shape of the border of the bottom-right corner</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderBottomStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the bottom border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderBottomWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the bottom border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderCollapse</p></td>
+            <td><p class="mb-0">Sets or returns whether the table border should be collapsed into a single border, or not</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of an element's border (can have up to four values)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderImage</p></td>
+            <td><p class="mb-0">A shorthand property for setting or returning all the borderImage properties</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderImageOutset</p></td>
+            <td><p class="mb-0">Sets or returns the amount by which the border image area extends beyond the border box</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderImageRepeat</p></td>
+            <td><p class="mb-0">Sets or returns whether the image-border should be repeated, rounded or stretched</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderImageSlice</p></td>
+            <td><p class="mb-0">Sets or returns the inward offsets of the image-border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderImageSource</p></td>
+            <td><p class="mb-0">Sets or returns the image to be used as a border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderImageWidth</p></td>
+            <td><p class="mb-0">Sets or returns the widths of the image-border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderLeft</p></td>
+            <td><p class="mb-0">Sets or returns all the borderLeft properties in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderLeftColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the left border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderLeftStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the left border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderLeftWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the left border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderRadius</p></td>
+            <td><p class="mb-0">A shorthand property for setting or returning all the four borderRadius properties</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderRight</p></td>
+            <td><p class="mb-0">Sets or returns all the borderRight properties in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderRightColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the right border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderRightStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the right border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderRightWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the right border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderSpacing</p></td>
+            <td><p class="mb-0">Sets or returns the space between cells in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of an element's border (can have up to four values)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderTop</p></td>
+            <td><p class="mb-0">Sets or returns all the borderTop properties in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderTopColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the top border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderTopLeftRadius</p></td>
+            <td><p class="mb-0">Sets or returns the shape of the border of the top-left corner</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderTopRightRadius</p></td>
+            <td><p class="mb-0">Sets or returns the shape of the border of the top-right corner</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderTopStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the top border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderTopWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the top border</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">borderWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of an element's border (can have up to four values)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">bottom</p></td>
+            <td><p class="mb-0">Sets or returns the bottom position of a positioned element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">boxDecorationBreak</p></td>
+            <td><p class="mb-0">Sets or returns the behaviour of the background and border of an element at page-break, or, for in-line
+                elements, at line-break.
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">boxShadow</p></td>
+            <td><p class="mb-0">Attaches one or more drop-shadows to the box</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">boxSizing</p></td>
+            <td><p class="mb-0">Allows you to define certain elements to fit an area in a certain way</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">captionSide</p></td>
+            <td><p class="mb-0">Sets or returns the position of the table caption</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">caretColor</p></td>
+            <td><p class="mb-0">Sets or returns the caret/cursor color of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clear</p></td>
+            <td><p class="mb-0">Sets or returns the position of the element relative to floating objects</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clip</p></td>
+            <td><p class="mb-0">Sets or returns which part of a positioned element is visible</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">color</p></td>
+            <td><p class="mb-0">Sets or returns the color of the text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnCount</p></td>
+            <td><p class="mb-0">Sets or returns the number of columns an element should be divided into</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnFill</p></td>
+            <td><p class="mb-0">Sets or returns how to fill columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnGap</p></td>
+            <td><p class="mb-0">Sets or returns the gap between the columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnRule</p></td>
+            <td><p class="mb-0">A shorthand property for setting or returning all the columnRule properties</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnRuleColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the rule between columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnRuleStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the rule between columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnRuleWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the rule between columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columns</p></td>
+            <td><p class="mb-0">A shorthand property for setting or returning columnWidth and columnCount</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnSpan</p></td>
+            <td><p class="mb-0">Sets or returns how many columns an element should span across</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">columnWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">content</p></td>
+            <td><p class="mb-0">Used with the :before and :after pseudo-elements, to insert generated content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">counterIncrement</p></td>
+            <td><p class="mb-0">Increments one or more counters</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">counterReset</p></td>
+            <td><p class="mb-0">Creates or resets one or more counters</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">cursor</p></td>
+            <td><p class="mb-0">Sets or returns the type of cursor to display for the mouse pointer</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">direction</p></td>
+            <td><p class="mb-0">Sets or returns the text direction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">display</p></td>
+            <td><p class="mb-0">Sets or returns an element's display type</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">emptyCells</p></td>
+            <td><p class="mb-0">Sets or returns whether to show the border and background of empty cells, or not</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">filter</p></td>
+            <td><p class="mb-0">Sets or returns image filters (visual effects, like blur and saturation)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flex</p></td>
+            <td><p class="mb-0">Sets or returns the length of the item, relative to the rest</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flexBasis</p></td>
+            <td><p class="mb-0">Sets or returns the initial length of a flexible item</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flexDirection</p></td>
+            <td><p class="mb-0">Sets or returns the direction of the flexible items</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flexFlow</p></td>
+            <td><p class="mb-0">A shorthand property for the flexDirection and the flexWrap properties</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flexGrow</p></td>
+            <td><p class="mb-0">Sets or returns how much the item will grow relative to the rest</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flexShrink</p></td>
+            <td><p class="mb-0">Sets or returns how the item will shrink relative to the rest</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">flexWrap</p></td>
+            <td><p class="mb-0">Sets or returns whether the flexible items should wrap or not</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">cssFloat</p></td>
+            <td><p class="mb-0">Sets or returns the horizontal alignment of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">font</p></td>
+            <td><p class="mb-0">Sets or returns fontStyle, fontVariant, fontWeight, fontSize, lineHeight, and fontFamily in one
+                declaration
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontFamily</p></td>
+            <td><p class="mb-0">Sets or returns the font family for text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontSize</p></td>
+            <td><p class="mb-0">Sets or returns the font size of the text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontStyle</p></td>
+            <td><p class="mb-0">Sets or returns whether the style of the font is normal, italic or oblique</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontVariant</p></td>
+            <td><p class="mb-0">Sets or returns whether the font should be displayed in small capital letters</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontWeight</p></td>
+            <td><p class="mb-0">Sets or returns the boldness of the font</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontSizeAdjust</p></td>
+            <td><p class="mb-0">Preserves the readability of text when font fallback occurs</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fontStretch</p></td>
+            <td><p class="mb-0">Selects a normal, condensed, or expanded face from a font family</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hangingPunctuation</p></td>
+            <td><p class="mb-0">Specifies whether a punctuation character may be placed outside the line box</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">height</p></td>
+            <td><p class="mb-0">Sets or returns the height of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hyphens</p></td>
+            <td><p class="mb-0">Sets how to split words to improve the layout of paragraphs</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">icon</p></td>
+            <td><p class="mb-0">Provides the author the ability to style an element with an iconic equivalent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">imageOrientation</p></td>
+            <td><p class="mb-0">Specifies a rotation in the right or clockwise direction that a user agent applies to an image</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isolation</p></td>
+            <td><p class="mb-0">Defines whether an element must create a new stacking content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">justifyContent</p></td>
+            <td><p class="mb-0">Sets or returns the alignment between the items inside a flexible container when the items do not use
+                all available space.
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">left</p></td>
+            <td><p class="mb-0">Sets or returns the left position of a positioned element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">letterSpacing</p></td>
+            <td><p class="mb-0">Sets or returns the space between characters in a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">lineHeight</p></td>
+            <td><p class="mb-0">Sets or returns the distance between lines in a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">listStyle</p></td>
+            <td><p class="mb-0">Sets or returns listStyleImage, listStylePosition, and listStyleType in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">listStyleImage</p></td>
+            <td><p class="mb-0">Sets or returns an image as the list-item marker</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">listStylePosition</p></td>
+            <td><p class="mb-0">Sets or returns the position of the list-item marker</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">listStyleType</p></td>
+            <td><p class="mb-0">Sets or returns the list-item marker type</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">margin</p></td>
+            <td><p class="mb-0">Sets or returns the margins of an element (can have up to four values)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">marginBottom</p></td>
+            <td><p class="mb-0">Sets or returns the bottom margin of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">marginLeft</p></td>
+            <td><p class="mb-0">Sets or returns the left margin of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">marginRight</p></td>
+            <td><p class="mb-0">Sets or returns the right margin of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">marginTop</p></td>
+            <td><p class="mb-0">Sets or returns the top margin of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">maxHeight</p></td>
+            <td><p class="mb-0">Sets or returns the maximum height of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">maxWidth</p></td>
+            <td><p class="mb-0">Sets or returns the maximum width of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">minHeight</p></td>
+            <td><p class="mb-0">Sets or returns the minimum height of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">minWidth</p></td>
+            <td><p class="mb-0">Sets or returns the minimum width of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">navDown</p></td>
+            <td><p class="mb-0">Sets or returns where to navigate when using the arrow-down navigation key</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">navIndex</p></td>
+            <td><p class="mb-0">Sets or returns the tabbing order for an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">navLeft</p></td>
+            <td><p class="mb-0">Sets or returns where to navigate when using the arrow-left navigation key</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">navRight</p></td>
+            <td><p class="mb-0">Sets or returns where to navigate when using the arrow-right navigation key</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">navUp</p></td>
+            <td><p class="mb-0">Sets or returns where to navigate when using the arrow-up navigation key</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">objectFit</p></td>
+            <td><p class="mb-0">Specifies how the contents of a replaced element should be fitted to the box established by its used
+                height and width
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">objectPosition</p></td>
+            <td><p class="mb-0">Specifies the alignment of the replaced element inside its box</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">opacity</p></td>
+            <td><p class="mb-0">Sets or returns the opacity level for an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">order</p></td>
+            <td><p class="mb-0">Sets or returns the order of the flexible item, relative to the rest</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">orphans</p></td>
+            <td><p class="mb-0">Sets or returns the minimum number of lines for an element that must be left at the bottom of a page
+                when a page break occurs inside an element
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outline</p></td>
+            <td><p class="mb-0">Sets or returns all the outline properties in one declaration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outlineColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the outline around a element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outlineOffset</p></td>
+            <td><p class="mb-0">Offsets an outline, and draws it beyond the border edge</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outlineStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the outline around an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">outlineWidth</p></td>
+            <td><p class="mb-0">Sets or returns the width of the outline around an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">overflow</p></td>
+            <td><p class="mb-0">Sets or returns what to do with content that renders outside the element box</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">overflowX</p></td>
+            <td><p class="mb-0">Specifies what to do with the left/right edges of the content, if it overflows the element's content
+                area
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">overflowY</p></td>
+            <td><p class="mb-0">Specifies what to do with the top/bottom edges of the content, if it overflows the element's content
+                area
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">padding</p></td>
+            <td><p class="mb-0">Sets or returns the padding of an element (can have up to four values)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">paddingBottom</p></td>
+            <td><p class="mb-0">Sets or returns the bottom padding of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">paddingLeft</p></td>
+            <td><p class="mb-0">Sets or returns the left padding of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">paddingRight</p></td>
+            <td><p class="mb-0">Sets or returns the right padding of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">paddingTop</p></td>
+            <td><p class="mb-0">Sets or returns the top padding of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pageBreakAfter</p></td>
+            <td><p class="mb-0">Sets or returns the page-break behavior after an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pageBreakBefore</p></td>
+            <td><p class="mb-0">Sets or returns the page-break behavior before an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pageBreakInside</p></td>
+            <td><p class="mb-0">Sets or returns the page-break behavior inside an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">perspective</p></td>
+            <td><p class="mb-0">Sets or returns the perspective on how 3D elements are viewed</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">perspectiveOrigin</p></td>
+            <td><p class="mb-0">Sets or returns the bottom position of 3D elements</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">position</p></td>
+            <td><p class="mb-0">Sets or returns the type of positioning method used for an element (static, relative, absolute or
+                fixed)
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">quotes</p></td>
+            <td><p class="mb-0">Sets or returns the type of quotation marks for embedded quotations</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">resize</p></td>
+            <td><p class="mb-0">Sets or returns whether or not an element is resizable by the user</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">right</p></td>
+            <td><p class="mb-0">Sets or returns the right position of a positioned element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scrollBehavior</p></td>
+            <td><p class="mb-0">Specifies whether to smoothly animate the scroll position, instead of a straight jump, when the user
+                clicks on a link within a scrollable boxt
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">tableLayout</p></td>
+            <td><p class="mb-0">Sets or returns the way to lay out table cells, rows, and columns</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">tabSize</p></td>
+            <td><p class="mb-0">Sets or returns the length of the tab-character</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textAlign</p></td>
+            <td><p class="mb-0">Sets or returns the horizontal alignment of text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textAlignLast</p></td>
+            <td><p class="mb-0">Sets or returns how the last line of a block or a line right before a forced line break is aligned when
+                text-align is "justify"
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textDecoration</p></td>
+            <td><p class="mb-0">Sets or returns the decoration of a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textDecorationColor</p></td>
+            <td><p class="mb-0">Sets or returns the color of the text-decoration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textDecorationLine</p></td>
+            <td><p class="mb-0">Sets or returns the type of line in a text-decoration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textDecorationStyle</p></td>
+            <td><p class="mb-0">Sets or returns the style of the line in a text decoration</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textIndent</p></td>
+            <td><p class="mb-0">Sets or returns the indentation of the first line of text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textJustify</p></td>
+            <td><p class="mb-0">Sets or returns the justification method used when text-align is "justify"</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textOverflow</p></td>
+            <td><p class="mb-0">Sets or returns what should happen when text overflows the containing element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textShadow</p></td>
+            <td><p class="mb-0">Sets or returns the shadow effect of a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">textTransform</p></td>
+            <td><p class="mb-0">Sets or returns the capitalization of a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">top</p></td>
+            <td><p class="mb-0">Sets or returns the top position of a positioned element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transform</p></td>
+            <td><p class="mb-0">Applies a 2D or 3D transformation to an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transformOrigin</p></td>
+            <td><p class="mb-0">Sets or returns the position of transformed elements</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transformStyle</p></td>
+            <td><p class="mb-0">Sets or returns how nested elements are rendered in 3D space</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transition</p></td>
+            <td><p class="mb-0">A shorthand property for setting or returning the four transition properties</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transitionProperty</p></td>
+            <td><p class="mb-0">Sets or returns the CSS property that the transition effect is for</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transitionDuration</p></td>
+            <td><p class="mb-0">Sets or returns how many seconds or milliseconds a transition effect takes to complete</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transitionTimingFunction</p></td>
+            <td><p class="mb-0">Sets or returns the speed curve of the transition effect</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transitionDelay</p></td>
+            <td><p class="mb-0">Sets or returns when the transition effect will start</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">unicodeBidi</p></td>
+            <td><p class="mb-0">Sets or returns whether the text should be overridden to support multiple languages in the same
+                document
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">userSelect</p></td>
+            <td><p class="mb-0">Sets or returns whether the text of an element can be selected or not</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">verticalAlign</p></td>
+            <td><p class="mb-0">Sets or returns the vertical alignment of the content in an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">visibility</p></td>
+            <td><p class="mb-0">Sets or returns whether an element should be visible</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">whiteSpace</p></td>
+            <td><p class="mb-0">Sets or returns how to handle tabs, line breaks and whitespace in a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">width</p></td>
+            <td><p class="mb-0">Sets or returns the width of an element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">wordBreak</p></td>
+            <td><p class="mb-0">Sets or returns line breaking rules for non-CJK scripts</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">wordSpacing</p></td>
+            <td><p class="mb-0">Sets or returns the spacing between words in a text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">wordWrap</p></td>
+            <td><p class="mb-0">Allows long, unbreakable words to be broken and wrap to the next line</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">widows</p></td>
+            <td><p class="mb-0">Sets or returns the minimum number of lines for an element that must be visible at the top of a page
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">zIndex</p></td>
+            <td><p class="mb-0">Sets or returns the stack order of a positioned element</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="domtokenlist_props_methods_anchor"><h2>HTML DOM: DOMTokenList - Properties and Methods</h2></a>
+    <p class="mb-2">
+        A DOMTokenList is a set of tokens delimited by space characters. The <em>classList</em> property of an
+        HTMLELement represents a DOMTokenList. Not an array - cannot use push, pop, or join methods.
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property/Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">add()</p></td>
+            <td><p class="mb-0">Adds one or more tokens to the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">contains()</p></td>
+            <td><p class="mb-0">Returns true if the list contains a class</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">entries()</p></td>
+            <td><p class="mb-0">Returns an Iterator with key/value pairs from the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">forEach()</p></td>
+            <td><p class="mb-0">Executes a callback function for each token in the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">item()</p></td>
+            <td><p class="mb-0">Returns the token at a specified index</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">keys()</p></td>
+            <td><p class="mb-0">Returns an Iterator with the keys in the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">length</p></td>
+            <td><p class="mb-0">Returns the number of tokens in the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">remove()</p></td>
+            <td><p class="mb-0">Removes one or more tokens from the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">replace()</p></td>
+            <td><p class="mb-0">Replaces a token in the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">supports()</p></td>
+            <td><p class="mb-0">Returns true if a token is one of an attribute's supported tokens</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">toggle()</p></td>
+            <td><p class="mb-0">Toggles between tokens in the list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">value</p></td>
+            <td><p class="mb-0">Returns the token list as a string</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">values()</p></td>
+            <td><p class="mb-0">Returns an Iterator with the values in the list</p></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Document Object Model - Reference
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#document_props_methods_anchor">HTML DOM: Document - Properties and Methods</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#obj_props_methods_anchor">HTML DOM: Element Object - Properties and Methods</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#attr_props_anchor">HTML DOM: Attr Object - Properties</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#namednodemap_methods_anchor">HTML DOM: NamedNodeMap - Methods</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#html_collection_props_methods_anchor">HTML DOM: HTMLCollection - Properties and
+        Methods</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#nodelist_props_methods_anchor">HTML DOM: NodeList - Properties and Methods</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#htmlcollection_nodelist_differences_anchor">HTMLCollection & NodeList: Similarities
+        and Differences</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#style_props_anchor">HTML DOM: Style Object - Properties</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#domtokenlist_props_methods_anchor">HTML DOM: DOMTokenList - Properties and
+        Methods</a>
+</li>
+
+{% endblock %}

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>DOM Basics</title>
+<link rel="stylesheet" href="{% static 'css/javascript_dom.css' %}">
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="dom_basics_anchor"><h1>Document Object Model (DOM) <span class="door">-</span> Basics</h1></a>
+<div class="form-control mb-2">
+    <a id="element_retrieval_anchor"><h2>Element Retrieval Methods</h2></a>
+    <p class="mb-2">
+        Query Selectors: <br>
+        querySelector, querySelectorAll, getElementById, getElementsByClassName, getElementsByName,
+        getElementsByTagName, getElementsByTagNameNS
+    </p>
+    <div class="example_section_div">
+        <h5>Test Area</h5>
+        <pre class="mb-0">
+&lt;div&gt;123&lt;/div&gt;
+&lt;div id="abc"&gt;&lt;/div&gt;
+&lt;div id="def"&gt;&lt;/div&gt;
+&lt;div name="ghi"&gt;&lt;/div&gt;
+&lt;div name="ghi"&gt;&lt;/div&gt;
+&lt;h1 class="jkl"&gt;HeaderA&lt;/h1&gt;
+&lt;h1 class="jkl"&gt;HeaderB&lt;/h1&gt;
+&lt;p&gt;loremipsum&lt;/p&gt;
+&lt;a href="https://www.youtube.com/"&gt;YouTube&lt;/a&gt;
+&lt;ul&gt;
+    &lt;li&gt;
+        &lt;a href="https://www.reddit.com/"&gt;Reddit&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="https://imgur.com/"&gt;Imgur&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        Streaming
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a href="https://www.netflix.com/"&gt;Netflix&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href="https://www.crunchyroll.com/"&gt;Crunchyroll&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;body&gt;
+        &lt;p&gt;One&lt;/p&gt;
+        &lt;p&gt;Two&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="queryselector_anchor"><h3>QuerySelector</h3></a>
+        <p class="mb-1">Selects the first element that matches the search criteria.</p>
+        <pre class="mb-0">
+const e1 = document.<mark>querySelector</mark>('div');                   // Selects the very first 'div' element
+const e2 = document.<mark>querySelector</mark>('#abc');                  // Selects the element with 'id' attribute value of "abc"
+const e3 = document.<mark>querySelector</mark>('.jkl');                  // Selects the first element with 'class' attribute value of "jkl"
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="queryselectorall_anchor"><h3>QuerySelectorAll</h3></a>
+        <p class="mb-1">Selects all elements that match the search criteria.</p>
+        <pre class="mb-0 p-1">
+const e4 = document.<mark>querySelectorAll</mark>('div');                // Selects all div elements
+const e5 = document.<mark>querySelectorAll</mark>('li a');               // Selects all 'a' elements inside of 'li' elements
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="getelementbyid_anchor"><h3>GetElementById</h3></a>
+        <p class="mb-1">Selects the element whose id attribute matches the search criteria.</p>
+        <pre class="mb-0">
+const e6 = document.<mark>getElementById</mark>('abc');
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="getelementbyclassname_anchor"><h3>GetElementsByClassName</h3></a>
+        <p class="mb-1">Selects all elements whose class attribute matches the search criteria</p>
+        <pre class="mb-0">
+const e7 = document.<mark>getElementsByClassName</mark>('jkl');
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="getelementsbyname_anchor"><h3>GetElementsByName</h3></a>
+        <p class="mb-1">Selects all elements whose name attribute matches the search criteria.</p>
+        <pre class="mb-0">
+const e8 = document.<mark>getElementsByName</mark>('ghi');
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="getelementsbytagname_anchor"><h3>GetElementsByTagName</h3></a>
+        <p class="mb-1">Selects all elements whose tag name (element name) matches the search criteria.</p>
+        <pre class="mb-0">
+const e9 = document.<mark>getElementsByTagName</mark>('a');              // Retrieves all 'a' elements
+const e10 = document.<mark>getElementsByTagName</mark>('h1');            // Retrieves all 'h1' elements
+const e11 = document.<mark>getElementsByTagName</mark>('*');             // Retrieves all elements
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="getelementsbytagnamens_anchor"><h3>GetElementsByTagNameNS(namespace, tagname)</h3></a>
+        <p class="mb-1">
+            Selects all elements whose namespace and tag name match the search criteria. The namespace is the value
+            attached to the xmlns attribute.
+        </p>
+        <pre class="mb-0">
+const e12 = document.<mark>getElementsByTagNameNS</mark>('http://www.w3.org/1999/xhtml', 'p');
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="traversing_accessing_retrieved_elements_anchor"><h2>Traversing/Accessing Retrieved Elements</h2></a>
+    <pre class="mb-0">
+const all_a_elements = document.getElementsByTagName('a');
+for(let i = 0; i < all_a_elements.length; i++){
+    let current_a = all_a_elements[i];
+    //let current_a = all_a_elements.item(i);
+
+    // Element Methods
+    a_href_attribute = current_a.getAttribute('href');
+    current_a.hasAttribute('class');
+    current_a.removeAttribute('class');
+    current_a.setAttribute('href', 'https://www.disneyplus.com/');
+
+    // Attribute Methods
+    let_current_a.name
+    let_current_a.specified
+}
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="events_anchor"><h2>Events</h2></a>
+    <p class="mb-2">
+        Types of events that can be listened to using the addEventListener() method or using the oneventname property
+        of this interface. Example:
+        <br>
+        let headerOne = document.querySelector('h1');
+        <br>
+        headerOne.addEventListener(&lt;eventName&gt;, exampleFunction);
+    </p>
+
+    <div class="form-control mb-2">
+        <a id="keyboard_events_anchor"><h3>Keyboard Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> keydown</th>
+                <td> Fired when a key is pressed</td>
+            </tr>
+            <tr>
+                <th> keypress</th>
+                <td> Fired when a key that produces a character value is pressed</td>
+            </tr>
+            <tr>
+                <th> keyup</th>
+                <td> Fired when a key is released</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="mouse_events_anchor"><h3>Mouse Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> click</th>
+                <td> Fired when the left mouse button is pressed and released on the element</td>
+            </tr>
+            <tr>
+                <th> dblclick</th>
+                <td> Fired when the left mouse button double-clicks on the element</td>
+            </tr>
+            <tr>
+                <th> auxclick</th>
+                <td> Fired when any mouse button other than the left button has been pressed and released on the
+                    element
+                </td>
+            </tr>
+            <tr>
+                <th> mousedown</th>
+                <td> Fired when the left mouse button is pressed on the element</td>
+            </tr>
+            <tr>
+                <th> mouseenter</th>
+                <td> Fired when the pointer is moved over the element</td>
+            </tr>
+            <tr>
+                <th> mouseleave</th>
+                <td> Fired when the pointer is moved out of the element</td>
+            </tr>
+            <tr>
+                <th> mousemove</th>
+                <td> Fired when the pointer is moved while over an element</td>
+            </tr>
+            <tr>
+                <th> mouseup</th>
+                <td> Fired when the left mouse button is released over an element</td>
+            </tr>
+            <tr>
+                <th> mousewheel</th>
+                <td> Fired when the mouse wheel or similar device is operated (scrolled)</td>
+            </tr>
+            <tr>
+                <th> contextmenu</th>
+                <td> Fired when the user attempts to open a context menu</td>
+            </tr>
+            <tr>
+                <th> DOMActivate</th>
+                <td> Occurs when the element is activated, for instance, through a mouse click or keypress</td>
+            </tr>
+            <tr>
+                <th> DOMMouseScroll</th>
+                <td> Occurs when a mouse wheel or similar device is operated and the accumulated scroll amount is over 1
+                    line or 1 page since the last event
+                </td>
+            </tr>
+            <tr>
+                <th> MozMousePixelScroll</th>
+                <td> Fired when the mouse wheel or similar device is operated</td>
+            </tr>
+            <tr>
+                <th> webkitmouseforcechanged</th>
+                <td> Fired each time the amount of pressure changes on the trackpad touchscreen</td>
+            </tr>
+            <tr>
+                <th> webkitmouseforcedown</th>
+                <td> Fired after the mousedown event as soon as sufficient pressure has been applied (force click)</td>
+            </tr>
+            <tr>
+                <th> webkitmouseforcewillbegin</th>
+                <td> Fired before the mousedown event</td>
+            </tr>
+            <tr>
+                <th> webkitmouseforceup</th>
+                <td> Fired after the webkitmouseforcedown event as soon as the pressure has been reduced enough to end
+                    the force click
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="pointer_events_anchor"><h3>Pointer Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> getpointercapture</th>
+                <td> Fired when an element captures a pointer using setPointerCapture()</td>
+            </tr>
+            <tr>
+                <th> lostpointercapture</th>
+                <td> Fired when a captured pointer event is released</td>
+            </tr>
+            <tr>
+                <th> pointercancel</th>
+                <td> Fired when a pointer event is canceled</td>
+            </tr>
+            <tr>
+                <th> pointerdown</th>
+                <td> Fired when a pointer becomes active</td>
+            </tr>
+            <tr>
+                <th> pointercenter</th>
+                <td> Fired when a pointer is moved into the hit test boundaries of an element or its descendants</td>
+            </tr>
+            <tr>
+                <th> pointerleave</th>
+                <td> Fired when a pointer is moved out of the hit test boundaries of an element</td>
+            </tr>
+            <tr>
+                <th> pointermove</th>
+                <td> Fired when a pointer changes coordinates</td>
+            </tr>
+            <tr>
+                <th> pointerout</th>
+                <td> Fired when a pointer is moved out of the hit test boundaries</td>
+            </tr>
+            <tr>
+                <th> pointerover</th>
+                <td> Fired when a pointer is moved into an element's hit test boundaries</td>
+            </tr>
+            <tr>
+                <th> pointerrawupdate</th>
+                <td> Fired when a pointer changes any properties that don't fire pointerdown or pointerup events</td>
+            </tr>
+            <tr>
+                <th> pointerup</th>
+                <td> Fired when a pointer is no longer active</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="pointer_lock_events_anchor"><h3>Pointer Lock Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> pointerlockchange</th>
+                <td> Fired when the pointer is locked/unlocked</td>
+            </tr>
+            <tr>
+                <th> pointerlockerror</th>
+                <td> Fired when locking the pointer failed</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="clipboard_events_anchor"><h3>Clipboard Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> copy</th>
+                <td> Fired when the user initiates a copy action through the browser's UI</td>
+            </tr>
+            <tr>
+                <th> cut</th>
+                <td> Fired when the user initiates a cut action through the browser's UI</td>
+            </tr>
+            <tr>
+                <th> paste</th>
+                <td> Fired when the user initiates a paste action through the browser's UI</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="scroll_events_anchor"><h3>Scroll Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> scroll</th>
+                <td> Fired when the document view or an element has been scrolled</td>
+            </tr>
+            <tr>
+                <th> scrollend</th>
+                <td> Fired when the document view or an element has stopped scrolling</td>
+            </tr>
+            <tr>
+                <th> wheel</th>
+                <td> Fired when the user rotates a wheel button on a pointing device (typically a mouse)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="fullscreen_events_anchor"><h3>Fullscreen Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> fullscreenchange</th>
+                <td> Fired when the Document transition into or out of fullscreen mode</td>
+            </tr>
+            <tr>
+                <th> fullscreenerror</th>
+                <td> Fired if an error occurs while attempting to switch into/out of fullscreen mode</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="animation_events_anchor"><h3>Animation Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> animationcancel</th>
+                <td> Fired when an animation unexpectedly aborts</td>
+            </tr>
+            <tr>
+                <th> animationend</th>
+                <td> Fired when an animation has completed normally</td>
+            </tr>
+            <tr>
+                <th> animationiteration</th>
+                <td> Fired when an animation iteration has completed</td>
+            </tr>
+            <tr>
+                <th> animationstart</th>
+                <td> Fired when an animation starts</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="focus_events_anchor"><h3>Focus Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> blur</th>
+                <td> Fired when an element has lost focus</td>
+            </tr>
+            <tr>
+                <th> focus</th>
+                <td> Fired when an element has gained focus</td>
+            </tr>
+            <tr>
+                <th> focusin</th>
+                <td> Fired when an element has gained focus, after focus</td>
+            </tr>
+            <tr>
+                <th> focusout</th>
+                <td> Fired when an element has lost after, after blur</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="load_unload_events_anchor"><h3>Load & Unload Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> DOMContentLoaded</th>
+                <td> Fired when the document has been completely loaded and parsed without waiting for stylesheets,
+                    images, and subframes to finish loading
+                </td>
+            </tr>
+            <tr>
+                <th> readystatechange</th>
+                <td> Fired when the readyState attribute of a document has changed</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="selection_events_anchor"><h3>Selection Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> selectionchange</th>
+                <td> Fired when the current text selection on a document is changed</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="composition_events_anchor"><h3>Composition Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> compositionend</th>
+                <td> Fired when a text composition system such as an input method editor completes/cancels the current
+                    session
+                </td>
+            </tr>
+            <tr>
+                <th> compositionstart</th>
+                <td> Fired when a text composition system such as an input method editor starts a new session</td>
+            </tr>
+            <tr>
+                <th> compositionupdated</th>
+                <td> Fired when a new character is received in the context of a text composition session</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="touch_events_anchor"><h3>Touch Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th> gesturechange</th>
+                <td> Fired when digits move during a touch gesture</td>
+            </tr>
+            <tr>
+                <th> gestureend</th>
+                <td> Fired when there are no longer multiple fingers contacting the touch surface, ending the gesture
+                </td>
+            </tr>
+            <tr>
+                <th> gesturestart</th>
+                <td> Fired when multiple fingers contact the touch surface, starting a new gesture</td>
+            </tr>
+            <tr>
+                <th> touchcancel</th>
+                <td> Fired when one or more touch points have been disrupted in an implementation-specific manner</td>
+            </tr>
+            <tr>
+                <th> touchend</th>
+                <td> Fired when one or more touch points are removed from the touch surface</td>
+            </tr>
+            <tr>
+                <th> touchmove</th>
+                <td> Fired when one or more touch points are moved along the touch surface</td>
+            </tr>
+            <tr>
+                <th> touchstart</th>
+                <td> Fired when one or more touch points are placed on the touch surface</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="transition_events_anchor"><h3>Transition Events</h3></a>
+        <table class="table table-bordered mb-2">
+            <tr>
+                <th>transitioncancel</th>
+                <td>An Event fired when a CSS transition has been cancelled</td>
+            </tr>
+            <tr>
+                <th>transitionend</th>
+                <td>An Event fired when a CSS transition has finished playing</td>
+            </tr>
+            <tr>
+                <th>transitionrun</th>
+                <td>An Event fired when a CSS transition is created</td>
+            </tr>
+            <tr>
+                <th>transitionstart</th>
+                <td>An Event fired when a CSS transition has started transitioning</td>
+            </tr>
+            <tr>
+                <th>prerenderingchange</th>
+                <td>Fired on a prerendered document when it is activated (i.e. user views the page)</td>
+            </tr>
+            <tr>
+                <th>securitypolicyviolation</th>
+                <td>Fired when a content security policy is violated</td>
+            </tr>
+            <tr>
+                <th>visibilitychange</th>
+                <td>Fired when the content of a tab has been visible or has been hidden</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="misc_events_anchor"><h3>Miscellaneous Events</h3></a>
+        <table class="table table-bordered mb-1">
+            <tr>
+                <th>afterscriptexecute</th>
+                <td>Fired when a static script element finishes executing</td>
+            </tr>
+            <tr>
+                <th>beforescriptexecute</th>
+                <td>Fired when a static script is about to start executing</td>
+            </tr>
+            <tr>
+                <th>beforematch</th>
+                <td>Fired on an element that is in the hidden until found state</td>
+            </tr>
+            <tr>
+                <th>contentvisibilityautostatechange</th>
+                <td>
+                    Fires on any element with 'content-visibility: auto' set on it when it starts/stops being relevant
+                    to the user and skipping its contents
+                </td>
+            </tr>
+            <tr>
+                <th>prerenderingchange</th>
+                <td>Fired on a prerendered document when it is activated (i.e. user views the page)</td>
+            </tr>
+            <tr>
+                <th>securitypolicyviolation</th>
+                <td>Fired when a content security policy is violated</td>
+            </tr>
+            <tr>
+                <th>visibilitychange</th>
+                <td>Fired when the content of a tab has been visible or has been hidden</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="addeventlistener_method_anchor"><h2>addEventListener() method</h2></a>
+    <p class="mb-1">
+        The addEventListener() method of the EventTarget interface sets up a function that will be called
+        whenever the
+        specified event is delivered to the target.
+    </p>
+    <h5>Syntax:</h5>
+    <pre>
+let <em>elementName</em> = document.querySelector('<em>cssSelectors</em>');
+<em>elementName</em>.<mark>addEventListener</mark>('<em>eventType</em>', <em>exampleFunction/listener</em>);
+<em>elementName</em>.<mark>addEventListener</mark>('<em>eventType</em>', <em>exampleFunction/listener</em>, <em>options</em>);
+<em>elementName</em>.<mark>addEventListener</mark>('<em>eventType</em>', <em>exampleFunction/listener</em>, <em>useCapture</em>);
+</pre>
+
+    <h5>Example usages:</h5>
+    <pre class="mb-0">
+let first_header_one = document.querySelector('h1');
+
+first_header_one.<mark>addEventListener</mark>('click', function(){first_header_one.style.color="blue";}
+first_header_one.<mark>addEventListener</mark>('click', function(){first_header_one.style.color="blue";}
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="createelement_createtextnode_methods_anchor"><h2>createElement() and createTextNode() methods</h2></a>
+    <h5>Example usages:</h5>
+    <pre class="mb-0">
+const heading = document.<mark>createElement</mark>('h1');                   // Creates a header element
+const headingText = document.<mark>createTextNode</mark>('Hello World');     // Creates a text node that we can add text to
+
+heading.appendChild(headingText);                               // Adds the text node to the header element
+document.body.appendChild(heading);                             // Adds the header element into the body
+</pre>
+</div>
+<div class="form-control mb-1">
+    <h2>Example Javascript/DOM usages:</h2>
+    <pre class="mb-0">
+console.log(document.URL);
+console.log(document.head);
+console.log(document.body);
+console.log(document.links);
+
+var link_2 = document.links[1];
+console.log("Link #2: " + link_2);
+
+var li_first = document.querySelector("li");
+li_first.textContent = "WAKA WAKA";
+
+var li_5 = document.getElementById("li_5");
+li_5.textContent = "KAKA KAKA";
+//li_5.style.
+
+var li_4 = document.querySelector(".li_4").addEventListener("click", function(){this.style.color="red"});
+
+var img_0 = document.querySelector("img");
+
+img_0.onclick = () => {
+    const img_0_src = img_0.getAttribute("src");
+    if(img_0_src === "hsr_img_assets/jingliu.webp"){
+        img_0.setAttribute("src", "hsr_img_assets/seele.webp");
+    }else{
+        img_0.setAttribute("src", "hsr_img_assets/jingliu.webp");
+    }
+};
+
+var img_1 = document.getElementById("img_1").addEventListener("click", function(){
+    const img_1_src = this.getAttribute("src");
+    if(img_1_src === "hsr_img_assets/fuxuan.webp"){
+        this.setAttribute("src", "hsr_img_assets/luocha.webp");
+    }else{
+        this.setAttribute("src", "hsr_img_assets/fuxuan.webp");
+    }
+}); // Functions the same as the img_0.onclick function above. Just an alternative way of writing it
+
+function getRandomColor(){
+    var numbers_and_letters = "0123456789ABCDEF";
+    var color = "#";
+    for(var i = 0; i < 6; i++){
+        color += numbers_and_letters[Math.floor(Math.random()*16)];
+    }
+    return color;
+};
+
+//var num_runs = 30;
+//while(num_runs){
+//    num_runs--;
+//    console.log(getRandomColor());
+//}
+
+function setElementColor(element){
+    element.style.color = getRandomColor();
+    element.style.backgroundColor = getRandomColor();
+};
+
+function setParagraphsToRandomColor(){
+    var first_p = document.querySelectorAll("p");
+    first_p.forEach(element => setElementColor(element));
+};
+
+setInterval("setParagraphsToRandomColor()", 1000);
+
+
+var pre_first = document.getElementById("pre_0");
+pre_first.style.color = "red";
+const time = new Date();
+const timeStr = time.toLocaleTimeString();
+var msg = "chicken"
+pre_first.innerHTML = `${timeStr}: ${msg}&lt;br/&gt;`;
+</pre>
+</div>
+
+<script src="{% static 'js/javascript_dom.js' %}"></script>
+{% endblock %}
+
+{% block chapter_block %}
+Document Object Model - Basics
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#dom_basics_anchor"><strong>Document Object Model (DOM) Basics</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#element_retrieval_anchor">Element Retrieval Methods</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#queryselector_anchor">&nbsp;&nbsp;&nbsp;QuerySelector</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#queryselectorall_anchor">&nbsp;&nbsp;&nbsp;QuerySelectorAll</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#getelementbyid_anchor">&nbsp;&nbsp;&nbsp;GetElementById</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#getelementbyclassname_anchor">&nbsp;&nbsp;&nbsp;GetElementsByClassName</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#getelementsbyname_anchor">&nbsp;&nbsp;&nbsp;GetElementsByName</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#getelementsbytagname_anchor">&nbsp;&nbsp;&nbsp;GetElementsByTagName</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#getelementsbytagnamens_anchor">
+        &nbsp;&nbsp;&nbsp;GetElementsByTagNameNS
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#traversing_accessing_retrieved_elements_anchor">
+        Traversing/Accessing Retrieved Elements
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#events_anchor">Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#keyboard_events_anchor">&nbsp;&nbsp;&nbsp;Keyboard Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#mouse_events_anchor">&nbsp;&nbsp;&nbsp;Mouse Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#pointer_events_anchor">&nbsp;&nbsp;&nbsp;Pointer Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#pointer_lock_events_anchor">&nbsp;&nbsp;&nbsp;Pointer Lock Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#clipboard_events_anchor">&nbsp;&nbsp;&nbsp;Clipboard Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#scroll_events_anchor">&nbsp;&nbsp;&nbsp;Scroll Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#fullscreen_events_anchor">&nbsp;&nbsp;&nbsp;Fullscreen Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#animation_events_anchor">&nbsp;&nbsp;&nbsp;Animation Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#focus_events_anchor">&nbsp;&nbsp;&nbsp;Focus Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#load_unload_events_anchor">&nbsp;&nbsp;&nbsp;Load & Unload Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#selection_events_anchor">&nbsp;&nbsp;&nbsp;Selection Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#composition_events_anchor">&nbsp;&nbsp;&nbsp;Composition Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#touch_events_anchor">&nbsp;&nbsp;&nbsp;Touch Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#transition_events_anchor">&nbsp;&nbsp;&nbsp;Transition Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#misc_events_anchor">&nbsp;&nbsp;&nbsp;Miscellaneous Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#addeventlistener_method_anchor">addEventListener() method</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#createelement_createtextnode_methods_anchor">
+        createElement() and createTextNode() methods
+    </a>
+</li>
+{% endblock %}

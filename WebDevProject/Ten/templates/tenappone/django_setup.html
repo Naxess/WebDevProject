@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Setup</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_init_setup_anchor"><h1>Django <span class="door">-</span> Initial Setup</h1></a>
+<div class="form-control mb-2">
+    <a id="venv_conda_anchor"><h2>Installing/Using Virtual Environments (with <em>conda</em>)</h2></a>
+    <div class="form-control mb-2">
+        <a id="install_anaconda"><h3>Installing Anaconda</h3></a>
+        <ol class="mb-1">
+            <li>
+                Install Anaconda (if not installed) by navigating to, then downloading and running the installer from
+                <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html">docs.conda.io</a>.
+            </li>
+            <li>
+                During installation, the installer will prompt as to whether to install for <u>'Just me'</u> or for
+                <u>'All users'</u>. Select <u>'Just me'</u>.
+                <br>
+                Later, the installer will prompt as to whether to 'add to PATH' - select <u>'yes'</u> to allow it.
+                <br>
+                [However, if the 'All users' option was selected, then <strong>do not</strong> enable adding to path as
+                this makes the system potentially vulnerable to security exploits.]
+            </li>
+            <li>
+                After the installation is complete, reboot the computer. This is a necessary step, do not skip this
+                step.
+            </li>
+            <li>
+                Confirm that the installation worked by opening <em>Anaconda Prompt</em> (or Command Prompt or
+                Powershell), then entering this command: <em>conda</em>. If a list of available options/commands for
+                Conda is presented, then it has been successfully installed.
+            </li>
+            <li>
+                <span style="color:red;">[If no error was encountered in the previous step, skip this step and move on
+                to the <strong>Using Anaconda</strong> section.]</span>
+                <br>
+                If the error message states something along the lines of: <q>'conda' is not recognized as the name of a
+                ...</q>, then it means that Conda was not added to the PATH variable. Follow the steps below to
+                resolve the above issue:
+                <ul class="mb-3">
+                    <li>
+                        Open the Anaconda Prompt application, then enter this command: <em>where conda</em>. This will
+                        display the location(s) where the Conda files are installed.
+                    </li>
+                    <li>Opening the Environment Variables window:
+                        <ul>
+                            <li>
+                                Start by opening the Start menu and entering <em>Advanced System Settings</em> into the
+                                search. One of the results should be <em>View advanced system settings</em>. Click on it
+                                to open the System Properties window. (See images below as a visual reference)
+                            </li>
+                            <li>
+                                In the System Properties window, locate and then select the 'Advanced' tab. Then, click
+                                on 'Environment Variables' (it should be located near the bottom-right corner) to open
+                                the Environment Variables window.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Editing the Path:
+                        <ul>
+                            <li>
+                                There should be two sections in the Environment Variables window: 'User variables for
+                                ...' and 'System variables'. In the 'User variables' section, locate and select the row
+                                that has 'Path' as a value in the Variable column, then click on the 'Edit...' button.
+                            </li>
+                            <li>
+                                <p class="mb-2">
+                                    There are 3 directories that we need to add. For each of these, click on the 'New'
+                                    button and enter the path of each.
+                                </p>
+                                <table class="table table-bordered mb-2">
+                                    <tr class="table-dark">
+                                        <th>Directory</th>
+                                        <th>Description</th>
+                                        <th>Example path</th>
+                                    </tr>
+                                    <tr>
+                                        <td>\anaconda3</td>
+                                        <td>Root directory of Anaconda</td>
+                                        <td>C:\Users\ ... \anaconda3\</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\Scripts</td>
+                                        <td>Scripts directory</td>
+                                        <td>C:\Users\ ... \anaconda3\Scripts\</td>
+                                    </tr>
+                                    <tr>
+                                        <td>\Library\bin</td>
+                                        <td>Library directory's Bin folder</td>
+                                        <td>C:\Users\ ... \anaconda3\Library\bin\</td>
+                                    </tr>
+                                </table>
+                            </li>
+                            <li>
+                                When the 3 directories have been added, click on the 'OK' button and then restart the
+                                computer.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <img src="{% static 'media/images/examples/django_setup.add_anaconda_to_path.png' %}"
+                     alt="django_setup.add_anaconda_to_path.png" width="100%">
+            </li>
+        </ol>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="using_anaconda_anchor"><h3>Using Anaconda</h3></a>
+        <div class="form-control mb-2">
+            <h6>Create a virtual environment</h6>
+            <code>conda create --name example_env django</code>
+        </div>
+        <div class="form-control mb-2">
+            <h6>Activate a virtual environment</h6>
+            <code>conda activate example_env</code>
+        </div>
+        <div class="form-control mb-2">
+            <h6>Deactivate the current virtual environment</h6>
+            <code>conda deactivate</code>
+        </div>
+        <div class="form-control mb-2">
+            <h6>Permanently delete a virtual environment</h6>
+            <code>conda remove --name example_env --all</code>
+        </div>
+        <div class="form-control mb-2">
+            <h6>Create a virtual environment with particular module versions</h6>
+            <code>conda create --name example_env python=3.11</code>
+        </div>
+        <div class="form-control mb-2">
+            <h6>View all available virtual environments</h6>
+            <code>conda info --envs</code>
+        </div>
+        <div class="form-control mb-1">
+            <h6>Install module into virtual environment</h6>
+            <code>conda install django</code>
+        </div>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="install_use_django_anchor"><h2>Installing/Using Django</h2></a>
+    <div class="form-control mb-2">
+        <a id="install_django_anchor"><h3>Installing Django (2 Methods)</h3></a>
+        <div class="form-control mb-2">
+            <h6>Install Django using <em>conda</em></h6>
+            <p class="mb-1">(Used when inside of the virtual environment)</p>
+            <code>conda install django</code>
+        </div>
+        <div class="form-control mb-2">
+            <h6>Install Django using <em>pip</em></h6>
+            <code>pip install django</code>
+        </div>
+    </div>
+    <div class="form-control mb-2">
+        <a id="djangoadmin_vs_managepy_anchor"><h3>django-admin vs. manage.py</h3></a>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong><em>django-admin</em></strong> is a command-line utility tool for administrative tasks that
+                comes automatically installed with the Django installation.
+            </li>
+            <li class="list-group-item">
+                <strong><em>manage.py</em></strong> is created automatically in each Django project. It performs the
+                same utility as <em>django-admin</em> but also sets the <q>DJANGO_SETTINGS_MODULE</q> environment
+                variable so that it points to the project's settings.py file.
+            </li>
+            <li class="list-group-item">
+                Essentially, these commands operate virtually the same and are typically interchangeable and use the
+                same commands (except for maybe the <em>startproject</em> command - because the manage.py file doesn't
+                exist until the project is created).
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="startproject_cmd_anchor"><h3><em>startproject</em> command</h3></a>
+        <p class="mb-2">
+            The <em>startproject</em> command is used to create a new Django project.
+            With Anaconda Prompt (or the command line interface of choice), navigate to the desired location for
+            the project and then run the following command:
+            <br>
+            <code>django-admin startproject example_project</code>
+        </p>
+        <p>
+            After creating a project using the following example command, it creates a directory named after the
+            <em>project name</em> argument with the following internal file structure shown below:
+            <br>
+            <code>django-admin startproject first_project</code>
+        </p>
+        <img src="{% static 'media/images/examples/django_setup.startproject_files.png' %}"
+             alt="django_setup.startproject_files.png">
+        <br><br>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th>File</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>__init__.py</th>
+                <td>File used to mark the current directory as a Python package.</td>
+            </tr>
+            <tr>
+                <th>settings.py</th>
+                <td>Stores all of the project's settings/preferences.</td>
+            </tr>
+            <tr>
+                <th>urls.py</th>
+                <td>Stores all of the project's URL patterns.</td>
+            </tr>
+            <tr>
+                <th>wsgi.py</th>
+                <td>Acts as the WSGI (Web Server Gateway Interface). Can be used to deploy the web application
+                    to production.
+                </td>
+            </tr>
+            <tr>
+                <th>manage.py</th>
+                <td>Functions similarly to <em>django-admin</em>. This file is also a command-line utility for
+                    Django projects. Sets the DJANGO_SETTINGS_MODULE environment variable to point to the
+                    project's settings.py file.
+                </td>
+            </tr>
+        </table>
+        <p class="mb-1">
+            After creating the app, it needs to be registered with the project's <em>settings.py</em> file,
+            specifically the <em>INSTALLED_APPS</em> list. Add the string name of the app to this list. See
+            below example of adding apps to the list:
+        </p>
+        <pre class="mb-0">
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    <mark>'TenAppOne',</mark>
+    <mark>'UserAuthentication',</mark>
+    <mark>'HonkaiStarRail',</mark>
+]
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="startapp_cmd_anchor"><h3><em>startapp</em> Command</h3></a>
+        <p class="mb-1">
+            Creates a Django app within the project. The app must be created at the root directory of the Django
+            project using one of the following commands (manage.py is the preferred option as it is already located
+            at the root directory):
+        </p>
+        <ul class="mb-1">
+            <li><code>python manage.py startapp appName</code></li>
+            <li><code>django-admin startapp appName</code></li>
+        </ul>
+        <p>
+            Once created, an additional step needs to be taken to register the app to the project. Open the
+            project's <em>settings.py</em> file. Locate the <u>INSTALLED_APPS</u> list and then add the name of the
+            app.
+        </p>
+        <div class="form-control mb-2">
+            <a id="app_vs_project_anchor"><h4>Django App vs. Project</h4></a>
+            <ul class="list-group mb-2">
+                <li class="list-group-item">
+                    A Django <strong><em>app</em></strong> is created to perform a specific functionality for the entire
+                    web application. Example functions include things like: registration, polling, etc.. These
+                    applications can then be reused by plugging them into other Django projects.
+                </li>
+                <li class="list-group-item">
+                    A Django <strong><em>project</em></strong> is a collection of applications and configurations that,
+                    when combined, will make up a full web application.
+                </li>
+            </ul>
+        </div>
+        <p>After creating a Django app with the following example command, it creates a directory named after
+            the <em>app name</em> argument with the following internal file structure shown below:
+            <br>
+            <code>python manage.py startapp first_app</code>
+        </p>
+        <img src="{% static 'media/images/examples/django_setup.startapp_files.png' %}"
+             alt="django_setup.startapp_files.png">
+        <br><br>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>File/Directory</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>admin.py</th>
+                <td>Stores a registry of models, which will then be accessible and displayable from Django's
+                    admin interface.
+                </td>
+            </tr>
+            <tr>
+                <th>apps.py</th>
+                <td>Stores app-specific configurations.</td>
+            </tr>
+            <tr>
+                <th>models.py</th>
+                <td>Stores the application's data models.</td>
+            </tr>
+            <tr>
+                <th>tests.py</th>
+                <td>Can be used to store functions to test your code.</td>
+            </tr>
+            <tr>
+                <th>views.py</th>
+                <td>Stores functions that handle requests and return responses.</td>
+            </tr>
+            <tr>
+                <th>'migrations' folder</th>
+                <td>Stores database-specific information as it relates to the models.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="runserver_cmd_anchor"><h3><em>runserver</em> Command</h3></a>
+        <p>Starts a lightweight development web server on the local machine. Default port is <u>8000</u> on the
+            IP address: <u>127.0.0.1</u>. The address should look like this:
+            <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.
+            The IP address and port can be changed by supplying the desired values.
+        </p>
+        <div class="form-control mb-2">
+            <h6>Starts the (default) server with one of the following commands</h6>
+            <p class="mb-1">(can use either django-admin or manage.py)</p>
+            <ul class="mb-1">
+                <li><code>django-admin runserver</code></li>
+                <li><code>python manage.py runserver</code></li>
+            </ul>
+        </div>
+        <div class="form-control mb-2">
+            <h6>Starts the server with a different IP address and port:</h6>
+            <ul class="mb-1">
+                <li><code>django-admin runserver 1.2.3.4:5678</code></li>
+                <li><code>python manage.py runserver 1.2.3.4:5678</code></li>
+            </ul>
+        </div>
+        <div class="form-control mb-1">
+            <h6>Starts the server with a different port but with the default IP address:</h6>
+            <code>python manage.py runserver 1234</code>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="makemigrations_migrate_cmds_anchor"><h3><em>makemigrations</em> and <em>migrate</em> Commands</h3></a>
+        <div class="form-control mb-2">
+            <a id="makemigrations_cmd_anchor"><h4><em>makemigrations</em> Command</h4></a>
+            <p>Creates new migrations based on changes detected to the models. The command can be run without
+                arguments, but providing one or more app names as arguments will limit the migrations to the app(s)
+                specified and any dependencies needed.
+            </p>
+            <div class="form-control mb-2">
+                <h6>Command without arguments (creates new migrations for all apps):</h6>
+                <code>python manage.py makemigrations</code>
+            </div>
+            <div class="form-control mb-1">
+                <h6>Command with app arguments supplied (creates new migrations only for specified apps):</h6>
+                <code>python manage.py makemigrations appName</code>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="migrate_cmd_anchor"><h3><em>migrate</em> Command</h3></a>
+            <p>Synchronizes the database state with the current set of models and migrations. The command can be run
+                without arguments, but providing one or more app names as arguments will limit the migrations to the
+                app(s) specified and any dependencies needed.
+            </p>
+            <div class="form-control mb-2">
+                <h6>Command without arguments (all apps will be migrated):</h6>
+                <code>python manage.py migrate</code>
+            </div>
+            <div class="form-control mb-1">
+                <h6>Command with an app arguments supplied (only migrates the specified apps):</h6>
+                <code>python manage.py migrate appName</code>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="makemigrations_vs_migrate_anchor"><h3><em>makemigrations</em> vs. <em>migrate</em></h3></a>
+            <ul class="list-group mb-1">
+                <li class="list-group-item">
+                    <strong><em>makemigrations</em></strong> is responsible for packaging up your model changes into
+                    individual migration files (analogous to commits)
+                </li>
+                <li class="list-group-item">
+                    <strong><em>migrate</em></strong> is responsible for applying the migration files generated by the
+                    <em>makemigrations</em> command to your database.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="form-control mb-1">
+    <a id="django_cmds_external_reference_anchor"><h4>Full List of <em>django-admin/manage.py</em> Commands</h4></a>
+    <a href="https://docs.djangoproject.com/en/5.0/ref/django-admin/">
+        https://docs.djangoproject.com/en/5.0/ref/django-admin/
+    </a>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Initial Setup
+{% endblock %}
+
+&nbsp;&nbsp;&nbsp;
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_init_setup_anchor"><strong>Django - Initial Setup</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#venv_conda_anchor">Installing/Using Virtual Environments (with <em>conda</em>)</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#install_anaconda">&nbsp;&nbsp;&nbsp;Installing Anaconda</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#using_anaconda_anchor">&nbsp;&nbsp;&nbsp;Using Anaconda</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#install_use_django_anchor">Installing/Using Django</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#install_django_anchor">&nbsp;&nbsp;&nbsp;Installing Django (2 Methods)</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#djangoadmin_vs_managepy_anchor">&nbsp;&nbsp;&nbsp;django-admin vs. manage.py</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#startproject_cmd_anchor">&nbsp;&nbsp;&nbsp;<em>startproject</em> command</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#startapp_cmd_anchor">&nbsp;&nbsp;&nbsp;<em>startapp</em> Command</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#app_vs_project_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Django App vs. Project
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#runserver_cmd_anchor">&nbsp;&nbsp;&nbsp;<em>runserver</em> Command</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#makemigrations_migrate_cmds_anchor">
+        &nbsp;&nbsp;&nbsp;<em>makemigrations</em> and <em>migrate</em> Commands
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#makemigrations_cmd_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>makemigrations</em> Command
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#migrate_cmd_anchor">&nbsp;&nbsp;&nbsp;<em>migrate</em> Command</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#makemigrations_vs_migrate_anchor">
+        &nbsp;&nbsp;&nbsp;<em>makemigrations</em> vs. <em>migrate</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#django_cmds_external_reference_anchor">
+        Full List of <em>django-admin/manage.py</em> Commands
+    </a>
+</li>
+{% endblock %}

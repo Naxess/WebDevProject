@@ -1,0 +1,646 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <title>React - Example Apps</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id="reactexampleapps_anchor"><h1>React <span class="door">-</span> Example Apps</h1></a>
+    <div class="form-control mb-1">
+        <div class="form-control mb-2 mt-1">
+            <a id="buttonclicktracker_anchor"><h2>Button Click Tracker</h2></a>
+            <p class="mb-2">
+                This app creates a button on which "This button has been clicked 0 times" is printed. Each time this
+                button is clicked, the message updates to reflect the number of times it has been clicked.
+            </p>
+
+            <div class="form-control mb-2">
+                <h5>main.jsx</h5>
+                <pre class="mb-1">
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+    &lt;StrictMode&gt;
+        &lt;App/&gt;
+    &lt;/StrictMode&gt;,
+)
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5>App.jsx</h5>
+                <pre class="mb-1">
+import {useState} from 'react'
+
+function App() {
+    const [count, setCount] = useState(0);
+
+    return (
+        &lt;&gt;
+            &lt;h1&gt;Click Tracker&lt;/h1&gt;
+            &lt;div&gt;
+                &lt;button onClick={() =&gt; setCount((count) =&gt; count + 1)}&gt;
+                    This button has been clicked {count} times!
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/&gt;
+    )
+}
+
+export default App;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="dynamiclist_anchor"><h2>Dynamic List</h2></a>
+            <p class="mb-2">
+
+            </p>
+
+            <div class="form-control mb-2">
+                <h5>main.jsx</h5>
+                <pre class="mb-1">
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+    &lt;StrictMode&gt;
+        &lt;App/&gt;
+    &lt;/StrictMode&gt;,
+)
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5>App.jsx</h5>
+                <pre class="mb-1">
+import {useState} from 'react'
+import ListSix from "./components/ListSix.jsx";
+
+function App() {
+    const listData = ['Apple', 'Banana', 'Strawberry', 'Watermelon', 'Cherries', 'Grapes']
+    let [listDataVar, setListDataVar] = useState(listData);
+
+    return (
+        &lt;&gt;
+            &lt;ListSix data={listDataVar} setData={setListDataVar}/&gt;
+        &lt;/&gt;
+    )
+}
+
+export default App;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5>ListSix.jsx</h5>
+                <pre class="mb-1">
+import {useState} from "react";
+import {nanoid} from "nanoid";
+
+function ListSix(props) {
+    let testData = ['a', 'b', 'c', 'd', 'e', 'f']
+    let testDataAsElements = testData.map((item) =&gt; (
+        &lt;li key={`listTest-${nanoid()}`}&gt;
+            {item}
+        &lt;/li&gt;
+    ));
+
+    let importedData = null;
+    let combinedElements = null;
+    if (props.data) {
+        importedData = props.data;
+        let importedDataAsElements = importedData.map((item) =&gt; (
+            &lt;li key={`listData-${nanoid()}`}&gt;
+                {item}
+            &lt;/li&gt;
+        ));
+
+        let [itemInput, setItemInput] = useState("");
+
+        function onChangeItemInput(event) {
+            setItemInput(event.target.value);
+        }
+
+        function onClickAddItem() {
+            props.setData([...props.data, itemInput]);
+            setItemInput("");
+        }
+
+        function onClickDeleteItem() {
+            let filteredData = props.data.filter((item) =&gt; item !== itemInput);
+            props.setData(filteredData);
+            setItemInput("");
+        }
+
+        let formElements = (
+            &lt;div className={"input-group"}&gt;
+                &lt;label className="input-group-text"&gt;Item name:&lt;/label&gt;
+                &lt;input type={"text"}
+                       value={itemInput}
+                       onChange={onChangeItemInput}
+                       className={"form-control"}
+                /&gt;
+                &lt;button type={"button"} onClick={onClickAddItem} className={"btn btn-primary"}&gt;Add&lt;/button&gt;
+                &lt;button type={"button"} onClick={onClickDeleteItem} className={"btn btn-danger"}&gt;Delete&lt;/button&gt;
+            &lt;/div&gt;
+        )
+
+        combinedElements = (
+            &lt;div className={"form-control mb-2"}&gt;
+                &lt;h3&gt;List&lt;/h3&gt;
+                &lt;ul&gt;
+                    {importedDataAsElements}
+                &lt;/ul&gt;
+                {formElements}
+            &lt;/div&gt;
+        )
+    }
+
+    return (
+        &lt;&gt;
+            &lt;div className={"form-control mb-2"}&gt;
+                &lt;h3&gt;List (with test data)&lt;/h3&gt;
+                &lt;ul&gt;
+                    {testDataAsElements}
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            {importedData ? combinedElements : null}
+        &lt;/&gt;
+    )
+}
+
+export default ListSix;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="dynamictable_anchor"><h2>Dynamic Table</h2></a>
+            <p class="mb-2">
+
+            </p>
+
+            <div class="form-control mb-2">
+                <h5>main.jsx</h5>
+                <pre class="mb-1">
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+    &lt;StrictMode&gt;
+        &lt;App/&gt;
+    &lt;/StrictMode&gt;,
+)
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5>App.jsx</h5>
+                <pre class="mb-1">
+import {useState} from 'react'
+import TableSix from "./components/TableSix.jsx";
+
+function App() {
+    const tableData = [
+        {first_name: 'John', last_name: 'Doe'},
+        {first_name: 'Jane', last_name: 'Doe'},
+        {first_name: 'Arnold', last_name: 'Benedict'},
+        {first_name: 'Antoinette', last_name: 'Faye'},
+        {first_name: 'Margo', last_name: 'Robbie'},
+    ]
+    let [tableDataVar, setTableDataVar] = useState(tableData);
+
+    return (
+        &lt;&gt;
+            &lt;TableSix data={tableDataVar} setData={setTableDataVar}/&gt;
+        &lt;/&gt;
+    )
+}
+
+export default App;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5>TableSix.jsx</h5>
+                <pre class="mb-1">
+import {useState} from "react";
+import {nanoid} from "nanoid";
+
+function TableSix(props) {
+    let testData = [
+        {first_name: 'John', last_name: 'Doe'},
+        {first_name: 'Jane', last_name: 'Doe'},
+        {first_name: 'Arnold', last_name: 'Benedict'},
+    ]
+
+    let testDataAsElements = testData.map((item) =&gt; (
+        &lt;tr key={`tableTest-${nanoid()}`}&gt;
+            &lt;td&gt;{item.first_name}&lt;/td&gt;
+            &lt;td&gt;{item.last_name}&lt;/td&gt;
+        &lt;/tr&gt;
+    ));
+
+    let importedData = null;
+    let importedDataAsElements = null;
+    if (props.data) {
+        importedData = props.data;
+        importedDataAsElements = importedData.map((row) =&gt; (
+            &lt;tr key={`tableData-${nanoid()}`}&gt;
+                &lt;td&gt;{row.first_name}&lt;/td&gt;
+                &lt;td&gt;{row.last_name}&lt;/td&gt;
+            &lt;/tr&gt;
+        ));
+    }
+
+    let [firstNameInput, setFirstNameInput] = useState("");
+    let [lastNameInput, setLastNameInput] = useState("");
+
+    function onChangeFirstNameInput(event) {
+        setFirstNameInput(event.target.value);
+    }
+
+    function onChangeLastNameInput(event) {
+        setLastNameInput(event.target.value);
+    }
+
+    function onClickAdd() {
+        props.setData([...props.data, {first_name: firstNameInput, last_name: lastNameInput}])
+        setFirstNameInput("");
+        setLastNameInput("");
+    }
+
+    function onClickDelete() {
+        props.setData([...props.data.filter((row) =&gt; {
+            if (row.first_name !== firstNameInput || row.last_name !== lastNameInput) {
+                return row;
+            }
+        })]);
+        setFirstNameInput("");
+        setLastNameInput("");
+    }
+
+    let formElements = (
+        &lt;div className={"input-group"}&gt;
+            &lt;label className="input-group-text"&gt;User name:&lt;/label&gt;
+            &lt;input type="text" className={"form-control"} onChange={onChangeFirstNameInput} value={firstNameInput}/&gt;
+            &lt;input type="text" className={"form-control"} onChange={onChangeLastNameInput} value={lastNameInput}/&gt;
+            &lt;button type={"button"} className={"btn btn-primary"} onClick={onClickAdd}&gt;Add&lt;/button&gt;
+            &lt;button type={"button"} className={"btn btn-danger"} onClick={onClickDelete}&gt;Delete&lt;/button&gt;
+        &lt;/div&gt;
+    )
+
+    let tableAsElement = (
+        &lt;div className={"form-control mb-2"}&gt;
+            &lt;h3&gt;Table&lt;/h3&gt;
+            &lt;table className={"table table-bordered"}&gt;
+                &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;First Name&lt;/th&gt;
+                    &lt;th&gt;Last Name&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                {importedDataAsElements}
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+            {formElements}
+        &lt;/div&gt;
+    )
+
+    return (
+        &lt;&gt;
+            &lt;div className={"form-control mb-2"}&gt;
+                &lt;h3&gt;Table (with test data)&lt;/h3&gt;
+                &lt;table className={"table table-bordered"}&gt;
+                    &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;First Name&lt;/th&gt;
+                        &lt;th&gt;Last Name&lt;/th&gt;
+                    &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                    {testDataAsElements}
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+
+            {importedData ? tableAsElement : null}
+        &lt;/&gt;
+    )
+}
+
+export default TableSix;
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="todotasktracker_anchor"><h2>To-do Task Tracker</h2></a>
+            <p class="mb-2">
+
+            </p>
+
+            <div class="form-control mb-2">
+                <h5>main.jsx</h5>
+                <pre class="mb-1">
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+    &lt;StrictMode&gt;
+        &lt;App/&gt;
+    &lt;/StrictMode&gt;,
+)
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5>App.jsx</h5>
+                <pre class="mb-1">
+import {useState} from 'react'
+import TaskListSix from "./components/TaskListSix.jsx";
+
+function App() {
+    const taskListData = [
+        {taskName:'Eat', completed:false, id:`taskList-0`},
+        {taskName:'Sleep', completed:true, id:`taskList-1`},
+        {taskName:'Study', completed:false, id:`taskList-2`},
+        {taskName:'Play', completed:true, id:`taskList-3`},
+    ]
+    let [taskListDataVar, setTaskListDataVar] = useState(taskListData);
+
+    return (
+        &lt;&gt;
+            &lt;TaskListSix data={taskListDataVar} setData={setTaskListDataVar}/&gt;
+        &lt;/&gt;
+    )
+}
+
+export default App;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5>TaskListSix.jsx</h5>
+                <pre class="mb-1">
+import {useState} from "react";
+import {nanoid} from "nanoid";
+
+import TaskListItemSix from "./TaskListItemSix.jsx";
+import TaskListFormSix from "./TaskListFormSix.jsx";
+
+function TaskListSix(props) {
+    const FilterTypes = {
+        All: () =&gt; true,
+        Completed: (task) =&gt; task.completed,
+        Incomplete: (task) =&gt; !task.completed,
+    }
+    let [filterType, setFilterType] = useState("All");
+
+    function addTask(taskName) {
+        props.setData([...props.data, {taskName: taskName, completed: false, id: `taskList-${nanoid()}`}])
+    }
+
+    function updateTaskName(id, newTaskName) {
+        let updatedData = props.data.map((row) =&gt; {
+            if (row.id === id) {
+                return {...row, taskName: newTaskName}
+            }
+            return row;
+        });
+        props.setData([...updatedData])
+    }
+
+    function toggleTaskCompleted(id) {
+        let updatedData = props.data.map((row) =&gt; {
+            if (row.id === id) {
+                return {...row, completed: !row.completed}
+            }
+            return row;
+        });
+        props.setData([...updatedData]);
+    }
+
+    function deleteTask(id) {
+        let filteredData = props.data.filter((row) =&gt; row.id !== id);
+        props.setData([...filteredData]);
+    }
+
+    let importedDataAsElements = props.data
+        .filter(FilterTypes[filterType])
+        .map((task) =&gt; (
+            &lt;li key={`taskList-${nanoid()}`}&gt;
+                &lt;TaskListItemSix taskName={task.taskName}
+                                 id={task.id}
+                                 completed={task.completed}
+                                 editTaskName={updateTaskName}
+                                 toggleCompleted={toggleTaskCompleted}
+                                 deleteTask={deleteTask}
+                /&gt;
+            &lt;/li&gt;
+        ));
+
+    return (
+        &lt;&gt;
+            &lt;div className={"form-control mb-2"}&gt;
+                &lt;h3&gt;Task Planner&lt;/h3&gt;
+                &lt;ul&gt;
+                    {importedDataAsElements}
+                &lt;/ul&gt;
+                &lt;TaskListFormSix addTask={addTask}
+                                 setFilter={setFilterType}
+                /&gt;
+            &lt;/div&gt;
+        &lt;/&gt;
+    )
+}
+
+export default TaskListSix;
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h5>TaskListItemSix.jsx</h5>
+                <pre class="mb-1">
+import {useState} from "react";
+
+function TaskListItemSix(props) {
+    let [taskNameInput, setTaskNameInput] = useState("");
+    let [currentlyEditing, setCurrentlyEditing] = useState(false);
+
+    function onChangeTaskNameInput(event) {
+        setTaskNameInput(event.target.value);
+    }
+
+    function onClickTaskNameInput() {
+        props.editTaskName(props.id, taskNameInput);
+        setCurrentlyEditing(false);
+    }
+
+    let editTemplate = (
+        &lt;div className={"input-group mb-2"}&gt;
+            &lt;label className="input-group-text"&gt;Edit "{props.taskName}" to:&lt;/label&gt;
+            &lt;input type="text"
+                   className={"form-control"}
+                   value={taskNameInput}
+                   onChange={onChangeTaskNameInput}
+                   placeholder={"Enter new task description..."}
+            /&gt;
+            &lt;button type={"button"}
+                    className={"btn btn-primary"}
+                    onClick={onClickTaskNameInput}&gt;Apply change
+            &lt;/button&gt;
+            &lt;button type={"button"}
+                    className={"btn btn-danger"}
+                    onClick={() =&gt; setCurrentlyEditing(false)}&gt;Cancel
+            &lt;/button&gt;
+        &lt;/div&gt;
+    )
+
+    let viewTemplate = (
+        &lt;div className={"input-group mb-2"}&gt;
+            &lt;label className="input-group-text"&gt;
+                Completed&nbsp;&nbsp;
+                &lt;input type="checkbox"
+                       className={"form-check-input"}
+                       checked={props.completed}
+                       onChange={() =&gt; props.toggleCompleted(props.id)}
+                /&gt;
+            &lt;/label&gt;
+            &lt;label className="input-group-text col-4"&gt;
+                {props.taskName}
+            &lt;/label&gt;
+            &lt;button type={"button"}
+                    className={"btn btn-primary col-2"}
+                    onClick={() =&gt; setCurrentlyEditing(true)}&gt;
+                Edit Task
+            &lt;/button&gt;
+            &lt;button type={"button"}
+                    className={"btn btn-danger col-3"}
+                    onClick={() =&gt; props.deleteTask(props.id)}&gt;
+                Delete Task
+            &lt;/button&gt;
+        &lt;/div&gt;
+    )
+
+    return (
+        &lt;&gt;
+            {currentlyEditing ? editTemplate : viewTemplate}
+        &lt;/&gt;
+    )
+}
+
+export default TaskListItemSix;
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5>TaskListFormSix.jsx</h5>
+                <pre class="mb-1">
+import {useState} from "react";
+
+function TaskListFormSix(props) {
+    let [newTaskName, setNewTaskName] = useState("");
+
+    function onChangeTaskNameInput(event) {
+        setNewTaskName(event.target.value);
+    }
+
+    function onClickAddNewTask(newTaskName) {
+        props.addTask(newTaskName)
+        setNewTaskName("");
+    }
+
+    let addTaskFormAsElement = (
+        &lt;div className={"input-group mb-2"}&gt;
+            &lt;label className="input-group-text"&gt;Task description:&lt;/label&gt;
+            &lt;input type="text"
+                   className={"form-control"}
+                   value={newTaskName}
+                   onChange={onChangeTaskNameInput}/&gt;
+            &lt;button type={"button"}
+                    className={"btn btn-primary"}
+                    onClick={() =&gt; onClickAddNewTask(newTaskName)}&gt;Add
+            &lt;/button&gt;
+        &lt;/div&gt;
+    )
+
+    let filterFormAsElement = (
+        &lt;div className={"form-control mb-2"}&gt;
+            &lt;div className={"form-check"}&gt;
+                &lt;label className="form-check-label"&gt;Show All&lt;/label&gt;
+                &lt;input type="radio"
+                       name={"filter_group"}
+                       className={"form-check-input"}
+                       checked={props.completed}
+                       onClick={() =&gt; props.setFilter("All")}
+                       defaultChecked
+                /&gt;
+            &lt;/div&gt;
+            &lt;div className={"form-check"}&gt;
+                &lt;label className="form-check-label"&gt;Show Completed&lt;/label&gt;
+                &lt;input type="radio"
+                       name={"filter_group"}
+                       className={"form-check-input"}
+                       checked={props.completed}
+                       onClick={() =&gt; props.setFilter("Completed")}/&gt;
+            &lt;/div&gt;
+            &lt;div className={"form-check"}&gt;
+                &lt;label className="form-check-label"&gt;Show Incomplete&lt;/label&gt;
+                &lt;input type="radio"
+                       name={"filter_group"}
+                       className={"form-check-input"}
+                       checked={props.completed}
+                       onClick={() =&gt; props.setFilter("Incomplete")}/&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+
+    return (
+        &lt;&gt;
+            {filterFormAsElement}
+            {addTaskFormAsElement}
+        &lt;/&gt;
+    )
+}
+
+export default TaskListFormSix;
+</pre>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+    React - Example Apps
+{% endblock %}
+
+{% block glossary_block %}
+    <li>
+        <a class="dropdown-item" href="#reactexampleapps_anchor"><strong>React - Example Apps</strong></a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#buttonclicktracker_anchor">&nbsp;&nbsp;&nbsp;Button Click Tracker</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#dynamiclist_anchor">&nbsp;&nbsp;&nbsp;Dynamic List</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#dynamictable_anchor">&nbsp;&nbsp;&nbsp;Dynamic Table</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#todotasktracker_anchor">&nbsp;&nbsp;&nbsp;To-do Task Tracker</a>
+    </li>
+{% endblock %}

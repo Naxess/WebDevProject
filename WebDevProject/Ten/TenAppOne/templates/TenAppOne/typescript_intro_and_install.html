@@ -1,0 +1,574 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <title>TypeScript - Introduction & Installation</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id="ts_anchor"><h1>TypeScript <span class="door">-</span> Introduction <span class="door">&</span> Installation
+    </h1></a>
+    <div class="form-control mb-1">
+        <div class="form-control mt-1 mb-2">
+            <a id="ts_intro_anchor"><h2>Introduction</h2></a>
+            <p class="mb-2">
+                TypeScript is a syntactic superset (shares the same base syntax) of JavaScript which adds static typing.
+                Simply put, TypeScript is JavaScript but with added syntax for types.
+            </p>
+            <p class="mb-1">
+                JavaScript is a loosely typed language, which means it can be difficult to understand what types of data
+                are being passed around. Additionally, function parameters and variables do not contain any information
+                about this either, thus forcing the developer to refer to the documentation or infer based on the
+                implementation. TypeScript alleviates these issues by allowing specifying the types of data being passed
+                around within the code and reports errors when there is a type mismatch. For example, TypeScript will
+                report an error when passing a string into a function that expects a number whereas JavaScript will not.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="ts_install_anchor"><h2>Setup/Installation/Start</h2></a>
+            <ul class="mb-1">
+                <li>Install NPM (if it hasn't been done already), then create an npm project</li>
+                <li>
+                    <p class="mb-0">
+                        Run the following command within the npm project:
+                    </p>
+                    <pre class="mb-1">
+    npm install typescript --save-dev
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        The compiler, which is installed in the <i>node_modules</i> directory can be run with the
+                        following command:
+                    </p>
+                    <pre class="mb-1">
+    npx tsc
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="ts_install_anchor"><h2>Adding TypeScript to an Existing (<i>vite</i>) React Project</h2></a>
+            <ul class="mb-1">
+                <li>
+                    <p class="mb-0">
+                        In the root directory of the (<i>vite</i>) react project, run the following command:
+                    </p>
+                    <pre class="mb-1">
+    npm install -D typescript @types/react @types/react-dom
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        First, we need to rename the <i>vite.config.js</i> file to <i>vite.config.ts</i>, then we need
+                        to edit its contents to match below:
+                    </p>
+                    <pre class="mb-1">
+    {
+        "compilerOptions": {
+            "target": "ESNext",
+            "useDefineForClassFields": true,
+            "lib": ["DOM", "DOM.Iterable", "ESNext"],
+            "allowJs": false,
+            "skipLibCheck": true,
+            "esModuleInterop": false,
+            "allowSyntheticDefaultImports": true,
+            "strict": true,
+            "forceConsistentCasingInFileNames": true,
+            "module": "ESNext",
+            "moduleResolution": "Node",
+            "resolveJsonModule": true,
+            "isolatedModules": true,
+            "noEmit": true,
+            "jsx": "react-jsx"
+        },
+        "include": ["src"],
+        "references": [{ "path": "./tsconfig.node.json" }]
+    }
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Next, we need to create a file named '<i>tsconfig.node.json</i>' and edit its contents to match
+                        below:
+                    </p>
+                    <pre class="mb-1">
+    {
+        "compilerOptions": {
+            "composite": true,
+            "module": "ESNext",
+            "moduleResolution": "Node",
+            "allowSyntheticDefaultImports": true
+        },
+        "include": ["vite.config.ts"]
+    }
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Create yet another file, this one named '<i>vite-env.d.ts</i>' in the <i>src</i> folder
+                        and edit its contents to match below:
+                    </p>
+                    <pre class="mb-1">
+    /// &lt;reference types="vite/client" /&gt;
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Lastly, edit the <i>index.html</i> file so that the <i>&lt;script&gt;</i> sources
+                        <i>/src/index.tsx</i> instead of <i>/src/index.ts</i>:
+                    </p>
+                    <pre class="mb-1">
+    &lt;script type="module" src="/src/index.tsx"&gt;&lt;/script&gt;
+</pre>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="ts_install_anchor"><h2>Adding TypeScript to an Existing (<i>vite</i>) React Project (Version 2)</h2></a>
+            <ul class="mb-1">
+                <li>
+                    <p class="mb-0">
+                        In the root directory of the (<i>vite</i>) react project, run the following command:
+                    </p>
+                    <pre class="mb-1">
+    npm install -D typescript @types/react @types/react-dom
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Next, we need to create a file named '<i>tsconfig.json</i>' and edit its contents to match
+                        below:
+                    </p>
+                    <pre class="mb-1">
+    {
+        "compilerOptions": {
+            "target": "esnext",
+            "module": "esnext",
+            "moduleResolution": "node",
+            "importHelpers": true,
+            "isolatedModules": true,
+            "noEmit": true
+        }
+    }
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Lastly, edit the <i>index.html</i> file so that the <i>&lt;script&gt;</i> sources
+                        <i>/src/index.tsx</i> instead of <i>/src/index.ts</i>:
+                    </p>
+                    <pre class="mb-1">
+    &lt;script type="module" src="/src/index.tsx"&gt;&lt;/script&gt;
+</pre>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="ts_relationship_anchor"><h2>Relationship between TypeScript (TS) & JavaScript (JS)</h2></a>
+            <ul class="mb-1">
+                <li>
+                    Syntax:
+                    <ul>
+                        <li>TS is a language that is a superset of JS and uses its syntax.</li>
+                    </ul>
+                </li>
+                <li>
+                    Types:
+                    <ul>
+                        <li>
+                            TypeScript is a <strong>typed</strong> superset, meaning that it adds rules about how
+                            different kinds of values can be used. TypeScript will check its programs for errors before
+                            execution. This is done based on the kind of values, thus making it a <strong>static type
+                            checker</strong>.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Runtime Behavior:
+                    <ul>
+                        <li>
+                            TypeScript preserves the runtime behavior of JavaScript. This is an advantage of
+                            TypeScript in that it means that developers can easily transition between the languages
+                            without worrying about any subtle differences that may prevent the program from working.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Erased Types:
+                    <ul>
+                        <li>
+                            Once TypeScript has completed checking the code, it erases the types to produce the
+                            resulting <strong>compiled</strong> code. After compilation, the resulting code is plain
+                            JavaScript code that has no type information. Additionally, this means that TypeScript will
+                            never change the behavior of the program based on the types it inferred. Any type errors
+                            encountered during compilation will have no bearing on how the program works when it is run.
+                            Lastly, TypeScript does no provide any additional runtime libraries. Programs will use the
+                            same standard library (or external libraries) as JavaScript programs, no there are no
+                            TypeScript-specific frameworks to learn.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="ts_typing_anchor"><h2>TypeScript Typing</h2></a>
+            <div class="form-control mb-2">
+                <a id="ts_implicit_typing_anchor"><h3>Types by Inference:</h3></a>
+                <p class="mb-1">
+                    TS will generate types for variables automatically as variables are initialized. Based on
+                    the initial value, TS will determine which type to assign to that variable. In this
+                    example: let abc = "abcdefghi";, the 'abc' variable will automatically be typed by TS as a
+                    'string'.
+                </p>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="ts_explicit_typing_anchor"><h3>(Explicitly) Defining Types:</h3></a>
+                <p class="mb-0">
+                    In some scenarios, it may be difficult for TS to infer a variable's type. In these
+                    scenarios, there is an extension of the JS language - interface, that allows the
+                    developer to dictate to TS, what the type(s) should be.
+
+                    In the below example, we create an object with an inferred types that where 'name' is a
+                    string and 'id' is a number:
+                </p>
+                <pre class="mb-0">
+    const user = {
+        name: "John Doe",
+        id: 12,
+    }</pre>
+                <p class="mb-0">
+                    However, if we want to explicitly describe the object's shape, then we need to use an
+                    interface declaration. Like so:
+                </p>
+                <pre class="mb-0">
+    interface User {
+        name: string;
+        id: number;
+    }</pre>
+                <p class="mb-2">
+                    We can then utilize the interface by passing it to the variable using the following
+                    syntax:
+                    <br>
+                    <strong>&lt;declarationType&gt; &lt;variableName&gt;: &lt;interfaceName&gt; =
+                        &lt;valuesDict&gt;</strong>
+                    <br>
+                </p>
+                <p class="mb-0">
+                    Example usage of the interface:
+                </p>
+                <pre class="mb-0">
+    const user: User = {
+        name: "John Doe",
+        id: 12,
+    }
+</pre>
+                <p>
+                    Essentially, if an argument is provided that doesn't contain the types as a subset, then
+                    TS will throw an error.
+                </p>
+                <p class="mb-0">
+                    Interface declaration will also work with classes. JS supports classes and
+                    object-oriented programming, so TS also supports these features. In the below example,
+                    we create an interface and class, then when creating an object from the class, we set
+                    the interface as its type:
+                </p>
+                <pre class="mb-0">
+    interface <mark style="background-color:cyan;">User</mark> {
+        name: string;
+        id: number;
+    }
+
+    class <mark style="background-color:greenyellow;">UserAccount</mark> {
+        name: string;
+        id: number;
+        constructor(name: string, id: number){
+            this.name = name;
+            this.id = id;
+        }
+    }
+
+    const user: <mark style="background-color:cyan;">User</mark> = new <mark style="background-color:greenyellow;">UserAccount</mark>("John Doe", 12);
+</pre>
+                <p class="mb-0">
+                    Interfaces can also be used to annotate parameters and return values to functions. See
+                    examples below:
+                </p>
+                <pre class="mb-0">
+    function deleteUser(user: User) { ... }; // argument must be of type User
+
+    function getAdminUser(): User { ... }; // Returns a value of type User</pre>
+
+                <p class="mb-0">The base JS primitive types has these primitive types:</p>
+                <ul class="mb-2">
+                    <li><i>boolean</i></li>
+                    <li><i>bigint</i></li>
+                    <li><i>null</i></li>
+                    <li><i>number</i></li>
+                    <li><i>string</i></li>
+                    <li><i>symbol</i></li>
+                    <li><i>undefined</i></li>
+                </ul>
+
+                <p class="mb-0">
+                    TS extends this list to include:
+                </p>
+                <ul class="mb-2">
+                    <li><i>any</i> (allows anything)</li>
+                    <li><i>unknown</i> (ensures that the developer that is using this type declares what the type is)
+                    </li>
+                    <li><i>never</i> (impossible for that type to happen)</li>
+                    <li><i>void</i> (a function which returns undefined or has no return value)</li>
+                </ul>
+
+                <p class="mb-2">
+                    As shown above, there are two methods for building types: <strong>interfaces</strong> and
+                    <strong>Types</strong> (each with their own syntaxes). Of these, <strong>interface</strong> is the
+                    preferred method. Use <strong>type</strong> only when you need specific features.
+                </p>
+            </div>
+
+            <div class="form-control mb-1">
+                <a id="ts_types_anchor"><h3>Composing Types:</h3></a>
+                <p class="mb-2">
+                    In TS, developers can create complex types by combining simple ones. There are two popular methods
+                    for doing this: <strong>unions</strong> and <strong>generics</strong>.
+                </p>
+                <div class="form-control mb-2">
+                    <a id="ts_union_types_anchor"><h4>Unions</h4></a>
+                    <p class="mb-0">
+                        With unions, developers can declare that a type can be one of many types. For example, a
+                        <strong>boolean</strong> can be described as either <i>true</i> or <i>false</i>. See example:
+                    </p>
+                    <pre class="mb-2">
+    type booboo = true | false;
+</pre>
+                    <p class="mb-0">
+                        Another popular use-case for union types is to describe the set of <strong>string</strong>
+                        or <strong>number</strong> literals that a value is allowed to be. (Similar to <i>enums</i> in
+                        other programming languages such as Python). See examples below:
+                    </p>
+                    <pre class="mb-2">
+    type WindowStates = "open" | "closed" | "minimized";
+    type LockStates = "locked" | "unlocked";
+    type PositiveOddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
+</pre>
+                    <p class="mb-0">
+                        Unions also enable functions to accept different types of arguments. For instance, we can create
+                        a function that accepts either a <strong>string</strong> argument or an <strong>array</strong>
+                        argument. See example below:
+                    </p>
+                    <pre class="mb-2">
+    function getLength(objL string | string[]) {
+        return obj.length;
+    }
+</pre>
+                    <p class="mb-1">
+                        The <strong>typeof</strong> operator can be used to check the type of a variable:
+                    </p>
+                    <table class="table table-bordered mb-1">
+                        <thead>
+                        <tr class="table-dark">
+                            <th>Type</th>
+                            <th>Predicate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>string</td>
+                            <td>typeof s === "string"</td>
+                        </tr>
+                        <tr>
+                            <td>number</td>
+                            <td>typeof n === "number"</td>
+                        </tr>
+                        <tr>
+                            <td>boolean</td>
+                            <td>typeof b === "boolean"</td>
+                        </tr>
+                        <tr>
+                            <td>undefined</td>
+                            <td>typeof undefined === "undefined"</td>
+                        </tr>
+                        <tr>
+                            <td>function</td>
+                            <td>typeof f === "function"</td>
+                        </tr>
+                        <tr>
+                            <td>array</td>
+                            <td>Array.isArray(a)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="mb-0">
+                        This is useful in that it allows the function to behave differently based on the tested type,
+                        like so:
+                    </p>
+                    <pre class="mb-2">
+    function exampleTypeof(obj: string | string[]) {
+        if(typeof obj === "string") {
+            // Do this
+        } else {
+            // Do this instead
+        }
+    }
+</pre>
+                </div>
+                <div class="form-control mb-2">
+                    <a id="ts_generics_anchor"><h4>Generics</h4></a>
+                    <p class="mb-0">
+                        Generics provide variables to types. Generics are commonly applied to <i>arrays</i>. The reason
+                        being that arrays (without generics applied) can contain any type and any combination of types
+                        as items. Using generics on an array will force it to accept only values whose type matches the
+                        applied generic type. Examples below:
+                    </p>
+                    <pre class="mb-2">
+    type StringArray = Array&lt;string&gt;;
+    type NumberArray = Array&lt;number&gt;;
+    type ObjectWithNameArray = Array&lt;{ name: string }&gt;;
+</pre>
+                    <p class="mb-0">We can also declare custom types using generics. Example below:</p>
+                    <pre class="mb-1">
+    interface Backpack&lt;Type&gt; {
+        add: (obj: Type) =&gt; void;
+        get: () =&gt; Type;
+    }
+
+    // Essentially tells TS that there is a constant named 'backpack' and sets the type to 'string'
+    declare const backpack: Backpack&lt;string&gt;;
+
+    // The 'object' must be a string because we set the type to 'string' when we declared 'backpack'
+    const object = backpack.get();
+
+    // TS will mark this as an error because 123 is a 'number' and 'backpack' only accepts 'string' values
+    backpack.add(123); // will produce an error
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <a id="ts_structural_types_anchor"><h4>Structural Type System:</h4></a>
+                    <p class="mb-1">
+                        One of TS's core principles is that type checking focuses on the "shape" that values have. This
+                        is also known as "duck typing" or "structural typing". In a Structural Type system, if two
+                        objects have the same "shape", then they are considered to be of the same type. Example:
+                    </p>
+                    <pre class="mb-1">
+    interface Point {
+        x: number;
+        y: number;
+    }
+
+    function logPointFunction(p: Point) {
+        console.log(`${p.x}, ${p.y}`);
+    }
+
+    const point2 = { x: 12, y: 26 };
+    logPointFunction(point2);
+    // This function is able to take point2 because it has the same structure as a Point object
+
+
+    const point3 = { first_name: 'John', last_name: 'Doe'};
+    logPointFunction(point3); // will produce an error
+    // This function won't take point3 because the variable's structure is different from a Point type
+</pre>
+                    <p class="mb-0">
+                        In the above example, the 'point2' variable is never declared to be a 'Point' type, but because
+                        TS compares the shape of 'point2' to the shape of 'Point' and determined it to be a structural
+                        match, that variable is deemed acceptable as a value to the 'logPointFunction(p: Point)'
+                        function. The structure of the variable does not need to match the object exactly, however. The
+                        variable only requires a subset of the object's fields to match. So in the above example, if the
+                        variable is a dict and has at least a variable of type 'number' named 'x' and a variable of type
+                        'number' named 'y', then it is still deemed as acceptable. See below examples:
+                    </p>
+                    <pre class="mb-2">
+    ...
+    const point4 = { x: 12, y: 26, z: 30 };
+    logPointFunction(point4);
+    // The existence of the 'z' variable in 'point4' does not make it ineligible for use in the function
+
+    const point5 = { x: 12, y: 26, first_name: 'Jane', last_name: 'Doe' };
+    logPointFunction(point5);
+    // The additional variables' typings are ignored by the function as it only checks for 'x' and 'y'
+
+    const point6 = { hex_color: "#000000" };
+    logPointFunction(point6); // will produce an error
+    // No 'x' and 'y' variables of type 'number' are found in the variable, so the function rejects it</pre>
+                    <p class="mb-0">
+                        There's no difference between how classes and objects conform to shapes. If the object or class
+                        has all of the required properties, then TS will say they match, regardless of the
+                        implementation details. See example below:
+                    </p>
+                    <pre class="mb-1">
+    class PointTwo {
+        x: number;
+        y: number;
+
+        constructor(x: number, y: number) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    const pointTwoVar = new PointTwo(10, 20);
+    logPointFunction(pointTwoVar);</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block chapter_block %}
+    TypeScript - Intro & Install
+{% endblock %}
+
+{% block glossary_block %}
+    <li>
+        <a class="dropdown-item" href="#ts_anchor"><strong>TypeScript - Intro & Installation</strong></a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_intro_anchor">&nbsp;&nbsp;&nbsp;Introduction</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_install_anchor">&nbsp;&nbsp;&nbsp;Setup/Installation/Start</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_relationship_anchor">&nbsp;&nbsp;&nbsp;Relationship between TypeScript &
+            JavaScript</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_typing_anchor">&nbsp;&nbsp;&nbsp;TypeScript Typing</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_implicit_typing_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Types by
+            Inference</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_explicit_typing_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Explicitly)
+            Defining Types</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_types_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Composing Types</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_union_types_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unions</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_generics_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generics</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#ts_structural_types_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Structural
+            Type System</a>
+    </li>
+{% endblock %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Survivor.io - Pets</title>
+{% endblock %}
+
+{% block body_block %}
+<a id="pets_anchor"><h1>Survivor.io <span class="door">-</span> Pets</h1></a>
+<div class="form-control mb-2">
+    <a id="awakening_costs_anchor"><h2>Awakening Costs</h2></a>
+    <img src="{% static 'media/images/survivorio/awakening_costs.pets.jpg' %}" alt="awakening_costs.pets.jpg"
+         width="50%">
+</div>
+
+<div class="form-control mb-2">
+    <a id="skills_anchor"><h2>Skills</h2></a>
+    <img src="{% static 'media/images/survivorio/pet_skills.1of3.png' %}" alt="pet_skills.1of3.png" width="100%">
+    <img src="{% static 'media/images/survivorio/pet_skills.2of3.png' %}" alt="pet_skills.2of3.png" width="100%">
+    <img src="{% static 'media/images/survivorio/pet_skills_3of3.png' %}" alt="pet_skills_3of3.png" width="100%">
+</div>
+
+<div class="form-control mb-2">
+    <a id="assist_skills_anchor"><h2>Assist Skills</h2></a>
+    <img src="{% static 'media/images/survivorio/pet_assist_skills.png' %}" alt="pet_assist_skills.png" width="100%">
+</div>
+
+<div class="form-control mb-2">
+    <a id="buffs_anchor"><h2>Buffs</h2></a>
+    <img src="{% static 'media/images/survivorio/pet_buffs.1of4.png' %}" alt="pet_buffs.1of4.png" width="100%">
+    <img src="{% static 'media/images/survivorio/pet_buffs.2of4.png' %}" alt="pet_buffs.2of4.png" width="100%">
+    <img src="{% static 'media/images/survivorio/pet_buffs.3of4.png' %}" alt="pet_buffs.3of4.png" width="100%">
+    <img src="{% static 'media/images/survivorio/pet_buffs.4of4.png' %}" alt="pet_buffs.4of4.png" width="100%">
+</div>
+
+<div class="form-control mb-2">
+    <a id="preferred_toys_anchor"><h2>Preferred Toys</h2></a>
+    <img src="{% static 'media/images/survivorio/pet_preferred_toys.png' %}" alt="pet_preferred_toys.png" width="30%">
+</div>
+
+{% endblock %}
+
+{% block chapter_block %}
+Survivor.io - Pets
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#pets_anchor">Survivor.io - Pets</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#awakening_costs_anchor">&nbsp;&nbsp;&nbsp;Awakening Costs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#skills_anchor">&nbsp;&nbsp;&nbsp;Skills</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#assist_skills_anchor">&nbsp;&nbsp;&nbsp;Assist Skills</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#buffs_anchor">&nbsp;&nbsp;&nbsp;Buffs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#preferred_toys_anchor">&nbsp;&nbsp;&nbsp;Preferred Toys</a>
+</li>
+
+{% endblock %}

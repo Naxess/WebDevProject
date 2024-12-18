@@ -1,0 +1,364 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>SQL - Basics</title>
+{% endblock %}
+
+{% block body_block %}
+<a id="sql_basics_anchor"><h1>SQL <span class="door">-</span> Basics</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="create_table_anchor"><h2>Create a table - Using <em>CREATE TABLE</em></h2></a>
+        <pre>CREATE TABLE [IF NOT EXISTS] [<i>schema_name</i>].<i>table_name</i> (
+            <i>col_1</i> data_type [PRIMARY KEY] [AUTOINCREMENT],
+            <i>col_2</i> data_type [NOT NULL] [UNIQUE],
+            <i>col_3</i> data_type [DEFAULT <i>default_value</i>],
+            ...
+        );</pre>
+
+        <div class="form-control mb-1">
+            <a id="foreign_keys_anchor"><h3>Foreign keys</h3></a>
+            <pre>PRAGMA foreign_keys = ON;</pre>
+            <pre>CREATE TABLE [IF NOT EXISTS] [<i>schema_name</i>].<i>table_one</i> (
+            <i>col_1</i> data_type [PRIMARY KEY] [AUTOINCREMENT],
+            <i>col_2</i> data_type,
+            <i>col_3</i> data_type
+        );</pre>
+            <pre>CREATE TABLE [IF NOT EXISTS] [<i>schema_name</i>].<i>table_two</i> (
+            <i>col_11</i> data_type [PRIMARY KEY],
+            <i>col_22</i> data_type,
+            <i>col_33</i> data_type,
+            FOREIGN KEY (<i>col_33</i>) REFERENCES <i>table_one</i> (<i>col_1</i>) [ON DELETE <i>action</i> ON UPDATE <i>action</i>]
+        );</pre>
+            <p class="mb-1">Some example options:</p>
+            <ul class="mb-1">
+                <li><i>SET NULL</i> - Changes to the parent key will set corresponding child keys to NULL</li>
+                <li><i>SET DEFAULT</i> - Changes to the parent key will set the value of the corresponding child keys to
+                    the
+                    default value (if specified) or null
+                </li>
+                <li><i>RESTRICT</i> - Prevents the parent key from being deleted or updated</li>
+                <li><i>NO ACTION</i> - (See RESTRICT)</li>
+                <li><i>CASCADE</i> - Changes to the parent key will propogate those same changes to the corresponding
+                    child
+                    keys
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="alter_table_anchor"><h2>Rename tables/columns - Using <em>ALTER TABLE</em></h2></a>
+        <div class="form-control mb-2">
+            <a id="rename_table_anchor"><h3>Rename table</h3></a>
+            <pre class="mb-1">ALTER TABLE <i>table_name</i> RENAME TO <i>new_table_name</i>;</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="rename_column_anchor"><h3>Rename column</h3></a>
+            <pre class="mb-1">ALTER TABLE <i>table_name</i> RENAME COLUMN TO <i>new_table_name</i>;</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="drop_table_anchor"><h2>Delete a table - Using <em>DROP TABLE</em></h2></a>
+        <pre class="mb-1">DROP TABLE [IF EXISTS] [<i>schema_name</i>].<i>table_name</i>;</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="select_anchor"><h2>Retrieve data from a table - Using <em>SELECT</em></h2></a>
+        <pre>SELECT [DISTINCT] <i>col_1</i>, <i>col_2</i>, <i>col_3</i>, ... FROM <i>table_name</i> [LIMIT <i>max_rows_to_select</i>];</pre>
+        <div class="form-control mb-2">
+            <a id="stats_operations_anchor"><h3>Max, Min, Avg, Count, Sum Operations</h3></a>
+            <pre>SELECT <i>statistical_operation</i>(<i>col_1</i>) FROM <i>table_name</i>;</pre>
+            <p class="mb-1">Some statistical operations:</p>
+            <ul class="mb-1">
+                <li><i>MIN</i> - Selects the lowest value for the selected column</li>
+                <li><i>MAX</i> - Selects the highest value for the selected column</li>
+                <li><i>AVG</i> - Outputs the average of all of the values for the selected column</li>
+                <li><i>COUNT</i> - Outputs the number of rows for the selected column</li>
+                <li><i>SUM</i> - Outputs the sum of all of the values for the selected column</li>
+            </ul>
+        </div>
+        <div class="form-control mb-2">
+            <a id="groupby_anchor"><h3>Group By</h3></a>
+            <pre class="mb-1">SELECT <i>col_1</i>, <i>col_2</i>, <i>col_3</i>, ... FROM <i>table_name</i> GROUP BY <i>col_1, ...</i>;</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="where_anchor"><h3>Retrieve rows whose columns match a condition - Using <em>WHERE</em></h3></a>
+            <pre>SELECT <i>col_1</i>, <i>col_2</i>, <i>col_3</i>, ... FROM <i>table_name</i> WHERE <i>condition</i>;</pre>
+
+            <div class="form-control mb-1">
+                <a id="operators_anchor"><h4>Operators:</h4></a>
+                <div class="form-control mb-2">
+                    <a id="comparison_operators_anchor"><h5>Comparison operators:</h5></a>
+                    <table class="table table-bordered mb-2">
+                        <tr class="table-dark">
+                            <th>Operator</th>
+                            <th>Meaning</th>
+                            <th>Usage</th>
+                        </tr>
+                        <tr>
+                            <td>=</td>
+                            <td>Equal to</td>
+                            <td><i>col_1</i> <strong><i> = </i></strong> <i>value_1</i></td>
+                        </tr>
+                        <tr>
+                            <td><> or !=</td>
+                            <td>Not equal to</td>
+                            <td><i>col_1</i> <strong><i> < > </i></strong> <i>value_1</i><br><i>col_1</i> <strong><i>
+                                != </i></strong> <i>value_1</i></td>
+                        </tr>
+                        <tr>
+                            <td><</td>
+                            <td>Less than</td>
+                            <td><i>col_1</i> <strong><i> < </i></strong> <i>value_1</i></td>
+                        </tr>
+                        <tr>
+                            <td>></td>
+                            <td>Greater than</td>
+                            <td><i>col_1</i> <strong><i> > </i></strong> <i>value_1</i></td>
+                        </tr>
+                        <tr>
+                            <td><=</td>
+                            <td>Less than or equal to</td>
+                            <td><i>col_1</i> <strong><i> <= </i></strong> <i>value_1</i></td>
+                        </tr>
+                        <tr>
+                            <td>>=</td>
+                            <td>Greater than or equal to</td>
+                            <td><i>col_1</i> <strong><i> >= </i></strong> <i>value_1</i></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="form-control mb-1">
+                    <a id="logical_operators_anchor"><h5>Logical operators:</h5></a>
+                    <table class="table table-bordered mb-2">
+                        <tr class="table-dark">
+                            <th>Operator</th>
+                            <th>Meaning</th>
+                            <th>Usage</th>
+                        </tr>
+                        <tr>
+                            <td>AND</td>
+                            <td>Returns true if both are true</td>
+                            <td>... WHERE <i>condition_1 AND condition_2;</i></td>
+                        </tr>
+                        <tr>
+                            <td>OR</td>
+                            <td>Returns true if either expression is true</td>
+                            <td>... WHERE <i>condition_1 OR condition_2;</i></td>
+                        </tr>
+                        <tr>
+                            <td>NOT</td>
+                            <td>Reverses the value of other operators</td>
+                            <td>... WHERE NOT <i>condition</i>;</td>
+                        </tr>
+                        <tr>
+                            <td>BETWEEN</td>
+                            <td>Returns true if a value is within a range</td>
+                            <td>... WHERE <i>col_1</i> BETWEEN <i>min_value_1</i> AND <i>max_value_2</i>;</td>
+                        </tr>
+                        <tr>
+                            <td>EXISTS</td>
+                            <td>Returns true if a subquery contains any rows</td>
+                            <td>... WHERE EXISTS (SELECT <i>col_1</i> FROM <i>table_name</i> WHERE <i>condition</i>);
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>IN</td>
+                            <td>Returns true if a value is in a list of values</td>
+                            <td>... WHERE <i>col_1</i> IN (<i>value_1, value_2, value_3, ...</i>);</td>
+                        </tr>
+                        <tr>
+                            <td>LIKE</td>
+                            <td>Returns true if a value matches a pattern</td>
+                            <td>... WHERE <i>col_1</i> LIKE '<i>pattern</i>';</td>
+                        </tr>
+                        <tr>
+                            <td>ALL</td>
+                            <td>Returns true if the value matches all of the values returned from the subquery</td>
+                            <td>... WHERE <i>col_1</i> <i>operator</i> ALL (SELECT <i>col_1</i> FROM <i>table_name</i>
+                                WHERE
+                                <i>condition</i>);
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ANY</td>
+                            <td>Returns true if any of a set of comparisons is true</td>
+                            <td>... WHERE <i>col_1</i> <i>operator</i> ANY (SELECT <i>col_1</i> FROM <i>table_name</i>
+                                WHERE
+                                <i>condition</i>);
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="like_anchor"><h3>LIKE</h3></a>
+            <div class="form-control mb-2">
+                <a id="infinite_wildcard_anchor"><h4>Infinite length wildcard: %</h4></a>
+                <pre class="mb-1">SELECT <i>col_1</i>, <i>col_2</i>, <i>col_3</i>, ... FROM <i>table_name</i> WHERE <i>col_1</i> LIKE '%hn';</pre>
+            </div>
+            <div class="form-control mb-1">
+                <a id="single_wildcard_anchor"><h4>Single character wildcard: _</h4></a>
+                <pre class="mb-1">SELECT <i>col_1</i>, <i>col_2</i>, <i>col_3</i>, ... FROM <i>table_name</i> WHERE <i>col_1</i> LIKE 'J_hn';</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="having_anchor"><h3>Retrieve rows whose columns match a condition - Using <em>HAVING</em></h3></a>
+            <pre class="mb-1">SELECT <i>col_1, col_2, ...</i> FROM <i>table_name</i> GROUP BY <i>col_1</i> HAVING <i>condition</i>;</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="joins_anchor"><h3>Retrieve data from multiple tables - Using <em>JOINS</em></h3></a>
+            <div class="form-control mb-2">
+                <a id="inner_join_anchor"><h4>Inner Join</h4></a>
+                <pre class="mb-1">SELECT <i>table_one.col_2</i>, <i>table_two.col_22</i>, ...
+        FROM <i>table_one</i>
+        INNER JOIN <i>table_two</i>
+        ON <i>table_two.col_22</i> = <i>table_one.col_1</i>;</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="leftjoin_anchor"><h4>Left Join</h4></a>
+                <pre class="mb-1">SELECT <i>table_one.col_2</i>, <i>table_two.col_22</i>, ...
+        FROM <i>table_one</i>
+        LEFT JOIN <i>table_two</i>
+        ON <i>table_two.col_22</i> = <i>table_one.col_1</i>;</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="crossjoin_anchor"><h4>Cross Join</h4></a>
+                <p>Creates new rows by joining rows from two tables based on a condition, thus creating rows_a * rows_b
+                    rows.</p>
+                <pre class="mb-1">SELECT * FROM <i>table_one</i> CROSS JOIN <i>table_two</i>
+        ON <i>table_two.col_22</i> = <i>table_one.col_1</i>;</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="union_anchor"><h4>Union</h4></a>
+                <pre class="mb-1">SELECT <i>col_1, col_2, ...</i> FROM <i>table_one</i> UNION SELECT <i>col_1, col_2, ...</i> FROM <i>table_two</i>;</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <a id="joins_examples_anchor"><h4>Visual examples of common SQL Joins:</h4></a>
+                <img src="{% static 'media/images/examples/sql_basics.join_types.jpg' %}" alt="" width="100%"
+                     class="mb-1">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="insert_anchor"><h2>Insert new data into a table - Using <em>INSERT</em></h2></a>
+        <pre class="mb-1">INSERT INTO <i>table_name</i> (<i>col_1, col_2, col_3, ...</i>)
+        VALUES (<i>value_1, value_2, value_3, ...</i>);</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="delete_anchor"><h2>Delete data from a table - Using <em>DELETE</em></h2></a>
+        <pre class="mb-1">DELETE FROM <i>table_name</i> [WHERE <i>condition</i>];</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="update_anchor"><h2>Update existing data - Using <em>UPDATE</em></h2></a>
+        <pre class="mb-1">UPDATE <i>table_name</i> SET <i>col_1</i> = <i>new_value_1</i>, <i>col_2</i> = <i>new_value_2</i>, ... WHERE <i>condition</i>;</pre>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+SQL - Basics
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#sql_basics_anchor"><strong>SQL - Basics</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#create_table_anchor">Create a table - Using CREATE TABLE</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#foreign_keys_anchor">&nbsp;Foreign keys</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#alter_table_anchor">Rename tables/columns - Using ALTER TABLE</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#rename_table_anchor">&nbsp;&nbsp;&nbsp;Rename table</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#rename_column_anchor">&nbsp;&nbsp;&nbsp;Rename column</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#drop_table_anchor">Delete a table - Using DROP TABLE</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#select_anchor">Retrieve data from a table - Using SELECT</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#stats_operations_anchor">&nbsp;&nbsp;&nbsp;Max, Min, Avg, Count, Sum Operations</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#groupby_anchor">&nbsp;&nbsp;&nbsp;Group By</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#where_anchor">&nbsp;&nbsp;&nbsp;Where</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#operators_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operators:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#comparison_operators_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comparison operators:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#logical_operators_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logical operators:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#like_anchor">&nbsp;&nbsp;&nbsp;LIKE</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#infinite_wildcard_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Infinite length wildcard: %</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#single_wildcard_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Single character wildcard: _</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#having_anchor">&nbsp;&nbsp;&nbsp;Retrieve rows whose columns match a condition - Using HAVING</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#joins_anchor">&nbsp;&nbsp;&nbsp;Retrieve data from multiple tables - Using JOINS</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inner_join_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inner Join</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#leftjoin_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left Join</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#crossjoin_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cross Join</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#union_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Union</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#joins_examples_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visual examples of common SQL Joins:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#insert_anchor">Insert new data into a table - Using INSERT</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#delete_anchor">Delete data from a table - Using DELETE</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#update_anchor">Update existing data - Using UPDATE</a>
+</li>
+{% endblock %}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>CSS Selectors</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="css_selectors_anchor"><h1 class="p-2">CSS <span class="door">-</span> Selectors</h1></a>
+<div class="form-control">
+    <p class="mb-2">
+        In CSS, selectors are patterns used to select desired elements from a HTML webpage. Once selected, changes and
+        other effects can be applied to the elements.
+    </p>
+    <div class="form-control mb-2">
+        <h5>Syntax:</h5>
+        <pre class="mb-0">
+    <em>&lt;selector&gt;</em> {
+        &lt;propertyName&gt;: <em>&lt;propertyValue&gt;</em>;
+        &lt;propertyName2&gt;: <em>&lt;propertyValue2&gt;</em>;
+        ...
+    }</pre>
+
+        <h5>Example usage:</h5>
+        <pre class="mb-1">
+    body {
+        margin: 10px;
+        padding: 10px;
+        background-color: gray;
+    }</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="selector_types_anchor"><h2>Types of Selectors</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Selector</th>
+                <th>Functionality</th>
+                <th>Syntax/Example Usages</th>
+            </tr>
+
+            <tr>
+                <td>Universal Selector</td>
+                <td>Using an asterisk ( * ) as the selector will select <strong>everything</strong> in the document.
+                </td>
+                <td>
+                    <pre class="mb-0">* { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1&gt;Selected&lt;/h1&gt;
+    &lt;h2&gt;Selected&lt;/h2&gt;
+    &lt;h3&gt;Selected&lt;/h3&gt;
+&lt;/body&gt;
+
+// Selects every element on the page
+* { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Element (AKA 'Tag name' or Type) Selector</td>
+                <td>
+                    Selects all instances of the specified tag/element name (i.e. html elements such as body, h1, div,
+                    p, etc..). To select multiple different tags, use a comma as a delimiter (ex. h1, h2, h3 { ... }).
+                </td>
+                <td>
+                <pre class="mb-0">
+elementName { ... }
+elementName, element2Name, element3Name { ... }
+</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1&gt;Selected&lt;/h1&gt;
+    &lt;h2&gt;Selected&lt;/h2&gt;
+    &lt;h3&gt;Selected&lt;/h3&gt;
+&lt;/body&gt;
+
+// Selects the 'body' element
+body { ... }
+// Selects all 'h1', 'h2', and 'h3' elements
+h1, h2, h3 { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>ID Selector</td>
+                <td>Selects the element on the page with the specified ID. IDs must start with a hashtag, like so:
+                    #exampleId, #JohnDoe, #idsMustBeUnique, etc..
+                </td>
+                <td>
+                    <pre class="mb-0">#id { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1 id="ExampleId"&gt;Selected&lt;/h1&gt;
+&lt;/body&gt;
+
+// Selects the 'h1' element with the 'id' attribute of 'ExampleId'
+#ExampleId { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Class Selector</td>
+                <td>
+                    Selects elements on the page whose class attribute matches the specified value. Classes must start
+                    with a dot (period), like so: .exampleClass, .ClassOf2024, .classy
+                </td>
+                <td>
+                    <pre class="mb-0">.className { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1 class="exampleClass"&gt;Selected&lt;/h1&gt;
+&lt;/body&gt;
+
+// Selects the 'h1' element with a 'class' attribute of 'exampleClass'
+.exampleClass { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Class-Value Selector V2</td>
+                <td>
+                    Elements can be selected based on the value assigned to the class attribute by specifying the
+                    element name and the value assigned to the class attribute, separated by a dot. Example:
+                    span.highlight will select &lt;span class="highlight"&gt;&lt;/span&gt;
+                </td>
+                <td>
+                    <pre class="mb-0">elementName.classValue { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1 class="highlight"&gt;Selected by #1&lt;/h1&gt;
+    &lt;input type="text" class="form-control"&gt;Selected by #2&lt;/a&gt;
+&lt;/body&gt;
+
+// #1. Selects 'h1' tags with a 'class' attribute value of 'highlight'
+h1.highlight { ... }
+
+// #2. Selects 'input' tags with a 'class' attribute value of 'form-control'
+input.form-control { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Attribute Selector</td>
+                <td>
+                    <p class="mb-2">
+                        Selects elements on the page that match the specified element and contain the specified
+                        attribute. For attributes, results can be further narrowed by specifying the value. The
+                        selection criteria can be expanded to match elements with attribute values that contain the
+                        specified value. Additionally, adding the letter <em>i</em> into the square bracket after the
+                        specified value allows the search to ignore case-sensitivity.
+                    </p>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>
+                                <strong><em>[attributeName]</em></strong>
+                                <br>
+                                Matches any elements that contain the provided attribute
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><em>~=</em></strong>
+                                <br>
+                                Matches elements whose attribute values contain the specified value in its
+                                space-delimited
+                                list of values
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><em>|=</em></strong>
+                                <br>
+                                Matches elements whose attribute value is exactly the specified value or begins with the
+                                value followed by a hyphen ( - )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><em>^=</em></strong>
+                                <br>
+                                Matches elements whose attribute value begins with the specified value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><em>$=</em></strong>
+                                <br>
+                                Matches elements whose attribute value ends with the specified value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><em>*=</em></strong>
+                                <br>
+                                Matches elements whose attribute value contains the specified value as a substring
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong><em>i</em></strong>
+                                <br>
+                                When added to the square brackets, it allows the search to ignore case-sensitivity
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                <pre class="mb-0">
+[attributeName]{ ... }
+elementName[attributeName]{ ... }
+elementName[attributeName='attributeValue']{ ... }
+elementName[attributeName~='attributeValue']{ ... }
+elementName[attributeName|='attributeValue']{ ... }
+elementName[attributeName^='attributeValue']{ ... }
+elementName[attributeName$='attributeValue']{ ... }
+elementName[attributeName*='attributeValue']{ ... }
+elementName[attributeName='attributeValue' i]{ ... }
+</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;a&gt;This won't be selected - no 'href' attribute.&lt;/a&gt;
+    &lt;a href="#"&gt;This will be selected by #1&lt;/a&gt;
+    &lt;a href="https://www.google.com/"&gt;This will be selected by #1 and #2&lt;/a&gt;
+    &lt;img src="profile_pic.png" alt="This will be selected by #3 and #4"&gt;
+    &lt;video src="audition.mp4"&gt;This will be selected by #4&lt;/video&gt;
+&lt;/body&gt;
+
+// #1. Matches the 2nd and 3rd 'a' tags
+a[href] { ... }
+
+// #2. Matches the 3rd 'a' tag
+a[href="https://www.google.com/"] { ... }
+
+// #3. Matches the 'img' tag
+img[src="profile_pic.png"] { ... }
+
+// #4. Matches all elements that contain the 'src' tag, regardless of type
+[src] { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Pseudo-class Selector</td>
+                <td>Selects elements on the page that match the provided element and attached pseudo-class.
+                    Pseudo-classes can be identified because they start with a single colon.
+                    <br>
+                    Examples of pseudo-classes: :active, :blank, :disabled, :enabled, :hover, :optional, :required,
+                    :paused, :playing, :stalled, :read-only, :read-write, :focus, :first-child, :last-child)
+                    pseudo-elements (which select a certain part of an element rather than the element itself).
+                </td>
+                <td>
+                    <pre class="mb-0">elementName:pseudoClass { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;p&gt;This won't be selected&lt;/p&gt;
+    &lt;p&gt;This element will be selected because it's the last sibling.&lt;/p&gt;
+&lt;/body&gt;
+
+// Selects the last 'p' element that is a descendant of 'body'
+body p:last-child { ... }
+
+// Selects the element only when the mouse pointer is hovering over it
+a:hover { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Pseudo-element Selector</td>
+                <td>
+                    Selects <strong>parts</strong> of elements in the document that match the provided pseudo-elements.
+                    For example, <em>p::first-line</em> will return the first-line of text in a paragraph, but not the
+                    paragraph element itself. Pseudo-elements can be identified because they start with a double colon.
+                    <br>
+                    Examples of pseudo-elements: ::first-letter, ::first-line, ::placeholder, ::selection, ::before,
+                    ::after, ::grammar-error, ::spelling-error
+                </td>
+                <td>
+                    <pre class="mb-0">elementName::pseudoElement { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;p&gt;This text (not the element itself) will be selected&lt;/p&gt;
+&lt;/body&gt;
+
+// Selects the first line of text inside of the element
+// (instead of the element itself)
+p::first-line { ... }
+</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;p&gt;This text (not the element itself) will be selected&lt;/p&gt;
+    &lt;p&gt;This won't selected, because it isn't the first sibling.&lt;/p&gt;
+&lt;/body&gt;
+
+// Usages of pseudo-elements can be combined with pseudo-classes
+body p:first-child::first-line { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Descendant-Combinator Selector</td>
+                <td>
+                    Combines two or more selectors, each delimited by a single space. The first (leftmost) selector is
+                    the parent, with each following selector being a descendant of the previous one.
+                </td>
+                <td>
+                    <code>
+                        parent descendant descendantOfDescendant { ... }
+                    </code>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;em&gt;
+        &lt;u&gt;
+            &lt;s&gt;This element will be selected.&lt;/s&gt;
+        &lt;/u&gt;
+    &lt;/em&gt;
+&lt;/body&gt;
+
+// Selects all 's' elements that are descendants of 'em u'
+
+em u s { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Child-Combinator Selector</td>
+                <td>
+                    Combines two selectors, delimited by a greater-than symbol ( > ) that matches only those elements
+                    matched by the second selector that are the direct children of elements matched by the first. The
+                    right selector must be a <em>direct</em> child of the left selector.
+                </td>
+                <td>
+                    <pre class="mb-0">parentElement > desiredElement { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;ul&gt;
+        &lt;li&gt;This element will be selected.&lt;/li&gt;
+        &lt;li&gt;This will also be selected.&lt;/li&gt;
+        &lt;li&gt;This as well.&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+
+// Selects all 'li' elements that are children of 'ul'
+ul > li { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Next-sibling Combinator Selector</td>
+                <td>
+                    Combines two selectors, delimited by a plus sign ( + ) that matches only those elements matched by
+                    the second selector that are <em>immediately</em> preceded by the first selector.
+                </td>
+                <td>
+                    <pre class="mb-0">precedingSibling + desiredSibling { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1&gt;Hello&lt;/h1&gt;
+    &lt;p&gt;This element will be selected.&lt;/p&gt;
+    &lt;p&gt;This won't because it doesn't appear immediately after.&lt;/p&gt;
+&lt;/body&gt;
+
+// Selects all 'p' elements that are preceded by 'h1'
+h1 + p { ... }
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td>Subsequent-sibling Combinator Selector</td>
+                <td>
+                    Allows selecting siblings of an element even if they are not directly adjacent. The right selector
+                    matches all elements that come anywhere after the left selector even if there are non-target
+                    elements in between.
+                </td>
+                <td>
+                    <pre class="mb-0">precedingSibling ~ desiredSiblings { ... }</pre>
+                    <hr class="my-2">
+                    <pre class="mb-0">
+&lt;body&gt;
+    &lt;h1&gt;Hello&lt;/h1&gt;
+    &lt;p&gt;This element will be selected.&lt;/p&gt;
+    &lt;img src="#" alt="Won't be selected."&gt;
+    &lt;p&gt;This will also be selected.&lt;/p&gt;
+&lt;/body&gt;
+
+// Selects all 'p' elements that appear after 'h1'
+h1 ~ p { ... }
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block chapter_block %}
+CSS - Selectors
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#css_selectors_anchor"><strong>CSS Selectors</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#selector_types_anchor">Types of Selectors</a>
+</li>
+{% endblock %}

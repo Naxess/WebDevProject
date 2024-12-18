@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>CSS - Basics</title>
+<link rel="stylesheet" href="{% static 'css/css_basics.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body_block %}
+<a id="css_basics_anchor"><h1>CSS <span class="door">-</span> Basics</h1></a>
+<div class="form-control mb-2">
+    <p class="mb-2">
+        CSS is not a programming language or a markup language. It is a <strong>style sheet language</strong>. It is
+        used to selectively style HTML elements. A style sheet can be applied in 3 ways:
+    </p>
+    <table class="table table-bordered mb-2">
+        <tr class="table-dark">
+            <th></th>
+            <th>Description</th>
+            <th>Example Usage</th>
+        </tr>
+        <tr>
+            <td>External CSS</td>
+            <td>Refers to when the CSS stylesheet is on a separate file from the HTML page. The HTML page must reference
+                this external CSS stylesheet file by using the <em>link</em> tag. The <em>rel</em> attribute must be set
+                to <u>stylesheet</u> and the <em>href</em> attribute must be set to the location of the file. The
+                <em>link</em> tag should be defined inside of the <em>head</em> section of the HTML page.
+            </td>
+            <td>
+                <h6 class="mb-1">HTML Code:</h6>
+                <pre>
+&lt;html&gt;
+    &lt;head&gt;
+        <mark>&lt;link rel="stylesheet" href="external_css_file.css"&gt;</mark>
+    &lt;/head&gt;
+    ...
+&lt;/html&gt;
+</pre>
+                <h6 class="mb-1">external_css_file.css:</h6>
+                <pre class="mb-0">
+<mark>body{</mark>
+    <mark>background-color:ghostwhite;}</mark>
+    <mark>margin:15px;}</mark>
+<mark>}</mark>
+<mark>h1{</mark>
+    <mark>color:red;</mark>
+<mark>}</mark>
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>Internal CSS</td>
+            <td>When CSS style sheets are defined within the HTML page, it is referred to as internal CSS. To do this,
+                create a <em>style</em> tag inside of the <em>head</em> section of the page. Finally, supply the CSS
+                properties/values inside the <em>style tag</em>. There are no attributes that need to be specified.
+            </td>
+            <td>
+                <pre class="mb-0">
+&lt;html&gt;
+    &lt;head&gt;
+        <mark>&lt;style&gt;</mark>
+            <mark>body{</mark>
+                <mark>background-color:ghostwhite;</mark>
+                <mark>margin:15px;</mark>
+            <mark>}</mark>
+            <mark>h1{</mark>
+                <mark>color:red;</mark>
+            <mark>}</mark>
+        <mark>&lt;/style&gt;</mark>
+    &lt;/head&gt;
+    ...
+&lt;/html&gt;
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>Inline CSS</td>
+            <td>Used to apply CSS styling to a single element. This is done by adding the <em>style</em> attribute to
+                the element, then supplying that attribute with the desired CSS properties/values.
+            </td>
+            <td>
+                <pre class="mb-0">
+&lt;html&gt;
+    ...
+    &lt;body <mark>style="background-color:ghostwhite;margin:15px;"</mark>&gt;
+        &lt;h1 <mark>style="color:red;"</mark>&gt;Hello&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-control mb-2">
+        <a id="box_model_anchor"><h2>Box Model</h2></a>
+        <img src="{% static 'media/images/box_model_diagram.png' %}" alt="box_model_diagram.png" class="mb-2">
+        <p class="mb-2">
+            The CSS Box Model applies to block boxes and defines how different parts of a box - margin, border, padding,
+            and content - work together to create a box that you can see on a page.
+            <br>
+            Additionally, there are multiple types of boxes: content box, padding box, border box, and margin box.
+        </p>
+        <ul class="list-group mb-2">
+            <li class="list-group-item">
+                <strong>Padding</strong>: refers to the space directly around the outside of the content.
+            </li>
+            <li class="list-group-item">
+                <strong>Border</strong>: refers to the visible line that appears directly around the outside of the
+                padding.
+            </li>
+            <li class="list-group-item">
+                <strong>Margin</strong>: refers to the space directly around the outside of the border.
+            </li>
+            <li class="list-group-item">
+                <strong>Content box</strong>: refers to the area where the content is displayed. It can be sized using
+                properties like: <em>inline-size, block-size, width</em>, and <em>height</em>
+            </li>
+            <li class="list-group-item">
+                <strong>Padding box</strong>: refers to the space that sits around the content as whitespace. It can be
+                sized using <em>padding</em> and related properties.
+            </li>
+            <li class="list-group-item">
+                <strong>Border box</strong>: this box wraps the content and any padding. It can be sized using
+                <em>border</em> and related properties.
+            </li>
+            <li class="list-group-item">
+                <strong>Margin box</strong>: this box is the outermost layer, wrapping the content, padding, and border
+                as
+                whitespace between this box and other elements. It can be sized using <em>margin</em> and related
+                properties.
+            </li>
+        </ul>
+        <div class="form-control mb-1">
+            <h5>Example usage:</h5>
+            <pre class="mb-0">
+.box {
+    width: 350px;
+    height: 150px;
+    margin: 10px;
+    padding: 25px;
+    border: 5px;
+}
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="alt_box_model_anchor"><h2>Alternate Box Model</h2></a>
+        <p class="mb-2">
+            In the alternative box model, any width is the width of the visible box on the page. The content area
+            width is that width minus the width for the padding and border. Because of this, there's no need to add
+            up the border and padding to get the real size of the box.
+            <br>
+            To enable the alternate box model, we add the <em>box-sizing</em> property and set the value to
+            <em>content-box</em> or <em>border-box</em>, depending on the desired effect.
+        </p>
+        <ul>
+            <li>
+                <strong>content-box</strong>: gives the default CSS box-sizing behavior. If an element's width is
+                set to 100 pixels, then the element's content will be 100 pixels wide and the width of any border or
+                padding will be added to the final rendered width, making the element wider than 100px;
+            </li>
+            <li>
+                <strong>border-box</strong>: tells the browser to account for any border and padding (but not the
+                margin) in the values specified for an element's width and height. If an element's width is set to
+                100 pixels, that 100 pixels will include any border or padding that was added, and the content box
+                will shrink to absorb that extra width. This typically makes it easier to size elements.
+            </li>
+        </ul>
+        <div class="form-control mb-1">
+            <h5>Example usage:</h5>
+            <pre class="mb-0">
+.alt_box {
+    box-sizing: border-box; # Other option: content-box
+}
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="bgs_borders_anchor"><h2>Backgrounds & Borders</h2></a>
+        <div class="form-control mb-2">
+            <a id="backgrounds_anchor"><h3>Backgrounds</h3></a>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>background-color</td>
+                    <td>Defines the background color on any element in CSS. It accepts any valid &lt;color&gt;:
+                        <ul>
+                            <li>
+                                Keyword syntax: uses a &lt;named-color&gt; (e.g. <em>red</em>, <em>blue</em>,
+                                <em>green</em>, <em>orange</em>, <em>yellow</em>, <em>transparent</em>, etc..)
+                            </li>
+                            <li>
+                                Hexadecimal notation syntax: uses &lt;hex-color&gt; (e.g. <em>#ff0000</em>,
+                                <em>#00ff00</em>, <em>#0000ff</em>, <em>#ffffff</em>, <em>#000000</em>, etc..)
+                            </li>
+                            <li>
+                                Functional notations syntax: (e.g. <em>rgb(255,0,0)</em>, <em>rgb(0,255,0)</em>,
+                                <em>rgba(0,0,255, 0.5)</em>, <em>rgba(0,0,255 / 50%)</em>, etc..)
+                            </li>
+                            <li>
+                                Mixing colors syntax: (e.g. <em>color-mix(in lch, red, white)</em>,
+                                <em>color-mix(in lch, red 50%, white)</em>, <em>color-mix(in srgb, #ff0000 50%,
+                                white)</em>)
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>background-image</td>
+                    <td>
+                        Enables the display of an image in the background of an element.
+                        <pre class="mb-0">
+// Example usages:
+background-image:url("../media/profile_pic.png"); // image can be internal or from an online source
+
+// Can be supplied with multiple images, delimited by a comma
+// If multiple images are supplied, they will overlap, with higher priority given in the order in which they were supplied
+background-image:url("../arlan.webp"), url("../asta.webp");
+
+// Creates a background using the colors supplied
+// The color will gradate from the first supplied color to the other, in the direction supplied
+// (Other directions: 'to top', 'to bottom', 'to left');
+background-image:linear-gradient(to right, rgba(0,0,255,0.5), rgba(255,0,0,0.5)), url("../argenti.webp");
+</pre>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>background-repeat</td>
+                    <td>
+                        This property is used to control the tiling behavior of images. Available values: <em>no-repeat,
+                        repeat-x, repeat-y,</em> and <em>repeat</em>
+                        <pre class="mb-0">
+// Example usage:
+.box {
+    background-image:url("profile_pic.png");
+    background-repeat: repeat;
+}</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>background-size</td>
+                    <td>
+                        This property takes a <u>&lt;length&gt;</u>, <u>&lt;percentage&gt;</u> value or the
+                        <u>cover</u> or <u>contain</u> keywords to size the image to fit inside the background.
+                    </td>
+                </tr>
+                <tr>
+                    <td>background-position</td>
+                    <td>
+                        This property allows the position of a background image to be edited in relation to the box
+                        to it is applied to. It takes many values in several forms (coordinate, percentage, length,
+                        etc..).
+                        <ul>
+                            <li>
+                                Coordinate syntax takes two values, an <em>x</em> value and a <em>y</em>
+                                value, which correspond to the image's x and y axis.
+                                <ul>
+                                    <li>
+                                        Example usage: <em>background-position: 50px 100px;</em>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Keyword syntax takes one or two values. Acceptable values: <u>top</u>, <u>bottom</u>,
+                                <u>left</u>, <u>right</u>, <u>center</u>. If using two values, the directions should
+                                not contradict each other as they will cancel out.
+                                <ul>
+                                    <li>
+                                        Example usage: <em>background-position: top right;</em>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Percentage syntax values.
+                                <ul>
+                                    <li>
+                                        Example usage: <em>background-position: 25% 75%;</em>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Length syntax values.
+                                <ul>
+                                    <li>
+                                        Example usage: <em>background-position: 0 0;</em>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <em>Other combinations exist as well. See
+                                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">reference</a>.
+                                </em>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>background-attachment</td>
+                    <td>
+                        This property allows specifying how background images scroll when the content scrolls. It
+                        accepts the following values:
+                        <ul>
+                            <li>
+                                <u>scroll</u>: causes the element's background to scroll when the page is scrolled.
+                                If the element content is scrolled, the background does not move. In effect, the
+                                background is fixed to the same position on the page, so it scrolls as the page scrolls.
+                            </li>
+                            <li>
+                                <u>fixed</u>: causes an element's background to be fixed to the viewport so that it
+                                doesn't scroll when the page or element content is scrolled. It will alwaysremain in
+                                the same position on the screen.
+                            </li>
+                            <li>
+                                <u>local</u>: fixes the background to the element it is set on, so when the element
+                                is scrolled, the background scrolls with it.
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-control mb-1">
+            <a id="borders_anchor"><h3>Borders</h3></a>
+            <p class="mb-2">
+                Property that draws a border around the element. Similar to the <em>outline</em> property. Differences
+                being that outlines never take up space (as theyr are drawn outside of an element's content) and they
+                don't have to be rectangular.
+            </p>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>border</td>
+                    <td>Draws a border around the element using <em>border-width</em>, <em>border-style</em>, and
+                        <em>border-color</em> values. The property may be specified using one, two, or three of the
+                        values. The order in which they're supplied does not matter.
+                        <ul>
+                            <li><em>border-width</em>/<em>line-width</em>: sets the thickness of the border. Defaults to
+                                <u>medium</u> if absent.
+                                <br>
+                                Subcategories: <em>border-top-width</em>, <em>border-bottom-width</em>,
+                                <em>border-left-width</em>, <em>border-right-width</em>
+                                <br>
+                                Example usage:
+                                <pre class="mb-0">
+border-width:5px; // Sets the width of all sides of the border to 5px;
+border-top-width:10px; // Sets the width of only the top width to 10px;</pre>
+                            </li>
+                            <li><em>border-style</em>/<em>line-style</em>: sets the style of the border. Defaults to
+                                <u>none</u> if absent.
+                                <br>
+                                Subcategories: <em>border-top-style</em>, <em>border-bottom-style</em>,
+                                <em>border-left-style</em>, <em>border-right-style</em>
+                            </li>
+                            <li><em>border-color</em>/<em>color</em>: sets the color of the border. Defaults to
+                                <u>currentcolor</u> if absent.
+                                <br>
+                                Subcategories: <em>border-top-color</em>, <em>border-bottom-color</em>,
+                                <em>border-left-color</em>, <em>border-right-color</em>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>border-radius</td>
+                    <td>
+                        This property is used to round the corners on borders. This property accepts up to two lengths
+                        or percentages, which may be used as a value. The first value defines the horizontal radius, the
+                        second defines the vertical radius.
+                        <br>
+                        Subcategories: <em>border-top-right-radius</em>, <em>border-top-left-radius</em>,
+                        <em>border-bottom-left-radius</em>, <em>border-bottom-right-radius</em>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="fonts_text_anchor"><h2>Fonts and Text</h2></a>
+        <p class="mb-2">
+            The appearance of text can be modified using CSS properties. Things like the font size, color, placement,
+            styling, etc.. are all appearances that can be edited in CSS. Additionally, we can supply fonts from other
+            sources if desired.
+        </p>
+        <div class="form-control mb-2">
+            <a id="font_props_anchor"><h3>Font Properties</h3></a>
+            <ul class="list-group mb-1">
+                <li class="list-group-item">
+                    <strong>color</strong>: sets the color of the foreground content of the selected elements, usually
+                    the text, but can also include other things like underlines, overlines, etc..
+                    <br>
+                    Acceptable values: <em>named-colors</em> (red, blue, green, etc.., <em>rgb/rgba</em> (rgb(255 255
+                    0), rgba(0 255 255 0.5), etc..), and <em>hexidecimal values</em> (#ffffff, #000000, etc..).
+                </li>
+                <li class="list-group-item">
+                    <strong>font-family</strong>: applies a specified font(s) to selected elements. Some web-safe
+                    (i.e.common across a wide variety of browsers) fonts: <u>Arial</u>, <u>Courier New</u>,
+                    <u>Georgia</u>, <u>Times New Roman</u>, <u>Trebuchet MS</u>, <u>Verdana</u>. Default fonts:
+                    <u>serif</u>, <u>sans-serif</u>, <u>monospace</u>, <u>cursive</u>,<u>fantasy</u>.
+                    <br><br>
+                    Multiple fonts can be supplied as backups in case specified fonts are unavailable. Example:
+                    <em>font-family: "Trebuchet MS", Verdana, sans-serif</em>. If 'Trebuchet MS' is unavailable, then
+                    'Verdana' will be tried, if 'Verdana' unavailable, then sans-serif, etc.. This is called font
+                    stacking.
+                </li>
+                <li class="list-group-item">
+                    <strong>font-size</strong>: resizes element text to the specified size. Takes values in the form of
+                    px, em, and rem.
+                    <br>
+                    <ul>
+                        <li>
+                            <em>px</em> (pixels): refers to the number of pixels. Sets the text height to the number of
+                            pixels specified.
+                        </li>
+                        <li>
+                            <em>em</em>: refers to the font size set on the parent element.
+                        </li>
+                        <li>
+                            <em>rem</em>: refers to the font size set on the root element of the document.
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <strong>font-style</strong>: used to turn italic text on or off. Possible values: <u>normal</u>,
+                    <u>italic</u>, and <u>oblique</u>.
+                </li>
+                <li class="list-group-item">
+                    <strong>font-weight</strong>: used to set boldness. Possible values: <u>light</u>, <u>normal</u>,
+                    <u>bold</u>, <u>black</u>, and <u>a value between 100-900</u>).
+                </li>
+                <li class="list-group-item">
+                    <strong>text-transform</strong>: enables/disables text transformation. Possible values: <u>none</u>
+                    (prevents transformation), <u>uppercase</u>, <u>lowercase</u>, <u>capitalize</u>, <u>full-width</u>
+                    (transforms all glyphs to be written inside a fixed-width square, similar to a monospace font,
+                    allowing aligning of e.g., Latin characters along with Asian language glyphs (like Chinese,
+                    Japanese, Korean).
+                </li>
+                <li class="list-group-item">
+                    <strong>text-decoration</strong>: sets/unsets text decorations on fonts. Possible values:
+                    <u>none</u>, <u>underline</u>, <u>overline</u>, and <u>line-through</u>.
+                </li>
+                <li class="list-group-item">
+                    <strong>text-shadow</strong>: applies shadows to text. Accepts two to four values. These four
+                    properties in the order from left to right:
+                    <ul>
+                        <li>
+                            The horizontal offset of the shadow from the original text. Can take px values. Required.
+                        </li>
+                        <li>The vertical offset of the shadow from the original text. Can take px values. Required.</li>
+                        <li>
+                            The blur radius - a higher value means the shadow is dispersed more widely. Defaults to 0 if
+                            not specified.
+                        </li>
+                        <li>
+                            The base color of the shadow, which can take any CSS color unit. If not included, it
+                            defaults to <em>currentcolor</em>.
+                        </li>
+                    </ul>
+                    <br>
+                    Multiple shadows can be applied by adding additional rows of values, delimited by commas. Example:
+                    <pre>
+    h1 {
+        text-shadow:
+            1px 1px 2px red,
+            -1px -1px 2px blue,
+    }
+</pre>
+                </li>
+                <li class="list-group-item">
+                    <strong>text-align</strong>: this property is used to control how text is aligned within its
+                    containing
+                    content box. Possible values:
+                    <ul>
+                        <li><u>left</u>: left-justifies the text</li>
+                        <li><u>right</u>: right-justifies the text</li>
+                        <li><u>center</u>: centers the text</li>
+                        <li><u>justify</u>: spreads the text out, varying the gaps between the words so that all lines
+                            of
+                            text are the same width.
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <strong>line-height</strong>: this property sets the height of each line of text. Takes a numeric
+                    value. Example: <em>line-height: 1.5;</em>
+                </li>
+                <li class="list-group-item">
+                    <strong>letter-spacing</strong>: this property sets the spacing between letters in the text
+                </li>
+                <li class="list-group-item">
+                    <strong>word-spacing</strong>: this property sets the spacing between words in the text
+                </li>
+                <li class="list-group-item">
+                    <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Fundamentals#other_properties_worth_looking_at">
+                        Additional font styles and text layouts
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="my-3 example_section_div">
+            <h2 id="test_font_example_h2">Test Text <em>[text-shadow:5px 5px 5px green,-5px -5px 5px red;]</em></h2>
+            <ul>
+                <li id="test_font_example_li_one">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus aperiam, blanditiis corporis
+                    deleniti distinctio dolore dolorum eligendi eum fuga, laboriosam odit omnis quaerat quidem sequi
+                    tempore, voluptate voluptates! Quasi. <em>[font-family: "Courier New";]</em>
+                </li>
+                <li id="test_font_example_li_two">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, debitis dolorem est fuga laborum
+                    maxime minima nobis numquam quaerat quam, quas, quasi quis repellendus sunt suscipit tempore unde ut
+                    velit. <em>[font-family: "NonexistentFont", cursive;]</em>
+                </li>
+                <li id="test_font_example_li_three">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error officia rem soluta? Aspernatur at
+                    culpa cupiditate dolorem doloremque eaque, eum iste iure iusto laboriosam modi numquam perspiciatis
+                    quam
+                    quasi veniam? <em>[text-align:right; font-weight:bold; font-style:italic; font-size:1.3em;
+                    text-transform:uppercase; text-decoration:overline;]</em>
+                </li>
+                <li id="test_font_example_li_four">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda cupiditate dolore eos error ex
+                    iste provident quos rerum! Ab deleniti ex impedit incidunt minus officiis quaerat quia quod veniam
+                    voluptatibus. <em>[color: blue; font-size:1.2em; font-family: 'Protest Guerrilla', sans-serif;]</em>
+                </li>
+            </ul>
+        </div>
+        <div class="form-control mb-1">
+            <a id="web_fonts_anchor"><h3>Web Fonts</h3></a>
+            <p class="mb-2">
+                Steps to adding a web font to your webpage (using Google Fonts):
+            </p>
+            <ul>
+                <li>
+                    Go to <a href="https://fonts.google.com/">https://fonts.google.com/</a>.
+                </li>
+                <li>
+                    Select the desired font and add it to the list of selected families.
+                </li>
+                <li>
+                    When done selecting, navigate to the selected families section (click the icon in the top-right
+                    corner).
+                </li>
+                <li>
+                    There should be two sections, one containing HTML code and the other containing CSS code. Copy the
+                    HTML code into the header of the HTML page.
+                    <br>
+                    Example:
+                    <br>
+                    <pre>
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap"
+rel="stylesheet"&gt;
+</pre>
+                </li>
+                <li>
+                    To use the desired font for an element, create a declaration for the element in attached CSS page,
+                    and add the CSS code for the desired font from the selected families page.
+                    <br>
+                    Example:
+                    <br>
+                    <pre>
+.applyCoolFont{
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+</pre>
+                </li>
+            </ul>
+            <pre class="mb-1">
+        &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+        &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+        &lt;link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet"&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="text_directionality_anchor"><h2>Text Directionality</h2></a>
+        <p class="mb-2">
+            The <em>writing-mode</em> property allows switching from one writing mode to another. Writing modes in
+            CSS refer to whether the text is running horizontally or vertically.
+            <br>
+            It accepts three possible values:
+        </p>
+        <ul>
+            <li><u>horizontal-tb</u>: sets the flow direction to top-to-bottom. Sentences run horizontally.</li>
+            <li><u>vertical-rl</u>: sets the flow direction to right-to-left. Sentences run vertically.</li>
+            <li><u>vertical-lr</u>: sets the flow direction to left-to-right. Sentences run vertically.</li>
+        </ul>
+        <p class="mb-2">
+            Essentially it is setting the direction in which block-level elements are displayed on the page - either
+            in top-to-bottom, right-to-left, or left-to-right. This then dictates the direction that the text flows in
+            sentences.
+        </p>
+        <div class="form-control mb-2">
+            <h5>Example usages:</h5>
+            <pre class="mb-0">
+.horizontal {
+    writing-mode: horizontal-tb;
+}
+
+.vertical {
+    writing-mode: vertical-rl;
+}
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <h4>Overflowing Content</h4>
+            <p class="mb-2">
+                If the text in the content starts to overflow, then the <em>inline-size</em> property can be used to
+                adjust the height/width of the element. If the the writing mode is vertically oriented, then the
+                <em>inline-size</em> property will relate to the height of the element. If the writing mode is
+                horizontally oriented, then the <em>inline-size</em> property will relate to the width of the element.
+            </p>
+            <div class="form-control mb-1">
+                <h5>Example usage:</h5>
+                <pre class="mb-0">
+.box {
+    writing-mode: vertical-lr;
+    inline-size: 300px;
+}
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="values_units_anchor"><h2>CSS Values and Units</h2></a>
+    <div class="form-control mb-2">
+        <a id="nums_lens_pcts_anchor"><h3>Numbers, Lengths, and Percentages</h3></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Data Type</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>&lt;integer&gt;</td>
+                <td>Refers to a whole number. Examples: 1024, -128.</td>
+            </tr>
+            <tr>
+                <td>&lt;number&gt;</td>
+                <td>Represents a decimal number - it may or may not have a decimal point with a fractional component.
+                    Examples: 0.255, 128, -1.2.
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;dimension&gt;</td>
+                <td>Refers to a &lt;number&gt; with a unit attached to it. Examples: 45deg, 5s, 10px. >&lt;dimension&gt;
+                    is an umbrella category that includes the >&lt;length&gt;, >&lt;angle&gt;, >&lt;time&gt;, and >&lt;resolution&gt;
+                    types.
+                </td>
+            </tr>
+            <tr>
+                <td>&lt;percentage&gt;</td>
+                <td>Represents a fraction of some other value. Percentage values are always relative to another quantity
+                    (e.g. an element's length is relative to its parent element's length). Examples: 25%, 50%.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="abs_len_units_anchor"><h3>Absolute Length Units</h3></a>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th>Unit</th>
+                <th>Name</th>
+                <th>Equivalent To</th>
+            </tr>
+            <tr>
+                <td>cm</td>
+                <td>centimeters</td>
+                <td>1cm = 37.8px = 25.2/64in</td>
+            </tr>
+            <tr>
+                <td>mm</td>
+                <td>millimeters</td>
+                <td>1mm = 1/10th of 1cm</td>
+            </tr>
+            <tr>
+                <td>Q</td>
+                <td>quarter-millimeters</td>
+                <td>1Q = 1/40th of 1cm</td>
+            </tr>
+            <tr>
+                <td>in</td>
+                <td>inches</td>
+                <td>1in = 2.54cm = 96px</td>
+            </tr>
+            <tr>
+                <td>pc</td>
+                <td>picas</td>
+                <td>1pc = 1/6th of 1in</td>
+            </tr>
+            <tr>
+                <td>pt</td>
+                <td>points</td>
+                <td>1pt = 1/72nd of 1in</td>
+            </tr>
+            <tr>
+                <td>px</td>
+                <td>pixels</td>
+                <td>1px = 1/96th of 1in</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="relative_len_units"><h3>Relative Length Units</h3></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Unit</th>
+                <th>Relative To</th>
+            </tr>
+            <tr>
+                <td>em</td>
+                <td>Font size of the parent, in the case of typographical properties like font-size, and font size of
+                    the element itself, in case of other properties like width
+                </td>
+            </tr>
+            <tr>
+                <td>ex</td>
+                <td>x-height of the element's font</td>
+            </tr>
+            <tr>
+                <td>fr</td>
+                <td>Represents a fraction of the leftover space in a grid container.</td>
+            </tr>
+            <tr>
+                <td>ch</td>
+                <td>The advance measure (width) of the glyph '0' of the element's font</td>
+            </tr>
+            <tr>
+                <td>rem</td>
+                <td>Font size of the root element</td>
+            </tr>
+            <tr>
+                <td>lh</td>
+                <td>Line height of the element</td>
+            </tr>
+            <tr>
+                <td>rlh</td>
+                <td>Line height of the root element. When used on the font-size or line-height properties of the root
+                    element, it refers to the properties' initial value
+                </td>
+            </tr>
+            <tr>
+                <td>vw</td>
+                <td>1% of the viewport's width</td>
+            </tr>
+            <tr>
+                <td>vh</td>
+                <td>1% of the viewport's height</td>
+            </tr>
+            <tr>
+                <td>vmin</td>
+                <td>1% of the viewport's smaller dimension</td>
+            </tr>
+            <tr>
+                <td>vmax</td>
+                <td>1% of the viewport's larger dimension</td>
+            </tr>
+            <tr>
+                <td>vb</td>
+                <td>1% of the size of the initial contain block in the direction of the root element's block axis</td>
+            </tr>
+            <tr>
+                <td>vi</td>
+                <td>1% of the size of the initial contain block in the direction of the root element's inline axis</td>
+            </tr>
+            <tr>
+                <td>svw, svh</td>
+                <td>1% of the small viewport's width and height, respectively</td>
+            </tr>
+            <tr>
+                <td>lvw, lvh</td>
+                <td>1% of the large viewport's width and height, respectively</td>
+            </tr>
+            <tr>
+                <td>dvw, dvh</td>
+                <td>1% of the dynamic viewport's width and height, respectively</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="color_values_anchor"><h3>Color Values</h3></a>
+        <p class="mb-2">
+            Colors can be represented through rgb/rgba, named-color keywords, hexadecimal, and hues. Examples:
+        </p>
+        <ul class="mb-1">
+            <li>
+                <em>background-color: rgb(255,0,0);</em>
+                <ul>
+                    <li>Red (0-255), Green (0-255), Blue (0-255)</li>
+                </ul>
+            </li>
+            <li>
+                <em>background-color: rgba(0,255,255,0.5);</em>
+                <ul>
+                    <li>Red (0-255), Green (0-255), Blue (0-255), Alpha (0-1.0)</li>
+                </ul>
+            </li>
+            <li>
+                <em>background-color: purple;</em>
+                <ul>
+                    <li>Some other colors: red, green, blue, orange, gray, yellow. See full list of colors
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color">here</a>.
+                    </li>
+                </ul>
+            </li>
+            <li><em>background-color: #ff0050;</em>
+                <ul>
+                    <li>Hexadecimal values (000000-ffffff)</li>
+                </ul>
+            </li>
+            <li><em>background-color: hsl(360,25%,75%);</em>
+                <ul>
+                    <li>Hue (0-360), Saturation (0-100%), Lightness (0-100%)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="sizing_elements_anchor"><h2>Sizing Elements</h2></a>
+    <p class="mb-2">
+        The <em>width</em> and <em>height</em> of elements can be adjusted to fixed values or percentages. The same
+        can be done for that element's margins, padding, and borders.
+    </p>
+    <div class="form-control mb-2">
+        <h5>Example of fixed values:</h5>
+        <pre class="mb-0">
+.box {
+    border: 5px solid black;
+    height: 100px;
+    width: 200px;
+}</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <h5>Example of percentage values:</h5>
+        <pre class="mb-0">
+.box {
+    border: 5px solid black;
+    width: 80%;
+}</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="min_max_anchor"><h3>Using min- and max-</h3></a>
+        <p class="mb-2">
+            Using the <em>min-</em> and <em>max-</em> properties in combination with properties like <em>height</em> and
+            <em>width</em> allows us to set a minimum or maximum size for that property.
+        </p>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th colspan="2">min-</th>
+            </tr>
+            <tr>
+                <td>min-height</td>
+                <td>Sets the minimum allowed height of an element.</td>
+            </tr>
+            <tr>
+                <td>min-width</td>
+                <td>Sets the minimum allowed width of an element.</td>
+            </tr>
+            <tr>
+                <td>min-inline-size</td>
+                <td>
+                    Defines the minimum horizontal or vertical size of an element's block, depending on its writing
+                    mode. It correspondes to either the <em>min-width</em> or <em>min-height</em> property, depending on
+                    the value of <em>writing-mode</em>. If the writing mode is vertically oriented, the value of
+                    <em>min-inline-size</em> relates to the minimum height of the element; otherwise it relates to the
+                    minimum width of the element. A related property is <em>min-block-size</em>, which defines the other
+                    dimension of the element.
+                </td>
+            </tr>
+            <tr>
+                <td>min-block-size</td>
+                <td>
+                    Sets the minimum horizontal or vertical size of an element's block depending on the writing
+                    direction specified by <em>writing-mode</em>. If the writing mode is vertically oriented, the value
+                    of <em>min-block-size</em> relates to the minimum width of the element; otherwise, it relates to the
+                    minimum height of the element. <em>min-inline-size</em> defines the other dimension of the element.
+                </td>
+            </tr>
+            <tr class="table-dark">
+                <th colspan="2">max-</th>
+            </tr>
+            <tr>
+                <td>max-height</td>
+                <td>Sets the maximum allowed height of an element.</td>
+            </tr>
+            <tr>
+                <td>max-width</td>
+                <td>Sets the maximum allowed width of an element.</td>
+            </tr>
+            <tr>
+                <td>max-inline-size</td>
+                <td>
+                    Defines the maximum horizontal or vertical size of an element's block depending on its writing mode.
+                    It corresponds to either the <em>max-width</em> or the <em>max-height</em> property, depending on
+                    the value of the <em>writing-mode</em>. If the writing mode is vertically oriented, the value of
+                    <em>max-inline-size</em> relates to the maximum height of the element; otherwise, it relates to the
+                    maximum width of the element. A related property is <em>max-block-size</em>, which defines the other
+                    dimension of the element.
+                </td>
+            </tr>
+            <tr>
+                <td>max-block-size</td>
+                <td>
+                    Sets the maximum size of an element in the direction opposite that of the writing direction
+                    specified by <em>writing-mode</em>. i.e. if the writing direction is horizontal, then
+                    <em>max-block-size</em> is equivalent to <em>max-height</em>; if the writing direction is vertical,
+                    then <em>max-block-size</em> is the same as <em>max-width</em>. The other dimension's maximum length
+                    is specified using the <em>max-inline-size</em>.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="viewport_units_anchor"><h3>Viewport Units</h3></a>
+        <p class="mb-2">
+            The viewport is the visible area of the webpage in the browser. <em>vw</em> is the viewport width, while
+            <em>vh</em> is the viewport height. Using these units, elements can be sized relative to the viewport of the
+            user. 1vh is equal to 1% of the viewport height, and 1wh is equal to 1% of the viewport width. These are
+            applicable to boxes and text as well.
+        </p>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="img_media_form_anchor"><h2>Images, Media, and Form Elements</h2></a>
+    <div class="form-control mb-2">
+        <a id="objectfit_prop_anchor"><h3>The <em>object-fit</em> property</h3></a>
+        <p class="mb-1">
+            For media, such as &lt;img&gt;, &lt;video&gt;, and &lt;iframe&gt; elements, the <em>object-fit</em> property
+            can be used to size the element to fit a box in a variety of ways.
+            <br>
+            Example usage:
+        </p>
+        <pre>
+<em>img,video,iframe</em> {
+    <mark>object-fit</mark>:<em>fill</em>;
+}
+</pre>
+        <div class="form-control mb-1">
+            <h5><em>object-fit</em> values:</h5>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Values</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>contain</td>
+                    <td>
+                        The replaced content is scaled to maintain its aspect ratio while fitting within the element's
+                        content box. The entire object is made to fill the box, while preserving its aspect ratio, so
+                        the object will be letterboxed if its aspect ratio doesn't match the aspect ratio of the box.
+                    </td>
+                </tr>
+                <tr>
+                    <td>cover</td>
+                    <td>
+                        The replaced content is sized to maintain its aspect ratio while filling the element's entire
+                        content box. If the object's aspect ratio doesn't match the aspect ratio of its box, then the
+                        object will be clipped to fit.
+                    </td>
+                </tr>
+                <tr>
+                    <td>fill</td>
+                    <td>
+                        The replaced content is sized to fill the element's content box. The entire object will
+                        completely fill the box. If the object's aspect ratio does not match the aspect ratio of its
+                        box, then the object will be stretched to fit.
+                    </td>
+                </tr>
+                <tr>
+                    <td>none</td>
+                    <td>The replaced content is not resized.</td>
+                </tr>
+                <tr>
+                    <td>scale-down</td>
+                    <td>
+                        The content is sized as if <em>none</em> or <em>contain</em> were specified, whichever would
+                        result in a smaller concrete object size.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="overflow_prop_anchor"><h3>The <em>overflow</em> property</h3></a>
+        <p class="mb-2">
+            The <em>overflow</em> property can be used to address situations in which the content does not fit within
+            the parent element box in the horizontal and/or vertical direction.
+        </p>
+        <p class="mb-2">
+            Subcategories of the <em>overflow</em> property are <em>overflow-x</em> (for controlling behavior at left
+            and right edges) and <em>overflow-y</em> (for controlling behavior at the top and bottom edges).
+        </p>
+        <p class="mb-1">
+            This property can accept one or two values. If only one value is supplied, then it applies to both
+            <em>overflow-x</em> and <em>overflow-y</em>. If two values are supplied,then the first value applies to
+            <em>overflow-x</em> and the second value applies to <em>overflow-y</em>.
+            <br>
+            Example usage:
+        </p>
+        <pre>
+<em>img,video,iframe</em> {
+    <mark>overflow</mark>:<em>hidden</em>;
+}
+</pre>
+        <div class="form-control mb-1">
+            <h5><em>overflow</em> values:</h5>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Values</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>visible</td>
+                    <td>
+                        Overflow content is not clipped and may be visible outside the element's padding box. The
+                        element box is not a scroll container. This is the property's default value.
+                    </td>
+                </tr>
+                <tr>
+                    <td>hidden</td>
+                    <td>
+                        Overflow content is clipped at the element's padding boxing. There are no scroll bars, and the
+                        clipped content is not visible, but still exists. User agents do not add scroll bars and also do
+                        not allow users to view the content outside the clipped region by actions such as dragging or
+                        scrolling. It can, however, be scrolled programmatically by setting the value of the scrollLeft
+                        property or scrollTo() method, in which case the element box is a scroll container.
+                    </td>
+                </tr>
+                <tr>
+                    <td>clip</td>
+                    <td>
+                        Overflow content is clipped at the element's overflow clip edge that is defined using the
+                        <em>overflow-clip-margin</em> property. As a result, content overflows the element's padding box
+                        by the &lt;length&gt; value of <em>overflow-clip-margin</em> or by 0px if not set. Overflow
+                        content outside the clipped region is not visible, user agents do not add a scroll bar, and
+                        programmatic scrolling is also not supported. No new formatting context is created.
+                    </td>
+                </tr>
+                <tr>
+                    <td>scroll</td>
+                    <td>
+                        Overflow content is clipped at the element's padding box, and overflow content can be scrolled
+                        into view using scroll bars. User agents display scroll bars in both horizontal and vertical
+                        directions if only one value is set, whether or not any content is overflowing or clipped. The
+                        use of this keyword can prevent scroll bars from appearing and disappearing as content changes.
+                        The element box is a scroll container.
+                    </td>
+                </tr>
+                <tr>
+                    <td>auto</td>
+                    <td>Overflow content is clipped at the element's padding box, and overflow content can be scrolled
+                        into view. Unlike <em>scroll</em>, user agents display scroll bars ONLY if the content is
+                        overflowing and hides scroll bars by default. If content fits inside the element's padding
+                        boxing, it looks the same as with <em>visible</em> but still establishes a new formatting
+                        context. The element box is a scroll container.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="css_layouts_anchor"><h3>CSS Layouts</h3></a>
+        <p class="mb-2">
+            <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout">Reference guide to CSS layouts</a>
+        </p>
+        <div class="form-control mb-1">
+            <h5>Example usage:</h5>
+            <pre class="mb-0">
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 20px;
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="styling_tables_anchor"><h2>Styling Tables</h2></a>
+    <div class="example_section_div form-control">
+        <h4>Test Table</h4>
+        <table class="styling_tables_example">
+            <caption>
+                This caption element allows a description of the table contents.
+            </caption>
+            <thead>
+            <tr>
+                <th>This is a thead header</th>
+                <th>This is a thead header</th>
+                <!--The scope attribute is optional, it specifies whether the header is for a column or row. No visual effect.-->
+                <th scope="col">This is a thead header</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">This is a tbody header</th>
+                <!--Scope is optional, no visual effect. Just says it's a header for a row.-->
+                <td>This is a row cell.</td>
+                <td>This is a row cell.</td>
+            </tr>
+            <tr>
+                <td>This is a row cell.</td>
+                <td colspan="2">This is a row cell with colspan of 2.</td>
+            </tr>
+            <tr>
+                <td rowspan="2">This is a row cell with rowspan of 2.</td>
+                <td>This is a row cell.</td>
+                <td>This is a row cell.</td>
+            </tr>
+            <tr>
+                <!-- <td>This row cell needs removal because the previous row cell has rowspan > 1 and overlaps this one</td>-->
+                <td>This is a row cell.</td>
+                <td>This is a row cell.</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>This is a footer header</th>
+                <td>This is a footer cell</td>
+            </tr>
+            </tfoot>
+        </table>
+        <hr style="solid">
+        <h5>HTML Code:</h5>
+        <pre class="mb-1">
+    &lt;table class="styling_tables_example"&gt;
+        &lt;caption&gt;
+            The caption element allows us to include a description of the table contents.
+        &lt;/caption&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;This is a thead header&lt;/th&gt;
+            &lt;th&gt;This is a thead header&lt;/th&gt;
+            &lt;!--The scope attribute is optional, it specifies whether the header is for a column or row. No visual effect.--&gt;
+            &lt;th scope="col"&gt;This is a thead header&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;This is a tbody header&lt;/th&gt;
+            &lt;!--Scope is optional, no visual effect. Just says it's a header for a row.--&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+            &lt;td colspan="2"&gt;This is a row cell with colspan of 2.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rowspan="2"&gt;This is a row cell with rowspan of 2.&lt;/td&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;!-- &lt;td&gt;This row cell needs removal because the previous row cell has rowspan &gt; 1 and overlaps this one&lt;/td&gt;--&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+            &lt;td&gt;This is a row cell.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;th&gt;This is a footer header&lt;/th&gt;
+            &lt;td&gt;This is a footer cell&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/tfoot&gt;
+    &lt;/table&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="other_table_props_anchor"><h3>Other Table CSS Properties</h3></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>table-layout</td>
+                <td>
+                    Set the algorithm that is used to lay out table cells, rows, and columns. There are two values:
+                    <em>auto</em> and <em>fixed</em>.
+                    <ul class="mb-1">
+                        <li>
+                            <u>auto</u>: enables an algorithm that automatically adjusts the widths of the table and its
+                            cells to accomodate the content. This is enabled by default.
+                        </li>
+                        <li>
+                            <u>fixed</u>: enables the fixed table layout algorithm. When enabled, the table's width
+                            NEEDS to be specified explicitly using the <em>width</em> property. If the width is not
+                            specified, then, then the browser uses the automatic table layout algorithm, in which case
+                            the <em>fixed</em> value has no effect.
+                            <ul>
+                                <li>
+                                    The advantage of the fixed algorithm is that it is faster than <em>auto</em> on
+                                    account of not needing to calculate the column width, borders or cell spacing. These
+                                    widths can be specified explicitly. If not, then the widths are divided equally with
+                                    no regard to the content.
+                                </li>
+                                <li>
+                                    The downside is that it doesn't take the content into account, meaning there may be
+                                    overlap or poor appearance.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>border-collapse</td>
+                <td>
+                    This property sets whether cells inside a table have shared or separate borders. It takes one of two
+                    values: <em>collapse</em> or <em>separate</em>.
+                    <ul class="mb-1">
+                        <li>
+                            <u>collapse</u>: adjacent cells have shared borders
+                        </li>
+                        <li>
+                            <u>separate</u>: adjacent cells have distinct borders
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="debug_css_anchor"><h2>Debugging CSS</h2></a>
+    <p class="mb-1">
+        In a browser, we can view access the DevTool by pressing F12 or by right-clicking and selecting 'Inspect'.
+        This allows us to view the webpage's source. The source displays the html and css code of the webpage viewable
+        under the 'Elements' and 'Styles' tabs, respectively. It also allows us to edit both, displaying the changes in
+        real-time, thus making it a valuable tool for testing changes.
+    </p>
+</div>
+
+<div class="form-control mb-1">
+    <a id="organizing_css_anchor"><h2>Organizing CSS</h2></a>
+    <h5>Tips for keeping the CSS code organized:</h5>
+    <ul class="mb-1">
+        <li>Utilize a coding style guide.</li>
+        <li>Consistency in things such as naming, color description, formatting, etc..</li>
+        <li>Make the code readable through good formatting.</li>
+        <li>
+            Use comments to describe or explain potentially confusing code.
+            <pre class="mb-0">
+    /* Commenting in CSS is done like this */
+    /* This comment
+    is broken into
+    multiple lines */
+</pre>
+        </li>
+        <li>
+            Create logical sections. e.g. a section for general styles, another for utilities, global
+            styles/utilities, etc..
+        </li>
+        <li>Avoidance of overly-specific selectors.</li>
+        <li>
+            Break large stylesheets into multiple smaller ones. Consider separate stylesheets for different sections
+            of the website and another for global styles. (This is attainable by linking to multiple stylesheets from
+            the same page.)
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+CSS - Basics
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#css_basics_anchor"><strong>CSS - Basics</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#box_model_anchor">Box Model</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#alt_box_model_anchor">Alternate Box Model</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#bgs_borders_anchor">Backgrounds & Borders</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#backgrounds_anchor">&nbsp;&nbsp;&nbsp;Backgrounds</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#borders_anchor">&nbsp;&nbsp;&nbsp;Borders</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#fonts_text_anchor">Fonts and Text</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#font_props_anchor">&nbsp;&nbsp;&nbsp;Font Properties</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#web_fonts_anchor">&nbsp;&nbsp;&nbsp;Web Fonts</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#text_directionality_anchor">Text Directionality</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#values_units_anchor">CSS Values and Units</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#nums_lens_pcts_anchor">&nbsp;&nbsp;&nbsp;Numbers, Lengths, and Percentages</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#abs_len_units_anchor">&nbsp;&nbsp;&nbsp;Absolute Length Units</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relative_len_units">&nbsp;&nbsp;&nbsp;Relative Length Units</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#color_values_anchor">&nbsp;&nbsp;&nbsp;Color Values</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#sizing_elements_anchor">Sizing Elements</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#min_max_anchor">&nbsp;&nbsp;&nbsp;Using min- and max-</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#viewport_units_anchor">&nbsp;&nbsp;&nbsp;Viewport Units</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#img_media_form_anchor">Images, Media, and Form Elements</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#objectfit_prop_anchor">&nbsp;&nbsp;&nbsp;The <em>object-fit</em> property</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#overflow_prop_anchor">&nbsp;&nbsp;&nbsp;The <em>overflow</em> property</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#css_layouts_anchor">&nbsp;&nbsp;&nbsp;CSS Layouts</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#styling_tables_anchor">Styling Tables</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#other_table_props_anchor">&nbsp;&nbsp;&nbsp;Other Table CSS Properties</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#debug_css_anchor">Debugging CSS</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#organizing_css_anchor">Organizing CSS</a>
+</li>
+{% endblock %}

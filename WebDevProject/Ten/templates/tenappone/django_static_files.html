@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Static Files</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_staticfiles_anchor"><h1>Django <span class="door">-</span> Static Files</h1></a>
+<div class="form-control">
+    <p class="mb-2">
+        Static files typically refer to files like media (images/videos/audio), Javascript, CSS, etc., that are used by
+        websites for whatever reason.
+    </p>
+    <div class="form-control mb-2">
+        <a id="staticfiles_init_setup_anchor"><h2>Static Files Initial Setup</h2></a>
+        <ul class="mb-1">
+            <li>
+                <p class="mb-1">
+                    Before we can start using static files, we need to create a directory in the root of the project
+                    directory, named '<em>static</em>'. Subdirectories are optional but it's probably recommended to
+                    create at least three - one for Javascript files, one for CSS files, and another for media files.
+                </p>
+                <img src="{% static 'media/images/examples/django_static_files.static_directory.png' %}"
+                     alt="django_static_files.static_directory.png" class="mb-1">
+            </li>
+            <li>
+                <p class="mb-1">
+                    The next step is to register the static files directory. Open the <em>settings.py</em> file, and run
+                    the following steps:
+                </p>
+                <ul class="mb-1">
+                    <li>
+                        <p class="mb-1">
+                            Import the <em>os</em> module (if it hasn't been imported already). (Alternatively, can
+                            import just the <em>path</em> function from the <em>os</em> module. If you do this, adjust
+                            the value in the next step accordingly.)
+                        </p>
+                        <pre class="mb-1">import os</pre>
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            Check to see if there is a variable named <em>STATIC_URL</em> - it may be located near the
+                            bottom of the settings.py file. It should have a string value of <em>"static/"</em>. If the
+                            variable doesn't exist or the value is different, then add/edit the variable to match.
+                        </p>
+                        <pre class="mb-1">STATIC_URL = "static/"</pre>
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            Next, locate a variable named <em>BASE_DIR</em>. Directly below that variable, create
+                            another two variables:
+                        </p>
+                        <ul>
+                            <li>
+                                <p class="mb-1">
+                                    First variable should be named '<em>STATIC_DIR</em>' with a value set to
+                                    <em>os.path.join(BASE_DIR, 'static')</em>.
+                                </p>
+                                <img src="{% static 'media/images/examples/django_static_files.static_dir.png' %}"
+                                     alt="django_static_files.static_dir.png">
+                            </li>
+                            <li>
+                                <p class="mb-1">
+                                    Then create '<em>STATICFILES_DIRS</em>' below. Set the value as a list object with
+                                    one item: <em>STATIC_DIR</em>.
+                                </p>
+                                <img src="{% static 'media/images/examples/django_static_files.staticfiles_dirs.png' %}"
+                                     alt="django_static_files.staticfiles_dirs.png">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="form-control mb-1">
+        <a id="static_files_anchor"><h2>Using Static Files</h2></a>
+        <ul class="mb-1">
+            <li>
+                <p class="mb-1">
+                    Before an HTML page can start loading files from the static directory, it needs to insert the
+                    following tag (preferably near the top, before any attempts to load the files):
+                </p>
+                <pre class="mb-1">{{"{"}}% load static %{{"}"}}</pre>
+            </li>
+            <li>
+                <p class="mb-1">
+                    Loading a file from the static directory is done by using the following template tag syntax:
+                </p>
+                <pre class="mb-1">{% verbatim %}{% static '<em>static_file_path</em>' %}{% endverbatim %}</pre>
+                <div class="form-control mb-1">
+                    <h6>Example usage:</h6>
+                    <pre class="mb-1">{% verbatim %}
+&lt;html&gt;
+    <mark>{% load static %}</mark>
+    &lt;head&gt;
+        &lt;title&gt;Django - Static Files&lt;/title&gt;
+        &lt;link rel="stylesheet" href="<mark>{% static 'css/django_static_files.css' %}</mark>"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Django - Static Files&lt;/h1&gt;
+        &lt;img src="<mark>{% static 'media/images/cat.png' %}</mark>" alt="cat.png" alt=""&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+{% endverbatim %}</pre>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Static Files
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_staticfiles_anchor"><strong>Django - Static Files</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#staticfiles_init_setup_anchor">Static Files Initial Setup</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#static_files_anchor">Using Static Files</a>
+</li>
+{% endblock %}

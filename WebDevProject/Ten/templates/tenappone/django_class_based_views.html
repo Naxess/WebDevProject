@@ -1,0 +1,643 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Class-Based Views</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="classbasedviews_anchor"><h1>Django <span class="door">-</span> Class-Based Views</h1></a>
+<div class="form-control">
+    <a id="cbvs_anchor"><h2>Class-Based Views</h2></a>
+    <p class="mb-2">
+        A view is a callable which takes a request and returns a response. This can be done via a function, as was done
+        in this <a href="{% url 'tenappone:django_views_and_urls' %}">section</a> or by using a class that inherits from
+        certain view modules (such as View, TemplateView, ListView, DetailView, CreateView, UpdateView, and DeleteView).
+        In function-based views, you need to explicitly state the target template, but in some class-based views, these
+        are automatically generated and follow a specific naming convention. For example, CreateViews will append a
+        '_form' suffix to the lowercased model name (e.g. 'examplemodel_form.html'). ListView will append a '_list' to
+        the lowercased model name (e.g. 'examplemodel_list.html'). We can also specify a custom template name, but the
+        point is that class-based views take care of a lot of the mundane work.
+    </p>
+
+    <div class="form-control mb-2">
+        <a id="creating_cbvs_anchor"><h3>Creating a Class-Based View</h3></a>
+        <p class="mb-2">
+            To create a class-based view (CBV), we need to create a class in the <em>views.py</em> file that inherits
+            from one of the following built-in modules in this
+            <a href="https://docs.djangoproject.com/en/5.0/ref/class-based-views/#built-in-class-based-views-api">
+                article</a>. The below table lists just a few of the view modules mentioned in the article. Views not
+            listed in the table below will not be reviewed in this section as this is not meant to be a comprehensive
+            guide.
+        </p>
+        <table class="table table-bordered row mb-2">
+            <tr class="table-dark">
+                <th class="col-sm-1">View Name</th>
+                <th class="col-sm-6">Brief Description</th>
+                <th class="col-sm-5">Example Usage:</th>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="4">Base Views</th>
+            </tr>
+            <tr>
+                <th>View</th>
+                <td>The base view class. All other class-based views inherit from this base class.</td>
+                <td>
+                    <pre class="mb-0">
+from django.http import HttpResponse
+from django.views import View
+
+class Example_View(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("Hello, world!")
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>TemplateView</th>
+                <td>
+                    Renders a given template, with the context containing parameters captured in the URL.
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.views.generic.base import TemplateView
+from example_app.models import ExampleMemberModel
+
+class Example_TemplateView(TemplateView):
+    template_name = "registry.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_list"] = ExampleMemberModel.objects.all()
+        return context
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="4">Generic Display Views</th>
+            </tr>
+            <tr>
+                <th>DetailView</th>
+                <td>
+                    <p class="mb-2">
+                        While the view is executing, <em>self.object</em> contains the object that the view is operating
+                        upon.
+                    </p>
+                    <p class="mb-0">
+                        Syntax of default target template:
+                    </p>
+                    <pre class="mb-2">&lt;<em>lowercased_model_name</em>&gt;_detail.html</pre>
+                    <p class="mb-0">
+                        The model's context can be accessed from the template by calling <em>object</em>, like so:
+                    </p>
+                    <pre class="mb-2">{% verbatim %}{{ object }}{% endverbatim %}</pre>
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.views.generic.detail import DetailView
+from example_app.models import ExampleMemberModel
+
+class Example_DetailView(DetailView):
+    model = ExampleMemberModel
+    def get_context_data(self, **kwargs):
+        super().get_context_data(**kwargs)
+        context["user_list"] = ExampleMemberModel.objects.all()
+        return context
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>ListView</th>
+                <td>
+                    <p class="mb-2">
+                        A page representing a list of objects. While the view is executing, <em>self.object_list</em>
+                        contains the list of objects (usually a queryset) that the view is operating upon.
+                    </p>
+                    <p class="mb-0">
+                        Syntax of default target template:
+                    </p>
+                    <pre class="mb-2">&lt;<em>lowercased_model_name</em>&gt;_list.html</pre>
+                    <p class="mb-0">
+                        The model's context can be accessed from the template by calling <em>object_list</em>, like so:
+                    </p>
+                    <pre class="mb-0">{% verbatim %}{{ object_list }}{% endverbatim %}</pre>
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.views.generic.list import ListView
+from example_app.models import ExampleMemberModel
+
+class Example_ListView(ListView):
+    model = ExampleMemberModel
+    paginate_by = 100
+        # Optional. If pagination is desired, this can be used
+        # to limit the number of objects per page.
+        # Adds a <em>paginator</em> and <em>page_obj</em> to the <em>context</em>
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_list"] = ExampleMemberModel.objects.all()
+        return context
+</pre>
+                    <hr class="my-1">
+                    <a href="https://docs.djangoproject.com/en/5.0/topics/pagination/#paginating-a-listview">
+                        See here for details on how to using pagination with a ListView
+                    </a>
+                    <!--                    <pre class="mb-0">{% verbatim %}-->
+                    <!--<strong># example.html</strong>-->
+                    <!--{% for member in user_list %}-->
+                    <!--    {{ member.username }}-->
+                    <!--{% endfor %}-->
+                    <!--<div class="pagination">-->
+                    <!--    <span class="step-links">-->
+                    <!--        {% if user_list.has_previous %}-->
+                    <!--            <a href="?page=1">&lt;&lt; First</a>-->
+                    <!--            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>-->
+                    <!--        {% endif %}-->
+                    <!--        <span class="current">-->
+                    <!--            Page-->
+                    <!--        </span>-->
+                    <!--    </span>-->
+                    <!--</div>-->
+                    <!--{% endverbatim %}</pre>-->
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="4">Generic Editing Views</th>
+            </tr>
+            <tr>
+                <th>CreateView</th>
+                <td>
+                    <p class="mb-2">
+                        A view that displays a form for creating an object, redisplaying the form with validation errors
+                        (if any) and saving the object.
+                    </p>
+                    <p class="mb-0">
+                        Syntax of default target template:
+                    </p>
+                    <pre class="mb-2">&lt;<em>lowercased_model_name</em>&gt;_form.html</pre>
+                    <p class="mb-0">
+                        The model's context can be accessed from the template by calling <em>object</em>, like so:
+                    </p>
+                    <pre class="mb-2">{% verbatim %}{{ object }}{% endverbatim %}</pre>
+                    <p class="mb-0">
+                        The form's context can be accessed from the template by calling <em>form</em>, like so:
+                    </p>
+                    <pre class="mb-0">{% verbatim %}{{ form }}{% endverbatim %}</pre>
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.views.generic.edit import CreateView
+from example_app import ExampleMemberModel
+
+class Example_CreateView(CreateView):
+    model = ExampleMemberModel
+    fields = ["username", "email"]
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>UpdateView</th>
+                <td>
+                    <p class="mb-2">
+                        A view that displays a form for editing an existing object, redisplaying the form with
+                        validation errors (if any) and saving changes to the object. This uses a form automatically
+                        generated from the object's model class (unless a form class is manually specified).
+                    </p>
+                    <p class="mb-0">
+                        Syntax of default target template:
+                    </p>
+                    <pre class="mb-2">&lt;<em>lowercased_model_name</em>&gt;_form.html</pre>
+                    <p class="mb-0">
+                        The model's context can be accessed from the template by calling <em>object</em>, like so:
+                    </p>
+                    <pre class="mb-2">{% verbatim %}{{ object }}{% endverbatim %}</pre>
+                    <p class="mb-0">
+                        The form's context can be accessed from the template by calling <em>form</em>, like so:
+                    </p>
+                    <pre class="mb-0">{% verbatim %}{{ form }}{% endverbatim %}</pre>
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.views.generic.edit import UpdateView
+from example_app import ExampleMemberModel
+
+class Example_UpdateView(UpdateView):
+    model = ExampleMemberModel
+    fields = ["username", "email"]
+    template_name_suffix = "_update_form" # Optional
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>DeleteView</th>
+                <td>
+                    <p class="mb-2">
+                        A view that displays a confirmation page and deletes an existing object. The given object will
+                        only be deleted if the request method is <em>POST</em>. If this view is fetched via <em>GET</em>
+                        , it will display a confirmation page that should contain a form that POSTs to the same URL.
+                    </p>
+                    <p class="mb-0">
+                        Syntax of default target template:
+                    </p>
+                    <pre class="mb-2">&lt;<em>lowercased_model_name</em>&gt;_confirm_delete.html</pre>
+                    <p class="mb-0">
+                        The model's context can be accessed from the template by calling <em>object</em>, like so:
+                    </p>
+                    <pre class="mb-2">{% verbatim %}{{ object }}{% endverbatim %}</pre>
+                    <p class="mb-0">
+                        The form's context can be accessed from the template by calling <em>form</em>, like so:
+                    </p>
+                    <pre class="mb-0">{% verbatim %}{{ form }}{% endverbatim %}</pre>
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView
+from example_app import ExampleMemberModel
+
+class Example_DeleteView(DeleteView):
+    model = ExampleMemberModel
+    success_url = reverse_lazy("ex_app:registry")
+</pre>
+                </td>
+            </tr>
+        </table>
+
+        <div class="form-control mb-1">
+            <h4>Some useful attributes (may not be applicable to all views):</h4>
+            <table class="table table-bordered mb-1">
+                <tr class="table-dark">
+                    <th>Attribute Name</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <th>template_name</th>
+                    <td>
+                        This attribute allows the view to use a custom name for the target template, rather than the
+                        automatically generated one.
+                    </td>
+                </tr>
+                <tr>
+                    <th>template_name_suffix</th>
+                    <td>
+                        This attribute allows the view to continue using the lower-cased model as the base of the
+                        automatically-generated template name, but replaces the default suffix with a custom one. For
+                        example, a CreateView with a model of ExampleModel will generate a target template name of
+                        "<em>examplemodel_form.html</em>". If we use this attribute to set a custom suffix of "_custom",
+                        then the resulting template name will be "<em>examplemodel_custom.html</em>".
+                    </td>
+                </tr>
+                <tr>
+                    <th>context_object_name</th>
+                    <td>
+                        Allows the name of the context object to be renamed from <em>object</em>. If we rename context
+                        to "custom_context", then we can call the context in the template using
+                        <em>{% verbatim %}{{ custom_context }}{% endverbatim %}</em>.
+                    </td>
+                </tr>
+                <tr>
+                    <th>success_url</th>
+                    <td>
+                        This is the URL that will be redirected to after the form is processed as valid. Optional for
+                        CreateView and UpdateView - these will use <em>get_absolute_url()</em> on the model object if
+                        available.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="mapping_cbvs_anchor"><h3>Mapping a Class-Based View in urls.py</h3></a>
+        <p class="mb-1">
+            Before we can map class-based views, we need to import them into the <em>urls.py</em> file. Unlike
+            function-based views, these classes cannot be used as-is - they must be converted into views by using the
+            built-in <em>as_view()</em> function. See mappings in the example URLconf below:
+        </p>
+        <pre class="mb-0">
+<strong># urls.py</strong>
+from django.urls import path
+from example_app import views
+
+urlpatterns = [
+    path("ex_one/", views.Example_View.as_view(), name="example_one"),
+    path("ex_two/", views.Example_TemplateView.as_view(), name="example_two"),
+    path("ex_three/", views.Example_DetailView.as_view(), name="example_three"),
+    path("ex_four/", views.Example_CreateView.as_view(template_name="custom_template.html"), name="example_four"),
+        # Instead of supplying the <em>template_name</em> attribute within the view, we can instead supply it as a parameter
+]
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="using_cbvs_anchor"><h3>Using Class-Based Views</h3></a>
+        <p class="mb-2">
+            Refer to the below examples of usages of each of the listed class-based views.
+        </p>
+        <div class="form-control mb-2">
+            <h5>Example models.py</h5>
+            <pre class="mb-0">
+from django.db import models
+from django.urls import reverse
+
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    ceo = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("cbvs_app:company_details", kwargs={"pk", self.pk})
+
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    company = models.ForeignKey(Company, related_name="employees", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example views.py:</h5>
+            <pre class="mb-0">
+from django.shortcuts import render
+from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import HttpResponse
+from django.urls import reverse_lazy
+
+from PracticeClassBasedViewsApp.models import Company
+
+class StandardView(View):
+    def get(self, request):
+        return HttpResponse("This is a HttpResponse returned by a standard view!")
+
+class ExampleTemplateView(TemplateView):
+    template_name = "template_view_example.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["some_letters"] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ|abcdefghijklmnopqrstuvwxyz"
+        context["numbers_list"] = [10, 30, 25, 22, 8, 2, 33]
+        return context
+
+class CompanyListView(ListView):
+    context_object_name = "companies"
+    model = Company
+
+class CompanyDetailView(DetailView):
+    context_object_name = "company_details"
+    model = Company
+    template_name = 'PracticeClassBasedViewsApp/company_detail.html'
+    def get_queryset(self):
+        return Company.objects.all()
+
+class CompanyCreateView(CreateView):
+    fields = ("name", "ceo", "address")
+    model = Company
+
+class CompanyUpdateView(UpdateView):
+    fields = ("name", "ceo")
+    model = Company
+
+class CompanyDeleteView(DeleteView):
+    model = Company
+    success_url = reverse_lazy("cbvs_app:company_list")
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example application urls.py:</h5>
+            <pre class="mb-0">
+from django.urls import path
+from PracticeClassBasedViewsApp import views
+
+app_name = "cbvs_app"
+
+urlpatterns = [
+    path("templateview_example/", views.ExampleTemplateView.as_view(), name="templateview_example"),
+
+    path("", views.CompanyListView.as_view(), name="company_list"),
+    path("&lt;int:pk&gt;/", views.CompanyDetailView.as_view(), name="company_details"),
+    path("create_company/", views.CompanyCreateView.as_view(), name="create_company"),
+    path("update_company/&lt;int:pk&gt;/", views.CompanyUpdateView.as_view(), name="update_company"),
+    path("delete_company/&lt;int:pk&gt;/", views.CompanyDeleteView.as_view(), name="delete_company"),
+]
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example project urls.py:</h5>
+            <pre class="mb-0">
+from django.contrib import admin
+from django.urls import path, include
+from PracticeClassBasedViewsApp import views
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("cbvs_app/", include("PracticeClassBasedViewsApp.urls", namespace="cbvs_app")),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example base_template.html:</h5>
+            <pre class="mb-0">{% verbatim %}
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"&gt;
+        &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"&gt;&lt;/script&gt;
+        &lt;style&gt;table{font-size:0.8em;} pre{color:crimson;}&lt;/style&gt;
+        {% block head_block %}
+        {% endblock %}
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"&gt;
+            &lt;div class="container-fluid"&gt;
+                &lt;a class="navbar-brand" href="{% url 'cbvs_app:company_list' %}"&gt;Companies&lt;/a&gt;
+                &lt;ul class="navbar-nav"&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" href="{% url 'admin:index' %}"&gt;Admin&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" href="{% url 'cbvs_app:create_company' %}"&gt;Add Company&lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;li class="nav-item"&gt;
+                        &lt;a class="nav-link" href=""&gt;&lt;/a&gt;
+                    &lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/nav&gt;
+        &lt;br&gt;&lt;br&gt;&lt;br&gt;
+        &lt;div class="container-fluid"&gt;
+            {% block body_block %}
+            {% endblock %}
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+{% endverbatim %}</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example company_list.html:</h5>
+            <pre class="mb-0">{% verbatim %}
+{% extends 'PracticeClassBasedViewsApp/base_template.html' %}
+
+{% block head_block %}
+    &lt;title&gt;List of Companies&lt;/title&gt;
+{% endblock %}
+
+{% block body_block %}
+    &lt;h1&gt;List of Companies&lt;/h1&gt;
+    &lt;ul&gt;
+        {% for company in companies %}
+        &lt;li&gt;
+            &lt;a href="{{company.id}}"&gt;{{company.name}}&lt;/a&gt;
+        &lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+{% endblock %}
+{% endverbatim %}</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example company_detail.html:</h5>
+            <pre class="mb-0">{% verbatim %}
+{% extends 'PracticeClassBasedViewsApp/base_template.html' %}
+                
+{% block head_block %}
+    &lt;title&gt;Company Details&lt;/title&gt;
+{% endblock %}
+
+{% block body_block %}
+    &lt;h1&gt;Company Details&lt;/h1&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;strong&gt;Name&lt;/strong&gt;:
+            &lt;ul&gt;
+                &lt;li&gt;{{company_details.name}}&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;CEO&lt;/strong&gt;:
+            &lt;ul&gt;
+                &lt;li&gt;{{company_details.ceo}}&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;Address&lt;/strong&gt;:
+            &lt;ul&gt;
+                &lt;li&gt;{{company_details.address}}&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;strong&gt;List of employees&lt;/strong&gt;:
+            &lt;ul&gt;
+                {% for employee in company_details.employees.all %}
+                &lt;li&gt;
+                    {{employee.name}}
+                    &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;Role&lt;/strong&gt;: {{employee.role}}&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                {% endfor %}
+            &lt;/ul&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;a class="btn btn-info" href="{% url 'cbvs_app:update_company' pk=company_details.pk %}"&gt;Edit Details&lt;/a&gt;
+    &lt;a class="btn btn-danger" href="{% url 'cbvs_app:delete_company' pk=company_details.pk %}"&gt;Delete Company&lt;/a&gt;
+{% endblock %}
+
+{% endverbatim %}</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <h5>Example company_form.html:</h5>
+            <pre class="mb-0">{% verbatim %}
+{% extends 'PracticeClassBasedViewsApp/base_template.html' %}
+
+{% block head_block %}
+    &lt;title&gt;Create Company&lt;/title&gt;
+{% endblock %}
+
+{% block body_block %}
+    {% if not form.instance.pk %}
+        &lt;h1&gt;Create a Company&lt;/h1&gt;
+    {% else %}
+        &lt;h1&gt;Update Company Details&lt;/h1&gt;
+    {% endif %}
+
+    &lt;form method="POST" action=""&gt;
+        {% csrf_token %}
+        {{form.as_p}}
+        &lt;input type="submit" class="btn-primary" value="Submit"&gt;
+    &lt;/form&gt;
+{% endblock %}
+{% endverbatim %}</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <h5>Example company_confirm_delete.html:</h5>
+            <pre class="mb-0">{% verbatim %}
+{% extends 'PracticeClassBasedViewsApp/base_template.html' %}
+
+{% block head_block %}
+    &lt;title&gt;Delete Company&lt;/title&gt;
+{% endblock %}
+
+{% block body_block %}
+    &lt;h1&gt;Delete Confirmation&lt;/h1&gt;
+    &lt;h4&gt;Delete {{company.name}}? This operation cannot be reversed.&lt;/h4&gt;
+    &lt;form method="POST"&gt;
+        {% csrf_token %}
+        {{form.as_p}} # Optional. Can be removed and it will still work as long as the submit button is provided.
+        &lt;input type="submit" class="btn btn-danger" value="Confirm Delete"&gt;
+        &lt;a class="btn btn-primary" href="{% url 'cbvs_app:company_details' pk=company.pk %}"&gt;Cancel&lt;/a&gt;
+    &lt;/form&gt;
+{% endblock %}
+{% endverbatim %}</pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Class-Based Views
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#classbasedviews_anchor"><strong>Django - Class-Based Views</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#cbvs_anchor">Class-Based Views</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#creating_cbvs_anchor">&nbsp;&nbsp;&nbsp;Creating a Class-Based View</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#mapping_cbvs_anchor">&nbsp;&nbsp;&nbsp;Mapping a Class-Based View in urls.py</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#using_cbvs_anchor">&nbsp;&nbsp;&nbsp;Using Class-Based Views</a>
+</li>
+{% endblock %}

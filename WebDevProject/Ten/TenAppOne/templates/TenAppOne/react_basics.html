@@ -1,0 +1,826 @@
+{% extends 'base_template_languageguides.html' %}
+
+{#https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes#}
+
+{% load static %}
+
+{% block head_block %}
+    <title>React - Basics</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id="react_basics_anchor"><h1>React <span class="door">-</span> Basics</h1></a>
+    <div class="form-control mb-1">
+        <div class="form-control mt-1 mb-2">
+            <a id="react_intro_anchor"><h2>Introduction</h2></a>
+            <p class="mb-2">
+                In this section, we'll go through the full process of creating apps in React, from project to app
+                creation.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="createreactproject_anchor"><h2>Creating a (React) Project</h2></a>
+            <p class="mb-0">Run this command to create an app using NPM that uses Vite's standard React template:</p>
+            <pre class="mb-0">  npm create vite@latest &lt;project-directory-name&gt; -- --template react</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="installprojectdeps_anchor"><h2>Installing Project Dependencies</h2></a>
+            <p class="mb-1">
+                The next step after creating a project is to install dependencies. This must be done from the root
+                directory of the project, so navigate into that directory before running the following steps:
+            </p>
+            <ul class="mb-2">
+                <li>
+                    <p class="mb-0">This command installs the project's core dependencies:</p>
+                    <pre class="mb-0">  npm install</pre>
+                </li>
+                <li>
+                    <p class="mb-0">(Optional) This command installs Bootstrap:</p>
+                    <pre class="mb-0">  npm install bootstrap</pre>
+                    <p class="mb-0">
+                        To use this dependency in your project, navigate to the <i>src</i> directory of your project,
+                        then edit the core JavaScript file. You will be able to identify it by looking at the file
+                        contents, look for the one that calls the <i>createRoot()</i> command. At the top of the file,
+                        add the following imports:
+                    </p>
+                    <pre class="mb-0">
+    import "bootstrap/dist/css/bootstrap.min.css";
+    import "bootstrap/dist/js/bootstrap.bundle.min.js";
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="startserver_anchor"><h2>Starting the Server</h2></a>
+            <ul class="mb-2">
+                <li>
+                    <p class="mb-0">
+                        The following command starts up a local server from your project code and must be used from
+                        within the root directory of the project:
+                    </p>
+                    <pre class="mb-0">
+    npm run dev -- --open --port 3000
+</pre>
+                    <ul>
+                        <li>
+                            The <strong>--open</strong> flag tells it to open a browser tab to the server homepage.
+                        </li>
+                        <li>
+                            The <strong>--port 3000</strong> flag tells it to start the server using port 3000.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        (Alternative) This method runs the server using the <strong>--open</strong> and
+                        <strong>--port 3000</strong> but without specifying them explicitly:
+                    </p>
+                    <ul>
+                        <li>
+                            <p class="mb-0">
+                                Open the <i>package.json</i> file, locate the <i>scripts</i> object, then locate the
+                                <i>"dev"</i> key. Edit its value to include <strong>--open</strong> and
+                                <strong>--port 3000</strong>. After editing, the value should look like this:
+                                <i>"vite --open --port 3000"</i>
+                            </p>
+                            <pre class="mb-0">
+    (<i>package.json snippet</i>)
+    ...
+    "type": "module",
+    <mark>"scripts"</mark>: {
+        <mark>"dev": "vite --open --port 3000"</mark>,
+        "build": "vite build",
+    ...
+</pre>
+                        </li>
+                        <li>
+                            <p class="mb-0">After making the above edits, to run the server, we can simply run the
+                                following command (no flags needed) from the project's root directory:</p>
+                            <pre class="mb-0">
+    npm run dev</pre>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="reactjs_fileparts_anchor"><h2>Parts of a (React) JavaScript File</h2></a>
+            <div class="form-control mb-2">
+                <a id="importstatements_anchor"><h3>Import Statements</h3></a>
+                <p class="mb-1">
+                    Like most programming languages, the import statements are typically placed at the top of the file.
+                    These statements are used for importing things like local files and libraries.
+                </p>
+                <ul class="mb-2">
+                    <li>
+                        <p class="mb-0">Example of importing a module (from the <i>React</i> library):</p>
+                        <pre class="mb-1">
+    import {useState} from “react”;
+</pre>
+                    </li>
+                    <li>
+                        <p class="mb-0">Example of importing a local file:</p>
+                        <pre class="mb-1">
+    import reactLogo from “./assets/react.svg”;
+</pre>
+                    </li>
+                    <li>
+                        <p class="mb-0">Example of importing a stylesheet:</p>
+                        <pre class="mb-1">
+    import “.App.css”;
+</pre>
+                    </li>
+                    <li>
+                        <p class="mb-0">Example of importing a (local) component:</p>
+                        <pre class="mb-1">
+    import Todo from “./components/Todo”;
+</pre>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="componentsfragments_anchor"><h3>(React) Components and Fragments</h3></a>
+                <div class="form-control mb-2">
+                    <a id="components_anchor"><h4>Components</h4></a>
+                    <p class="mb-1">Components are JavaScript functions that return markup code.</p>
+                    <ul class="mb-2">
+                        <li>
+                            <p class="mb-0">Example React component (within a <i>div</i> wrapper):</p>
+                            <pre class="mb-1">
+    function ExampleButton(){
+        return {
+            &lt;div&gt;
+                &lt;button&gt;Example Button&lt;/button&gt;
+            &lt;/div&gt;
+        };
+    }
+</pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-control mb-1">
+                    <a id="fragments_anchor"><h4>Fragments</h4></a>
+                    <p class="mb-1">Fragments are React components that render elements without wrapping them in a
+                        parent element or component.
+                    </p>
+                    <ul class="mb-2">
+                        <li>
+                            <p class="mb-0">Example React fragment component:</p>
+                            <pre class="mb-1">
+    function ExampleButton(){
+        return {
+            &lt;button&gt;Example Button&lt;/button&gt;
+        };
+    }
+</pre>
+                        </li>
+                        <li>
+                            <p class="mb-0">Example React fragment component (within an empty wrapper):</p>
+                            <pre class="mb-1">
+    function ExampleButton(){
+        return {
+            &lt;&gt;
+                &lt;button&gt;Example Button&lt;/button&gt;
+            &lt;/&gt;
+        };
+    }
+</pre>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-control mb-1">
+                <a id="mainfile_anchor"><h3>Main/Root/Entry Point File</h3></a>
+                <ul class="mb-0">
+                    <li>
+                        <p class="mb-0">
+                            Example of an entry point file:
+                        </p>
+                        <p class="mb-1">
+                            (<i>Vite</i> named this file: <i>main.jsx</i> but it may be named differently elsewhere or
+                            later. Identify the root/main file by the <i>createRoot()</i> method call):
+                        </p>
+                        <pre class="mb-1">
+    import { StrictMode } from ‘react’
+    import { createRoot } from ‘react-dom/client’
+    import App from ‘./App.jsx’
+    import ‘./index.css’
+    
+    createRoot(document.getElementById(‘root’)).render(
+        &lt;StrictMode&gt;
+            &lt;App /&gt;
+        &lt;/StrictMode&gt;,
+    );</pre>
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            Example of alternate entry point file:
+                        </p>
+                        <p class="mb-1">
+                            Despite some differences, it is functionally identical to previous example. This may be an
+                            older variation.
+                        </p>
+                        <pre class="mb-1">
+    import React from ‘react’;
+    import ReactDOM from ‘react-dom/client’;
+    import App from ‘./App.jsx’;
+    import ‘./index.css’;
+
+    ReactDOM.createRoot(document.getElementById(“root”)).render(
+        &lt;React.StrictMode&gt;
+            &lt;App /&gt;
+        &lt;/React.StrictMode&gt;
+    );</pre>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="cssstyling_anchor"><h2>CSS Styling for React Components</h2></a>
+            <ul class="mb-2">
+                <li>
+                    <p class="mb-1">
+                        In React components, we cannot use <i>class</i> as an element attribute because it is a reserved
+                        keyword. Instead, we use <i>className</i>, which is functionally identically.
+                    </p>
+                    <p class="mb-0">
+                        Example of setting an element's class via React:
+                    </p>
+                    <pre class="mb-2">
+    &lt;h1 <mark>className</mark>=”header-club-example”&gt;&lt;/h1&gt;</pre>
+                    <p class="mb-0">The CSS files are functionally the same with React, no changes in syntax, etc..
+                        Example snippet
+                        of a CSS file:</p>
+                    <pre class="mb-1">
+    ...
+    .header-club-example {
+        color: white;
+    }
+    ...
+</pre>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        The below table details element attributes that work differently (or don't) between React and
+                        HTML:
+                    </p>
+                </li>
+            </ul>
+
+            <table class="table table-bordered table-striped mb-1">
+                <thead>
+                <tr class="table-dark">
+                    <th class="text-center col-6">HTML</th>
+                    <th class="text-center col-6">React</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>class</u></strong>
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;h1 <mark>class</mark>=”ex”&gt;&lt;/h1&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>className</u></strong>
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;h1 <mark>className</mark>=”ex”&gt;&lt;/h1&gt;
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="mb-3">
+                            <u>Self-closing tags are optional.</u>
+                        </p>
+                        <p class="mb-0">Example usages:</p>
+                        <pre class="mb-0">
+&lt;img src=” ”&gt;
+&lt;input&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p class="mb-3">
+                            <u>Self-closing tags are mandatory.</u>
+                        </p>
+                        <p class="mb-0">Example usages:</p>
+                        <pre class="mb-0">
+&lt;img src=” ” <mark>/</mark>&gt;
+&lt;input <mark>/</mark>&gt;
+</pre>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>for</u></strong>
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;label <mark>for</mark>=”ex”&gt;Click&lt;/label&gt;
+&lt;input <mark>type</mark>=”text” id=”ex”&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>htmlFor</u></strong>
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;label <mark>htmlFor</mark>=”ex”&gt;Click&lt;/label&gt;
+&lt;input <mark>type</mark>=”text” id=”ex” /&gt;
+</pre>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>select</u></strong>
+                            <br>
+                            In HTML, this tag creates multiple options and values.
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;select&gt;
+    &lt;option value=”ex1” selected&gt;One&lt;/option&gt;
+    &lt;option value=”ex2”&gt;Two&lt;/option&gt;
+    &lt;option value=”ex3”&gt;Three&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>select</u></strong>
+                            <br>
+                            In React, the tag also creates multiple options and values but the options are passed in as
+                            props.
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;select <mark>value={this.state.value}</mark>
+        <mark>onChange={this.handleChange}</mark>&gt;
+    &lt;option value=”ex1” selected&gt;One&lt;/option&gt;
+    &lt;option value=”ex2”&gt;Two&lt;/option&gt;
+    &lt;option value=”ex3”&gt;Three&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>textarea</u></strong>
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;textarea&gt;Example&lt;/textarea&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>textarea</u></strong>
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;textarea <mark>value={this.state.value}</mark>
+          <mark>onChange={this.handleChange}</mark> /&gt;
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>innerHTML</u></strong>
+                            <br>
+                            In HTML, this is a not a tag but a JavaScript method used to set or return the HTML content
+                            of an element.
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1 id=”he1”&gt;Hello&lt;/h1&gt;
+        &lt;p&gt;Lorem ipsum...&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        function exFunc() {
+            var ex = document.getElementById(“he1”).<mark>innerHTML</mark>;
+        }
+    &lt;/script&gt;
+&lt;/html&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p class="mb-3">
+                            <strong><u>dangerouslySetInnerHTML</u></strong>
+                            <br>
+                            In React, this also returns the HTML content of an element, but it can be used directly as
+                            an element attribute.
+                        </p>
+                        <p class="mb-0">Example usage:</p>
+                        <pre class="mb-0">
+function exFunc() {
+    return {
+        __html: ‘Hello’
+    };
+};
+
+&lt;div <mark>dangerouslySetInnerHTML</mark>={exFunc()} /&gt;
+</pre>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="passingretrievingdata_anchor"><h2>Passing/Retrieving Webpage Data</h2></a>
+            <p class="mb-2">
+                In this section, we show how we can pass data and expressions to the webpage, as well as retrieve data
+                from it.
+            </p>
+            <div class="form-control mb-2">
+                <a id="variables_anchor"><h3>Variables (within the class)</h3></a>
+                <p class="mb-1">
+                    React allows passing data via variables into a component's HTML code. This is accomplished
+                    similarly to string formatting - we place the variable in the desired location in the component,
+                    then enclosing the variable with curly brackets <strong>{<i>variable-name</i>}</strong>. When
+                    the component is parsed, the program automatically retrieves the variable's data and inserts it
+                    where the variable was located.
+                </p>
+                <p class="mb-0">See example below:</p>
+                <pre class="mb-1">
+    function ExampleApp() {
+        const <mark>abcs</mark> = “abcdefghijklmnopqrstuvwxyz”;
+        return (
+            &lt;div&gt;
+                &lt;p&gt;Alphabet: <mark>{abcs}</mark>&lt;/p&gt;
+            &lt;/div&gt;
+        )
+    }
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id="expressions_anchor"><h3>Expressions</h3></a>
+                <p class="mb-1">
+                    We can pass unevaluated expressions as variables into or written directly within the component,
+                    where it will be evaluated and the final result passed to the page when the component is parsed.
+                </p>
+                <p class="mb-0">See example below:</p>
+                <pre class="mb-1">
+    function ExampleApp() {
+        return (
+            &lt;div&gt;
+                &lt;p&gt;Evaluating math expression (1 + 2 * (3 - 4) / 5) = <mark>{1 + 2 * (3 - 4) / 5}</mark>&lt;/p&gt;
+            &lt;/div&gt;
+        )
+    }
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                {#https://react.dev/learn/passing-props-to-a-component#}
+                <a id="props_anchor"><h3>Props</h3></a>
+                <p class="mb-2">
+                    React props can be used to pass as well as retrieve data to/from the webpage. They are also used to
+                    pass data from one component to another - parent components can pass information to its child
+                    components using props. Props can hold a variety of things such as objects, arrays, and functions.
+                </p>
+
+                <div class="form-control mb-2">
+                    <a id="passingpropstojsx_anchor"><h4>Passing (Familiar) Props to a JSX Tag</h4></a>
+                    <p class="mb-1">
+                        <i>Familiar props</i> are props that use predefined (already existing) element attributes to
+                        pass information to a JSX tag via element attributes. In the below example, the
+                        <i>className, src, alt, width</i> and <i>height</i> attributes exist on <i>img</i> elements by
+                        default - we didn't add custom attributes and thus these are "familiar" props being passed
+                        to the &lt;img&gt; element:
+                    </p>
+                    <pre class="mb-1">
+    function Avatar() {
+        return (
+            &lt;img <mark>className="avatar"</mark>
+                 <mark>src="https://i.imgur.com/EIr0qq1.jpeg"</mark>
+                 <mark>alt="bird"</mark>
+                 <mark>width={300}</mark>
+                 <mark>height={200}</mark>
+            /&gt;
+        );
+    }
+
+    export default function Profile() {
+        return (
+            &lt;Avatar /&gt;
+        );
+    }
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <a id="passingpropstocomponents_anchor"><h4>Passing Props to a Component</h4></a>
+                    <p class="mb-1">
+                        In the below example, we have a component ("Profile"), that is not passing any props to its
+                        child component ("Avatar"):
+                    </p>
+                    <pre class="mb-1">
+    export default function Profile() {
+        return (
+            &lt;Avatar /&gt;
+        );
+    }
+</pre>
+                    <p class="mb-1">
+                        Below, we added two props, <i>person</i> and <i>size</i>. The names of the props follow the same
+                        conventions as variable names, you can customize them as desired, but it's recommended that
+                        they give some meaning (to the dev) to the type of data they hold. For instance, the
+                        <i>person</i> prop is an object that holds details about the "person" such as <i>name</i>, and
+                        the <i>imageId</i> is presumably related to a profile picture. As for <i>size</i>, the exact
+                        thing being sized isn't known, but we know it's a measurement because of the name.
+                    </p>
+                    <pre class="mb-1">
+export default function Profile() {
+    return (
+        &lt;Avatar <mark>person</mark>=&#123;&#123; name: 'Birdy', imageId: 'EIr0qq1' &#125;&#125;
+                <mark>size</mark>={100}
+        /&gt;
+    );
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <a id="readingpropsfrominsidecomponent_anchor"><h4>Reading Props from inside the Component</h4></a>
+                    <p class="mb-1">
+                        Following from the example in the <i>Passing Props to a Component</i> section, we're now going
+                        to create logic that allows the child component to read the props. The below example function is
+                        named <i>Avatar</i> and has a parameter that takes an object that holds <i>person</i> and
+                        <i>size</i>.
+                    </p>
+                    <pre class="mb-1">
+    function Avatar({ person, size }) {}
+</pre>
+                    <p class="mb-1">
+                        As for the body of the function, this is where we add the logic for reading the <i>person</i>
+                        and <i>size</i> props. We also added a <i>getImageUrl</i> function that builds and returns the
+                        image hosting url from the data supplied by the <i>person</i> object.
+                    </p>
+                    <pre class="mb-1">
+    function getImageUrl(<span class="highlight_3">person</span>, size = 's') {
+        return (
+            'https://i.imgur.com/' +
+                <span class="highlight_3">person</span>.imageId +
+                size +
+                '.jpeg'
+        );
+    }
+
+    function Avatar({ <span class="highlight_3">person</span>, <mark>size</mark> }) {
+        return (
+            &lt;img className="avatar"
+                 src={getImageUrl(<span class="highlight_3">person</span>)}
+                 alt={<span class="highlight_3">person</span>.name}
+                 width={<mark>size</mark>}
+                 height={<mark>size</mark>}
+            /&gt;
+        );
+    }</pre>
+                    <p class="mb-1">
+                        Finally, we can utilize the Avatar (fragment) component by supplying it to another example
+                        component ("Profile"), which will render our Avatar component(s) within that larger component.
+                        In the below example, we supplied <i>Profile</i> with three <i>Avatar</i> components and
+                        customized each to have different values from each other, and thus each will render a different
+                        image and size:
+                    </p>
+                    <pre class="mb-1">
+    export default function Profile() {
+        return (
+            &lt;div&gt;
+                <mark>&lt;Avatar size={100}</mark>
+                        <mark>person=&#123;&#123;name: 'Birdy', imageId: 'EIr0qq1'&#125;&#125;</mark>
+                <mark>/&gt;</mark>
+                <mark>&lt;Avatar size={90}</mark>
+                        <mark>person=&#123;&#123;name: 'Jane', imageId: 'etMfgxs'&#125;&#125;</mark>
+                <mark>/&gt;</mark>
+                <mark>&lt;Avatar size={90}</mark>
+                        <mark>person=&#123;&#123;name: 'John', imageId: 'Qg67Baj'&#125;&#125;</mark>
+                /&gt;
+            &lt;/div&gt;
+        );
+    }
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <a id="specifydefaultvaluesforprops_anchor"><h4>Specifying Default Values for Props</h4></a>
+                    <p class="mb-0">
+                        For the component function ("Avatar"), we can specify default values for the parameters. In the
+                        below example, we specify <i>size</i> to have a default value of <strong>100</strong> if it
+                        isn't explicitly supplied by the function's caller:
+                    </p>
+                    <pre class="mb-1">
+    function Avatar({ person, size<mark>=100</mark> }) {
+        return (
+            &lt;img className="avatar"
+                 src={getImageUrl(person)}
+                 alt={person.name}
+                 width={size}
+                 height={size}
+            /&gt;
+        );
+    }</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <a id="forwardpropsusingspread_anchor"><h4>Forward Props Using the JSX Spread Syntax</h4></a>
+                    <p class="mb-0">
+                        Manually passing all of a prop's attributes one by one into a component tag can be tedious, but
+                        this can be simplified by using the "spread syntax". In the original function below, note that
+                        the function takes four separate parameters, which we then have to individually pass into each
+                        of the corresponding attributes of the component tag.
+                    </p>
+                    <pre class="mb-1">
+    function Profile({ person, size, isSepia, thickBorder }) {
+        return (
+            &lt;div className="card"&gt;
+                &lt;Avatar person={person}
+                        size={size}
+                        isSepia={isSepia}
+                        thickBorder={thickBorder}
+                /&gt;
+            &lt;/div&gt;
+        );
+    }
+</pre>
+                    <p class="mb-0">
+                        If we use the "spread syntax", we can replace the function's four parameters with a single one -
+                        the <i>props</i> object itself. Then, in the component tag, instead of creating key-value pairs
+                        for each attribute and its corresponding <i>props</i> attribute value, we simply use the spread
+                        operator ( <strong>...</strong> ) on the <i>props</i> object into it, enclose it within curly
+                        brackets. The below example shows how much more simplified it is:
+                    </p>
+                    <pre class="mb-1">
+    function Profile(<mark>props</mark>) {
+        return (
+            &lt;div className="card"&gt;
+                &lt;Avatar <mark>{...props}</mark> /&gt;
+            &lt;/div&gt;
+        );
+    }
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <a id="passjsxaschildren_anchor"><h4>Passing JSX as Children</h4></a>
+                    <p class="mb-1">
+                        When content is nested inside a JSX tag, the parent component will receive that content in a
+                        prop called <i>children</i>. In the example below, the <i>Card</i> component (function) will
+                        receive a prop named <i>children</i> set to <i>&lt;Avatar /&gt;</i> and render it inside a
+                        <i>&lt;div&gt;</i> wrapper:
+                    </p>
+                    <pre class="mb-1">
+    function Avatar({ person, size }) {
+        return (
+            &lt;img className="avatar"
+                 src={getImageUrl(person)}
+                 alt={person.name}
+                 width={size}
+                 height={size}
+            /&gt;
+        );
+    }
+
+    function Card(<mark>{ children }</mark>) {
+        return (
+            &lt;div className="card"&gt;
+                <mark>{children}</mark>
+            &lt;/div&gt;
+        );
+    }
+
+    export default function Profile() {
+        return (
+            &lt;Card&gt;
+                <mark>&lt;Avatar size={100}</mark>
+                        <mark>person=&#123;&#123;name: 'Katsuko Saruhashi', imageId: 'YfeOqp2'&#125;&#125;</mark>
+                <mark>/&gt;</mark>
+            &lt;/Card&gt;
+        );
+    }
+</pre>
+                    <p class="mb-1">
+                        In the above example, the <i>Card</i> component can wrap any nested content, not just components
+                        - for instance, we can supply it with text, numbers, etc..
+                    </p>
+                </div>
+
+                <div class="form-control mb-1">
+                    <a id="noteaboutprops_anchor"><h4>A Note About Props</h4></a>
+                    <p class="mb-0">
+                        Components may receive different props over time. The current prop being used by a component can
+                        be replaced with a different one at any time. Props reflect a component's data at any point of
+                        time, rather than only in the beginning. However, the props themselves are
+                        <strong>immutable</strong>; when a component needs to change its props, it needs to ask the
+                        parent component to pass it <strong>different</strong> props. The old prop hasn't been edited,
+                        it has replaced with a new one.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+    React - Basics
+{% endblock %}
+
+{% block glossary_block %}
+    <li>
+        <a class="dropdown-item" href="#react_basics_anchor"><strong>React - Basics</strong></a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#react_intro_anchor">&nbsp;&nbsp;&nbsp;Introduction</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#createreactproject_anchor">&nbsp;&nbsp;&nbsp;Creating a (React) Project</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#installprojectdeps_anchor">&nbsp;&nbsp;&nbsp;Installing Project Dependencies</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#startserver_anchor">&nbsp;&nbsp;&nbsp;Starting the Server</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#reactjs_fileparts_anchor">&nbsp;&nbsp;&nbsp;Parts of a (React) JavaScript File</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#importstatements_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import Statements</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#componentsfragments_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(React) Components and Fragments</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#components_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Components</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#fragments_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fragments</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#mainfile_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Main/Root/Entry Point File</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#cssstyling_anchor">&nbsp;&nbsp;&nbsp;CSS Styling for React Components</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#passingretrievingdata_anchor">&nbsp;&nbsp;&nbsp;Passing/Retrieving Webpage Data</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#variables_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variables (within the class)</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#expressions_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expressions</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#props_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Props</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#passingpropstojsx_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing (Familiar) Props to a JSX Tag</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#passingpropstocomponents_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing Props to a Component</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#readingpropsfrominsidecomponent_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reading Props from inside the Component</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#specifydefaultvaluesforprops_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifying Default Values for Props</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#forwardpropsusingspread_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forward Props Using the JSX Spread Syntax</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#passjsxaschildren_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passing JSX as Children</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#noteaboutprops_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Note About Props</a>
+    </li>
+{% endblock %}

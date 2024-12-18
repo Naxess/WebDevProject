@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Python</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<h1>Python <span class="door">-</span> Overview</h1>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <h3>Variables & Collections</h3>
+        <pre class="mb-0">
+def using_variables_and_collections():
+    print('Hello World!')
+
+    test_var = 'abc'
+    test_var2 = 123
+    test_var3 = 123 + 321
+    print('123')
+    print(456)
+    print(test_var)
+    print(f'{test_var2} and {test_var3}')
+
+    test_arr = [1, 2, 3, 4, 5]
+    test_arr2 = [8, 7]
+    print(test_arr[2:4])
+    print(test_arr[-2])
+    print(test_arr[:3])
+    print(test_arr[2:])
+    test_arr.sort(reverse=True)
+    test_arr.append(6)
+    print(test_arr[3])
+    test_arr[4] = 100
+    print(test_arr)
+    test_arr.extend(test_arr2)
+    test_arr_combined = test_arr + test_arr2
+    test_arr_combined.reverse()
+    test_arr.remove(2)
+    test_arr.pop()
+    test_arr.pop(2)
+    test_arr.count(4)
+    test_arr.insert(1, 9)
+    test_arr.clear()
+    for x in test_arr_combined:
+        if 8 == x:
+            print('found ', 8)
+
+    test_dict = {'a': 1, 'b': 2, 'c': 3}
+    print(test_dict['b'])
+    test_dict['d'] = 4
+    print(test_dict)
+
+    test_tuple = ('a', 'b', 'c')
+    print(test_tuple[0])
+    print(test_tuple)
+
+    test_set = {'aa', 'bb', 'cc'}
+    # print(test_set[2]) # Cannot grab set items by index as the order is not preserved
+    print(test_set)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="strings_anchor"><h3>Strings and its built-in functions</h3></a>
+        <pre class="mb-0">
+def using_string_formatting_and_functions(food):
+    food = food.capitalize()
+    print(f'{food} is passing into and through the stomach')
+    food = food.lower()
+    foodo = "The {} has been digested."
+    print(foodo.format(food))
+    print('HERE COMES THE POOP!')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="defaults_varargs_anchor"><h3>Default values & Variable-length arguments</h3></a>
+        <pre class="mb-0">
+def using_default_arguments_and_varargs(ingredient_1="chicken", ingredient_2="olive oil", *ingredients):
+    # Single * means it takes a variable number of arguments
+    print(f'{ingredient_1}\n{ingredient_2}')
+
+    for ingredient in ingredients:
+        print(ingredient)
+
+def using_vaargs(**keeps):
+    # Double ** means it takes key-value pair arguments
+    for x, y in keeps.items():
+        print(f'{x} and {y}')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="control_stmts_anchor"><h3>Control Statements</h3></a>
+        <pre class="mb-0">
+def using_control_statements(target):
+    test_dict = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+    for x, y in test_dict.items():
+        print(x, ' = ', y)
+
+    num = 3
+    while num > 0:
+        print(num)
+        num = num - 1
+
+    for x in range(10):
+        print(x)
+
+    for x in range(5, 10):
+        print(x)
+
+    if target in test_dict.values():
+        print("Match to target found in the values.")
+    elif target in test_dict.keys():
+        print("Match to target found in the keys.")
+    else:
+        print("No match to target found in either the keys or values.")
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="control_stmts_2_anchor"><h3>Control Statements II</h3></a>
+        <pre class="mb-0">
+def using_break_continue_return(start=0, stop=10, step=1):
+    for x in range(start, stop, step):
+        print(x)
+        if x == 10:
+            print("TEN")
+            break
+        elif x >= 15:
+            print("FIFTEEN")
+            return
+        else:
+            continue
+
+def using_return():
+    return 1, 2, 3
+
+def using_pass():
+    print("what")
+    pass
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="lambda_anchor"><h3>Lambda</h3></a>
+        <pre class="mb-0">
+def using_lambda():
+    add_ten = lambda x: x + 10
+    print(add_ten(10))
+
+    nnn = 10
+    multiply_by_num = lambda y: y * nnn
+    print(multiply_by_num(3))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="function_parameters_anchor"><h3>Function Parameters</h3></a>
+        <pre class="mb-0">
+def using_function_parameters():
+    """yoyoyoyooyyo"""
+    print('Annotations: ', using_function_parameters.__annotations__)
+    print('Code: ', using_function_parameters.__code__)
+    print('Name: ', using_function_parameters.__name__)
+    print('Doc: ', using_function_parameters.__doc__)
+    print('Dir: ', using_function_parameters.__dir__)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="switch_anchor"><h3>Switch Statements</h3></a>
+        <pre class="mb-0">
+def using_switch_aka_match(num):
+    print('match function. Works in Python versions 3.10 and later.')
+    match num:
+        case 1:
+            print("One")
+        case 2:
+            print("Two")
+        case 3:
+            print("Three")
+        case _:
+            print("Other")
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="positional_keyword_anchor"><h3>Positional & Keyword markers</h3></a>
+        <pre class="mb-0">
+def using_positional_only_marker(positional, /, positional_or_keyword):
+    # / is used to separate positional-only parameters from rest of the parameters.
+    '''
+    It is to be placed directly after the positional-only arguments separating them from the positional-or-keyword and
+    keyword-only arguments.
+    '''
+
+    print(positional)
+    print(positional_or_keyword)
+
+
+def using_keyword_only_marker(positional, *, keyword):
+    # * is used to mark parameters as keyword-only, indicating the parameters must be passed by keyword argument.
+    # To use it, place * in the arguments just before the keyword-only parameter.
+    print(positional)
+    print(keyword)
+
+
+def using_positional_and_keyword_only_markers(positional, /, positional_or_keyword, *, keyword):
+    print(positional)
+    print(positional_or_keyword)
+    print(keyword)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="stack_queue_anchor"><h3>Stack & Queue</h3></a>
+        <pre class="mb-0">
+def using_list_as_stack():
+    stacko = [1.1, 3.1, 5.1, 7.1, 9.1]
+    '''
+    Stack data structures use push and pop. append() acts like a push operation while pop() performs the pop operation.
+    first-in/last-out AKA last-in/first-out
+    '''
+
+    stacko.append(10.1)  # push adds an element to the end of the list
+    print(stacko.pop())  # pop retrieves and removes the last element
+    print(stacko)
+
+
+def using_list_as_queue():
+    import collections
+
+    queue_tee = collections.deque([3.3, 4.4, 2.2, 1.1, 5.5])  # Alternatively, can import 'deque' from 'collections'
+    # Queue data structure uses dequeue/enqueue operations.
+    # The enqueue operation adds an element to the end of the list. We can use the append() function for this.
+    # The dequeue operations removes an element from the front of the list. We can use the popleft() function for this.
+    queue_tee.append(6.6)
+    print(queue_tee.popleft())
+    print(queue_tee)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="compare_collections_anchor"><h3>Collection Comparison</h3></a>
+        <pre class="mb-0">
+def using_comparing_collections():
+    print([1, 2, 3] == [1, 2, 3])
+    print((1, 2, 3) > (1, 2, 3))
+    print({1, 2, 3} <= {1, 2, 3})
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="del_anchor"><h3><em>del</em> function</h3></a>
+        <pre class="mb-0">
+def using_del():
+    listo = [1, 2, 3, 4, 5, 6]
+    del listo[4]
+    print(listo)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="modules_anchor"><h3>Modules</h3></a>
+        <pre class="mb-0">
+def using_modules():
+    '''
+    A module is a file containing Python definitions and statements. The file name is the module name with the
+    suffix .py appended.
+    '''
+    import example_module
+    example_module.combo_order('Large Combo with Fries', 'McFlurry', 'Breakfast sandwich', 'Large coffee')
+    example_module.get_yesterdays_date()
+
+    import sys
+    print(sys.path)
+    print(sys.argv)
+    print(sys.path.append('/jajaja/kakaka'))
+    print(dir(sys))
+    print(dir(datetime))
+
+    from math import pi
+    print(pi)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="input_output_anchor"><h3>Input & Output</h3></a>
+        <pre class="mb-0">
+def using_input_output():
+    name = input("Type your first name, then last name, separated by a space: ")
+    split_names = name.split(' ')
+    first_name = split_names[0]
+    last_name = split_names[1]
+    print(f'First name: {first_name.capitalize()}\nLast name: {last_name.capitalize()}')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="str_repr_anchor"><h3><em>str</em> & <em>repr</em> functions</h3></a>
+        <pre class="mb-0">
+def using_str_and_repr():
+    hello_world = 'Hello world!'
+    print(str(hello_world))  # Returns (mostly) human-readable representations of values
+    print(repr(hello_world))  # Returns representations to be read by the interpreter
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="str_formatting_anchor"><h3>String Formatting</h3></a>
+        <pre class="mb-0">
+def using_string_formatting():
+    str_template = "A equals {}; \nB equals {}; \nC equals {};"
+    formatted_str = str.format(str_template, 'abc', 'def', 'ghi')
+    print(formatted_str)
+
+    nums = '8'
+    # zfill(int length) pads the string with zeros on the left up until the length of the string matches the length argument
+    print(nums.zfill(5))
+    print(nums.zfill(10))
+
+    # rjust(int length) pads the string with empty spaces on the left until the length of the string matches the length argument
+    print(repr(nums.rjust(4)))
+
+    # ljust(int length) pads the string with empty spaces on the right until the length of the string matches the length argument
+    print(repr(nums.ljust(4)))
+
+    # center(int index) pads the string with empty spaces on the left and right. The spacing on each side is the length argument halved
+    print(repr(nums.center(9)))
+
+    str_old_template = "The value is %3.5f"
+    print(str_old_template % 3.1415926)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="os_anchor"><h3><em>os</em> module</h3></a>
+        <pre class="mb-0">
+def using_os_module():
+    import os
+
+    # Get current working directory
+    print(os.getcwd())
+
+    # Get list of files in directory
+    print(os.listdir())
+
+    # Join paths
+    current_working_dir = os.getcwd()
+    file_name = 'practice_python.py'
+    combined_path = os.path.join(current_working_dir, file_name)
+    print(combined_path)
+
+    # Check if file already exists
+    print(os.path.isfile(file_name))  # Checks to see if a file exists. Does not work for directories.
+    print(os.path.exists('Practice'))  # Checks to see whether a file or directory exists.
+    print(os.path.exists(file_name))
+
+def using_os_module_2():
+    import os
+
+    # Get current working directory
+    print(os.getcwd())
+
+    # Create new directory
+    os.system('mkdir ABC')  # os.system() runs the command in the system shell
+
+    # Change current working directory
+    # os.chdir('ABC')
+
+    # Deletes the folder
+    os.rmdir('ABC')
+
+    # Creates file
+    open('ghi.txt', 'w')
+
+    os.remove('ghi.txt')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="read_write_files_anchor"><h3>Reading and Writing Files</h3></a>
+        <pre class="mb-0">
+def using_read_and_write_file():
+    import os
+
+    # First, check if the file exists
+    if not os.path.isfile('abc.txt'):
+        # Opens a file for writing (overwrites existing data). This will create a file if it doesn't already exist.
+        write_file = open('abc.txt', 'w', encoding='utf-8')
+        write_file.close()
+
+    # Opens a file for reading. Fails if the file doesn't already exist.
+    read_file = open('abc.txt', 'r', encoding='utf-8')
+    read_file.close()  # Close the file when you are done performing operations on it.
+
+    # Opens a file for writing (appends to existing data). Fails if the file doesn't already exist.
+    append_file = open('abc.txt', 'a', encoding='utf-8')
+    append_file.close()
+
+    # Opens a file for reading and writing. Fails if the file doesn't already exist.
+    read_and_write_file = open('abc.txt', 'r+', encoding='utf-8')
+
+    # Writing to a file
+    read_and_write_file.write("hello hello\n")
+    read_and_write_file.write("bye bye bye\n")
+    read_and_write_file.write("sky sky sky\n")
+    read_and_write_file.write("mellow fellow jello")
+
+    read_and_write_file.close()  # After writing it complete, the file needs to be closed to save these changes.
+    print(read_and_write_file.closed)  # Check to see whether a file was closed by running the closed function
+
+    # Preferred way to open a file is using 'with'. This automatically closes the file when execution is completed.
+    with open('abc.txt', 'r', encoding='utf-8') as opened_file:
+        print('\n-----read-----')
+        print(opened_file.read())  # Reading entire content from a file
+        print('-----read-----')
+
+    with open('abc.txt', 'r', encoding='utf-8') as opened_file:
+        print('\n-----readline-----')
+        print(opened_file.readline())  # Reads a single line of the file, then moves the pointer to the next line
+        print(opened_file.readline())  # Reads the second line, then moves the pointer to the next line
+        print(opened_file.readline(1))  # We can specify which line to read
+        print('-----readline-----')
+
+    with open('abc.txt', 'r', encoding='utf-8') as opened_file:
+        print('\n-----for-loop-----')
+        for line in opened_file:
+            print(line)
+        print('-----for-loop-----')
+
+    with open('abc.txt', 'r', encoding='utf-8') as opened_file:
+        print('\n-----readlines-----')
+        print(opened_file.readlines())  # Reads the lines in the file into a list
+        print('-----readlines-----')
+
+    os.remove('abc.txt')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="json_anchor"><h3>Reading JSON files</h3></a>
+        <pre class="mb-0">
+def read_json_files():
+    import json
+    import os
+
+    # Converts an object into a json object
+    random_list = [1, 2, 3, 4, 5, 6, 'a', 'b', 'c', 'd', 'e', 'f']
+    json_object = json.dumps(random_list)
+    print(json_object)
+
+    # Writes an object into a json object and serializes it onto a file
+    with open('def.txt', 'w', encoding='utf-8') as opened_file:
+        json.dump(random_list, opened_file)
+
+    # Decodes the file back into the object
+    with open('def.txt', 'r', encoding='utf-8') as opened_file:
+        decoded_list = json.load(opened_file)
+        print(decoded_list)
+
+    os.remove('def.txt')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="errors_exceptions_anchor"><h3>Errors and Exceptions</h3></a>
+        <pre class="mb-0">
+def using_errors_and_exceptions():
+    while True:
+        try:
+            divisor = int(input("Enter a number: "))
+            print(f"The result of dividing 10 by {divisor} is: ", 10 / divisor)
+            break
+        except ZeroDivisionError:
+            print("Division by zero! Enter another number!")
+        except ValueError:
+            print("Invalid value entered! Enter another number!")
+        except(RuntimeError, TypeError, NameError) as e:
+            print(f"Something bad! {type(e)}. Enter another number!")
+        except Exception as e:
+            print(f"Absolutely last catchall! {type(e)}: {e}. Enter another number!")
+            x, y = e.args
+            print(x, " ", y)
+
+    try:
+        raise ValueError("Kaboom!")  # invokes an exception to occur
+    except ValueError:
+        print("KaboomKaboom!")
+        # raise  # re-raises the exception
+
+    try:
+        raise RuntimeError
+    except RuntimeError as e:
+        raise ZeroDivisionError("BoomBoom?") from e
+        # We can transform an exception from one to another using 'from'. Referred to as 'exception chaining'
+
+
+def using_errors_and_exceptions_2():
+    try:
+        raise ConnectionError
+    except Exception:
+        raise PermissionError from None  # Using 'from None' will disable exception chaining
+    finally:
+        print("THIS IS THE FINALLY STATEMENT, IT RUNS NO MATTER WHAT HAPPENS IN THE TRY BLOCK")
+        return False  # Can optionally return a value
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="exception_groups_anchor"><h3>Exception Groups</h3></a>
+        <pre class="mb-0">
+def using_exceptiongroup():
+    try:
+        print("uno")
+        exceptions = [OSError('1'), IOError('2')]
+        raise ExceptionGroup('Issues: ', exceptions)
+    except ExceptionGroup:
+        print("dos")
+
+    def inner_function():
+        raise ExceptionGroup("one",
+                             [OSError("os error 1"),
+                              SystemError("sys error 2"),
+                              ExceptionGroup("two",
+                                             [OSError("os error 3"),
+                                              RecursionError("rec error 4")])])  # Nested exception group
+
+    try:
+        inner_function()
+    except* OSError as e:
+        # except* allows selectively handling only the exception that matches a certain type
+        print("OS ERROR HAPPENED")
+    except* SystemError as e:
+        print("SYS ERROR HAPPENED")
+    except* RecursionError:
+        print("RECURSION ERROR HAPPENED")
+    except* ZeroDivisionError as e:
+        print("ZERO DIVISION ERROR HAPPENED")  # Does not get called because it is not part of the exception group
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="classes_anchor"><h3>Classes</h3></a>
+        <pre class="mb-0">
+def using_classes():
+    class ExampleClass:
+        counter = 0
+
+        def __init__(self, one_one, two_two):
+            self.one = one_one
+            self.two = two_two
+            self.three = []
+
+        def print_vars(self):
+            print(self.one, 'and', self.two, 'and', self.counter)
+
+        def get_one(self):
+            return self.one
+
+        def set_one(self, one_one):
+            self.one = one_one
+
+        def add_three(self, three_three):
+            self.three.append(three_three)
+
+    ec = ExampleClass("hello", "good bye")
+    ec.print_vars()
+    print(ec.counter)
+
+    try:
+        del ec.counter
+    except AttributeError as e:
+        print(e)
+
+    print(ec.counter)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inheritance_anchor"><h3>Inheritance</h3></a>
+        <pre class="mb-0">
+def using_inheritance():
+    class ObjectTemplate:
+        __date_discovered = None  # Class variable
+
+        def __init__(self, name, yyyymmdd):
+            self.name = name  # Instance variable0
+            self.__set_date_discovered(yyyymmdd)  # Designate a variable as private by prefixing with __
+
+        def set_name(self, new_name):
+            self.name = new_name
+
+        def get_name(self):
+            return self.name
+
+        def set_date_discovered(self, yyyymmdd):
+            self.date_discovered = yyyymmdd
+
+        # Private instance variables cannot be
+        __set_date_discovered = set_date_discovered  # Creates a private copy of the original method
+
+    class Living(ObjectTemplate):
+        def __init__(self, name, yyyymmdd, is_sentient):
+            self.is_sentient = is_sentient
+            # ObjectTemplate.__init__(self, name)
+            super().__init__(name, yyyymmdd)  # Alternative to the above line. The super() function calls the parent.
+
+        def set_sentience(self, is_sentient):
+            self.is_sentient = is_sentient
+
+    li = Living('Cat', '20000101', True)
+    li.set_sentience(False)
+    print(li.get_name())
+    print(li.date_discovered)
+    print(li.set_name('Catdog'))
+    print(li.get_name())
+    print(li)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="multiple_inheritance_anchor"><h3>Multiple Inheritance</h3></a>
+        <pre class="mb-0">
+def using_multiple_inheritance():
+    class A:
+        def __init__(self, name):
+            self.name = name
+
+        def a_method(self):
+            print('AAA')
+
+        def get_name(self):
+            return self.name
+
+    class B:
+        def __init__(self, birth_year):
+            self.birth_year = birth_year
+
+        def b_method(self):
+            print('BBB')
+
+        def get_birth_year(self):
+            return self.birth_year
+
+    class C(A, B):
+        def __init__(self, name, birth_year):
+            self.name = name
+            self.birth_year = birth_year
+            super().__init__(name)
+            super().__init__(birth_year)
+
+        def print_deets(self):
+            print(self.name, ':', self.birth_year)
+
+    ccc = C('Joe', 1900)
+    print(ccc.get_name())
+    ccc.a_method()
+    ccc.b_method()
+    print(ccc.get_birth_year())
+    print(ccc.print_deets())
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="iterators_anchor"><h3>Iterators</h3></a>
+        <pre class="mb-0">
+def using_iterators_on_classes():
+    '''
+    To add iterator behavior to a class, we need to add an __iter__() method which returns an object with a __next__()
+    method. If the class defines __next__(), then __iter__() can just return self
+    '''
+
+    class ExampleClass:
+        def __init__(self, data):
+            self.name = data
+            self.index = len(data)
+
+        def __iter__(self):
+            return self
+
+        def __next__(self):
+            if self.index == 0:
+                raise StopIteration
+            self.index = self.index - 1
+            return self.name[self.index]
+
+    ec = ExampleClass('Hello')
+    for char in iter(ec):
+        print(char)
+
+    print('----------------------------')
+    ec2 = ExampleClass("Cello")
+    print(next(ec2))
+    print(next(ec2))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="generators_anchor"><h3>Generators</h3></a>
+        <pre class="mb-0">
+def using_generators():
+    '''
+    Generators are tools that create iterators. They use the yield statement whenever data needs to be returned. Each
+    time that the next() function is called, the generator resumes where it left off (it remembers all of the data
+    values and which statement was last executed).
+    '''
+
+    def example_function(data):
+        for index in range(len(data) - 1, -1, -1):
+            yield data[index]
+
+    for char in example_function('Hello'):
+        print(char)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="generator_expressions_anchor"><h3>Generator Expressions</h3></a>
+        <pre class="mb-0">
+def using_generator_expressions():
+    def x_times_x(num):
+        return sum(i * i for i in range(num))
+
+    print(x_times_x(5))
+
+    def multiply_lists(list_one, list_two):
+        return sum(x * y for x, y in zip(list_one, list_two))
+
+    print(multiply_lists([2, 4, 6], [3, 6, 9]))
+
+    def get_unique_words(big_text):
+        print('get_uniques')
+        return set(word for line in big_text.splitlines() for word in line.split())
+
+    print(get_unique_words('''hello cello hello\nmellow yellow mellow\nfellow donatello fellow'''))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="shutil_anchor"><h3><em>shutil</em> module</h3></a>
+        <pre class="mb-0">
+def using_shutil():
+    open('jkl.txt', 'w')
+
+    import shutil
+
+    shutil.copyfile('jkl.txt', 'mno.txt')
+    shutil.move(os.path.join(os.getcwd(), 'mno.txt'), os.path.join(os.getcwd(), 'pqr.txt'))
+
+    os.remove('jkl.txt')
+    os.remove('pqr.txt')
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="glob_anchor"><h3><em>glob</em> module</h3></a>
+        <pre class="mb-0">
+def using_glob():
+    import glob
+
+    print(glob.glob('*.py'))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="sys_anchor"><h3><em>sys</em> module</h3></a>
+        <pre class="mb-0">
+def using_sys():
+    import sys
+
+    print(sys.argv)
+    print(sys.argv[0])
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="argparse_anchor"><h3><em>argparse</em> module</h3></a>
+        <pre class="mb-0">
+def using_argparse():
+    import argparse
+    '''
+    Refer to the using_argparse.py class for additional review.
+    '''
+
+    parser = argparse.ArgumentParser(prog='programName',
+                                     description='descriptionText',
+                                     epilog='bottomText')
+    parser.add_argument('filename')
+    parser.add_argument('-c', '--count')
+    parser.add_argument('-v', '--verbose', action='store_true')
+    # action values: 'store', 'store_const', 'store_true', 'append', 'append_const', 'count', 'help', 'version'
+    parser.add_argument('integers', metavar='N')
+
+    args = parser.parse_args()
+    print(args)
+</pre>
+    </div>
+
+
+    <div class="form-control mb-2">
+        <a id="re_anchor"><h3><em>re</em> module</h3></a>
+        <pre class="mb-0">
+def using_re():
+    import re
+
+    def starts_with_f(str):
+        return re.findall(r'\bf[a-z]*', str)
+        # \b is used to match a given string but only at the beginning or end of a word.
+
+    print(starts_with_f('fifteen farthings for fifty forks'))
+    print(starts_with_f('Fran, we seem to have run into fortuitous luck!'))
+
+    def remove_consecutive_repeats(str):
+        '''
+        re.sub(pattern, repl, string, count=0, flags=0) function:
+        Returns the string obtained by replacing the leftmost non-overlapping occurences of pattern in string by the
+        replacement repl. If the pattern isn't found, the string is returned unchanged. repl can be a string or
+        function.
+        '''
+        return re.sub(r'(\b[a-z]+) \1', r'\1', str)
+
+    print(remove_consecutive_repeats('cat cat in the the hat hathat'))
+
+    def testing_re(str):
+        '''
+
+        '''
+        # return re.findall(r'\bTo[a-z]*', str)
+        return re.findall(r'\b[a-z]*zz', str)
+
+    print(testing_re('Total to Today tortilla'))
+    print(testing_re('Spazz zzz razz gas chzzz'))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="math_anchor"><h3><em>math</em> module</h3></a>
+        <pre class="mb-0">
+def using_math():
+    import math
+    import random
+    import statistics
+
+    print(math.pi / 4)
+    print(math.cos(100))
+    print(math.log(1024, 2))
+    print(math.pow(2, 10))
+
+    print(random.choice(['apple', 'banana', 'cherry', ]))
+    print(random.sample(range(100), 10))
+    print(random.random() * 10)
+    print(random.randrange(8))
+
+    import statistics
+    sample_numbers = [1, 4, 6, 8, 4, 3, 2, 6, 8, 4, 2, 6, 8, 9, 2, 5]
+    print(statistics.mean(sample_numbers))
+    print(statistics.median(sample_numbers))
+    print(statistics.variance(sample_numbers))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="urllib_anchor"><h3><em>urllib</em> module</h3></a>
+        <pre class="mb-0">
+def using_urllib():
+    # Can be used to open URLs
+    from urllib.request import urlopen
+    from bs4 import BeautifulSoup
+
+    website = 'https://webscraper.io/test-sites/e-commerce/allinone/phones/touch'
+    with urlopen(website) as response:  # opens the website and retrieves the html
+        html_page_soup = BeautifulSoup(response, 'html.parser')
+
+        # print(html_page_soup)
+
+        html_text_only = html_page_soup.get_text()
+        '''
+        BeautifulSoup().get_text() function strips the html element tags (and attributes) from the document and returns
+        only the text.
+        '''
+        # for line in html_text_only.splitlines():
+        #     if line != '':
+        #         print(line)
+
+        # Can open one of the tags in the html by specifying the tag. Anything within that tag is included.
+        # print("HEAD\n", html_page_soup.head)
+        # print("\n\nTITLE\n", html_page_soup.title)
+
+        # Can open up tags within tags
+        # print("\n\nHEAD.SCRIPT\n", html_page_soup.head.script)
+        # print("\n\nBODY\n", html_page_soup.body.header.div.span)
+
+        # Locates all instances of a tag (normally only the first tag is returned)
+        # print("\n\nSPAN\n", html_page_soup.find_all('span'))
+
+        # Children
+        print('\nCHILDREN')
+        for child in html_page_soup.body.header.div.a.children:
+            print(repr(child))
+
+        # Parent
+        print('\nPARENT')
+        print(repr(html_page_soup.body.header.div.a.parent))
+
+        # Next Sibling
+        print('\nNEXT SIBLING')
+        print(repr(html_page_soup.body.header.div.a.next_sibling.next_sibling))
+
+        # Previous Sibling
+        print('\nPREVIOUS SIBLING')
+        print(repr(html_page_soup.body.header.div.a.previous_sibling))
+
+        # Contents
+        print('\nCONTENTS')
+        for content in html_page_soup.body.header.div.a.contents:
+            print(repr(content))
+
+        # Descendants
+        print('\nDESCENDANTS')
+        for content in html_page_soup.body.header.div.a.descendants:
+            print(repr(content))
+
+        # Strings
+        print('\nSTRINGS')
+        # for content in html_page_soup.body.header.div.strings:
+        for content in html_page_soup.body.header.div.strings:
+            print(repr(content))
+
+        # Stripped Strings
+        print('\nSTRIPPED STRINGS')
+        # for content in html_page_soup.body.header.div.strings:
+        for content in html_page_soup.body.header.div.stripped_strings:
+            print(repr(content))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="smtplib_anchor"><h3><em>smtplib</em> module</h3></a>
+        <pre class="mb-0">
+def using_smtplib():
+    import smtplib  # SMTP (Simple Mail Transfer Protocol)
+    # e-mail utility library
+    # For this to work, it requires a mailserver running on localhost.
+    server = smtplib.SMTP('localhost')
+    server.sendmail('sender@example.org', 'recipient@example.org', 'hello')
+    server.quit()
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="datetime_anchor"><h3><em>datetime</em> module</h3></a>
+        <pre class="mb-0">
+def using_datetime():
+    import datetime
+
+    print("Time right now: ", datetime.datetime.today().time())
+
+    print("15 minutes from now: ", (datetime.datetime.today() + datetime.timedelta(minutes=15)).time())
+
+    print("Today: ", datetime.date.today())
+
+    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+    print("Tomorrow's date: ", tomorrow)
+
+    last_year_today_minus_a_day = datetime.date.today() - datetime.timedelta(weeks=52, days=1)
+    print("Last year today minus a day: ", last_year_today_minus_a_day)
+
+    yyyy = 1950
+    mm = 12
+    dd = 31
+    print('1950/12/31 ->', datetime.date(yyyy, mm, dd))
+
+    print('8 hours 35 minutes 32 seconds ->', datetime.time(hour=8, minute=35, second=32))
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="zlib_anchor"><h3><em>zlib</em> module - Data Compression</h3></a>
+        <pre class="mb-0">
+def using_data_compression():
+    import zlib
+
+    lorem_ipsum = b"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+        culpa qui officia deserunt mollit anim id est laborum."
+    print(len(lorem_ipsum))
+
+    compressed_lorem_ipsum = zlib.compress(lorem_ipsum)
+    print(len(compressed_lorem_ipsum))
+
+    print(lorem_ipsum)
+    print(compressed_lorem_ipsum)
+
+    decompressed_lorem_ipsum = zlib.decompress(compressed_lorem_ipsum)
+    print(len(decompressed_lorem_ipsum))
+    print(decompressed_lorem_ipsum)
+
+    print(zlib.crc32(compressed_lorem_ipsum))  # Prints the 32 bit integer checksum
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="timeit_anchor"><h3><em>timeit</em> module - Performance Evaluation</h3></a>
+        <pre class="mb-0">
+def using_timeit():
+    from timeit import Timer
+    '''
+    Can be used to measure the performance of different code solutions for the same problem.
+    '''
+
+    print(Timer('t=a; a=b; b=t', 'a=1; b=2').timeit())
+    print(Timer('a,b=b,a', 'a=1; b=2').timeit())
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="doctest_anchor"><h3><em>doctest</em> module</h3></a>
+        <pre class="mb-0">
+def using_doctest(sample_size):
+    import doctest
+    import random
+    import statistics
+
+    def average(ex_list=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]):
+        print(ex_list)
+        # return sum(ex_list) / len(ex_list)
+        return statistics.mean(ex_list)
+
+    print(average())
+    print(average(random.sample(range(100), sample_size)))
+
+    doctest.testmod()
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="unittest_anchor"><h3><em>unittest</em> module - Unit Testing</h3></a>
+        <pre class="mb-0">
+def using_unittest():
+    import unittest
+    '''
+    Unittest is a unit testing framework that supports test automation, sharing of setup and shutdown code for tests,
+    aggregation of tests into collections, and independence of the tests from the reporting framework.
+
+    Concepts:
+    test fixture:
+        A test fixture represents the preparation needed to perform one or more tests, and any associated cleanup
+        actions. This may involve, for example, creating temporary or proxy databases, directories, or starting a
+        server process.
+    test case:
+        A test case is the individual unit of testing. It checks for a specific response to a particular set of inputs.
+        unittest provides a base class, TestCase, which may be used to create new test cases.
+    test suite:
+        A test suite is a collection of test cases, test suites, or both. It is used to aggregate tests that should be
+        executed together.
+    test runner:
+        A test runner is a component which orchestrates the execution of tests and provides the outcome to the user.
+        The runner may use a graphical interface, a text interface, or return a special value to indicate the results
+        of executing the tests.
+    '''
+
+    class TestSampleMethods(unittest.TestCase):
+        def test_upper(self):
+            self.assertEqual('hello'.upper(), 'HELLO')
+
+        def test_isupper(self):
+            self.assertTrue('BYE'.isupper())
+            self.assertFalse('Bye'.isupper())
+
+        def test_split(self):
+            greeting = 'good afternoon'
+            self.assertEqual(greeting.split(), ['good', 'afternoon'])
+
+            with self.assertRaises(TypeError):
+                greeting.split(5)
+
+    unittest.main()
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="main_anchor"><h3><em>__main__</em> function - Python Main function</h3></a>
+        <pre class="mb-0">
+if __name__ == '__main__':
+    print("Hello World!")
+</pre>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Python - Overview
+{% endblock %}
+
+{% block glossary_block %}
+<li><a class="dropdown-item" href="#strings_anchor">Strings and its built-in functions</a></li>
+<li><a class="dropdown-item" href="#defaults_varargs_anchor">Default values & Variable-length arguments</a></li>
+<li><a class="dropdown-item" href="#control_stmts_anchor">Control Statements</a></li>
+<li><a class="dropdown-item" href="#control_stmts_2_anchor">Control Statements II</a></li>
+<li><a class="dropdown-item" href="#lambda_anchor">Lambda</a></li>
+<li><a class="dropdown-item" href="#function_parameters_anchor">Function Parameters</a></li>
+<li><a class="dropdown-item" href="#switch_anchor">Switch Statements</a></li>
+<li><a class="dropdown-item" href="#positional_keyword_anchor">Positional & Keyword markers</a></li>
+<li><a class="dropdown-item" href="#stack_queue_anchor">Stack & Queue</a></li>
+<li><a class="dropdown-item" href="#compare_collections_anchor">Collection Comparison</a></li>
+<li><a class="dropdown-item" href="#del_anchor"><em>del</em> function</a></li>
+<li><a class="dropdown-item" href="#modules_anchor">Modules</a></li>
+<li><a class="dropdown-item" href="#input_output_anchor">Input & Output</a></li>
+<li><a class="dropdown-item" href="#str_repr_anchor"><em>str</em> & <em>repr</em> functions</a></li>
+<li><a class="dropdown-item" href="#str_formatting_anchor">String Formatting</a></li>
+<li><a class="dropdown-item" href="#os_anchor"><em>os</em> module</a></li>
+<li><a class="dropdown-item" href="#read_write_files_anchor">Reading and Writing Files</a></li>
+<li><a class="dropdown-item" href="#json_anchor">Reading JSON files</a></li>
+<li><a class="dropdown-item" href="#errors_exceptions_anchor">Errors and Exceptions</a></li>
+<li><a class="dropdown-item" href="#exception_groups_anchor">Exception Groups</a></li>
+<li><a class="dropdown-item" href="#classes_anchor">Classes</a></li>
+<li><a class="dropdown-item" href="#inheritance_anchor">Inheritance</a></li>
+<li><a class="dropdown-item" href="#multiple_inheritance_anchor">Multiple Inheritance</a></li>
+<li><a class="dropdown-item" href="#iterators_anchor">Iterators</a></li>
+<li><a class="dropdown-item" href="#generators_anchor">Generators</a></li>
+<li><a class="dropdown-item" href="#generator_expressions_anchor">Generator Expressions</a></li>
+<li><a class="dropdown-item" href="#shutil_anchor"><em>shutil</em> module</a></li>
+<li><a class="dropdown-item" href="#glob_anchor"><em>glob</em> module</a></li>
+<li><a class="dropdown-item" href="#sys_anchor"><em>sys</em> module</a></li>
+<li><a class="dropdown-item" href="#argparse_anchor"><em>argparse</em> module</a></li>
+<li><a class="dropdown-item" href="#re_anchor"><em>re</em> module</a></li>
+<li><a class="dropdown-item" href="#math_anchor"><em>math</em> module</a></li>
+<li><a class="dropdown-item" href="#urllib_anchor"><em>urllib</em> module</a></li>
+<li><a class="dropdown-item" href="#smtplib_anchor"><em>smtplib</em> module</a></li>
+<li><a class="dropdown-item" href="#datetime_anchor"><em>datetime</em> module</a></li>
+<li><a class="dropdown-item" href="#zlib_anchor"><em>zlib</em> module - Data Compression</a></li>
+<li><a class="dropdown-item" href="#timeit_anchor"><em>timeit</em> module</a></li>
+<li><a class="dropdown-item" href="#doctest_anchor"><em>doctest</em> module</a></li>
+<li><a class="dropdown-item" href="#unittest_anchor"><em>unittest</em> module - Unit Testing</a></li>
+<li><a class="dropdown-item" href="#main_anchor"><em>__main__</em> function - Python Main function</a></li>
+{% endblock %}

@@ -1,0 +1,78 @@
+html{
+/*    scrollbar-width: auto;*/
+    scrollbar-color:rgb(108,117,125) rgb(33,37,41);
+}
+
+body{
+    padding-top:75px;
+    margin:15px;
+    background-image:linear-gradient(to top, gray, lightgray, white);
+    /*    background-image:linear-gradient(gray, lightgray, white, lightgray, gray);*/
+    /*    background-repeat: no-repeat; *//* testing, doesn't seem necessary */
+    background-attachment: fixed; /* Removes the gap at the bottom of the page  */
+}
+
+table{
+    font-size:0.9em;
+}
+
+table pre{
+    font-size:0.9em;
+}
+
+pre{
+    color:crimson;
+    font-size:0.8em;
+}
+
+pre mark{
+    color:crimson;
+    font-weight:bold;
+    font-size:0.95em;
+}
+
+.highlight{
+    background-color:orange;
+}
+
+.highlight_2{
+    background-color: #a6ddea;
+    padding: 1px;
+}
+
+.highlight_3{
+    background-color: lightgreen;
+    padding: 1px;
+}
+
+.highlight_4{
+    background-color: #fdd892;
+    padding: 1px;
+}
+
+code{
+    font-size:0.85em;
+}
+
+h1,h2,h3,h4,h5,h6{
+    color:black;
+}
+
+a[class~="nav-link"]:hover{
+    color:red;
+    text-shadow:0px 0px 10px orange;
+}
+
+.dropdown-menu-scrollbar{
+    max-height:90vh;
+    overflow-y:scroll;
+}
+
+.error_underline{
+    text-decoration: underline wavy red;
+}
+
+.comment{
+    color:black;
+    font-style: italic;
+}

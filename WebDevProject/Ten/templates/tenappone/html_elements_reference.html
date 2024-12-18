@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>HTML Elements List</title>
+<link rel=stylesheet href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="html_elements_anchor"><h1>HTML <span class="door">-</span> Elements/Tags</h1></a>
+<div class="form-control">
+    <a id="ref_table_anchor"><h2>Reference Table</h2></a>
+    <table class="table table-bordered mb-1">
+        <tr class="table-dark">
+            <th><p class="mb-0">Element/Tag</p>/th>
+            <th><p class="mb-0">Description</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;!--...--&gt;</p></td>
+            <td><p class="mb-0">Defines a comment</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;!DOCTYPE&gt;</p></td>
+            <td><p class="mb-0">Defines the document type</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;a&gt;</p></td>
+            <td><p class="mb-0">Defines a hyperlink</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;abbr&gt;</p></td>
+            <td><p class="mb-0">Defines an abbreviation or an acronym</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;acronym&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use &lt;abbr&gt; instead. Defines an acronym.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;address&gt;</p></td>
+            <td><p class="mb-0">Defines contact information for the author/owner of a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;applet&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use &lt;embed&gt; or &lt;object&gt; instead. Defines an embedded applet.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;area&gt;</p></td>
+            <td><p class="mb-0">Defines an area inside an image map</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;article&gt;</p></td>
+            <td><p class="mb-0">Defines an article</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;aside&gt;</p></td>
+            <td><p class="mb-0">Defines content aside from the page content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;audio&gt;</p></td>
+            <td><p class="mb-0">Defines embedded sound content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;b&gt;</p></td>
+            <td><p class="mb-0">Defines bold text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;base&gt;</p></td>
+            <td><p class="mb-0">Specifies the base URL/target for all relative URLs in a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;basefont&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use CSS instead. Specifies a default color, size, and font for all text in a
+                document.
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;bdi&gt;</p></td>
+            <td><p class="mb-0">Isolates a part of text that might be formatted in a different direction from other text outside it
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;bdo&gt;</p></td>
+            <td><p class="mb-0">Overrides the current text direction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;big&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use CSS instead. Defines big text.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;blockquote&gt;</p></td>
+            <td><p class="mb-0">Defines a section that is quoted from another source</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;body&gt;</p></td>
+            <td><p class="mb-0">Defines the document's body</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;br&gt;</p></td>
+            <td><p class="mb-0">Defines a single line break</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;button&gt;</p></td>
+            <td><p class="mb-0">Defines a clickable button</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;canvas&gt;</p></td>
+            <td><p class="mb-0">Used to draw graphics, on the fly, via scripting (usually JavaScript)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;caption&gt;</p></td>
+            <td><p class="mb-0">Defines a table caption</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;center&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use CSS instead. Defines centered text.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;cite&gt;</p></td>
+            <td><p class="mb-0">Defines the title of a work</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;code&gt;</p></td>
+            <td><p class="mb-0">Defines a piece of computer code</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;col&gt;</p></td>
+            <td><p class="mb-0">Specifies column properties for each column within a &lt;colgroup&gt; element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;colgroup&gt;</p></td>
+            <td><p class="mb-0">Specifies a group of one or more columns in a table for formatting</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;data&gt;</p></td>
+            <td><p class="mb-0">Adds a machine-readable translation of a given content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;datalist&gt;</p></td>
+            <td><p class="mb-0">Specifies a list of pre-defined options for input controls</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;dd&gt;</p></td>
+            <td><p class="mb-0">Defines a description/value of a term in a description list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;del&gt;</p></td>
+            <td><p class="mb-0">Defines text that has been deleted from a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;details&gt;</p></td>
+            <td><p class="mb-0">Defines additional details that the user can view or hide</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;dfn&gt;</p></td>
+            <td><p class="mb-0">Specifies a term that is going to be defined within the content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;dialog&gt;</p></td>
+            <td><p class="mb-0">Defines a dialog box or window</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;dir&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use &lt;ul&gt; instead. Defines a directory list.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;div&gt;</p></td>
+            <td><p class="mb-0">Defines a section in a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;dl&gt;</p></td>
+            <td><p class="mb-0">Defines a description list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;dt&gt;</p></td>
+            <td><p class="mb-0">Defines a term/name in a description list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;em&gt;</p></td>
+            <td><p class="mb-0">Defines emphasized text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;embed&gt;</p></td>
+            <td><p class="mb-0">Defines a container for an external application</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;fieldset&gt;</p></td>
+            <td><p class="mb-0">Groups related elements in a form</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;figcaption&gt;</p></td>
+            <td><p class="mb-0">Defines a caption for a &lt;figure&gt; element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;figure&gt;</p></td>
+            <td><p class="mb-0">Specifies self-contained content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;font&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use CSS instead. Defines font, color, and size for text.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;footer&gt;</p></td>
+            <td><p class="mb-0">Defines a footer for a document or section</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;form&gt;</p></td>
+            <td><p class="mb-0">Defines an HTML form for user input</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;frame&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Defines a window (a frame) in a frameset.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;frameset&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Defines a set of frames.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;h1&gt; to &lt;h6&gt;</p></td>
+            <td><p class="mb-0">Defines HTML headings</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;head&gt;</p></td>
+            <td><p class="mb-0">Contains metadata/information for the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;header&gt;</p></td>
+            <td><p class="mb-0">Defines a header for a document or section</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;hgroup&gt;</p></td>
+            <td><p class="mb-0">Defines a header and related content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;hr&gt;</p></td>
+            <td><p class="mb-0">Defines a thematic change in the content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;html&gt;</p></td>
+            <td><p class="mb-0">Defines the root of an HTML document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;i&gt;</p></td>
+            <td><p class="mb-0">Defines a part of text in an alternate voice or mood</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;iframe&gt;</p></td>
+            <td><p class="mb-0">Defines an inline frame</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;img&gt;</p></td>
+            <td><p class="mb-0">Defines an image</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;input&gt;</p></td>
+            <td><p class="mb-0">Defines an input control</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;ins&gt;</p></td>
+            <td><p class="mb-0">Defines a text that has been inserted into a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;kbd&gt;</p></td>
+            <td><p class="mb-0">Defines keyboard input</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;label&gt;</p></td>
+            <td><p class="mb-0">Defines a label for an &lt;input&gt; element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;legend&gt;</p></td>
+            <td><p class="mb-0">Defines a caption for a &lt;fieldset&gt; element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;li&gt;</p></td>
+            <td><p class="mb-0">Defines a list item</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;link&gt;</p></td>
+            <td><p class="mb-0">Defines the relationship between a document and an external resource (most used to link to style
+                sheets)
+            </p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;main&gt;</p></td>
+            <td><p class="mb-0">Specifies the main content of a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;map&gt;</p></td>
+            <td><p class="mb-0">Defines an image map</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;mark&gt;</p></td>
+            <td><p class="mb-0">Defines marked/highlighted text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;menu&gt;</p></td>
+            <td><p class="mb-0">Defines an unordered list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;meta&gt;</p></td>
+            <td><p class="mb-0">Defines metadata about an HTML document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;meter&gt;</p></td>
+            <td><p class="mb-0">Defines a scalar measurement within a known range (a gauge)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;nav&gt;</p></td>
+            <td><p class="mb-0">Defines navigation links</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;noframes&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Defines an alternate content for users that do not support frames.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;noscript&gt;</p></td>
+            <td><p class="mb-0">Defines an alternate content for users that do not support client-side scripts</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;object&gt;</p></td>
+            <td><p class="mb-0">Defines a container for an external application</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;ol&gt;</p></td>
+            <td><p class="mb-0">Defines an ordered list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;optgroup&gt;</p></td>
+            <td><p class="mb-0">Defines a group of related options in a drop-down list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;option&gt;</p></td>
+            <td><p class="mb-0">Defines an option in a drop-down list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;output&gt;</p></td>
+            <td><p class="mb-0">Defines the result of a calculation</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;p&gt;</p></td>
+            <td><p class="mb-0">Defines a paragraph</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;param&gt;</p></td>
+            <td><p class="mb-0">Defines a parameter for an object</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;picture&gt;</p></td>
+            <td><p class="mb-0">Defines a container for multiple image resources</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;pre&gt;</p></td>
+            <td><p class="mb-0">Defines preformatted text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;progress&gt;</p></td>
+            <td><p class="mb-0">Represents the progress of a task</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;q&gt;</p></td>
+            <td><p class="mb-0">Defines a short quotation</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;rp&gt;</p></td>
+            <td><p class="mb-0">Defines what to show in browsers that do not support ruby annotations</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;rt&gt;</p></td>
+            <td><p class="mb-0">Defines an explanation/pronunciation of characters (for East Asian typography)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;ruby&gt;</p></td>
+            <td><p class="mb-0">Defines a ruby annotation (for East Asian typography)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;s&gt;</p></td>
+            <td><p class="mb-0">Defines text that is no longer correct</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;samp&gt;</p></td>
+            <td><p class="mb-0">Defines sample output from a computer program</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;script&gt;</p></td>
+            <td><p class="mb-0">Defines a client-side script</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;search&gt;</p></td>
+            <td><p class="mb-0">Defines a search section</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;section&gt;</p></td>
+            <td><p class="mb-0">Defines a section in a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;select&gt;</p></td>
+            <td><p class="mb-0">Defines a drop-down list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;small&gt;</p></td>
+            <td><p class="mb-0">Defines smaller text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;source&gt;</p></td>
+            <td><p class="mb-0">Defines multiple media resources for media elements (&lt;video&gt; and &lt;audio&gt;)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;span&gt;</p></td>
+            <td><p class="mb-0">Defines a section in a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;strike&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use &lt;del&gt; or &lt;s&gt; instead. Defines strikethrough text.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;strong&gt;</p></td>
+            <td><p class="mb-0">Defines important text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;style&gt;</p></td>
+            <td><p class="mb-0">Defines style information for a document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;sub&gt;</p></td>
+            <td><p class="mb-0">Defines subscripted text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;summary&gt;</p></td>
+            <td><p class="mb-0">Defines a visible heading for a &lt;details&gt; element</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;sup&gt;</p></td>
+            <td><p class="mb-0">Defines superscripted text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;svg&gt;</p></td>
+            <td><p class="mb-0">Defines a container for SVG graphics</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;table&gt;</p></td>
+            <td><p class="mb-0">Defines a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;tbody&gt;</p></td>
+            <td><p class="mb-0">Groups the body content in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;td&gt;</p></td>
+            <td><p class="mb-0">Defines a cell in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;template&gt;</p></td>
+            <td><p class="mb-0">Defines a container for content that should be hidden when the page loads</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;textarea&gt;</p></td>
+            <td><p class="mb-0">Defines a multiline input control (text area)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;tfoot&gt;</p></td>
+            <td><p class="mb-0">Groups the footer content in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;th&gt;</p></td>
+            <td><p class="mb-0">Defines a header cell in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;thead&gt;</p></td>
+            <td><p class="mb-0">Groups the header content in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;time&gt;</p></td>
+            <td><p class="mb-0">Defines a specific time (or datetime)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;title&gt;</p></td>
+            <td><p class="mb-0">Defines a title for the document</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;tr&gt;</p></td>
+            <td><p class="mb-0">Defines a row in a table</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;track&gt;</p></td>
+            <td><p class="mb-0">Defines text tracks for media elements (&lt;video&gt; and &lt;audio&gt;)</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;tt&gt;</p></td>
+            <td><p class="mb-0">Not supported in HTML5. Use CSS instead. Defines teletype text.</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;u&gt;</p></td>
+            <td><p class="mb-0">Defines some text that is unarticulated and styled differently from normal text</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;ul&gt;</p></td>
+            <td><p class="mb-0">Defines an unordered list</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;var&gt;</p></td>
+            <td><p class="mb-0">Defines a variable</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;video&gt;</p></td>
+            <td><p class="mb-0">Defines embedded video content</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">&lt;wbr&gt;</p></td>
+            <td><p class="mb-0">Defines a possible line-break</p></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+HTML - Elements/Tags Reference Chart
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#html_elements_anchor"><strong>HTML Elements/Tags</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#ref_table_anchor">Reference Table</a>
+</li>
+{% endblock %}

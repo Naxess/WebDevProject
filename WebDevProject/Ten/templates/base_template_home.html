@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <!--    &lt;!&ndash;Bootstrap CDN&ndash;&gt;-->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"-->
+    <!--            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--    &lt;!&ndash;JQuery CDN&ndash;&gt;-->
+    <!--    <script src="https://code.jquery.com/jquery-3.7.1.js"-->
+    <!--            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>-->
+
+    <!--Using a localized version of Bootstrap-->
+    <script src="{% static 'dependencies/jquery/jquery-3.7.1.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'dependencies/bootstrap/css/bootstrap.css' %}">
+    <script rel="stylesheet" src="{% static 'dependencies/bootstrap/js/bootstrap.bundle.js' %}"></script>
+
+    <!--Favicon-->
+    <link rel="icon" href="{% static 'media/images/favicon_16x16.png' %}">
+    {% block head_block %}
+    {% endblock %}
+</head>
+<body>
+<div class="navbar navbar-expand-lg navbar-dark border-bottom border-light bg-dark fixed-top px-3">
+    <!--    <div class="container-fluid">-->
+    <a class="navbar-brand text-light" href="{% url 'home' %}">
+        <img src="{% static 'media/images/brand_192x192.png' %}" alt="" width="50px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_one">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapse_one">
+        <ul class="navbar-nav navbar-light">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#">Guides</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="{% url 'tenappone:language_guides_home' %}">
+                            Coders' Corner
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'gameguides:game_guides_home' %}">
+                            Gamers' Grove
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'stockapp:stock_app_home' %}">
+                            Stockbrokers' Study
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'about' %}">About</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'user_auth:user_roster' %}">User Registry</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'user_auth:logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'user_auth:registration' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'user_auth:login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'admin:index' %}">Admin Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<!--</div>-->
+<div>
+    {% block body_block %}
+    {% endblock %}
+</div>
+<br><br>
+<div class="navbar navbar-expand-lg navbar-left bg-dark border-top border-light navbar-light fixed-bottom">
+    <div class="container-fluid">
+        <!--        <a class="navbar-brand text-light" href="#"></a>-->
+        <ul class="navbar-nav">
+            <!--            <li class="nav-item">-->
+            <!--                &lt;!&ndash;                <a class="nav-link text-light" href="#">About</a>&ndash;&gt;-->
+            <!--                <a class="nav-link text-light" href="#">-->
+            <!--                    <strong>-->
+            <!--                    </strong>-->
+            <!--                </a>-->
+            <!--            </li>-->
+            <li class="nav-item dropup">
+                <!--'dropup' displays the dropdown menu above rather than below. Other options: dropright, dropleft-->
+                <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown">
+                    <strong>
+                        {% block chapter_block %}
+                        {% endblock %}
+                    </strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-scrollbar">
+                    {% block glossary_block %}
+                    {% endblock %}
+                    <!--                    <li>-->
+                    <!--                        <a class="dropdown-item" href="#">English</a>-->
+                    <!--                    </li>-->
+                    <!--                    <li>-->
+                    <!--                        <a class="dropdown-item" href="#">Spanish</a>-->
+                    <!--                    </li>-->
+                    <!--                    <li>-->
+                    <!--                        <a class="dropdown-item" href="#">Chinese</a>-->
+                    <!--                    </li>-->
+                </ul>
+            </li>
+        </ul>
+        <form class="d-flex">
+            <div class="input-group">
+                <span class="input-group-text bg-dark border border-dark text-light">Search:</span>
+                <button type="button" class="btn btn-outline-light border border-dark" hidden="hidden" id="prev_result_button_id">
+                    &lt;
+                </button>
+                <button type="button" class="btn btn-outline-light border border-dark" hidden="hidden" id="next_result_button_id">
+                    &gt;
+                </button>
+                <input type="text" class="form-control" placeholder="Search on page..." id="search_box_id">
+            </div>
+        </form>
+    </div>
+</div>
+<script src="{% static 'js/search_page_function.js' %}"></script>
+</body>
+</html>

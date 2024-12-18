@@ -1,0 +1,48 @@
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Survivor.io - Merging Guide</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="merging_guide_anchor"><h1>Survivor.io <span class="door">-</span> Merging Guide</h1></a>
+<div class="form-control mb-2">
+    <a id="merging_weapons_anchor"><h2>Merging Weapons/Armor</h2></a>
+    <img src="{% static 'media/images/survivorio/merge_guide.weapons.png' %}" alt="merge_guide.weapons.png"
+         width="80%">
+</div>
+
+<div class="form-control mb-2">
+    <a id="merging_tech_anchor"><h2>Merging Tech</h2></a>
+    <img src="{% static 'media/images/survivorio/merge_guide.tech.png' %}" alt="merge_guide.tech.png" width="80%">
+</div>
+
+<div class="form-control mb-2">
+    <a id="merging_pets_anchor"><h2>Merging Pets</h2></a>
+    <img src="{% static 'media/images/survivorio/merge_guide.pets.png' %}" alt="merge_guide.pets.png" width="80%">
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Survivor.io - Merging Guide
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#merging_guide_anchor">Survivor.io - Merging Guide</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#merging_weapons_anchor">&nbsp;&nbsp;&nbsp;Merging Weapons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#merging_tech_anchor">&nbsp;&nbsp;&nbsp;Merging Tech</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#merging_pets_anchor">&nbsp;&nbsp;&nbsp;Merging Pets</a>
+</li>
+{% endblock %}
+

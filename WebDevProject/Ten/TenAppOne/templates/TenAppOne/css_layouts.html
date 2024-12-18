@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>CSS Layouts</title>
+<!--<style>body{margin:15px;}</style>-->
+<link rel="stylesheet" href="{% static 'css/css_layouts.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="css_layouts_anchor"><h1>CSS <span class="door">-</span> Layouts</h1></a>
+<div class="form-control">
+    <p class="mb-2">
+        "Normal flow" describes the layout of HTML pages by default (i.e. unmodified by layout-changing properties).
+        Elements in the normal flow are displayed in the exact order in which they appear in the code. Elements that
+        appear one after another in this manner are referred to as <em>block elements</em>, in contrast to
+        <em>inline</em> elements, which appear beside one another.
+    </p>
+    <p class="mb-2">
+        Listed below are methods that can change the layout of elements in CSS:
+    </p>
+    <table class="table table-bordered mb-2">
+        <tr>
+            <th><u>display</u> property</th>
+            <td>
+                Sets whether an element is treated as a block or inline box and the layout used for its children, such
+                as flow layout, grid, or flex.
+                <br>
+                <ul>
+                    <li>
+                        <u>block</u>: the element generates a block box, generating line breaks both before and after
+                        the element when in the normal flow
+                    </li>
+                    <li>
+                        <u>inline</u>: the element generates one or more inline boxes that do not generate line breaks
+                        before or after themselves. In normal flow, the next will be on the same line if there is space.
+                    </li>
+                    <li>
+                        <u>flow</u>: the element lays out its contents using flow layout (block-and-inline layout). If
+                        its outer display is <em>inline</em> or <em>run-in</em>, and it is participating in a block or
+                        inline formatting content, then it generates an inline box, else it generates a block container
+                        box.
+                    </li>
+                    <li>
+                        <u>flex</u>: the element behaves like a block-level element and lays out its content according
+                        to the flexbox model.
+                    </li>
+                    <li>
+                        <u>grid</u>: the element behaves like a block-level element and lays out its content according
+                        to the grid model.
+                    </li>
+                    <li>
+                        <u>none</u>: Turns off the display of an element so that it has no effect on layout. The
+                        document is render as though the element doesn't exist. All descendant elements will also have
+                        their display turned off.
+                    </li>
+                    <li>
+                        Other values: <u>flow-root</u>, <u>table</u>, <u>ruby</u>, <u>contents</u>
+                        <br>
+                        See full list <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">here</a>.
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>floats</th>
+            <td>
+                Applying a float value such as <em>left</em> can cause block-level elements to wrap along one side of an
+                element.
+            </td>
+        </tr>
+        <tr>
+            <th><u>position</u> property</th>
+            <td>
+                Allows precise control of the placement of boxes inside other boxes. <em>static</em> positioning is the
+                default in normal flow, but elements can be laid out differently by using other values.
+            </td>
+        </tr>
+        <tr>
+            <th>table layout</th>
+            <td>
+                Features designing for styling parts of an HTML table can be used on non-table elements using <em>display:
+                table</em> and associated properties.
+            </td>
+        </tr>
+        <tr>
+            <th>multi-column layout</th>
+            <td>
+                Multi-column layout properties can cause the content of a block to lay out in columns.
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-control mb-2">
+        <a id="flexbox_intro_anchor"><h2>Introduction to Flexbox Layout</h2></a>
+        <p class="mb-2">
+            Flexbox is short for Flexible Box Layout, a CSS module designed to make it easy to lay out elements in one
+            dimension - either as a row or column. To use flexbox, set the value of <em>display</em> to <em>flex</em> to
+            the parent element of the elements to be laid out. All of that parent element's direct children then become
+            <em>flex items</em>.
+        </p>
+        <p class="mb-2">
+            When applied to the parent element, the children will arrange themselves into columns. When they are
+            converted to <em>flex items</em>, they are affected by some initial values that flexbox sets on the flex
+            container. They are displayed in a row because the <em>flex-direction</em> property in the parent element is
+            set to<em>row</em> by default. They appear to stretch in height because of the <em>align-items</em> property
+            of their parent element is set to <em>stretch</em> by default. This causes the items to stretch to the
+            height of the flex container, which is defined by the tallest item. The items are aligned to the start
+            (left) of the container by default.
+        </p>
+        <div class="form-control mb-1">
+            <a id="flex_property_anchor"><h3>Using the <em>flex</em> property</h3></a>
+            <p class="mb-2">
+                In addition to the properties that can be applied to the <em>flex container</em>, there are also
+                properties that can be applied to the <em>flex items</em>. The <em>flex</em> property, when applied to
+                the child item, will grow or shrink the item to fit the space available in its flex container. It has
+                three subcategories:
+            </p>
+            <table class="table table-bordered row">
+                <tr class="table-dark">
+                    <th class="col-2">Subcategory</th>
+                    <th class="col-10">Description</th>
+                </tr>
+                <tr>
+                    <th>flex-grow</th>
+                    <td>specifies how much of the container to use</td>
+                </tr>
+                <tr>
+                    <th>flex-shrink</th>
+                    <td>if larger than container, then shrinks to specified value</td>
+                </tr>
+                <tr>
+                    <th>flex-basis</th>
+                    <td>initial size</td>
+                </tr>
+            </table>
+            <p class="mb-2">The <em>flex</em> property accepts the following values:</p>
+            <table class="table table-bordered row">
+                <tr class="table-dark">
+                    <th class="col-2">Value</th>
+                    <th class="col-10">Description</th>
+                </tr>
+                <tr>
+                    <th>initial</th>
+                    <td>
+                        The item is sized according to its width and height properties. It shrinks to its
+                        minimum size to fit the cotnainer, but does not grow to absorb any extra free space in the flex
+                        container. Equivalent long form: <em>flex: 0 1 auto;</em>
+                    </td>
+                </tr>
+                <tr>
+                    <th>auto</th>
+                    <td>
+                        The item is zied according to its width and height properties, but grows to absorb any extra
+                        free space in the flex container, and shrinks to its minimum size to fit the container.
+                        Equivalent long form: <em>flex: 1 1 auto;</em>
+                    </td>
+                </tr>
+                <tr>
+                    <th>none</th>
+                    <td>
+                        The item is sized according to its width and height properties. It is fully inflexible: it
+                        neither shrinks nor grows in relation tot he flex container. Equivalent long form: <em>flex: 0 0
+                        auto;</em>
+                    </td>
+                </tr>
+                <tr>
+                    <th><'flex-grow'></th>
+                    <td>
+                        Defines the <em>flex-grow</em> of the flex item. Negative values are considered invalid.
+                        Defaults to 1 when omitted. Initial is 0.
+                    </td>
+                </tr>
+                <tr>
+                    <th><'flex-shrink'></th>
+                    <td>
+                        Defines the <em>flex-shrink</em> of the flex item. Negative values are considered invalid.
+                        Defaults to 1 when omitted. Initial is 1.
+                    </td>
+                </tr>
+                <tr>
+                    <th><'flex-basis'></th>
+                    <td>
+                        Defines the <em>flex-basis</em> of the flex item. A preferred size of 0 must have a unit to
+                        avoid being interpreted as a flexibility. Defaults to 0 when omitted. Initial is <em>auto</em>.
+                    </td>
+                </tr>
+            </table>
+            <p class="mb-2">
+                The <em>flex</em> property accepts between one and three values. The types and number of value(s)
+                supplied will determine which subcategory is supplied:
+            </p>
+            <table class="table table-bordered row mb-1">
+                <tr class="table-dark">
+                    <th class="col-2">Value</th>
+                    <th class="col-10">Description</th>
+                </tr>
+                <tr>
+                    <th>one-value syntax</th>
+                    <td>
+                        <p>One of the keywords: <u>auto</u>, <u>initial</u>, and <u>none</u></p>
+                        <p>
+                            Unitless number (i.e. numbers without 'px', 'em', '%', etc..). Value applies to
+                            <em>flex-grow</em>. <em>flex-basis</em> is automatically set to 0.
+                        </p>
+                        <p class="mb-0">
+                            Length unit (e.g. 1cm, 1.2em, 10%, etc..)). Value applies to <em>flex-basis</em>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>two-value syntax</th>
+                    <td>
+                        <p>
+                            Unitless number and length unit. First applies to <em>flex-grow</em>, second applies to
+                            <em>flex-basis</em>.
+                        </p>
+                        <p class="mb-0">
+                            Both values are unitless numbers. First applies to <em>flex-grow</em>, second applies to
+                            <em>flex-shrink</em>.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>three-value syntax</th>
+                    <td>
+                        <p class="mb-0">
+                            Unitless number, unitless number, length unit. First applies to <em>flex-grow</em>, second
+                            applies to <em>flex-shrink</em>, and third applies to <em>flex-basis</em>.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="grid_intro_anchor"><h2>Introduction to Grid Layout</h2></a>
+        <p class="mb-2">
+            The <em>grid</em> property is a shorthand property that sets all of the explicit and implicit grid
+            properties in a single declaration.
+        </p>
+        <div class="form-control mb-2">
+            <a id="grid_property_anchor"><h3>Using the <em>grid</em> property</h3></a>
+            <p class="mb-1">
+                As opposed to flexbox's one-dimensional layout, the grid layout is designed for two-dimensional layouts.
+                To enable the grid system, set the value of the <em>display</em> property to <em>grid</em>. Enabling
+                this property means that the <em>grid-template-row</em> and <em>grid-template-columns</em> properties
+                must also be declared. These two properties are used to specify an axis. Three other properties can also
+                be declared: <em>grid-auto-rows</em>, <em>grid-auto-columns</em>, and <em>grid-auto-flow</em>. These
+                three are implicit grid properties.
+            </p>
+            <ul>
+                <li>
+                    The <u><em>grid-template-columns</em></u> property takes a variable number of values. These values
+                    can be a fixed length (e.g. 100px), relative length (e.g. 2fr, em), or use the <em>auto</em>
+                    keyword. The number of values dictates the number of columns in the grid.
+                    <br>
+                    Examples:
+                    <ul>
+                        <li><em>grid-template-columns: 1fr 1fr 1fr;</em></li>
+                        <li><em>grid-template-columns: 100px 100px 100px 100px;</em></li>
+                    </ul>
+                </li>
+                <li>
+                    The <u><em>grid-template-rows</em></u> property takes a variable number of values. These values can
+                    be a fixed length (e.g. 100px), relative length (e.g. 2fr, em), or use the <em>auto</em> keyword.
+                    The number of values dictates the number of rows in the grid, however, if the number of elements in
+                    the grid container exceeds the "capacity" of the grid, they will simply be added as additional rows
+                    that follows the column layout.
+                    <br>
+                    Examples:
+                    <ul>
+                        <li><em>grid-template-rows: 1fr 1fr 1fr;</em></li>
+                        <li><em>grid-template-rows: 100px 100px 100px 100px;</em></li>
+                    </ul>
+                </li>
+            </ul>
+            <p class="mb-1">
+                Grid items have two major properties that are optional: <em>grid-column</em> and <em>grid-row</em>.
+            </p>
+            <ul>
+                <li>
+                    The <u><em>grid-column</em></u> property accepts either one or two grid-line values delimited by a
+                    slash ( / ). The first value denotes the start location <em>grid-column-start</em> while the second
+                    value denotes the end location <em>grid-column-end</em> or length. Acceptable values include 'auto',
+                    'span', or an integer value.
+                    <br>
+                    Examples:
+                    <ul>
+                        <li>
+                            grid-column:2/5;
+                            <br>
+                            grid-row:1;
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    The <u><em>grid-row</em></u> property accepts either one or two grid-line values delimited by a
+                    slash ( / ). The first value denotes the start location <em>grid-row-start</em> while the second
+                    value denotes the end location <em>grid-row-end</em> or length. Acceptable values include 'auto',
+                    'span', or an integer value.
+                </li>
+            </ul>
+        </div>
+
+        <div class="example_section_div mb-1">
+            <h4>Grid Layout Test Area</h4>
+            <h5>Grid Layout (grid-template-columns/grid-template-rows) Demonstration Area</h5>
+            <div class="grid_layout_example mb-3">
+                <div class="grid_layout_example_boxes">1</div>
+                <div class="grid_layout_example_boxes">2</div>
+                <div class="grid_layout_example_boxes">3</div>
+                <div class="grid_layout_example_boxes">4</div>
+                <div class="grid_layout_example_boxes">5</div>
+                <div class="grid_layout_example_boxes">6</div>
+                <div class="grid_layout_example_boxes">7</div>
+                <div class="grid_layout_example_boxes">8</div>
+                <div class="grid_layout_example_boxes">9</div>
+            </div>
+
+            <h5>Grid Layout (grid-column) Demonstration Area 2</h5>
+            <div class="grid_layout_example mb-3">
+                <div class="grid_layout_example_boxes box_1">A</div>
+                <div class="grid_layout_example_boxes box_2">B</div>
+                <div class="grid_layout_example_boxes box_3">C</div>
+                <div class="grid_layout_example_boxes box_4">D</div>
+                <div class="grid_layout_example_boxes box_5">E</div>
+                <div class="grid_layout_example_boxes box_6">F</div>
+                <div class="grid_layout_example_boxes box_7">G</div>
+                <div class="grid_layout_example_boxes box_8">H</div>
+                <div class="grid_layout_example_boxes box_9">I</div>
+            </div>
+
+            <h5>CSS Code:</h5>
+            <pre class="mb-0">
+.grid_container_div{
+    display:grid;
+    grid-template-columns: 80px 80px 80px 80px;
+    grid-template-rows: 30px 30px;
+    gap:10px;
+}
+
+.box_a{
+    grid-column:2/5;
+    grid-row:1;
+}
+
+.box_b{
+    grid-column:1;
+    grid-row:1/3;
+}
+
+.box_c{
+    grid-column:3/5;
+    grid-row:2;
+}
+
+.box_d{
+    grid-column:3;
+    grid-row:3/5;
+}
+
+.box_e{
+    grid-column:2;
+    grid-row:2/4;
+}
+
+.box_h{
+    grid-column:1/3;
+    grid-row:4;
+}</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="floats_anchor"><h2>Floats</h2></a>
+        <p class="mb-2">
+            Floating an element changes the behavior of that element and the block level elements that follow it in
+            normal flow. The floated element is moved to the left or right and removed from normal flow, and the
+            surrounding content <em>floats</em> around it.
+        </p>
+        <p class="mb-2">
+            The <em>float</em> property has four possible values:
+        </p>
+        <ul>
+            <li><u>left</u>: floats the element to the left</li>
+            <li><u>right</u>: floats the element to the right</li>
+            <li><u>none</u>: specifies no floating at all. This is the default</li>
+            <li><u>inherit</u>: specifies that the value of the <em>float</em> property should be inherited from the
+                element's parent element
+            </li>
+        </ul>
+
+        <div class="example_section_div mb-1">
+            <h5>Float Test Area</h5>
+            <div class="floating_box_a">
+                A
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis esse laudantium quisquam veritatis.
+                Ad asperiores consectetur cumque debitis delectus dolores, enim ipsam minus nam placeat quo repellat
+                saepe velit voluptates? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequuntur
+                doloremque eum facilis impedit natus perspiciatis possimus praesentium voluptatem! Autem consequatur
+                esse excepturi minus placeat ullam, vitae! A animi, tenetur. Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Aliquid, cumque doloremque incidunt neque nobis quas veniam. Deleniti nemo, pariatur.
+                Asperiores dolores dolorum ea fuga illo libero magni molestiae optio tempore? Lorem ipsum dolor sit
+                amet, consectetur adipisicing elit. Aperiam asperiores, consequatur dignissimos dolor, earum facere nemo
+                neque omnis quas reiciendis temporibus velit voluptatem voluptatibus? Aliquid cumque cupiditate mollitia
+                quia repellat.
+            </p>
+            <div class="floating_box_b">
+                B
+            </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis esse laudantium quisquam veritatis.
+                Ad asperiores consectetur cumque debitis delectus dolores, enim ipsam minus nam placeat quo repellat
+                saepe velit voluptates? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequuntur
+                doloremque eum facilis impedit natus perspiciatis possimus praesentium voluptatem! Autem consequatur
+                esse excepturi minus placeat ullam, vitae! A animi, tenetur. Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Aliquid, cumque doloremque incidunt neque nobis quas veniam. Deleniti nemo, pariatur.
+                Asperiores dolores dolorum ea fuga illo libero magni molestiae optio tempore? Lorem ipsum dolor sit
+                amet, consectetur adipisicing elit. Aperiam asperiores, consequatur dignissimos dolor, earum facere nemo
+                neque omnis quas reiciendis temporibus velit voluptatem voluptatibus? Aliquid cumque cupiditate mollitia
+                quia repellat.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="positioning_techniques_anchor"><h2>Positioning Techniques</h2></a>
+        <p class="mb-2">
+            Positioning allows movement of an element from where it would normally be in a 'normal flow' to another
+            location. It is not a tool for managing page layouts but for fine-tuning the position of specific elements
+            on a page. There are five types of positioning: static, relative, absolute, fixed, and sticky.
+        </p>
+        <ul>
+            <li>
+                <u>Static positioning</u>. This is the default mode. This sets the element in 'normal flow' mode.
+            </li>
+            <li>
+                <u>Relative positioning</u>. Moves an element into position relative to where it would originally be in
+                'normal flow' mode. It will overlap other elements on the page.
+            </li>
+            <li>
+                <u>Absolute positioning</u>. Moves an element completely out of the page's 'normal flow'. It can then be
+                fixed to a position relative to the dges of its closest positioned ancestor (
+            </li>
+            <li>
+                <u>Fixed positioning</u>. Fixes an element relative to the browser viewport, not another element. This
+                creates a persistent element that stays in the same place on the screen even if the page is scrolled.
+            </li>
+            <li>
+                <u>Sticky positioning</u>. Acts like relative positioning until it hits a defined offset from the
+                viewport, after which it acts according to fixed positioning.
+            </li>
+        </ul>
+
+        <div class="form-control mb-2">
+            <a id="static_positioning_anchor"><h3>Simple/Static Positioning</h3></a>
+            <p class="mb-2">
+                Default 'normal flow' layout. Elements are laid out in the order in which they are declared in HTML.
+            </p>
+            <div class="example_section_div">
+                <div class="centered_box">
+                    A
+                </div>
+                <div class="centered_box" style="background-color:yellow;">
+                    B (Simple Position)
+                </div>
+                <div class="centered_box">
+                    C
+                </div>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="relative_positioning_anchor"><h3>Relative Positioning</h3></a>
+            <p class="mb-2">
+                To enable relative positioning, we declare and then set the value of the <em>position</em> property to
+                <u>relative</u>. Then we need to declare one or both of the following properties: <em>top</em> and
+                <em>left</em>. These properties are used to move the affected element down and/or right.
+            </p>
+            <div class="example_section_div">
+                <div class="centered_box">
+                    A
+                </div>
+                <div class="relative_position_box">
+                    B (Relative Position)
+                </div>
+                <div class="centered_box">
+                    C
+                </div>
+                <p class="mt-2">
+                    The relative position example (Box B) is shifted to the left and below Box A. It is fixed to the
+                    webpage in exactly that spot and doesn't not move around. (The following positioning examples may be
+                    located in various positions around the webpage.)
+                </p>
+                <h5>CSS Code:</h5>
+                <pre class="mb-0">
+.relative_position_box{
+    position:relative;
+    top:15px;
+    left:200px;
+    ...
+}</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="absolute_positioning_anchor"><h3>Absolute Positioning</h3></a>
+            <p class="mb-2">
+                Enabled by declaring the <em>position</em> property and setting the value to <u>absolute</u>. Then
+                declare one or both of the following properties: <em>top</em> and <em>left</em>. These properties are
+                used to move the affected element down and/or right from the top of the page itself and not the
+                surrounding elements. The element sits on top of the page.
+            </p>
+            <div class="example_section_div">
+                <div class="centered_box">
+                    A
+                </div>
+                <div class="absolute_position_box">
+                    <a href="#absolute_positioning_anchor" id="absolute_positioning_example_anchor">
+                        B (Absolute Position)
+                    </a>
+                </div>
+                <div class="centered_box">
+                    C
+                </div>
+                <p class="mt-2">
+                    NOTE: The 'B' box in this example may be elsewhere on the page as expanding the width of the page
+                    may cause it to move up or down. Click <a href="#absolute_positioning_example_anchor">here</a>
+                    to move to its location.
+                </p>
+                <h5>CSS Code:</h5>
+                <pre class="mb-0">
+.absolute_position_box{
+    position:absolute;
+    top:99%; /* NOTE: this is the position of this element relative to the ceiling of the page. */
+    left:65%;
+    ...
+}</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="fixed_positioning_anchor"><h3>Fixed Positioning</h3></a>
+            <p class="mb-2">
+                Enabled by declaring the <em>position</em> property and setting the value to <u>fixed</u>.
+            </p>
+            <div class="example_section_div">
+                <div class="centered_box">
+                    A
+                </div>
+                <div class="fixed_position_box">
+                    <a href="#fixed_positioning_anchor">B (Fixed Position)</a>
+                </div>
+                <div class="centered_box">
+                    C
+                </div>
+                <p class="mt-2">
+                    NOTE: the fixed position (See yellow box with "B (Fixed Position)" text) example has been on the
+                    page all along. It has been fixed in place on the screen (bottom-right) in spite of scrolling.
+                </p>
+                <h5>CSS Code:</h5>
+                <pre class="mb-0">
+.fixed_position_box{
+    position:fixed;
+    top:90%;
+    left:65%;
+    ...
+}
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="sticky_positioning_anchor"><h3>Sticky Positioning</h3></a>
+            <p class="mb-2">
+                Enabled by declaring the <em>position</em> property and setting the value to <u>sticky</u>.
+            </p>
+            <div class="example_section_div">
+                <div class="centered_box">
+                    A
+                </div>
+                <div class="sticky_position_box">
+                    B (Sticky Position)
+                </div>
+                <div class="centered_box">
+                    C
+                </div>
+                <p class="mt-2">
+                    NOTE: the sticky position box example will shift down if the element is scrolled up above the middle
+                    of the page. It will return to the middle position if the element is at the center of the page or
+                    below the center.
+                </p>
+                <h5>CSS Code:</h5>
+                <pre class="mb-0">
+.sticky_position_box{
+    position:sticky;
+    top:50%;
+    left:36%;
+    ...
+}
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="multicolumn_layout_intro_anchor"><h2>Multi-column Layout</h2></a>
+        <p class="mb-2">
+            Enabling a multi-column layout is done by declaring the <em>column-count</em> property and setting the value
+            equal to a unitless integer. The number of columns created will reflect this value. The width of each column
+            is equally distributed. Optional properties:
+        </p>
+        <table class="table table-bordered row">
+            <tr class="table-dark">
+                <th class="col-2">Property</th>
+                <th class="col-10">Description</th>
+            </tr>
+            <tr>
+                <th>column-gap</th>
+                <td>This property changes the size of the gap between columns.</td>
+            </tr>
+            <tr>
+                <th>column-rule</th>
+                <td>This property adds a rule between columns (i.e. it draws a line between columns). It accepts up to
+                    three values: color, style, and width. It works the same as the <em>border</em> property and even
+                    accepts the same values. Some styles: <u>dotted</u>, <u>inset</u>, <u>dashed</u>.
+                    <br><br>
+                    Example usages of <em>column-rule</em>:
+                    <ul class="mb-0">
+                        <li><em>column-rule: dotted;</em></li>
+                        <li><em>column-rule: solid 5px;</em></li>
+                        <li><em>column-rule: solid black;</em></li>
+                        <li><em>column-rule: solid black;</em></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>column-span</th>
+                <td>
+                    <p>
+                        This property causes an element to span across all of the columns. It accepts one of two
+                        possible values: <u>none</u> or <u>all</u>. The <u>all</u> value causes the element to span
+                        across all columns. Content in the normal flow that appears before the element is automatically
+                        balanced across all columns before the element appears. The element establishes a new block
+                        formatting context.
+                    </p>
+                    Example usages:
+                    <ul class="mb-0">
+                        <li><em>column-span: none;</em></li>
+                        <li><em>column-span: all;</em></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>break-inside</th>
+                <td>
+                    Available values: <i>auto</i>, <i>avoid</i>. If the property is set to <i>avoid</i>, it avoids any
+                    break (page, column, or region) from being inserted within the principal box. Subvalues:
+                    <i>avoid-page</i>, <i>avoid-column</i>, and <i>avoid-region</i>. Simply put, the addition of
+                    this property causes the elements to stay in one piece - they will no longer fragment across the
+                    columns. Further simplified, when printing, if will force each section to have its own page, rather
+                    than split in order to fill a page. See a visual representation <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside#try_it">here</a>.
+                </td>
+            </tr>
+        </table>
+        <div class="example_section_div mb-1">
+            <p class="five_column_layout">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam debitis eius est facere hic id
+                incidunt maiores, numquam, odit perspiciatis provident quae quia quibusdam quisquam rem repellat
+                tempore, ullam voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad at atque commodi
+                culpa cupiditate, error esse facere id ipsum iure officia omnis porro sint sit tempora temporibus vitae
+                voluptatem! Explicabo? <em><strong>[column-count:5; column-rule:2px dotted red;]</strong></em>
+            </p>
+            <hr style="solid">
+            <div class="three_column_layout">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet atque cupiditate eaque
+                    fugiat laudantium obcaecati quas qui sint voluptatum. Aliquid blanditiis culpa debitis expedita
+                    harum ipsam iure quidem, totam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet,
+                    autem blanditiis fugit ipsum laborum minima praesentium. Beatae consectetur, debitis dolorem
+                    dolores, fugit nesciunt pariatur saepe sed sint voluptate voluptates voluptatum.
+                </p>
+                <h4 class="column_spanner_enabled">This column-span set to 'ALL'</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem consectetur consequatur cupiditate
+                    distinctio incidunt minus officia optio qui, quis sint sunt tenetur. Aliquid dignissimos explicabo
+                    perspiciatis quod reprehenderit rerum temporibus! Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Aperiam consequatur, corporis cupiditate dicta dolore, et exercitationem
+                    laudantium magni maxime molestias nemo odit praesentium quas quibusdam quo quod vel veniam
+                    voluptatum!
+                </p>
+                <h4 class="column_spanner_disabled">This column-span set to 'NONE'</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet at autem beatae consequuntur deleniti
+                    dolorum earum, exercitationem facere inventore ipsum iste modi nam nisi odit placeat quae quis
+                    repellat velit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores
+                    consectetur earum explicabo ipsam nobis perspiciatis? Autem enim, esse illum odio, officia placeat,
+                    porro quidem sunt totam veniam vero voluptate.
+                </p>
+            </div>
+            <hr>
+            <h4>HTML Code:</h4>
+            <pre>
+&lt;p class="five_column_layout"&gt;
+    Lorem ipsum ... &lt;em&gt;&lt;strong&gt;[column-count:5; column-rule:2px dotted red;]&lt;/strong&gt;&lt;/em&gt;
+&lt;/p&gt;
+&lt;hr style="solid"&gt;
+&lt;div class="three_column_layout"&gt;
+    &lt;p&gt;
+        Lorem ipsum ...
+    &lt;/p&gt;
+    &lt;h4 class="column_spanner_enabled"&gt;This column-span set to 'ALL'&lt;/h4&gt;
+    &lt;p&gt;
+        Lorem ipsum ...
+    &lt;/p&gt;
+    &lt;h4 class="column_spanner_disabled"&gt;This column-span set to 'NONE'&lt;/h4&gt;
+    &lt;p&gt;
+        Lorem ipsum ...
+    &lt;/p&gt;
+&lt;/div&gt;</pre>
+            <hr>
+            <h4>CSS Code:</h4>
+            <pre class="mb-0">
+.five_column_layout{
+    column-count:5;
+    column-rule:5px dotted blue;
+}
+
+.three_column_layout{
+    column-count:3;
+    column-rule:2px solid red;
+}
+
+.column_spanner_enabled{
+    column-span:all;
+    background-color:aqua;
+    text-align:center;
+}
+
+.column_spanner_disabled{
+    column-span:none;
+    background-color:lightgray;
+    text-align:center;
+}</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="table_layout_anchor"><h2>Table Layout</h2></a>
+        <p class="mb-2">
+            This property is enabled by setting the value of the <em>display</em> property to <u>table</u>. This
+            converts the layout of the affected element into that of a table - meaning it will utilize some of the same
+            types of components such as headers, footers, columns, etc.. Each of these components has their own
+            <em>display</em> value. See the list below:
+        </p>
+        <ul>
+            <li><em>table-row</em>: elements affected will behave like a 'tr' element. Example usage:
+                <em>display: table-row;</em></li>
+            <li><em>table-cell</em>: elements affected will behave like a 'td' element. Example usage:
+                <em>display: table-cell;</em></li>
+            <li><em>table-column</em>: elements affected will behave like a 'col' element. Example usage:
+                <em>display: table-column;</em></li>
+            <li><em>table-caption</em>: elements affected will behave like a 'caption' element. Example usage:
+                <em>display: table-caption;</em></li>
+            <li><em>table-row-group</em>: elements affected will behave like a 'tbody' element. Example usage:
+                <em>display: table-row-group;</em></li>
+            <li><em>table-column-group</em>: elements affected will behave like a 'colgroup' element. Example usage:
+                <em>display: table-column-group;</em></li>
+            <li><em>table-header-group</em>: elements affected will behave like a 'thead' element. Example usage:
+                <em>display: table-header-group;</em></li>
+            <li><em>table-footer-group</em>: elements affected will behave like a 'tfoot' element. Example usage:
+                <em>display: table-footer-group;</em></li>
+        </ul>
+        <h5 class="mb-1">NOTE:</h5>
+        <p class="mb-1">
+            Usage of this feature has lessened due to the inflexible nature of the format, heavy use of markup,
+            difficulty of debugging, and being semantically incorrect. It is now considered a legacy feature.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+CSS - Layouts
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#css_layouts_anchor"><strong>CSS Layouts</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#flexbox_intro_anchor">Introduction to Flexbox Layout</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#flex_property_anchor">&nbsp;&nbsp;&nbsp;Using the <em>flex</em> property</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#grid_intro_anchor">Introduction to Grid Layout</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#floats_anchor">Floats</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#positioning_techniques_anchor">Positioning Techniques</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#static_positioning_anchor">&nbsp;&nbsp;&nbsp;Simple/Static Positioning</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relative_positioning_anchor">&nbsp;&nbsp;&nbsp;Relative Positioning</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#absolute_positioning_anchor">&nbsp;&nbsp;&nbsp;Absolute Positioning</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#fixed_positioning_anchor">&nbsp;&nbsp;&nbsp;Fixed Positioning</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#sticky_positioning_anchor">&nbsp;&nbsp;&nbsp;Sticky Positioning</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#multicolumn_layout_intro_anchor">Multi-column Layout</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#table_layout_anchor">Table Layout</a>
+</li>
+{% endblock %}

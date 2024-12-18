@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Git - Basics</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="git_anchor"><h1>Git <span class="door">-</span> Basics</h1></a>
+<div class="form-control">
+    <p class="mb-2">
+        Git is a distributed version-control system designed to track changes in any set of computer files, usually
+        used for coordinating work among programmers who are collaboratively developing source code during software
+        development.
+    </p>
+
+    <div class="form-control mb-2">
+        <a id="version_control_anchor"><h3>Version Control</h3></a>
+        <p class="mb-2">
+            Refers to the practice of tracking and managing changes to software code. Version control systems are
+            software tools that help software teams manage changes to the source code over tme. Every single
+            modification to the code is tracked in a special database, thus allowing developers to compare their
+            code to earlier versions and if necessary, revert to them.
+        </p>
+        <p class="mb-1">Benefits:</p>
+        <ul class="mb-1">
+            <li>
+                A history of every change to every file is tracked and stored for later viewing or as a backup to
+                revert to.
+            </li>
+            <li>
+                Branching and merging. Allows multiple people to work on the same code simultaneously. Users can
+                create local copies of the code on which they can make modifications that they can then merge into
+                the original code.
+            </li>
+            <li>
+                Traceability and documentation. Can be used with project management and bug tracking software such
+                as Jira. Users are also able to submit messages with their changes. These messages can include
+                useful details about the any new features/fixes that are being implemented with their change.
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_benefits_anchor"><h3>Benefits of using Git</h3></a>
+        <p class="mb-2">
+            Git, at the moment of this writing, is the most widely use version control system in the world.
+        </p>
+        <p class="mb-1">Benefits of using Git:</p>
+        <ul class="mb-1">
+            <li>Better performance</li>
+            <li>High security</li>
+            <li>
+                Flexibility. Supports various kinds of nonlinear development workflows. High efficiency in both
+                small and large projects. Wide compatibility with existing systems and protocols
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_github_install_setup_anchor"><a id="_anchor"><h3>Git/GitHub Installation/Setup</h3></a></a>
+        <p class="mb-1">
+            Before we can start using Git and GitHub, we need to install them first:
+        </p>
+        <ul class="mb-1">
+            <li>
+                Install Git from <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a>.
+                During installation, make sure to enable the option to add Git to the PATH.
+            </li>
+            <li>
+                Create a GitHub account on <a href="https://github.com/">https://github.com/</a>.
+            </li>
+            <li>
+                Verify whether Git was installed correctly (or verify version), open the Command Prompt and enter
+                the following command: <code>git --version</code>
+                <br>
+                The should look something like this: <code>git version 2.44.0.windows.1</code>
+                <br>
+                If, instead, you get an error, then try rebooting the PC. Failing that, try reinstalling and ensuring
+                that the option to <em>add Git to the PATH</em> is installed.
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_vs_github_anchor"><h3>Git vs GitHub</h3></a>
+        <ul class="list-group mb-1">
+            <li class="list-group-item">
+                The difference between Git and GitHub is that Git is a version control software used to keep track of
+                the changes in your code.
+            </li>
+            <li class="list-group-item">
+                GitHub is a company and website that assists with managing Git and hosting the files
+                on their website. They also ofer extra tools for collaboration.
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="init_anchor"><h3>Setting up a Git repository - using <em>git init</em></h3></a>
+        <ol>
+            <li>
+                In the GitHub website, create a repository. Locate the HTTPS url for the repo. If SSH is selected, then
+                click on HTTPS to display the url instead. Save this url for later use.
+            </li>
+            <li>
+                On your PC, create a directory that you want to designate as a Git repo. This will be where your
+                projects will be stored. Copy the path of this directory.
+            </li>
+            <li>
+                Open the Command Prompt application and use commands to navigate into the directory you created in the
+                last step. Enter the following command to designate this directory as a Git repo:
+                <code>git init</code>
+                <br>
+                (This installs some files onto the directory. Do not delete or edit them.)
+            </li>
+        </ol>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="add_new_project_anchor"><h3>Adding local projects to the (remote) Git repository</h3></a>
+        <ol class="mb-1">
+            <li>
+                After the local Git repo is set up, add projects by copy-pasting them into the root directory of the Git
+                repo.
+            </li>
+            <li>
+                <p class="mb-1">
+                    Open the Command Prompt and navigate to the root directory of the Git repository. Run the following
+                    command on the added project(s): <code>git add .</code>
+                </p>
+                <p class="mb-1">
+                    This command adds new or edited files into a list of files (staging area) to be added/updated into
+                    the remote repo.
+                </p>
+                <p class="mb-1">
+                    The period ( . ) added at the end is a wildcard used to select every project in the directory. If we
+                    added multiple projects, then all will be added. If, instead, we want to select a single project,
+                    use this format instead: <code>git add <em>project_name</em></code>
+                </p>
+            </li>
+            <li>
+                <p class="mb-1">
+                    The following command takes a snapshot of the new/edited files in the staging area:
+                    <code>git commit -m "<em>message</em>"</code>
+                </p>
+                <p class="mb-1">
+                    Each commit requires that a message be attached, describing the list of changes that will occur to
+                    the remote repo once the file has been <em>pushed</em>. Example:
+                    <code>git commit -m "Adding a new project to the repo."</code>
+                </p>
+            </li>
+            <li>
+                <p class="mb-1">
+                    Now we need to tell Git which remote repo that we want to send the new changes to. Copy the HTTPS
+                    url from the Git repo on the GitHub website and run the following command on that url:
+                    <code>git remote add origin <em>https_url</em></code>
+                </p>
+                <p class="mb-1">
+                    Once we have designated the Git repo as the destination, all future changes will be pushed to this
+                    location.
+                </p>
+            </li>
+            <li>
+                <p class="mb-1">
+                    The last step to propagate the changes to the remote repo requires running this command:
+                    <code>git push -u origin master</code>
+                </p>
+                <p class="mb-1">
+                    After the command is run, all of the changes in the commit(s) are then applied onto the remote repo.
+                    We can then view the added/edited projects/files in GitHub.
+                </p>
+                <p class="mb-1">
+                    (You may be prompted to sign in after running this command.)
+                </p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="clone_anchor"><h3>Copying a remote repo to your local machine - using <em>git clone</em></h3></a>
+        <p class="mb-1">
+            We can make a copy of a remote repository onto our local machine by cloning it - we simply need the HTTPS
+            url of this remote repository. Once we have the url, we can run the following command to make a local copy
+            of the repo: <code>git clone <em>https_url</em></code>
+        </p>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="push_anchor"><h3>Applying changes from the local to the remote repo - using <em>git push</em></h3></a>
+        <p class="mb-1">
+            The <em>git push</em> command is used to update the remote repo with your local changes. It takes the
+            commits you created and applies those changes to the remote repo.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Git - Basics
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#git_anchor"><strong>Git - Basics</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#version_control_anchor">Version Control</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_benefits_anchor">Benefits of using Git</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_github_install_setup_anchor">Git/GitHub Installation/Setup</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_vs_github_anchor">Git vs GitHub</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#init_anchor">Setting up a Git repository - using <em>git init</em></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#add_new_project_anchor">Adding local projects to the (remote) Git repository</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#clone_anchor">
+        Copying a remote repo to your local machine - using <em>git clone</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#push_anchor">
+        Applying changes from the local to the remote repo - using <em>git push</em>
+    </a>
+</li>
+{% endblock %}

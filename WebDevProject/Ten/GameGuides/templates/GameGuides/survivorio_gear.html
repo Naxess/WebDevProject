@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Survivor.io - Gear</title>
+{% endblock %}
+
+{% block body_block %}
+<a id="gear_anchor"><h1>Survivor.io <span class="door">-</span> Gear</h1></a>
+<div class="form-control mb-2">
+    <a id="upgrade_perks_anchor"><h2>Upgrade Perks</h2></a>
+    <div class="form-control mb-2">
+        <a id="weapons_anchor"><h3>Weapons</h3></a>
+        <img src="{% static 'media/images/survivorio/upgrade_perks.weapons.png' %}" alt="upgrade_perks.weapons.png"
+             width="100%">
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="necklaces_anchor"><h3>Necklaces</h3></a>
+        <img src="{% static 'media/images/survivorio/upgrade_perks.necklaces.png' %}" alt="upgrade_perks.necklaces.png"
+             width="100%">
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="gloves_anchor"><h3>Gloves</h3></a>
+        <img src="{% static 'media/images/survivorio/upgrade_perks.gloves.png' %}" alt="upgrade_perks.gloves.png"
+             width="100%">
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="chest_armors_anchor"><h3>Chest Armors</h3></a>
+        <img src="{% static 'media/images/survivorio/upgrade_perks.chest_armors.png' %}"
+             alt="upgrade_perks.chest_armors.png" width="100%">
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="belts_anchor"><h3>Belts</h3></a>
+        <img src="{% static 'media/images/survivorio/upgrade_perks.belts.png' %}" alt="upgrade_perks.belts.png"
+             width="100%">
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="boots_anchor"><h3>Boots</h3></a>
+        <img src="{% static 'media/images/survivorio/upgrade_perks.boots.png' %}" alt="upgrade_perks.boots.png"
+             width="100%">
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="af_costs_anchor"><h2>Astral Forge Costs</h2></a>
+    <div class="form-control mb-2">
+        <a id="twin_lance_anchor"><h3>Twin Lance - Starforged Havoc</h3></a>
+        <table class="table table-bordered row mb-1">
+            <tr class="table-dark">
+                <th class="col-sm-1 text-center">Level</th>
+                <th class="col-sm-11">Description</th>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Grade Skills</th>
+            </tr>
+            <tr>
+                <td style="background-color:lime;"></td>
+                <td>
+                    <p class="mb-0">ATK <mark>+15%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:dodgerblue;"></td>
+                <td>
+                    <p class="mb-0">
+                        Starforge: Triggers Energy Overload <mark>1</mark> time for every <mark>2</mark> Eternity Ray
+                        shots, increasing own skill damage by <mark>30%</mark> for <mark>10</mark>s. Max <mark>2</mark>
+                        stacks.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:darkorchid;"></td>
+                <td>
+                    <p class="mb-0">
+                        Starforged Havoc: Higher thrust damage with lower HP
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:yellow;"></td>
+                <td>
+                    <p class="mb-0">ATK <mark>+25%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:red;"></td>
+                <td>
+                    <p class="mb-0">
+                        Havoc Nova: Releases Void power during a thrust. Targets hit by the Void Fissure take an
+                        additional <mark>10%</mark> damage.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-image:linear-gradient(to bottom right,darkturquoise,purple,white,blue);"></td>
+                <td>
+                    <p class="mb-0">
+                        Havoc Nova: Outermost rim of Eternity Ray has suppression force
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Eternal Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        Photolithography: Energy Overload counts will also be recorded when Eternity Ray retracts.
+                        Starforge and Havoc start at Lv. <mark>3</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">ATK <mark>+10%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Super Star: Each Energy Overload stack's damage increased to <mark>35%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+4000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Jade Cluster: Energy Overload stacks up to <mark>3</mark> times
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Void Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        ATK <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        Disordered Death: Void power damage <mark>+80%</mark>. Targets hit by the Void Fissure take an
+                        additional <mark>20%</mark> damage
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+4000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Blink: Thrusts performed at low HP reduces base attack intervals by up to <mark>1</mark>s
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+8000</mark>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="evervoid_armor_anchor"><h3>Evervoid Armor - Starforged Havoc</h3></a>
+        <table class="table table-bordered row mb-1">
+            <tr class="table-dark">
+                <th class="col-sm-1 text-center">Level</th>
+                <th class="col-sm-11">Description</th>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Grade Skills</th>
+            </tr>
+            <tr>
+                <td style="background-color:lime;"></td>
+                <td>
+                    <p class="mb-0">Skill choices when match starts <mark>+1</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:dodgerblue;"></td>
+                <td>
+                    <p class="mb-0">HP <mark>+15%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:darkorchid;"></td>
+                <td>
+                    <p class="mb-0">
+                        Adversity: Gain an energy shield with <mark>30%</mark> of Max HP when dying (Once per battle.
+                        Resets on revival)
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:yellow;"></td>
+                <td>
+                    <p class="mb-0">HP <mark>+25%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:red;"></td>
+                <td>
+                    <p class="mb-0">Clarity: Skill damage <mark>+20%</mark>. Effect fades on death</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-image:linear-gradient(to bottom right,darkturquoise,purple,white,blue);"></td>
+                <td>
+                    <p class="mb-0">
+                        Preservation: HP recovery through supplies also restores <mark>10%</mark> of energy levels.
+                        Shield recovery cannot exceed its max HP (Max <mark>100%</mark> HP)
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Eternal Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        Halberd Shield: Shield damage <mark>+10%</mark> (Damage up when shield is active)
+                        <br>
+                        Unrelenting: After taking no damage for <mark>10</mark>s, slowly restores <mark>2.5%</mark> of
+                        energy shield every second (will not exceed max shield HP)
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        HP <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Shield damage <mark>+10%</mark>
+                        <br>
+                        Violent Backlash: When own HP is higher than <mark>10%</mark>, own HP is deducted first before
+                        shield HP when taking damage
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Final HP <mark>+16000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Omnicombat: The higher the energy shield's HP, the higher the damage. For every <mark>25%</mark>
+                        shield HP, shield damage <mark>+5%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Void Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        HP <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        Reverse Scale: When shield HP is higher than own HP, skill damage <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Final HP <mark>+16000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Clarity increases skill damage by <mark>15%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Final HP <mark>+32000</mark>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="judgement_necklace_anchor"><h3>Judgment Necklace - Starforged Havoc</h3></a>
+        <table class="table table-bordered row mb-1">
+            <tr class="table-dark">
+                <th class="col-sm-1 text-center">Level</th>
+                <th class="col-sm-11">Description</th>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Grade Skills</th>
+            </tr>
+            <tr>
+                <td style="background-color:lime;"></td>
+                <td>
+                    <p class="mb-0">Hatred: On hit, inflicts Weaken on attacker, reducing its Attack by <mark>10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:dodgerblue;"></td>
+                <td>
+                    <p class="mb-0">ATK <mark>+15%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:darkorchid;"></td>
+                <td>
+                    <p class="mb-0">
+                        Defensive Stance: Restores <mark>15%</mark> of Energy Shield when skill levels up.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:yellow;"></td>
+                <td>
+                    <p class="mb-0">ATK <mark>+25%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:red;"></td>
+                <td>
+                    <p class="mb-0">Potential Unleashed: All passive skills learned in battle can be upgraded to Red
+                        Star (including character's exclusive).</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-image:linear-gradient(to bottom right,darkturquoise,purple,white,blue);"></td>
+                <td>
+                    <p class="mb-0">
+                        Amplify: <mark>+25%</mark> damage to Weakened target.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Eternal Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        Berserk: <mark>+20</mark>s Berserk when skill levels up. <mark>+50%</mark> skill damage during
+                        this time. Defeat monsters to extend Berserk duration. Max <mark>200</mark>s.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        Attack <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Wondermight: The higher the shield value, the more damage dealt to Weakened targets. +2% damage
+                        to Weakened targets.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+4000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Limit Break: +40% Max Energy Shield
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Void Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        Attack <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        Stealth Attack: +2% Crit Damage for every 2 levels of passive skills learned.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+4000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Divine Might: Initial passive skill level +1. For each Red Star passive upgrade, Crit Damage
+                        +10%.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+8000</mark>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="judgement_necklace_anchor"><h3>Moonscar Bracer - Starforged Havoc</h3></a>
+        <table class="table table-bordered row mb-1">
+            <tr class="table-dark">
+                <th class="col-sm-1 text-center">Level</th>
+                <th class="col-sm-11">Description</th>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Grade Skills</th>
+            </tr>
+            <tr>
+                <td style="background-color:lime;"></td>
+                <td>
+                    <p class="mb-0">
+                        Crit rate <mark>+5%</mark> for every <mark>500</mark> effective attacks in battle. Max
+                        <mark>30%</mark>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:dodgerblue;"></td>
+                <td>
+                    <p class="mb-0">ATK <mark>+15%</mark></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:darkorchid;"></td>
+                <td>
+                    <p class="mb-0">
+                        <mark>0.5%</mark> of energy shield restored when a critical hit defeats a monster (Max <mark>5</mark> times every second).
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:yellow;"></td>
+                <td>
+                    <p class="mb-0">ATK <mark>+25%</mark>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:red;"></td>
+                <td>
+                    <p class="mb-0">Shield damage <mark>+10%</mark>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-image:linear-gradient(to bottom right,darkturquoise,purple,white,blue);"></td>
+                <td>
+                    <p class="mb-0">
+                        Light's Judgment: Fires <mark>1</mark> Eternal Laser every <mark>10</mark>s. Marks
+                        <mark>1</mark> boss <mark>10</mark>s before firing and enters Charging Attack state. During this
+                        time, <mark>100%</mark> of total damage dealth to boss is converted into Charging Damage, and
+                        will be fired in a single laser when the charge phase ends (Charged damage is not affected by
+                        attack multiplier bonuses).
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Eternal Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        Mega Crit I: Crit Rate exceeds <mark>100%</mark>, Crit Damage <mark>+30%</mark>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        Attack <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Mega Crit II: Crit Rate exceeds <mark>130%</mark>, Crit Damage <mark>+30%</mark>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+4000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Mega Crit III: Crit Rate exceeds <mark>150%</mark>, Crit Damage <mark>+25%</mark>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-primary text-center py-0" colspan="2">Void Forge Effect</th>
+            </tr>
+            <tr>
+                <td class=text-center>AF1</td>
+                <td>
+                    <p class="mb-0">
+                        Attack <mark>+10%</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF2</td>
+                <td>
+                    <p class="mb-0">
+                        Revolution: Shield damage boost <mark>+20%</mark>. Restores <mark>10%</mark> Energy Shield after
+                        laser is fired.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF3</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+4000</mark>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF4</td>
+                <td>
+                    <p class="mb-0">
+                        Final Evolution: During Eternal Laser's charging period, Crit Rate <mark>+20%</mark>, Stored
+                        Damage <mark>+30%</mark>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class=text-center>AF5</td>
+                <td>
+                    <p class="mb-0">
+                        Final ATK <mark>+8000</mark>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="ss_astralforge_costs_anchor"><h3>SS Weapons/Gear - Astral Forge Upgrade Costs</h3></a>
+        <img src="{% static 'media/images/survivorio/ss_gear_astral_forge_upgrade_costs.jpg' %}"
+             alt="ss_gear_astral_forge_upgrade_costs.jpg" width="80%">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block chapter_block %}
+Survivor.io - Gear
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#gear_anchor">Survivor.io - Gear</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#upgrade_perks_anchor">&nbsp;&nbsp;&nbsp;Upgrade Perks</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#necklaces_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Necklaces</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#gloves_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gloves</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#chest_armors_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chest Armors</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#belts_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Belts</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#boots_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boots</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#af_costs_anchor">&nbsp;&nbsp;&nbsp;Astral Forge Costs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#twin_lance_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twin Lance - Starforged Havoc
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#evervoid_armor_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evervoid Armor - Starforged Havoc
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#s_astralforge_costs_anchor">&nbsp;&nbsp;&nbsp;S Weapons/Gear - Astral Forge Upgrade
+        Costs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#ss_astralforge_costs_anchor">&nbsp;&nbsp;&nbsp;SS Weapons/Gear - Astral Forge
+        Upgrade Costs</a>
+</li>
+{% endblock %}
+
+<!--
+Stardust Sash - Starforged Havoc (SS Belt)
+    Grade Skills:
+        Revival effect +35%
+        HP +15%
+        Toughened Armor: Triggers Toughened Armor for 5s when attacked (60s CD). Immune to all damage during this period, and collisions instakill minions.
+        HP +25%
+        Eternal Recharge: Energy orbs dropped for every 500 hits (energy orbs have a display limit in one screen). Collect orbs to raise energy level, up to Lv.5. +5% damage multiplier for each energy level. Energy drains with time.
+        Super Enhance: When total energy is above 90%, +30% additional skill damage.
+    Forge Effects:
+        Eternal Forge:
+            Peerless: -100 required hits for energy orb drops. +5% additional damage multiplier for each energy level.
+            HP +10%
+            Suppression: Able to trigger Super Enhance at Lv.4+. +5% additional damage multiplier for each energy level
+            Final HP +16000
+            Ultimate Eternity: -100 required hits for energy orb drops. +10% additional Crit Damage for each energy level.
+        Void Forge:
+            HP +10%
+            Cabalista: Energy level is maxed at the start. Restore additional 2% of energy shield when looting energy orbs. Shield damage boost +10%
+            Final HP +16000
+            Destructive Restraint: Energy drain speed halved. Shield damage boost +10%
+            Final HP +32000
+-->

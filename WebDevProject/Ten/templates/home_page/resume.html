@@ -1,0 +1,26 @@
+{% extends 'base_template_home.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<title>Resume PDF</title>
+{% endblock %}
+
+{% block body_block %}
+<!--<h1>About Me</h1>-->
+<div class="form-control mb-1">
+    <h1>Resume PDF</h1>
+    <object data="{% static 'media/texts/resume.pdf' %}" type="application/pdf" width="100%" height="2200px;">
+        File missing or unsupported.
+    </object>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+{% endblock %}
+
+{% block glossary_block %}
+{% endblock %}

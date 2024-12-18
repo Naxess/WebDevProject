@@ -1,0 +1,140 @@
+{% extends 'DESIRED_BASE_TEMPLATE.html' %}
+
+{#https://dzone.com/refcardz/mongodb#}
+
+{% load static %}
+
+{% block head_block %}
+    <title>TOPIC_NAME - SECTION_NAME</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id="TOPIC_anchor"><h1>TOPIC_NAME <span class="door">-</span> SECTION_NAME</h1></a>
+    <div class="form-control mb-2">
+        <div class="form-control mt-1 mb-2">
+            <h2>SUBSECTION_NAME</h2>
+            <p class="mb-2">
+
+            </p>
+            <p class="mb-2">
+
+            </p>
+            <p class="mb-2">
+
+            </p>
+            <p class="mb-1">
+
+            </p>
+        </div>
+        <div class="form-control mb-2">
+            <h2>SUBSECTION_2_NAME</h2>
+            <ul class="mb-0">
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+        <div class="form-control mb-2">
+            <h2>SUBSECTION_3_NAME</h2>
+            <ul class="mb-2">
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+        <div class="form-control mb-1">
+            <h2>SUBSECTION_4_NAME</h2>
+            <div class="form-control mb-2">
+                <h5>EXAMPLE_NAME</h5>
+                <p class="mb-1">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <p class="mb-2">
+
+                </p>
+                <p class="mb-0">
+
+                </p>
+                <ul>
+                    <li>
+
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+                <p class="mb-0">
+
+                </p>
+                <ul>
+                    <li>
+
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+                <p class="mb-2">
+
+                </p>
+                <p class="mb-2">
+
+                </p>
+            </div>
+            <div class="form-control mb-1">
+                <h5>EXAMPLE_2_NAME</h5>
+                <p class="mb-1">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+    SECTION_NAME
+{% endblock %}
+
+{% block glossary_block %}
+    <li>
+        <a class="dropdown-item" href="#SECTION_NAME_anchor">SECTION_NAME</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#SUBSECTION_anchor">&nbsp;&nbsp;&nbsp;SUBSECTION_NAME</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#SUBSECTION_2_anchor">&nbsp;&nbsp;&nbsp;SUBSECTION_2_NAME</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#SUBSECTION_3_anchor">&nbsp;&nbsp;&nbsp;SUBSECTION_3_NAME</a>
+    </li>
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Survivor.io - Clans</title>
+{% endblock %}
+
+{% block body_block %}
+<a id="survivorio_clans_anchor"><h1>Survivor.io <span class="door">-</span> Clans</h1></a>
+<!--<div class="form-control mb-2">-->
+<!--    <a id="stages_rewards_anchor"><h2>Clan Stages Rewards</h2></a>-->
+<!--    <img src="{% static 'media/images/survivorio/clan_stages_rewards.00-20.png' %}" alt="clan_stages_rewards.00-20.png"-->
+<!--         width="100%">-->
+<!--</div>-->
+
+<!--<div class="form-control mb-2">-->
+<!--    <a id="expedition_rewards_anchor"><h2>Clan Expedition Rewards</h2></a>-->
+<!--    <img src="{% static 'media/images/survivorio/clan_expedition_rewards.00-10.png' %}"-->
+<!--         alt="clan_expedition_rewards.00-10.png" width="100%">-->
+<!--    <img src="{% static 'media/images/survivorio/clan_expedition_rewards.11-20.png' %}"-->
+<!--         alt="clan_expedition_rewards.11-20.png" width="100%">-->
+<!--</div>-->
+
+<!--<div class="form-control mb-2">-->
+<!--    <a id="ranking_rewards_anchor"><h2>Clan Expedition Ranking Rewards</h2></a>-->
+<!--    <img src="{% static 'media/images/survivorio/clan_expedition_ranking_rewards.10-15.png' %}"-->
+<!--         alt="clan_expedition_ranking_rewards.10-15.png" width="100%">-->
+<!--    <img src="{% static 'media/images/survivorio/clan_expedition_ranking_rewards.16-20.png' %}"-->
+<!--         alt="clan_expedition_ranking_rewards.16-20.png" width="100%">-->
+<!--</div>-->
+
+<div class="form-control mb-2">
+    <a id="clan_expedition_rewards_anchor"><h2>Clan Expedition Rewards</h2></a>
+    <img src="{% static 'media/images/survivorio/clan_expedition_rewards.jpg' %}"
+         alt="clan_expedition_rewards.jpg" width="100%">
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Survivor.io - Clans
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#survivorio_clans_anchor"><strong>Survivor.io - Clans</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#clan_expedition_rewards_anchor">Clan Expedition Rewards</a>
+</li>
+<!--<li>-->
+<!--    <a class="dropdown-item" href="#stages_rewards_anchor">&nbsp;&nbsp;&nbsp;Clan Stages Rewards</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--    <a class="dropdown-item" href="#expedition_rewards_anchor">&nbsp;&nbsp;&nbsp;Clan Expedition Rewards</a>-->
+<!--</li>-->
+<!--<li>-->
+<!--    <a class="dropdown-item" href="#ranking_rewards_anchor">&nbsp;&nbsp;&nbsp;Clan Expedition Ranking Rewards</a>-->
+<!--</li>-->
+{% endblock %}

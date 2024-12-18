@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% extends 'base_template_home.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Roster</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<h1>User Roster</h1>
+{% if users_list %}
+<table class="table table-bordered row">
+    <tr class="table-dark">
+        <th class="col-1 text-center"></th>
+        <th class="col-1 text-center">Username</th>
+        <th class="col-5 text-center">Email</th>
+        <th class="col-5 text-center">Portfolio</th>
+    </tr>
+    {% for user in users_list %}
+    <tr>
+        <td>
+            {% if user.profile_pic %}
+            <img src="{{ MEDIA_URL }}{{ user.profile_pic.url }}" alt="{{ user.profile_pic.url }}" height="100">
+            {% endif %}
+        </td>
+        <th>{{ user.user.username }}</th>
+        <td>{{ user.user.email }}</td>
+        <td>
+            {% if user.portfolio %}
+            {{ user.portfolio }}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No registered users.</p>
+
+<div class="example_one">
+    {% if example_1 %}
+        <h3>Example 1</h3>
+        <ul>
+            {% for num in example_1 %}
+                <li>{{ num }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>Examples 1 list is empty.</h3>
+    {% endif %}
+</div>
+
+<div class="example_two">
+    {% if example_2 %}
+        <h3>Example 2</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            {% for item in example_2 %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h3>No items in Examples 2 database.</h3>
+    {% endif %}
+</div>
+
+
+{% endif %}
+{% endblock %}

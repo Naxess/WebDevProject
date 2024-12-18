@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+{% load static %}
+
+{% block head_block %}
+<title>Django - Admin Interface</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_admin_interface_anchor"><h1>Django <span class="door">-</span> Admin Interface</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="create_superuser_anchor"><h2>Creating a Superuser Account</h2></a>
+        <p class="mb-0">
+            To use the <em>Admin</em> interface, we need to create a <em>superuser</em> account. This can be done using
+            with this command:
+        </p>
+        <pre class="mb-0">
+python manage.py createsuperuser
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="register_models_anchor"><h2>Registering the Models</h2></a>
+        <p class="mb-0">
+            In order to use the Admin interface to interact with the models, we need to first register the models to the
+            app's <em>admin.py</em> file. In <em>admin.py</em>, the first thing that needs to be done is to import the
+            models from the app. With that done, we need to call the <em>admin.site.register</em> method once for each
+            imported model. Each call to the <em>register</em> function should be supplied with one of the imported
+            models.
+            <br>
+            Example:
+        </p>
+        <pre class="mb-0">
+from django.contrib import admin
+from <em>appName</em>.models import ExampleModelA, ExampleModelB
+
+admin.site.register(<em>ExampleModelA</em>)
+admin.site.register(<em>ExampleModelB</em>)
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="model_interaction_anchor"><h2>Interacting with the Models</h2></a>
+        <p class="mb-2">
+            Access to the (default) Admin interface is through this URL
+            (<a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>).
+            Sign in using a superuser account. After signing in, the home page of the
+            Admin page should display all created (and registered) tables (models) in the
+            <em>Site administration section</em> (ignore the <em>AUTHENTICATION AND AUTHORIZATION</em> section, that one
+            is created by Django by default).
+        </p>
+        <img src="{% static 'media/images/examples/django_admin_interface.admin_interface.png' %}"
+             alt="django_admin_interface.admin_interface.png" class="mb-2">
+        <p class="mb-1">
+            On the right side of each table, there are two buttons: <em>Add</em> and <em>Change</em>. Clicking on
+            <em>Add</em> will open a form that accepts values and when submitted will create a row in the table
+            populated with the supplied values. Clicking <em>Change</em> will open a form that allows us to change the
+            values on an existing row in the table.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Admin Interface
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_admin_interface_anchor"><strong>Django - Admin Interface</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#create_superuser_anchor">Creating a Superuser Account</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#register_models_anchor">Registering the Models</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#model_interaction_anchor">Interacting with the Models</a>
+</li>
+{% endblock %}

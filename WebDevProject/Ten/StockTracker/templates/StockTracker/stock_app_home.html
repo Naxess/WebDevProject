@@ -1,0 +1,31 @@
+{% extends 'StockTracker/base_template_stockapp.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/card_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Stock Trader Workshop</title>
+{% endblock %}
+
+{% block body_block %}
+<h1 class="text-center mb-4"><strong>Welcome to the Stockbrokers<span class="door">'</span> Study</strong></h1>
+<div>
+    <div class="row">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'stockapp:stock_history' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Stock Visualizer App</h4>
+                        <p class="card-text">
+                            This app renders visual graphs detailing the highs and lows of up to 3 stocks
+                            simultaneously.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

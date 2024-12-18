@@ -1,0 +1,9 @@
+.nav-tabs > .nav-item > .nav-link.active{
+    color:red;
+    text-shadow:0px 0px 10px orange;
+    font-weight:650;
+}
+
+.nav-tabs > .nav-item > .nav-link{
+    color:darkgray;
+}

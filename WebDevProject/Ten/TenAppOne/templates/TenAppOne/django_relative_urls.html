@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Relative URLs</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_relative_urls_anchor"><h1>Django <span class="door">-</span> Relative URLs</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="relative_urls_anchor"><h2>Intro to Relative URLs</h2></a>
+        <p class="mb-1">
+            While it's possible to use anchor tags with hardcoded paths (e.g.
+            <code>&lt;a href='
+                <mark style="color:crimson;font-weight:bold;font-size:0.9em;">/thankyou/</mark>
+                '&gt;Thanks&lt;/a&gt;</code>),
+            it is now considered poor programming practice. Below examples demonstrate how it should be coded using
+            relative urls.
+            <br>
+            This first example assumes that the 'thankyou' template is mapped in the project's urls.py file:
+        </p>
+        <pre class="mb-2">
+# Example project's urls.py file:
+    ...
+    urlpatterns = [
+        ...
+        path('thankyou/', views.thankyou_view, name='thankyou'),
+        ...
+    ]
+</pre>
+        <hr class="my-1">
+        <pre>{% verbatim relative_urls_example_one %}
+# Example usage in an html file:
+    &lt;a href='<mark>{% url 'thankyou' %}</mark>'&gt;Thanks&lt;/a&gt;
+{% endverbatim relative_urls_example_one %}</pre>
+        <p class="mb-1">
+            This next example assume that the 'thankyou' template is mapped to the application's urls.py file:
+        </p>
+        <pre class="mb-2">
+# Example app urls.py file:
+    ...
+    <mark>app_name = 'basic_app'</mark> # Required. Note that the project's urls.py does not need to specify this
+    urlpatterns = [
+        ...
+        path('thankyou/', views.thankyou_view, <mark>name='thankyou'</mark>) # named_url
+        ...
+    ]
+</pre>
+        <hr class="my-1">
+        <pre>{% verbatim relative_urls_example_two %}
+# Example usage in an html file:
+    &lt;a href='<mark>{% url 'basic_app:thankyou' %}</mark>'&gt;Thanks&lt;/a&gt;
+{% endverbatim relative_urls_example_two %}</pre>
+
+        <div class="form-control mb-1">
+            <h3>Breakdown:</h3>
+            <p class="mb-1">
+                In both examples, we supplied the <em>name</em> argument for the path. This is also referred to as a
+                "<em>named url</em>". It can be set to any desired value. If a named url is mapped in the project's
+                urls.py, then it can be called directly without specifying the <em>namespace</em>. Like so:
+            </p>
+            <pre class="mb-1">
+# snippet from views.py
+path('greeting', views.greeting_view, name='hellohello')
+</pre>
+            <hr class="my-2">
+            <pre>{% verbatim %}
+# example usage in html
+{% url 'hellohello' %} # "hellohello" is the named url
+{% endverbatim %}</pre>
+            <p class="mb-1">
+                In the second example, we specified the <em>app_name</em>. To use a <em>named url</em> from an
+                application, we're required to specify this value. This is the also known as a <em>namespace</em>. Like
+                <em>named urls</em>, it can be set to any value. To use a <em>namespaced url</em>, we need to specify
+                the <em>namespace</em> and then the <em>named url</em>, separated by a ( : ) operator. Like so:
+            </p>
+            <pre class="mb-1">
+# snippet from views.py
+app_name="SuperApp"
+path('farewell', views.farewell_view, name='byebye')
+</pre>
+            <hr class="my-1">
+            <pre>{% verbatim %}
+# example usage in html
+{% url 'SuperApp<mark style="font-size:0.9em;">:</mark>byebye' %} # "SuperApp" is the namespace and "byebye" is the named url
+{% endverbatim %}</pre>
+            <p class="mb-1">In short, the namespace URL syntax is as follows:</p>
+            <pre class="mb-1">
+# snippet from views.py
+app_name="<em>app_name</em>"
+path('<em>url</em>', views.<em>view_name</em>, name='<em>named_url</em>')
+</pre>
+            <hr class="my-1">
+            <pre class="mb-0">{% verbatim relative_urls_example_three %}
+# example usage in html
+{% url '<em>app_name</em>:<em>named_url</em>' %}
+{% endverbatim relative_urls_example_three %}</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="relative_urls_templates_anchor"><h2>Relative URLs with Templates</h2></a>
+        <p>
+            In a previous <a href="{% url 'tenappone:django_templates' %}">section</a>, we used templates to dynamically
+            inject values into our HTML web pages. In the <a
+                href="{% url 'tenappone:django_templates' %}:template_tags_reference_anchor">template tag reference</a>
+            in that section, the <em>extends & block</em> tags were briefly referenced and will be reviewed again here.
+        </p>
+        <div class="form-control mb-2">
+            <a id="extends_template_tag_anchor"><h3>Using the <em>extends</em> template tag</h3></a>
+            <p class="mb-1">
+                The <em>extends</em> template tag is used to copy the code of another template into the current one.
+                This has the added benefit of reducing the amount of duplicate code we need to write. This comes in
+                especially useful when adding navbars to each template. They require a significant amount of code to
+                write and change relatively little from page to page. A template is allowed to extend only one other
+                template. See example below:
+            </p>
+            <pre>{% verbatim %}
+# master_template.html
+    &lt;html&gt;
+        &lt;body&gt;
+            &lt;h1&gt;Hello, world!&lt;/h1&gt;
+            &lt;p&gt;
+                One two three four five six seven eight nine ten.
+            &lt;/p&gt;
+            &lt;h1&gt;Good bye!&lt;/h1&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+{% endverbatim %}</pre>
+            <hr>
+            <pre>{% verbatim %}
+# child_template.html
+    {% extends 'master_template.html' %}
+{% endverbatim %}</pre>
+            <hr>
+            <pre>{% verbatim %}
+# The resulting child_template.html after extending master_template.html
+    &lt;html&gt;
+        &lt;body&gt;
+            &lt;h1&gt;Hello, world!&lt;/h1&gt;
+            &lt;p&gt;
+                One two three four five six seven eight nine ten.
+            &lt;/p&gt;
+            &lt;h1&gt;Good bye!&lt;/h1&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+{% endverbatim %}</pre>
+            <p class="mb-1">
+                The result is the same because the child template (child_template.html) is inheriting from a parent
+                template (master_template.html) that doesn't have any <em>block</em> tags. There's no room for any
+                changes from the child template. See next section for using <em>block</em> tags.
+            </p>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="extends_block_tag_anchor"><h3>Using <em>extends</em> with <em>block</em></h3></a>
+            <p class="mb-1">
+                The <em>block/endblock</em> tags are used with parent templates to identify sections of the parent
+                template where the developer is meant to insert their own code. Each <em>block/endblock</em> needs to
+                marked with a unique identifier to differentiate them from each other and possibly identify the intended
+                purpose of the section. In the child template, after extending the master, we need to create block tags,
+                corresponding to the ones in the master. For each of the child's block tags we supply code to, it will
+                appear at the corresponding location in the inherited template. See example below:
+            </p>
+            <pre>{% verbatim %}
+# master_template
+    &lt;html&gt;
+        &lt;head&gt;
+            {% block title_block %}
+            {% endblock %}
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1&gt;Hello!&lt;/h1&gt;
+            {% block block_a %}
+            {% endblock %}
+            &lt;h1&gt;Got any change for the bus?&lt;/h1&gt;
+            {% block block_b %}
+            {% endblock %}
+            &lt;h1&gt;Good bye!&lt;/h1&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+{% endverbatim %}</pre>
+            <hr>
+            <pre>{% verbatim %}
+# child_template.html
+    {% extends 'master_template.html' %}
+
+    <mark>{% block title_block %}</mark>
+        <mark>&lt;title&gt;Named 'title_block' but could be any other element.&lt;/title&gt;</mark>
+    <mark>{% endblock %}</mark>
+
+    <mark>{% block block_a %}</mark>
+        <mark>&lt;p&gt;I want some candy!&lt;/p&gt;</mark>
+    <mark>{% endblock %}</mark>
+
+    <mark>{% block block_b %}</mark>
+        <mark>&lt;p&gt;I also want some ice cream!&lt;/p&gt;</mark>
+    <mark>{% endblock %}</mark>
+{% endverbatim %}</pre>
+            <hr>
+            <pre class="mb-0">{% verbatim %}
+# The resulting child_template.html after extending master_template.html and populating the blocks
+    &lt;html&gt;
+        &lt;head&gt;
+            <mark>&lt;title&gt;Named 'title_block' but could be any other element.&lt;/title&gt;</mark>
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1&gt;Hello!&lt;/h1&gt;
+            <mark>&lt;p&gt;I want some candy!&lt;/p&gt;</mark>
+            &lt;h1&gt;Got any change for the bus?&lt;/h1&gt;
+            <mark>&lt;p&gt;I also want some ice cream!&lt;/p&gt;</mark>
+            &lt;h1&gt;Good bye!&lt;/h1&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+{% endverbatim %}</pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Relative URLs
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_relative_urls_anchor"><strong>Django - Relative URLs</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relative_urls_anchor">Intro to Relative URLs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relative_urls_templates_anchor">Relative URLs with Templates</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#extends_template_tag_anchor">
+        &nbsp;&nbsp;&nbsp;Using the <em>extends</em> template tag
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#extends_block_tag_anchor">
+        &nbsp;&nbsp;&nbsp;Using <em>extends</em> with <em>block</em>
+    </a>
+</li>
+{% endblock %}

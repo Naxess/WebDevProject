@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Survivor.io - Maps</title>
+{% endblock %}
+
+{% block body_block %}
+<a id="maps_anchor"><h1>Survivor.io <span class="door">-</span> Maps</h1></a>
+<div class="form-control mb-1">
+    <a id="chapter_guides_anchor"><h2>Chapter Guides</h2></a>
+    <img src="{% static 'media/images/survivorio/chapter_guides.001-120.png' %}" alt="chapter_guides.001-120.png"
+         height="2500px">
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Survivor.io - Maps
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#maps_anchor">Survivor.io - Maps</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#chapter_guides_anchor">&nbsp;&nbsp;&nbsp;Chapter Guides</a>
+</li>
+{% endblock %}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/card_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Gamers' Grove</title>
+{% endblock %}
+
+{% block body_block %}
+<h1 class="text-center mb-4"><strong>Welcome to the Gamers<span class="door">'</span> Grove</strong></h1>
+<div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:hsr_banner_history' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Honkai: Star Rail</h4>
+                        <h5 class="card-subtitle">Banner History</h5>
+                        <p class="card-text mt-1">
+                            Click here to see a list of every Character and Light Cone banner since the game was
+                            released.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-4">
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:survivorio_survivors' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Survivor.io</h4>
+                        <h5 class="card-subtitle">Survivors</h5>
+                        <p class="card-text mt-1">
+                            Click here to see a list of all available Survivors and their skills/perks.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:survivorio_gear' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Survivor.io</h4>
+                        <h5 class="card-subtitle">Gear</h5>
+                        <p class="card-text mt-1">
+                            Click here to see a list of available gear and their attributes.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:survivorio_pets' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Survivor.io</h4>
+                        <h5 class="card-subtitle">Pets</h5>
+                        <p class="card-text mt-1">
+                            Click here to view each available pet, their types and their skills/perks.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:survivorio_clans' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Survivor.io</h4>
+                        <h5 class="card-subtitle">Clans</h5>
+                        <p class="card-text mt-1">
+                            Click here to see details about clans and clan expedition rewards during staging, boss
+                            fight, and ranking.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:survivorio_merging' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Survivor.io</h4>
+                        <h5 class="card-subtitle">Merging Guide</h5>
+                        <p class="card-text mt-1">
+                            Click here to see charts detailing the merging requirements per quality tier of gear,
+                            tech, and pets.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100">
+                <a href="{% url 'gameguides:survivorio_maps' %}">
+                    <div class="card-body">
+                        <h4 class="card-title">Survivor.io</h4>
+                        <h5 class="card-subtitle">Maps</h5>
+                        <p class="card-text mt-1">
+                            Click here to see a list of maps, their types, and the monsters/bosses in each.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

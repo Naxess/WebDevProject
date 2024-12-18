@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>HTML DOM Events</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="form-control mb-2">
+    <a id="dom_events_anchor"><h2>HTML Events<span class="door">:</span> DOM Events</h2></a>
+    <p class="mb-2">DOM Events allow Javascript to add event listener and event handlers to HTML elements.</p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Event Name</p></th>
+            <th><p class="mb-0">Trigger Description</p></th>
+            <th><p class="mb-0">Used By</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">abort</p></td>
+            <td><p class="mb-0">The loading of a media is aborted</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">afterprint</p></td>
+            <td><p class="mb-0">A page has started printing</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationend</p></td>
+            <td><p class="mb-0">A CSS animation has completed</p></td>
+            <td><p class="mb-0">AnimationEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationiteration</p></td>
+            <td><p class="mb-0">A CSS animation is repeated</p></td>
+            <td><p class="mb-0">AnimationEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationstart</p></td>
+            <td><p class="mb-0">A CSS animation has started</p></td>
+            <td><p class="mb-0">AnimationEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">beforeprint</p></td>
+            <td><p class="mb-0">A page is about to be printed</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">beforeunload</p></td>
+            <td><p class="mb-0">Before a document is about to be unloaded</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">blur</p></td>
+            <td><p class="mb-0">An element loses focus</p></td>
+            <td><p class="mb-0">FocusEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">canplay</p></td>
+            <td><p class="mb-0">The browser can start playing a media (has buffered enough to begin)</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">canplaythrough</p></td>
+            <td><p class="mb-0">The browser can play through a media without stopping for buffering</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">change</p></td>
+            <td><p class="mb-0">The content of a form element has changed</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">click</p></td>
+            <td><p class="mb-0">An element is clicked on</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">contextmenu</p></td>
+            <td><p class="mb-0">An element is right-clicked to open a context menu</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">copy</p></td>
+            <td><p class="mb-0">The content of an element is copied</p></td>
+            <td><p class="mb-0">ClipboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">cut</p></td>
+            <td><p class="mb-0">The content of an element is cut</p></td>
+            <td><p class="mb-0">ClipboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dblclick</p></td>
+            <td><p class="mb-0">An element is double-clicked</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">drag</p></td>
+            <td><p class="mb-0">An element is being dragged</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dragend</p></td>
+            <td><p class="mb-0">Dragging of an element has ended</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dragenter</p></td>
+            <td><p class="mb-0">A dragged element enters the drop target</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dragleave</p></td>
+            <td><p class="mb-0">A dragged element leaves the drop target</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dragover</p></td>
+            <td><p class="mb-0">A dragged element is over the drop target</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dragstart</p></td>
+            <td><p class="mb-0">Dragging of an element has started</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">drop</p></td>
+            <td><p class="mb-0">A dragged element is dropped on the target</p></td>
+            <td><p class="mb-0">DragEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">durationchange</p></td>
+            <td><p class="mb-0">The duration of a media is changed</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ended</p></td>
+            <td><p class="mb-0">A media has reach the end ("thanks for listening")</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">error</p></td>
+            <td><p class="mb-0">An error has occurred while loading a file</p></td>
+            <td><p class="mb-0">ProgressEvent, UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">focus</p></td>
+            <td><p class="mb-0">An element gets focus</p></td>
+            <td><p class="mb-0">FocusEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">focusin</p></td>
+            <td><p class="mb-0">An element is about to get focus</p></td>
+            <td><p class="mb-0">FocusEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">focusout</p></td>
+            <td><p class="mb-0">An element is about to lose focus</p></td>
+            <td><p class="mb-0">FocusEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fullscreenchange</p></td>
+            <td><p class="mb-0">An element is displayed in fullscreen mode</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">fullscreenerror</p></td>
+            <td><p class="mb-0">An element can not be displayed in fullscreen mode</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">hashchange</p></td>
+            <td><p class="mb-0">There has been changes to the anchor part of a URL</p></td>
+            <td><p class="mb-0">HashChangeEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">input</p></td>
+            <td><p class="mb-0">An element gets user input</p></td>
+            <td><p class="mb-0">InputEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">invalid</p></td>
+            <td><p class="mb-0">An element is invalid</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">keydown</p></td>
+            <td><p class="mb-0">A key is down</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">keypress</p></td>
+            <td><p class="mb-0">A key is pressed</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">keyup</p></td>
+            <td><p class="mb-0">A key is released</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">load</p></td>
+            <td><p class="mb-0">An object has loaded</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">loadeddata</p></td>
+            <td><p class="mb-0">Media data is loaded</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">loadedmetadata</p></td>
+            <td><p class="mb-0">Meta data (like dimensions and duration) are loaded</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">loadstart</p></td>
+            <td><p class="mb-0">The browser starts looking for the specified media</p></td>
+            <td><p class="mb-0">ProgressEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">message</p></td>
+            <td><p class="mb-0">A message is received through the event source</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mousedown</p></td>
+            <td><p class="mb-0">The mouse button is pressed over an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mouseenter</p></td>
+            <td><p class="mb-0">The pointer is moved onto an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mouseleave</p></td>
+            <td><p class="mb-0">The pointer is moved out of an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mousemove</p></td>
+            <td><p class="mb-0">The pointer is moved over an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mouseover</p></td>
+            <td><p class="mb-0">The pointer is moved onto an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mouseout</p></td>
+            <td><p class="mb-0">The pointer is moved out of an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mouseup</p></td>
+            <td><p class="mb-0">A user releases a mouse button over an element</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">mousewheel</p></td>
+            <td><p class="mb-0">Deprecated. Use the wheel event instead</p></td>
+            <td><p class="mb-0">WheelEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offline</p></td>
+            <td><p class="mb-0">The browser starts working offline</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">online</p></td>
+            <td><p class="mb-0">The browser starts working online</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">open</p></td>
+            <td><p class="mb-0">A connection with the event source is opened</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pagehide</p></td>
+            <td><p class="mb-0">User navigates away from a webpage</p></td>
+            <td><p class="mb-0">PageTransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pageshow</p></td>
+            <td><p class="mb-0">User navigates to a webpage</p></td>
+            <td><p class="mb-0">PageTransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">paste</p></td>
+            <td><p class="mb-0">Some content is pasted in an element</p></td>
+            <td><p class="mb-0">ClipboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pause</p></td>
+            <td><p class="mb-0">A media is paused</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">play</p></td>
+            <td><p class="mb-0">The media has started or is no longer paused</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">playing</p></td>
+            <td><p class="mb-0">The media is playing after being paused or buffered</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">popstate</p></td>
+            <td><p class="mb-0">The window's history changes</p></td>
+            <td><p class="mb-0">PopStateEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">progress</p></td>
+            <td><p class="mb-0">The browser is downloading media data</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ratechange</p></td>
+            <td><p class="mb-0">The playing speed of a media is changed</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">resize</p></td>
+            <td><p class="mb-0">The document view is resized</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">reset</p></td>
+            <td><p class="mb-0">A form is reset</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">scroll</p></td>
+            <td><p class="mb-0">An scrollbar is being scrolled</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">search</p></td>
+            <td><p class="mb-0">Something is written in a search field</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">seeked</p></td>
+            <td><p class="mb-0">Skipping to a media position is finished</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">seeking</p></td>
+            <td><p class="mb-0">Skipping to a media position is started</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">select</p></td>
+            <td><p class="mb-0">User selects some text</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">show</p></td>
+            <td><p class="mb-0">A &lt;menu&gt; element is shown as a context menu</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">stalled</p></td>
+            <td><p class="mb-0">The browser is trying to get unavailable media data</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">storage</p></td>
+            <td><p class="mb-0">A Web Storage area is updated</p></td>
+            <td><p class="mb-0">StorageEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">submit</p></td>
+            <td><p class="mb-0">A form is submitted</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">suspend</p></td>
+            <td><p class="mb-0">The browser is intentionally not getting media data</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">timeupdate</p></td>
+            <td><p class="mb-0">The playing position has changed (the user moves to a different point in the media)</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">toggle</p></td>
+            <td><p class="mb-0">The user opens or closes the &lt;details&gt; element</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">touchcancel</p></td>
+            <td><p class="mb-0">The touch is interrupted</p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">touchend</p></td>
+            <td><p class="mb-0">A finger is removed from a touch screen</p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">touchmove</p></td>
+            <td><p class="mb-0">A finger is dragged across the screen</p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">touchstart</p></td>
+            <td><p class="mb-0">A finger is placed on a touch screen</p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transitionend</p></td>
+            <td><p class="mb-0">A CSS transition has completed</p></td>
+            <td><p class="mb-0">TransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">unload</p></td>
+            <td><p class="mb-0">A page has unloaded</p></td>
+            <td><p class="mb-0">UiEvent, Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">volumechange</p></td>
+            <td><p class="mb-0">The volume of a media is changed (includes muting)</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">waiting</p></td>
+            <td><p class="mb-0">A media is paused but is expected to resume (e.g. buffering)</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">wheel</p></td>
+            <td><p class="mb-0">The mouse wheel rolls up or down over an element</p></td>
+            <td><p class="mb-0">WheelEvent</p></td>
+        </tr>
+
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="dom_event_objs_anchor"><h2>HTML Events: DOM Event Objects</h2></a>
+    <p class="mb-2">All event objects are based on the Event object. It is the parent object.</p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Object Name</p></th>
+            <th><p class="mb-0">Associated Actions</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">AnimationEvent</p></td>
+            <td><p class="mb-0">CSS animations</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ClipboardEvent</p></td>
+            <td><p class="mb-0">Modification of the clipboard</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">DragEvent</p></td>
+            <td><p class="mb-0">Drag and drop interaction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">FocusEvent</p></td>
+            <td><p class="mb-0">Focus-related events</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">HashChangeEvent</p></td>
+            <td><p class="mb-0">Changes in the anchor part of an URL</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">InputEvent</p></td>
+            <td><p class="mb-0">User input</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+            <td><p class="mb-0">Keyboard interaction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">MouseEvent</p></td>
+            <td><p class="mb-0">Mouse interaction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">PageTransitionEvent</p></td>
+            <td><p class="mb-0">Navigation between web pages</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">PopStateEvent</p></td>
+            <td><p class="mb-0">Changes in the page history</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ProgressEvent</p></td>
+            <td><p class="mb-0">The progress of loading external files</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">StorageEvent</p></td>
+            <td><p class="mb-0">Changes in the Web Storage</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">TouchEvent</p></td>
+            <td><p class="mb-0">Touch interaction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">TransitionEvent</p></td>
+            <td><p class="mb-0">CSS transitions</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">UiEvent</p></td>
+            <td><p class="mb-0">User interface interaction</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">WheelEvent</p></td>
+            <td><p class="mb-0">Mouse-wheel interaction</p></td>
+        </tr>
+
+    </table>
+</div>
+
+<div class="form-control mb-2">
+    <a id="dom_event_props_anchor"><h2>HTML Events: DOM Event Properties</h2></a>
+    <p class="mb-2">
+        HTML DOM events allow Javascript to register different event handlers on elements in an HTML document.
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Property</p></th>
+            <th><p class="mb-0">Description</p></th>
+            <th><p class="mb-0">Used By</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">altKey</p></td>
+            <td><p class="mb-0">Returns whether the "ALT" key was pressed when the mouse event was triggered</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">altKey</p></td>
+            <td><p class="mb-0">Returns whether the "ALT" key was pressed when the key event was triggered</p></td>
+            <td><p class="mb-0">KeyboardEvent, TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">animationName</p></td>
+            <td><p class="mb-0">Returns the name of the animation</p></td>
+            <td><p class="mb-0">AnimationEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">bubbles</p></td>
+            <td><p class="mb-0">Returns whether or not a specific event is a bubbling event</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">button</p></td>
+            <td><p class="mb-0">Returns which mouse button was pressed when the mouse event was triggered</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">buttons</p></td>
+            <td><p class="mb-0">Returns which mouse buttons were pressed when the mouse event was triggered</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">cancelable</p></td>
+            <td><p class="mb-0">Returns whether or not an event can have its default action prevented</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">charCode</p></td>
+            <td><p class="mb-0">"Deprecated (Avoid using it)
+                Use the key property instead"
+            </p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">changeTouches</p></td>
+            <td><p class="mb-0">Returns a list of all the touch objects whose state changed between the previous touch and this touch
+            </p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clientX</p></td>
+            <td><p class="mb-0">Returns the horizontal coordinate of the mouse pointer, relative to the current window, when the mouse
+                event was triggered
+            </p></td>
+            <td><p class="mb-0">MouseEvent, TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clientY</p></td>
+            <td><p class="mb-0">Returns the vertical coordinate of the mouse pointer, relative to the current window, when the mouse
+                event was triggered
+            </p></td>
+            <td><p class="mb-0">MouseEvent, TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">clipboardData</p></td>
+            <td><p class="mb-0">Returns an object containing the data affected by the clipboard operation</p></td>
+            <td><p class="mb-0">ClipboardData</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">code</p></td>
+            <td><p class="mb-0">Returns the code of the key that triggered the event</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">composed</p></td>
+            <td><p class="mb-0">Returns whether the event is composed or not</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ctrlKey</p></td>
+            <td><p class="mb-0">Returns whether the "CTRL" key was pressed when the mouse event was triggered</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">ctrlKey</p></td>
+            <td><p class="mb-0">Returns whether the "CTRL" key was pressed when the key event was triggered</p></td>
+            <td><p class="mb-0">KeyboardEvent, TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">currentTarget</p></td>
+            <td><p class="mb-0">Returns the element whose event listeners triggered the event</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">data</p></td>
+            <td><p class="mb-0">Returns the inserted characters</p></td>
+            <td><p class="mb-0">InputEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">dataTransfer</p></td>
+            <td><p class="mb-0">Returns an object containing the data being dragged/dropped, or inserted/deleted</p></td>
+            <td><p class="mb-0">DragEvent, InputEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">defaultPrevented</p></td>
+            <td><p class="mb-0">Returns whether or not the preventDefault() method was called for the event</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">deltaX</p></td>
+            <td><p class="mb-0">Returns the horizontal scroll amount of a mouse wheel (x-axis)</p></td>
+            <td><p class="mb-0">WheelEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">deltaY</p></td>
+            <td><p class="mb-0">Returns the vertical scroll amount of a mouse wheel (y-axis)</p></td>
+            <td><p class="mb-0">WheelEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">deltaZ</p></td>
+            <td><p class="mb-0">Returns the scroll amount of a mouse wheel for the z-axis</p></td>
+            <td><p class="mb-0">WheelEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">deltaMode</p></td>
+            <td><p class="mb-0">Returns a number that represents the unit of measurements for delta values (pixels, lines or pages)
+            </p></td>
+            <td><p class="mb-0">WheelEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">detail</p></td>
+            <td><p class="mb-0">Returns a number that indicates how many times the mouse was clicked</p></td>
+            <td><p class="mb-0">UiEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">elapsedTime</p></td>
+            <td><p class="mb-0">Returns the number of seconds an animation has been running</p></td>
+            <td><p class="mb-0">AnimationEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">elapsedTime</p></td>
+            <td><p class="mb-0">Returns the number of seconds a transition has been running</p></td>
+            <td><p class="mb-0"></p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">eventPhase</p></td>
+            <td><p class="mb-0">Returns which phase of the event flow is currently being evaluated</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getModifierState()</p></td>
+            <td><p class="mb-0">Returns an array containing target ranges that will be affected by the insertion/deletion</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">inputType</p></td>
+            <td><p class="mb-0">Returns the type of the change (i.e "inserting" or "deleting")</p></td>
+            <td><p class="mb-0">InputEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isComposing</p></td>
+            <td><p class="mb-0">Returns whether the state of the event is composing or not</p></td>
+            <td><p class="mb-0">InputEvent, KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">isTrusted</p></td>
+            <td><p class="mb-0">Returns whether or not an event is trusted</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">key</p></td>
+            <td><p class="mb-0">Returns the key value of the key represented by the event</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">key</p></td>
+            <td><p class="mb-0">Returns the key of the changed storage item</p></td>
+            <td><p class="mb-0">StorageEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">keyCode</p></td>
+            <td><p class="mb-0">"Deprecated (Avoid using it)
+                Use the key property instead"
+            </p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">location</p></td>
+            <td><p class="mb-0">Returns the location of a key on the keyboard or device</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">lengthComputable</p></td>
+            <td><p class="mb-0">Returns whether the length of the progress can be computable or not</p></td>
+            <td><p class="mb-0">ProgressEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">loaded</p></td>
+            <td><p class="mb-0">Returns how much work has been loaded</p></td>
+            <td><p class="mb-0">ProgressEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">metaKey</p></td>
+            <td><p class="mb-0">Returns whether the "META" key was pressed when an event was triggered</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">metaKey</p></td>
+            <td><p class="mb-0">Returns whether the "meta" key was pressed when the key event was triggered</p></td>
+            <td><p class="mb-0">KeyboardEvent, TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">MovementX</p></td>
+            <td><p class="mb-0">Returns the horizontal coordinate of the mouse pointer relative to the position of the last mousemove
+                event
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">MovementY</p></td>
+            <td><p class="mb-0">Returns the vertical coordinate of the mouse pointer relative to the position of the last mousemove
+                event
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">newValue</p></td>
+            <td><p class="mb-0">Returns the new value of the changed storage item</p></td>
+            <td><p class="mb-0">StorageEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">newURL</p></td>
+            <td><p class="mb-0">Returns the URL of the document, after the hash has been changed</p></td>
+            <td><p class="mb-0">HasChangeEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetX</p></td>
+            <td><p class="mb-0">Returns the horizontal coordinate of the mouse pointer relative to the position of the edge of the
+                target element
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">offsetY</p></td>
+            <td><p class="mb-0">Returns the vertical coordinate of the mouse pointer relative to the position of the edge of the target
+                element
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">oldValue</p></td>
+            <td><p class="mb-0">Returns the old value of the changed storage item</p></td>
+            <td><p class="mb-0">StorageEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">oldURL</p></td>
+            <td><p class="mb-0">Returns the URL of the document, before the hash was changed</p></td>
+            <td><p class="mb-0">HasChangeEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">onemptied</p></td>
+            <td><p class="mb-0">When something bad happens and the media file is suddenly unavailable (like unexpectedly disconnects)
+            </p></td>
+            <td><p class="mb-0"></p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pageX</p></td>
+            <td><p class="mb-0">Returns the horizontal coordinate of the mouse pointer, relative to the document, when the mouse event
+                was triggered
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pageY</p></td>
+            <td><p class="mb-0">Returns the vertical coordinate of the mouse pointer, relative to the document, when the mouse event
+                was triggered
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">persisted</p></td>
+            <td><p class="mb-0">Returns whether the webpage was cached by the browser</p></td>
+            <td><p class="mb-0">PageTransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">propertyName</p></td>
+            <td><p class="mb-0">Returns the name of the CSS property associated with the animation or transition</p></td>
+            <td><p class="mb-0">AnimationEvent, TransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">pseudoElement</p></td>
+            <td><p class="mb-0">Returns the name of the pseudo-element of the animation or transition</p></td>
+            <td><p class="mb-0">AnimationEvent, TransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">region</p></td>
+            <td><p class="mb-0"></p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">relatedTarget</p></td>
+            <td><p class="mb-0">Returns the element related to the element that triggered the mouse event</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">relatedTarget</p></td>
+            <td><p class="mb-0">Returns the element related to the element that triggered the event</p></td>
+            <td><p class="mb-0">FocusEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">repeat</p></td>
+            <td><p class="mb-0">Returns whether a key is being hold down repeatedly, or not</p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">screenX</p></td>
+            <td><p class="mb-0">Returns the horizontal coordinate of the mouse pointer, relative to the screen, when an event was
+                triggered
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">screenY</p></td>
+            <td><p class="mb-0">Returns the vertical coordinate of the mouse pointer, relative to the screen, when an event was
+                triggered
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">shiftKey</p></td>
+            <td><p class="mb-0">Returns whether the "SHIFT" key was pressed when an event was triggered</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">shiftKey</p></td>
+            <td><p class="mb-0">Returns whether the "SHIFT" key was pressed when the key event was triggered</p></td>
+            <td><p class="mb-0">KeyboardEvent, TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">state</p></td>
+            <td><p class="mb-0">Returns an object containing a copy of the history entries</p></td>
+            <td><p class="mb-0">PopStateEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">storageArea</p></td>
+            <td><p class="mb-0">Returns an object representing the affected storage object</p></td>
+            <td><p class="mb-0">StorageEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">target</p></td>
+            <td><p class="mb-0">Returns the element that triggered the event</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">targetTouches</p></td>
+            <td><p class="mb-0">Returns a list of all the touch objects that are in contact with the surface and where the touchstart
+                event occured on the same target element as the current target element
+            </p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">timeStamp</p></td>
+            <td><p class="mb-0">Returns the time (in milliseconds relative to the epoch) at which the event was created</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">total</p></td>
+            <td><p class="mb-0">Returns the total amount of work that will be loaded</p></td>
+            <td><p class="mb-0">ProgressEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">touches</p></td>
+            <td><p class="mb-0">Returns a list of all the touch objects that are currently in contact with the surface</p></td>
+            <td><p class="mb-0">TouchEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">transitionend</p></td>
+            <td><p class="mb-0">A CSS transition has completed</p></td>
+            <td><p class="mb-0">TransitionEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">type</p></td>
+            <td><p class="mb-0">Returns the name of the event</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">url</p></td>
+            <td><p class="mb-0">Returns the URL of the changed item's document</p></td>
+            <td><p class="mb-0">StorageEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">which</p></td>
+            <td><p class="mb-0">"Deprecated (Avoid using it)
+                Use the button property instead"
+            </p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">which</p></td>
+            <td><p class="mb-0">"Deprecated (Avoid using it)
+                Use the key property instead"
+            </p></td>
+            <td><p class="mb-0">KeyboardEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">view</p></td>
+            <td><p class="mb-0">Returns a reference to the Window object where the event occurred</p></td>
+            <td><p class="mb-0">UiEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">x</p></td>
+            <td><p class="mb-0">Alias for clientX</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">y</p></td>
+            <td><p class="mb-0">Alias for clientY</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-control mb-1">
+    <a id="dom_event_methods_anchor"><h2>HTML Events: DOM Event Methods</h2></a>
+    <p class="mb-2">HTML DOM events allow Javascript to register different event handlers on elements in an HTML
+        document.</p>
+    <table class="table">
+        <tr class="table-dark">
+            <th><p class="mb-0">Method</p></th>
+            <th><p class="mb-0">Description</p></th>
+            <th><p class="mb-0">Used By</p></th>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getModifierState()</p></td>
+            <td><p class="mb-0">Returns true if a specified key is activated</p></td>
+            <td><p class="mb-0">MouseEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">getTargetRanges()</p></td>
+            <td><p class="mb-0">Returns an array containing target ranges that will be affected by the insertion/deletion</p></td>
+            <td><p class="mb-0">InputEvent</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">preventDefault()</p></td>
+            <td><p class="mb-0">Cancels the event if it is cancelable, meaning that the default action that belongs to the event will
+                not occur
+            </p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">stopImmediatePropagation()</p></td>
+            <td><p class="mb-0">Prevents other listeners of the same event from being called</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+        <tr>
+            <td><p class="mb-0">stopPropagation()</p></td>
+            <td><p class="mb-0">Prevents further propagation of an event during event flow</p></td>
+            <td><p class="mb-0">Event</p></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Document Object Model - Events Reference
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#dom_events_anchor">HTML Events: DOM Events</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#dom_event_objs_anchor">HTML Events: DOM Event Objects</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#dom_event_props_anchor">HTML Events: DOM Event Properties</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#dom_event_methods_anchor">HTML Events: DOM Event Methods</a>
+</li>
+{% endblock %}

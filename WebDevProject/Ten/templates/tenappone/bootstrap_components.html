@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+{% load static %}
+
+{% block head_block %}
+<title>Bootstrap Components</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="bootstrap_components_anchor"><h1>Bootstrap <span class="door">-</span> Components</h1></a>
+<div class="form-control mb-2">
+    <a id="buttons_anchor"><h2>Buttons</h2></a>
+    <button class="btn btn-primary" type="button">Click me!</button>
+    <button class="btn btn-secondary" type="button">Click me!</button>
+    <button class="btn btn-tertiary" type="button">Click me!</button>
+    <button class="btn btn-info" type="button">Click me!</button>
+    <button class="btn btn-danger" type="button">Click me!</button>
+    <button class="btn btn-warning" type="button">Click me!</button>
+    <button class="btn btn-light" type="button">Click me!</button>
+    <button class="btn btn-dark" type="button">Click me!</button>
+    <button class="btn btn-success" type="button">Click me!</button>
+    <button class="btn btn-link" type="button">Click me!</button>
+    <hr>
+    <button class="btn btn-outline-primary" type="button">Click me!</button>
+    <button class="btn btn-outline-secondary" type="button">Click me!</button>
+    <button class="btn btn-outline-tertiary" type="button">Click me!</button>
+    <button class="btn btn-outline-info" type="button">Click me!</button>
+    <button class="btn btn-outline-danger" type="button">Click me!</button>
+    <button class="btn btn-outline-warning" type="button">Click me!</button>
+    <button class="btn btn-outline-light" type="button">Click me!</button>
+    <button class="btn btn-outline-dark" type="button">Click me!</button>
+    <button class="btn btn-outline-success" type="button">Click me!</button>
+    <button class="btn btn-outline-link" type="button">Click me!</button>
+
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;button class="<mark>btn btn-primary</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-secondary</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-tertiary</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-info</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-danger</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-warning</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-light</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-dark</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-success</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-link</mark>" type="button"&gt;Click me!&lt;/button&gt;
+
+&lt;button class="<mark>btn btn-outline-primary</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-secondary</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-tertiary</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-info</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-danger</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-warning</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-light</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-dark</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-success</mark>" type="button"&gt;Click me!&lt;/button&gt;
+&lt;button class="<mark>btn btn-outline-link</mark>" type="button"&gt;Click me!&lt;/button&gt;
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="button_groups_anchor"><h2>Button Groups</h2></a>
+    <div class="btn-group" role="group">
+        <button class="btn btn-primary" type="button">This</button>
+        <button class="btn btn-secondary" type="button">Is</button>
+        <button class="btn btn-info" type="button">A</button>
+        <button class="btn btn-danger" type="button">Button</button>
+        <button class="btn btn-success" type="button">Group</button>
+    </div>
+
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;div class="<mark>btn-group</mark>" <mark>role="group"</mark>&gt;
+    &lt;button class="btn btn-primary" type="button"&gt;This&lt;/button&gt;
+    &lt;button class="btn btn-secondary" type="button"&gt;Is&lt;/button&gt;
+    &lt;button class="btn btn-info" type="button"&gt;A&lt;/button&gt;
+    &lt;button class="btn btn-danger" type="button"&gt;Button&lt;/button&gt;
+    &lt;button class="btn btn-success" type="button"&gt;Group&lt;/button&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="badges_anchor"><h2 class="mb-2">Badges</h2></a>
+    <div class="form-control mb-2">
+        <h5>
+            Heading with a badge
+            <span class="badge bg-primary">This is a badge!</span>
+        </h5>
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;h5&gt;
+    Heading with a badge
+    &lt;span class="<mark>badge</mark> bg-primary"&gt;This is a badge!&lt;/span&gt;
+&lt;/h5&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <button class="btn btn-primary" type="button">
+            Button with a badge
+            <span class="badge bg-secondary">3</span>
+        </button>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;button class="<mark>btn</mark> btn-primary" type="button"&gt;
+    Button with a badge
+    &lt;span class="<mark>badge</mark> bg-secondary"&gt;3&lt;/span&gt;
+&lt;/button&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="accordion_anchor"><h2>Accordion</h2></a>
+    <div class="accordion" id="accordion_one">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#accordion_collapse_one">
+                    Click me! (1)
+                </button>
+            </h2>
+            <div class="accordion-collapse collapse show" id="accordion_collapse_one" data-bs-parent="#accordion_one">
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias, cumque esse, eveniet ex
+                    exercitationem explicabo ipsum iusto minima modi nesciunt odit omnis perspiciatis possimus quis
+                    repellendus veniam voluptatum! Laborum?
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#accordion_collapse_two">
+                    Click me! (2)
+                </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="accordion_collapse_two" data-bs-parent="#accordion_one">
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, beatae corporis debitis,
+                    delectus dicta dignissimos ducimus eius illo modi nam odit quas qui quia quidem recusandae similique
+                    voluptatum. Repellat, similique?
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#accordion_collapse_three">
+                    Click me! (3)
+                </button>
+            </h2>
+            <div class="accordion-collapse" id="accordion_collapse_three" data-bs-parent="#accordion_one">
+                <div class="accordion-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci doloremque ducimus ea
+                    earum excepturi incidunt iure labore maxime minima, minus neque nobis optio praesentium quae quia
+                    quo quos veniam.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;div class="<mark>accordion</mark>" id="accordion_one"&gt;
+    &lt;div class="<mark>accordion-item</mark>"&gt;
+        &lt;h2 class="<mark>accordion-header</mark>"&gt;
+            &lt;button class="<mark>accordion-button</mark>" type="button" <mark>data-bs-toggle="collapse"</mark>
+                    data-bs-target="#accordion_collapse_one"&gt;
+                Click me! (1)
+            &lt;/button&gt;
+        &lt;/h2&gt;
+        &lt;div class="<mark>accordion-collapse collapse show</mark>" id="accordion_collapse_one" <mark>data-bs-parent</mark>="#accordion_one"&gt;
+            &lt;div class="<mark>accordion-body</mark>"&gt;
+                Lorem ipsum ...
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>accordion-item</mark>"&gt;
+        &lt;h2 class="<mark>accordion-header</mark>"&gt;
+            &lt;button class="<mark>accordion-button</mark>" type="button" <mark>data-bs-toggle="collapse"</mark> <mark>data-bs-target</mark>="#accordion_collapse_two"&gt;
+                Click me! (2)
+            &lt;/button&gt;
+        &lt;/h2&gt;
+        &lt;div class="<mark>accordion-collapse collapse</mark>" id="accordion_collapse_two" <mark>data-bs-parent</mark>="#accordion_one"&gt;
+            &lt;div class="<mark>accordion-body</mark>"&gt;
+                Lorem ipsum ...
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>accordion-item</mark>"&gt;
+        &lt;h2 class="<mark>accordion-header</mark>"&gt;
+            &lt;button class="<mark>accordion-button</mark>" type="button" <mark>data-bs-toggle="collapse"</mark> <mark>data-bs-target</mark>="#accordion_collapse_three"&gt;
+                Click me! (3)
+            &lt;/button&gt;
+        &lt;/h2&gt;
+        &lt;div class="<mark>accordion-collapse</mark>" id="accordion_collapse_three" <mark>data-bs-parent</mark>="#accordion_one"&gt;
+            &lt;div class="<mark>accordion-body</mark>"&gt;
+                Lorem ipsum ...
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="alerts_anchor"><h2>Alerts</h2></a>
+    <div class="alert alert-primary" role="alert">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi doloribus itaque odio sed suscipit veniam.
+        Aperiam deleniti doloremque id, ipsa iure magnam mollitia nam odit possimus quos sunt voluptatem voluptatibus.
+        <a class="alert-link" href="#">Link in an alert!</a>
+    </div>
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;div class="<mark>alert</mark> <mark>alert-primary</mark>" <mark>role="alert"</mark>&gt;
+    Lorem ipsum ...
+    &lt;a class="<mark>alert-link</mark>" href="#"&gt;Link in an alert!&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+</div>
+
+<div class="form-control mb-2">
+    <a id="cards_anchor"><h2>Cards</h2></a>
+    <div class="form-control mb-2">
+        <div class="card">
+            <img class="card-img-top" src="" alt="">
+            <div class="card-body">
+                <h5 class="card-title">Card #1</h5>
+                <p class="card-text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet blanditiis cumque dicta
+                    dignissimos
+                    dolorem doloribus dolorum eligendi, iste libero minima nisi quas qui quibusdam repellendus
+                    reprehenderit
+                    tempora, unde vitae.
+                </p>
+            </div>
+            <div class="card-footer">
+                <a class="card-link" href="#">Card link in a card footer</a>
+            </div>
+        </div>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;div class="<mark>card</mark>"&gt;
+    &lt;img class="<mark>card-img-top</mark>" src="" alt=""&gt;
+    &lt;div class="<mark>card-body</mark>"&gt;
+        &lt;h5 class="<mark>card-title</mark>"&gt;Card #1&lt;/h5&gt;
+        &lt;p class="<mark>card-text</mark>"&gt;
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet blanditiis cumque dicta dignissimos
+            dolorem doloribus dolorum eligendi, iste libero minima nisi quas qui quibusdam repellendus reprehenderit
+            tempora, unde vitae.
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>card-footer</mark>"&gt;
+        &lt;a class="<mark>card-link</mark>" href="#"&gt;Card link in a card footer&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <h3>Cards with Bootstrap's Grid System</h3>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'media/images/hsr_characters/luocha.webp' %}" alt="luocha">
+                    <div class="card-body">
+                        <h5 class="card-title">Luocha</h5>
+                        <p class="card-text">Abundance/Imaginary</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="card-link" href="#">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'media/images/hsr_characters/jingliu.webp' %}"
+                         alt="jingliu">
+                    <div class="card-body">
+                        <h5 class="card-title">Jingliu</h5>
+                        <p class="card-text">Destruction/Ice</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="card-link" href="#">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'media/images/hsr_characters/ruan_mei.webp' %}"
+                         alt="ruan_mei">
+                    <div class="card-body">
+                        <h5 class="card-title">Ruan Mei</h5>
+                        <p class="card-text">Harmony/Ice</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="card-link" href="#">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'media/images/hsr_characters/bronya.webp' %}" alt="bronya">
+                    <div class="card-body">
+                        <h5 class="card-title">Bronya</h5>
+                        <p class="card-text">Harmony/Wind</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="card-link" href="#">More Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;div class="<mark>row</mark>"&gt;
+    &lt;div class="<mark>col-sm-3</mark>"&gt;
+        &lt;div class="<mark>card</mark>"&gt;
+            &lt;img class="<mark>card-img-top</mark>" src="{% static 'media/images/hsr_characters/luocha.webp' %}" alt="luocha"&gt;
+            &lt;div class="<mark>card-body</mark>"&gt;
+                &lt;h5 class="<mark>card-title</mark>"&gt;Luocha&lt;/h5&gt;
+                &lt;p class="<mark>card-text</mark>"&gt;Abundance &lt;br&gt;Imaginary&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="<mark>card-footer</mark> text-center"&gt;
+                &lt;a class="<mark>card-link</mark>" href="#"&gt;More Info&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>col-sm-3</mark>"&gt;
+        &lt;div class="<mark>card</mark>"&gt;
+            &lt;img class="<mark>card-img-top</mark>" src="{% static 'media/images/hsr_characters/jingliu.webp' %}" alt="jingliu"&gt;
+            &lt;div class="<mark>card-body</mark>"&gt;
+                &lt;h5 class="<mark>card-title</mark>"&gt;Jingliu&lt;/h5&gt;
+                &lt;p class="<mark>card-text</mark>"&gt;Destruction &lt;br&gt;Ice&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="<mark>card-footer</mark> text-center"&gt;
+                &lt;a class="<mark>card-link</mark>" href="#"&gt;More Info&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>col-sm-3</mark>"&gt;
+        &lt;div class="<mark>card</mark>"&gt;
+            &lt;img class="<mark>card-img-top</mark>" src="{% static 'media/images/hsr_characters/ruan_mei.webp' %}" alt="ruan_mei"&gt;
+            &lt;div class="<mark>card-body</mark>"&gt;
+                &lt;h5 class="<mark>card-title</mark>"&gt;Ruan Mei&lt;/h5&gt;
+                &lt;p class="<mark>card-text</mark>"&gt;Harmony&lt;br&gt;Ice&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="<mark>card-footer</mark> text-center"&gt;
+                &lt;a class="<mark>card-link</mark>" href="#"&gt;More Info&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>col-sm-3</mark>"&gt;
+        &lt;div class="<mark>card</mark>"&gt;
+            &lt;img class="<mark>card-img-top</mark>" src="{% static 'media/images/hsr_characters/bronya.webp' %}" alt="bronya"&gt;
+            &lt;div class="<mark>card-body</mark>"&gt;
+                &lt;h5 class="<mark>card-title</mark>"&gt;Bronya&lt;/h5&gt;
+                &lt;p class="<mark>card-text</mark>"&gt;Harmony &lt;br&gt;Wind&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="<mark>card-footer</mark> text-center"&gt;
+                &lt;a class="<mark>card-link</mark>" href="#"&gt;More Info&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="progressbars_anchor"><h2>Progress Bars</h2></a>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:0%">0%</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:5%">5%</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:50%">50%</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:95%">95%</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" style="width:100%">100%</div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar bg-info" role="progressbar" style="width:10%">10%</div>
+        <div class="progress-bar bg-warning" role="progressbar" style="width:30%">30%</div>
+        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar"
+             style="width:60%">60%
+        </div>
+    </div>
+
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;div class="<mark>progress</mark>"&gt;
+    &lt;div class="<mark>progress-bar</mark>" <mark>role="progressbar"</mark> <mark>style="width:0%"</mark>&gt;0%&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="<mark>progress</mark>"&gt;
+    &lt;div class="<mark>progress-bar</mark>" <mark>role="progressbar"</mark> <mark>style="width:5%"</mark>&gt;5%&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="<mark>progress</mark>"&gt;
+    &lt;div class="<mark>progress-bar</mark>" <mark>role="progressbar"</mark> <mark>style="width:50%"</mark>&gt;50%&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="<mark>progress</mark>"&gt;
+    &lt;div class="<mark>progress-bar</mark>" <mark>role="progressbar"</mark> <mark>style="width:95%"</mark>&gt;95%&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="<mark>progress</mark>"&gt;
+    &lt;div class="<mark>rogress-bar</mark> <mark>bg-success</mark>" <mark>role="progressbar"</mark> <mark>style="width:100%"</mark>&gt;100%&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;div class="<mark>progress</mark>"&gt;
+    &lt;div class="<mark>progress-bar</mark> <mark>bg-info</mark>" <mark>role="progressbar"</mark> <mark>style="width:10%"</mark>&gt;10%&lt;/div&gt;
+    &lt;div class="<mark>progress-bar</mark> <mark>bg-warning</mark>" <mark>role="progressbar"</mark> <mark>style="width:30%"</mark>&gt;30%&lt;/div&gt;
+    &lt;div class="<mark>progress-bar</mark> <mark>bg-danger</mark> <mark>progress-bar-striped</mark> <mark>progress-bar-animated</mark>" <mark>role="progressbar"</mark>
+         <mark>style="width:60%"</mark>&gt;60%
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="dropdownmenu_anchor"><h2>Dropdown Menus</h2></a>
+    <div class="form-control mb-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Dropdown Button
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">One</a></li>
+                <li><a class="dropdown-item" href="#">Two</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item disabled" href="#">Three</a></li>
+            </ul>
+        </div>
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;div class="<mark>dropdown</mark>"&gt;
+    &lt;button class="btn btn-secondary <mark>dropdown-toggle</mark>" type="button" <mark>data-bs-toggle="dropdown"</mark>&gt;
+        Dropdown Button
+    &lt;/button&gt;
+    &lt;ul class="<mark>dropdown-menu</mark>"&gt;
+        &lt;li&gt;&lt;a class="<mark>dropdown-item</mark>" href="#"&gt;One&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="<mark>dropdown-item</mark>" href="#"&gt;Two&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;hr class="<mark>dropdown-divider</mark>"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="<mark>dropdown-item</mark> <mark>disabled</mark>" href="#"&gt;Three&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <div class="btn-group">
+            <button class="btn btn-primary" type="button">Commit</button>
+            <button class="btn btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+                <span class="visually-hidden"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Commit and Push</a></li>
+            </ul>
+        </div>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;div class="<mark>btn-group</mark>"&gt;
+    &lt;button class="btn btn-primary" type="button"&gt;Commit&lt;/button&gt;
+    &lt;button class="btn btn-info <mark>dropdown-toggle</mark> <mark>dropdown-toggle-split</mark>" <mark>data-bs-toggle="dropdown"</mark>&gt;
+        &lt;<mark>span class="visually-hidden"</mark>&gt;&lt;<mark>/span</mark>&gt;
+    &lt;/button&gt;
+    &lt;ul class="<mark>dropdown-menu</mark>"&gt;
+        &lt;li&gt;&lt;a class="<mark>dropdown-item</mark>" href="#"&gt;Commit and Push&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="offcanvas_anchor"><h2>Offcanvas</h2></a>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_one">Open
+        Left Offcanvas
+    </button>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas_one">
+        <!-- offcanvas options: offcanvas-start, offcanvas-end, offcanvas-top, offcanvas-bottom-->
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Left!</h5>
+            <button class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">Left!</div>
+    </div>
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_two">Open
+        Right Offcanvas
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_two">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Right!</h5>
+            <button class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">Right!</div>
+    </div>
+
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;button class="btn btn-primary" type="button" <mark>data-bs-toggle="offcanvas"</mark> <mark>data-bs-target=</mark>"<span style="background-color:red;color:white;">#offcanvas_one</span>"&gt;
+    Open Left Offcanvas
+&lt;/button&gt;
+&lt;div class="<mark>offcanvas</mark> <mark>offcanvas-start</mark>" <mark>tabindex="-1"</mark> <mark>id=</mark>"<span style="background-color:red;color:white;">offcanvas_one</span>"&gt;
+    &lt;!-- offcanvas options: <u>offcanvas-start</u>, <u>offcanvas-end</u>, <u>offcanvas-top</u>, <u>offcanvas-bottom</u>--&gt;
+    &lt;div class="<mark>offcanvas-header</mark>"&gt;
+        &lt;h5 class="<mark>offcanvas-title</mark>"&gt;Left!&lt;/h5&gt;
+        &lt;button class="<mark>btn-close text-reset</mark>" <mark>data-bs-dismiss="offcanvas"</mark>&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>offcanvas-body</mark>"&gt;Left!&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;button class="btn btn-primary" type="button" <mark>data-bs-toggle="offcanvas"</mark> <mark>data-bs-target="</mark><span style="background-color:green;color:white;">#offcanvas_two</span>"&gt;
+    Open Right Offcanvas
+&lt;/button&gt;
+&lt;div class="<mark>offcanvas</mark> <mark>offcanvas-end</mark>" <mark>tabindex="-1"</mark> id="<span style="background-color:green;color:white;">offcanvas_two</span>"&gt;
+    &lt;div class="<mark>offcanvas-header</mark>"&gt;
+        &lt;h5 class="<mark>offcanvas-title</mark>"&gt;Right!&lt;/h5&gt;
+        &lt;button class="<mark>btn-close text-reset</mark>" <mark>data-bs-dismiss="offcanvas"</mark>&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>offcanvas-body</mark>"&gt;Right!&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+</div>
+
+<div class="form-control mb-2">
+    <a id="navbar_anchor"><h2>Navbar</h2></a>
+    <p>(See 'base_template_languageguides.html')</p>
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">{% verbatim %}
+&lt;div class="<mark>navbar</mark> <mark>navbar-expand-lg</mark> <mark>navbar-dark</mark> bg-primary <mark>fixed-top</mark>"&gt;
+    &lt;div class="container-fluid"&gt;
+        &lt;a class="<mark>navbar-brand</mark> text-light" href="{% url 'home' %}"&gt;
+            &lt;img src="{% static 'media/images/brand_192x192.png' %}" alt="" width="50px"&gt;
+        &lt;/a&gt;
+        &lt;button class="<mark>navbar-toggler</mark>" type="button" <mark>data-bs-toggle="collapse"</mark> <mark>data-bs-target=</mark>"<span style="background-color:red;color:white;">#collapse_one</span>"&gt;
+            &lt;span class="<mark>navbar-toggler-icon</mark>"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;div class="<mark>collapse</mark> <mark>navbar-collapse</mark>" id="<span style="background-color:red;color:white;">collapse_one</span>"&gt;
+            &lt;ul class="<mark>navbar-nav</mark> me-auto mb-2 mb-lg-0 <mark>navbar-light</mark>"&gt;
+                &lt;li class="<mark>nav-item</mark> <mark>dropdown</mark>"&gt;
+                    &lt;a class="<mark>nav-link</mark> <mark>dropdown-toggle</mark> text-light" <mark>data-bs-toggle="dropdown"</mark> href="#"&gt;Bootstrap&lt;/a&gt;
+                    &lt;ul class="<mark>dropdown-menu</mark>"&gt;
+                        &lt;li&gt;
+                            &lt;a class="<mark>dropdown-item</mark>" href="{% url 'tenappone:bootstrap_forms' %}"&gt;Forms&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            &lt;a class="<mark>dropdown-item</mark>" href="{% url 'tenappone:bootstrap_components' %}"&gt;Components&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            &lt;a class="<mark>dropdown-item</mark>" href="{% url 'tenappone:bootstrap_other' %}"&gt;Other&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            &lt;hr class="<mark>dropdown-divider</mark>"&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                            &lt;a class="<mark>dropdown-item</mark> <mark>disabled</mark>" href="#"&gt;Disabled (This is a test)&lt;/a&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li class="<mark>nav-item</mark>"&gt;
+                    &lt;a class="<mark>nav-link</mark> text-light" href="{% url 'tenappone:python' %}"&gt;Python&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class=""&gt;
+            &lt;ul class="<mark>navbar-nav</mark>"&gt;
+                &lt;li class="<mark>nav-item</mark>"&gt;
+                    {% if user.is_authenticated %}
+                        &lt;a class="<mark>nav-link</mark> text-light" href="{% url 'user_auth:logout' %}"&gt;Logout&lt;/a&gt;
+                    {% else %}
+                        &lt;a class="<mark>nav-link</mark> text-light" href="{% url 'user_auth:login' %}"&gt;Login&lt;/a&gt;
+                    {% endif %}
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+{% block body_block %}
+{% endblock %}
+&lt;br&gt;&lt;br&gt;
+&lt;div class="<mark>navbar</mark> <mark>navbar-expand-lg</mark> <mark>navbar-left</mark> bg-primary <mark>navbar-light</mark> <mark>fixed-bottom</mark>"&gt;
+    &lt;div class="container-fluid"&gt;
+        &lt;!--        &lt;a class="<mark>navbar-brand</mark> text-light" href="#"&gt;&lt;/a&gt;--&gt;
+        &lt;ul class="<mark>navbar-nav</mark>"&gt;
+            &lt;li class="<mark>nav-item</mark> <mark>dropup</mark>"&gt;
+                &lt;!--'dropup' displays the dropdown menu above rather than below. Other options: dropright, dropleft--&gt;
+                &lt;a class="<mark>nav-link</mark> <mark>dropdown-toggle</mark> text-light" href="#" <mark>data-bs-toggle="dropdown"</mark>&gt;Glossary&lt;/a&gt;
+                &lt;ul class="<mark>dropdown-menu</mark>"&gt;
+                    {% block glossary_block %}
+                    {% endblock %}
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;form class="d-flex"&gt;
+            &lt;div class="input-group"&gt;
+                &lt;input type="text" class="form-control" placeholder="Search..."&gt;
+                &lt;button type="button" class="btn btn-secondary"&gt;Search&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+{% endverbatim %}</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="nav_tab_anchor"><h2>Navs and Tabs</h2></a>
+    <div class="form-control mb-2">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">These</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Are</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Navs</a>
+            </li>
+        </ul>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;ul class="<mark>nav</mark>"&gt;
+    &lt;li class="<mark>nav-item</mark>"&gt;
+        &lt;a class="<mark>nav-link</mark> <mark>active</mark>" href="#"&gt;These&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="<mark>nav-item</mark>"&gt;
+        &lt;a class="<mark>nav-link</mark>" href="#"&gt;Are&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="<mark>nav-item</mark>"&gt;
+        &lt;a class="<mark>nav-link</mark> <mark>disabled</mark>" href="#"&gt;Navs&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+    </div>
+    <div class="form-control mb-2">
+        <ul class="nav nav-tabs"> <!--Pretty much the same as regular navs, only with an additional graphical effect-->
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Navs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">With</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Tabs</a>
+            </li>
+        </ul>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;ul class="<mark>nav</mark> <mark>nav-tabs</mark>"&gt;
+    &lt;li class="<mark>nav-item</mark>"&gt;
+        &lt;a class="<mark>nav-link</mark> <mark>active</mark>" href="#"&gt;Navs&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="<mark>nav-item</mark>"&gt;
+        &lt;a class="<mark>nav-link</mark>" href="#"&gt;With&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="<mark>nav-item</mark>"&gt;
+        &lt;a class="<mark>nav-link</mark> <mark>disabled</mark>" href="#"&gt;Tabs&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <div class="nav nav-tabs" role="tablist"> <!--Using a div with tablist is another way to provide nav tabs-->
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_pane_one" type="button"
+                    role="tab">
+                Navs Tabs
+            </button> <!--Also, can use buttons instead of links-->
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_pane_two" type="button" role="tab">
+                With
+            </button>
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_pane_three" type="button" role="tab">
+                Content
+            </button>
+        </div>
+        <div class="tab-content" id="tab_content_one">
+            <div class="tab-pane show active" id="tab_pane_one" role="tabpanel">
+                <h3 class="mt-2">One</h3>
+                <p>
+                    ONE. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut consequatur dolores
+                    dolorum eum illo, illum nam quia ullam voluptas. Autem facere molestiae officiis saepe tempora.
+                    Accusantium dicta fugit sequi!
+                </p>
+            </div>
+            <div class="tab-pane show" id="tab_pane_two" role="tabpanel">
+                <h3 class="mt-2">Two</h3>
+                <p>
+                    TWO. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cum cupiditate ea eos eveniet
+                    harum id impedit in itaque laudantium magnam molestiae perferendis, quidem quod unde veniam vitae
+                    voluptate voluptatibus!
+                </p>
+            </div>
+            <div class="tab-pane show" id="tab_pane_three" role="tabpanel">
+                <h3 class="mt-2">Three</h3>
+                <p>
+                    THREE. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis hic quas voluptate! Eaque
+                    libero nihil quidem sequi suscipit? Aut corporis deleniti, deserunt expedita facilis natus nostrum
+                    obcaecati quam repudiandae voluptate.
+                </p>
+            </div>
+        </div>
+
+        <h6 class="mt-3">HTML Code:</h6>
+        <pre class="mb-0">
+&lt;div class="<mark>nav</mark> <mark>nav-tabs</mark>" <mark>role="tablist"</mark>&gt;
+    &lt;button class="<mark>nav-link</mark> <mark>active</mark>" <mark>data-bs-toggle="tab"</mark> <mark>data-bs-target=</mark>"<span style="background-color:red;color:white;">#tab_pane_one</span>" type="button" role="tab"&gt;
+        Navs Tabs
+    &lt;/button&gt;
+    &lt;button class="<mark>nav-link</mark>" <mark>data-bs-toggle="tab"</mark> <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#tab_pane_two</span>" type="button" role="tab"&gt;
+        With
+    &lt;/button&gt;
+    &lt;button class="<mark>nav-link</mark>" <mark>data-bs-toggle="tab"</mark> <mark>data-bs-target=</mark>"<span style="background-color:blue;color:white;">#tab_pane_three</span>" type="button" role="tab"&gt;
+        Content
+    &lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="<mark>tab-content</mark>" id="tab_content_one"&gt;
+    &lt;div class="<mark>tab-pane</mark> <mark>show</mark> <mark>active</mark>" <mark>id=</mark>"<span style="background-color:red;color:white;">tab_pane_one</span>" <mark>role="tabpanel"</mark>&gt;
+        &lt;h3&gt;One&lt;/h3&gt;
+        &lt;p&gt;
+            ONE. Lorem ipsum ...
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>tab-pane</mark> <mark>show</mark>" <mark>id=</mark>"<span style="background-color:green;color:white;">tab_pane_two</span>" <mark>role="tabpanel"</mark>&gt;
+        &lt;h3&gt;Two&lt;/h3&gt;
+        &lt;p&gt;
+            TWO. Lorem ipsum ...
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="<mark>tab-pane</mark> <mark>show</mark>" <mark>id=</mark>"<span style="background-color:blue;color:white;">tab_pane_three</span>" <mark>role="tabpanel"</mark>&gt;
+        &lt;h3&gt;Three&lt;/h3&gt;
+        &lt;p&gt;
+            THREE. Lorem ipsum ...
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+
+    </div>
+</div>
+
+<div class="form-control mb-1">
+    <a id="carousel_anchor"><h2>Carousel</h2></a>
+    <div class="carousel bg-primary" data-bs-ride="carousel" data-bs-interval="3000" id="carousel_one">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'media/images/hsr_characters/kafka.webp' %}" alt="kafka">
+                <div class="carousel-caption">
+                    <h1 class="text-light">Kafka</h1>
+                    <h5 class="text-light">Nihility/Lightning</h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'media/images/hsr_characters/black_swan.webp' %}" alt="black_swan">
+                <div class="carousel-caption">
+                    <h1 class="text-light">Black Swan</h1>
+                    <h5 class="text-light">Nihility/Wind</h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'media/images/hsr_characters/acheron.webp' %}" alt="acheron">
+                <div class="carousel-caption">
+                    <h1 class="text-light">Acheron</h1>
+                    <h5 class="text-light">Nihility/Lightning</h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'media/images/hsr_characters/luocha.webp' %}" alt="luocha">
+                <div class="carousel-caption">
+                    <h1 class="text-light">Luocha</h1>
+                    <h5 class="text-light">Abundance/Imaginary</h5>
+                </div>
+            </div>
+        </div>
+        <!--(Optional) Left/right controls-->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_one" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <!--<span class="visually-hidden">Previous</span> (Doesn't seem necessary. No visible change)-->
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel_one" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <!--<span class="visually-hidden">Next</span>-->
+        </button>
+        <!--(Optional) Controls to select images by order-->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel_one" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carousel_one" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carousel_one" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#carousel_one" data-bs-slide-to="3"></button>
+        </div>
+    </div>
+
+    <h6 class="mt-3">HTML Code:</h6>
+    <pre class="mb-0">
+&lt;div class="<mark>carousel</mark> bg-primary" <mark>data-bs-ride="carousel"</mark> <mark>data-bs-interval=</mark>"3000" <mark>id=</mark>"<span style="background-color:green;color:white;">carousel_one</span>"&gt;
+    &lt;div class="<mark>carousel-inner</mark>"&gt;
+        &lt;div class="<mark>carousel-item</mark> <mark>active</mark>"&gt;
+            &lt;img src="{% static 'media/images/hsr_characters/kafka.webp' %}" alt="kafka"&gt;
+                &lt;div class="<mark>carousel-caption</mark>"&gt;
+                    &lt;h1 class="text-light"&gt;Kafka&lt;/h1&gt;
+                    &lt;h5 class="text-light"&gt;Nihility/Lightning&lt;/h5&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="<mark>carousel-item</mark>"&gt;
+            &lt;img src="{% static 'media/images/hsr_characters/black_swan.webp' %}" alt="black_swan"&gt;
+                &lt;div class="<mark>carousel-caption</mark>"&gt;
+                    &lt;h1 class="text-light"&gt;Black Swan&lt;/h1&gt;
+                    &lt;h5 class="text-light"&gt;Nihility/Wind&lt;/h5&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="<mark>carousel-item</mark>"&gt;
+            &lt;img src="{% static 'media/images/hsr_characters/acheron.webp' %}" alt="acheron"&gt;
+                &lt;div class="<mark>carousel-caption</mark>"&gt;
+                    &lt;h1 class="text-light"&gt;Acheron&lt;/h1&gt;
+                    &lt;h5 class="text-light"&gt;Nihility/Lightning&lt;/h5&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="<mark>carousel-item</mark>"&gt;
+            &lt;img src="{% static 'media/images/hsr_characters/luocha.webp' %}" alt="luocha"&gt;
+                &lt;div class="<mark>carousel-caption</mark>"&gt;
+                    &lt;h1 class="text-light"&gt;Luocha&lt;/h1&gt;
+                    &lt;h5 class="text-light"&gt;Abundance/Imaginary&lt;/h5&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button class="<mark>carousel-control-prev</mark>" type="button" <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#carousel_one</span>" <mark>data-bs-slide="prev"</mark>&gt;
+        &lt;span class="<mark>carousel-control-prev-icon</mark>"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button class="<mark>carousel-control-next</mark>" type="button" <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#carousel_one</span>" <mark>data-bs-slide="next"</mark>&gt;
+        &lt;span class="<mark>carousel-control-next-icon</mark>"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="<mark>carousel-indicators</mark>"&gt;
+        &lt;button type="button" <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#carousel_one</span>" <mark>data-bs-slide-to=</mark>"0" class="active"&gt;&lt;/button&gt;
+        &lt;button type="button" <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#carousel_one</span>" <mark>data-bs-slide-to=</mark>"1"&gt;&lt;/button&gt;
+        &lt;button type="button" <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#carousel_one</span>" <mark>data-bs-slide-to=</mark>"2"&gt;&lt;/button&gt;
+        &lt;button type="button" <mark>data-bs-target=</mark>"<span style="background-color:green;color:white;">#carousel_one</span>" <mark>data-bs-slide-to=</mark>"3"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Bootstrap - Components
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#bootstrap_components_anchor"><strong>Bootstrap - Components</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#buttons_anchor">Buttons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#button_groups_anchor">Button Groups</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#badges_anchor">Badges</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#accordion_anchor">Accordion</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#alerts_anchor">Alerts</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#cards_anchor">Cards</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#progressbars_anchor">Progress Bars</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#dropdownmenu_anchor">Dropdown Menus</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#offcanvas_anchor">Offcanvas</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#navbar_anchor">Navbar</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#nav_tab_anchor">Navs and Tabs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#carousel_anchor">Carousel</a>
+</li>
+{% endblock %}

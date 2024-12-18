@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Javascript - Basics</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="javascript_basics_anchor"><h1>Javascript <span class="door">-</span> Basics</h1></a>
+<p class="mb-2">
+    Javascript is a programming language that add interactivity to a website. It includes built-in APIs and permits
+    third-party APIs and frameworks/libraries.
+</p>
+<div class="form-control mb-2">
+    <a id="comments_anchor"><h2>Comments</h2></a>
+    <div class="form-control mb-2">
+        <h5 class="mb-2">Single-line comment:</h5>
+        <pre class="mb-1">
+// Single line comment
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <h5 class="mb-2">Multi-line comment:</h5>
+        <pre class="mb-1">
+/*
+    This is a
+    multiline
+    comment.
+*/
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="variables_anchor"><h2>Variables</h2></a>
+    <div class="form-control mb-2">
+        <a id="declare_use_variables_anchor"><h3>Declaring and using variables. Variable keywords: let, const, and
+            var</h3></a>
+        <p class="mb-2">
+            The 'let' keyword is recommended for variable declaration. The variable cannot be redeclared. The value can
+            be updated. Block-scoped.
+        </p>
+        <pre>
+let variableName;
+variableName = "hello";
+variableName;                           // Output: 'hello'
+</pre>
+
+        <p class="mb-1">
+            The 'const' keyword is meant for use with constants, variables whose value will not be changeable. The
+            variable cannot be redeclared. Its properties can be updated but key-value pairs cannot be added or removed.
+            Blocked-scoped.
+        </p>
+        <pre>
+const variableName2 = 'hamburger';
+</pre>
+
+        <p class="mb-1">
+            The 'var' keyword is used for variable declaration. The variable can be redeclared and this is why it is no
+            longer recommended for regular use. Globally-scoped if declared outside of a function - meaning it's
+            accessible throughout the whole window. Function-scoped if declared within a function - meaning it's only
+            accessible within the function.
+        </p>
+        <pre class="mb-0">
+var variableName3 = 'french fries';
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="primitive_data_types_anchor"><h3>Primitive data types: string, number, boolean, bigint, null, undefined,
+            symbol</h3></a>
+        <p class="mb-1">String:</p>
+        <pre>
+let stringVariable = 'This is a string.';
+let stringVariable2 = "This is a string with double-quotes. Functionality is the same.";
+</pre>
+
+        <p class="mb-1">Number:</p>
+        <pre>
+let numberVariable = 100;
+let numberVariable = 100.001;
+</pre>
+
+        <p class="mb-1">Boolean:</p>
+        <pre>
+let booleanVariable = true;
+let booleanVariable2 = false;
+</pre>
+
+        <p class="mb-1">BigInt (allows storing integers larger than the Number data type can support)</p>
+        <pre>
+const bigintVariable = BigInt(Number.MAX_SAFE_INTEGER);
+</pre>
+
+        <p class="mb-1">Null. Represents the intentional absense of any object value.</p>
+        <pre>
+let nullVariable = null;
+</pre>
+
+        <p class="mb-1">Undefined. Indicates the absence of a value, while null indicates the absence of an object.</p>
+        <pre>
+let undefinedVariable = undefined;
+</pre>
+
+        <p class="mb-1">
+            Symbol. Unique and immutable primitive value that can be used as the key of an Object property.
+        </p>
+        <pre class="mb-0">
+let symbolVariable = Symbol();
+let symbolVariable2 = Symbol('Bat');
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="typeof_anchor"><h3>Retrieving the data type of a variable using the <em>typeof</em> function</h3></a>
+        <p class="mb-1">
+            Syntax: <br>
+            <em>typeof &lt;variableName&gt;;</em>
+        </p>
+        <pre class="mb-0">
+var stringExample = "ABCDEFGHI";
+var numberExample = 1234567;
+var booleanExample = true;
+var arrayExample = [1,2,3];
+var objectExample = {name:'john doe',age:100};
+
+typeof stringExample;                   // Output: 'string'
+typeof numberExample;                   // Output: 'number'
+typeof booleanExample;                  // Output: 'boolean'
+typeof arrayExample;                    // Output: 'object' (Yes, it is an object.)
+typeof objectExample;                   // Output: 'object'
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="console_log_anchor"><h2>Printing to the console - using <em>console.log()</em></h2></a>
+    <p class="mb-1">
+        The console.log() method can take an optional argument and print that argument to the console. If no argument is
+        supplied, then it only outputs a newline.
+        <br>
+        There is no return value.
+    </p>
+    <pre class="mb-1">
+    console.log(<i>message</i>);
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="alerts_confirm_prompts_anchor"><h2>Alert, Confirm, and Prompts</h2></a>
+    <p class="mb-1">
+        The alert() method, when called, will display an alert box on top of the webpage with a message and an OK
+        button.
+        <br>
+        There is no return value.
+    </p>
+    <pre>
+    alert(<i>message</i>);
+</pre>
+
+    <p class="mb-1">
+        The confirm() method, when called, will display a dialog box with a message, an OK button, and a Cancel button.
+        <br>
+        Returns true if user clicked the OK button, else false.
+    </p>
+    <pre>
+    confirm(<i>message</i>);
+</pre>
+
+    <p class="mb-1">
+        The prompt() method, when called, will display a dialog box with a message, a text input field, an OK button,
+        and a Cancel button.
+        <br>
+        Returns the value in the text input field as a string if the user clicked the OK button, else null.
+    </p>
+    <pre class="mb-1">
+    prompt(<i>message</i>, <i>placeholderText</i>);
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="string_builtin_methods_anchor"><h2>Strings II - Built-in String Methods</h2></a>
+    <pre class="mb-0">
+let testString = '   abc123DEF456abc123DEF456   ';
+
+testString.length;                      // Output: 30
+
+testString.slice(6,12);                 // Output: '123DEF' (Allows negative indices)
+testString.substring(6,12);             // Output: '123DEF' (Doesn't permit negative indices)
+testString.substr(6,6);                 // Output: '123DEF' (2nd argument is length, not index)
+testString.replace('abc','___');        // Output: '   ___123DEF456abc123DEF456   '
+testString.replaceAll('abc','___');     // Output: '   ___123DEF456___123DEF456   '
+
+testString.split('1');                  // Output: ['   abc', '23DEF456abc', '23DEF456   ']
+
+testString.toUpperCase();               // Output: '   ABC123DEF456ABC123DEF456   '
+testString.toLowerCase();               // Output: '   abc123def456abc123def456   '
+
+testString.concat('Aa','Bb','Cc');      // Output: '   abc123DEF456abc123DEF456   AaBbCc'
+
+testString.trim();                      // Output: 'abc123DEF456abc123DEF456'
+testString.trimStart();                 // Output: 'abc123DEF456abc123DEF456   '
+testString.trimEnd();                   // Output: '   abc123DEF456abc123DEF456'
+testString.padStart(40,'X');            // Output: 'XXXXXXXXXX   abc123DEF456abc123DEF456   ' (1st argument is the desired total string length)
+testString.padEnd(40,'Y');              // Output: '   abc123DEF456abc123DEF456   YYYYYYYYYY'
+
+// Search functions
+testString.indexOf('DEF');              // Output: 9
+testString.indexOf('DEF',10);           // Output: 21 (2nd argument specifies start index)
+testString.lastIndexOf('abc');          // Output: 15
+testString.lastIndexOf('abc',10);       // Output: 3 (2nd argument specifies end index)
+testString.search('abc');               // Output: 3 (Same as index, but no optional 2nd argument)
+testString.match('abc');                // Output: ['abc', index: 3, input: '   abc123DEF456abc123DEF456   ', groups: undefined]
+
+[...testString.matchAll('abc')];        // Output: [Array(1), Array(1)]
+
+let allMatches = testString.matchAll('abc');
+allMatches.next().value;                // Output: ['abc', index: 3, input: '   abc123DEF456abc123DEF456   ', groups: undefined]
+allMatches.next().value;                // Output: ['abc', index: 15, input: '   abc123DEF456abc123DEF456   ', groups: undefined]
+
+testString.includes('abc');             // Output: true
+
+testString.startsWith('   abc');        // Output: true
+testString.endsWith('456   ');          // Output: true
+
+testString.charAt(6);                   // Output: '1'
+testString.charCodeAt(6);               // Output: 49
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="numbers_builtin_methods_anchr"><h2>Numbers II - Built-in Number Methods</h2></a>
+    <pre class="mb-0">
+let testNumber = 12345.67890;
+
+testNumber.toString();                  // Output: '12345.6789'
+
+testNumber.toExponential(1);            // Output: '1.2e+4'
+testNumber.toExponential(3);            // Output: '1.235e+4'
+testNumber.toExponential(5);            // Output: '1.23457e+4'
+
+testNumber.toFixed(1);                  // Output: '12345.7'
+testNumber.toFixed(3);                  // Output: '12345.679'
+testNumber.toFixed(5);                  // Output: '12345.67890'
+
+testNumber.toPrecision(1);              // Output: '1e+4'
+testNumber.toPrecision(3);              // Output: '1.23e+4'
+testNumber.toPrecision(5);              // Output: '12346'
+
+testNumber.valueOf();                   // Output: 12345.6789
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="operators_anchor"><h2>Operators</h2></a>
+    <div class="form-control mb-2">
+        <a id="math_operators_anchor"><h3>Math operators:</h3></a>
+        <pre class="mb-0">
+100 + 10;                               // Output: 110
+10 - 100;                               // Output: -90
+10 * 3;                                 // Output: 30
+10 / 3;                                 // Output: 3.3333333333333335
+2 ** 3;                                 // Output: 8
+10 % 3;                                 // Output: 1
+3 * (1 + 3);                            // Output: 12
+
+// Assignment operators
+let one = 1;
+one += 2;                               // Output: 3
+one -= 2;
+one *= 2;
+one /= 2;
+one %= 2;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="logic_operators_anchor"><h3>Logic operators:</h3></a>
+        <pre class="mb-0">
+let isHappy = false;
+let isHungry = true;
+
+isHappy && isHungry;                    // Output: false
+isHappy || isHungry;                    // Output: true
+isHappy === isHungry;                   // Output: false
+!isHappy;                               // Output: true
+!(isHappy === false);                   // Output: false
+isHappy !== true;                       // Output: true
+
+let two = 2;
+let three = 3;
+
+two > three;                            // Output: false
+two < three;                            // Output: true
+two >= three;                           // Output: false
+two <= three;                           // Output: true
+two == tree;                            // Output: false
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="conditionals_anchor"><h2>Conditionals</h2></a>
+    <div class="form-control mb-2">
+        <a id="ifelse_anchor"><h3>If-else Statements:</h3></a>
+        <pre class="mb-0">
+let isHappy = false;
+if (isHappy === true){
+    console.log('Happy');
+}else if(isHappy === false){
+    console.log('Not happy');
+}else{
+    console.log('Not feeling anything');
+};
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="switch_anchor"><h3>Switch Statements</h3></a>
+        <pre class="mb-0">
+switch(new Date().getDay()){
+    case 0:
+        console.log('Today is Sunday');
+        break;
+    case 1:
+        console.log('Today is Monday');
+        break;
+    case 2:
+        console.log('Today is Tuesday');
+        break;
+    case 3:
+        console.log('Today is Wednesday');
+        break;
+    case 4:
+        console.log('Today is Thursday');
+        break;
+    case 5:
+        console.log('Today is Friday');
+        break;
+    case 6:
+        console.log('Today is Saturday');
+        break;
+    default:
+        console.log('This should not be reachable!');
+        break;
+};
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="loops_anchor"><h2>Loops</h2></a>
+    <div class="form-control mb-2">
+        <a id="while_loop_anchor"><h3>While loop:</h3></a>
+        <pre class="mb-0">
+let counter = 0;
+while(counter < 10){
+    console.log(counter);
+    counter += 1;
+};
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="dowhile_loop_anchor"><h3>Do-while loop</h3></a>
+        <pre class="mb-0">
+let counter2 = 0;
+do{
+    console.log(counter2);
+    counter2 += 1;
+}while(counter2 < 10);
+</pre>
+
+    </div>
+    <div class="form-control mb-2">
+        <a id="for_loop_anchor"><h3>For loop</h3></a>
+        <pre class="mb-0">
+for(let i = 0; i < 10; i++){
+    console.log(i);
+};
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="forof_loop_anchor"><h3>For-of loop</h3></a>
+        <pre class="mb-0">
+let forOfExampleArray = [2,4,6,8,10,12];
+for(let x of forOfExampleArray){
+    console.log(x);
+};
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="var_collections_anchor"><h2>Variables - Collections</h2></a>
+    <div class="form-control mb-2">
+        <a id="arrays_anchor"><h3>Arrays</h3></a>
+        <pre class="mb-0">
+let arrayExample = [];
+
+let arrayExample2 = new Array('a','b','c');
+
+// Can store multiple data types including other arrays, objects, and functions
+let arrayExample3 = [[1,2,3], {name:'John Doe', age: 100}, function(){console.log('hello')}];
+
+// Accessing/modifying elements
+arrayExample3[0][1]; // Output: 2
+arrayExample3[0][1] = 'a';
+arrayExample3[0][1]; // Output: 'a'
+arrayExample3[1]['age']; // Output: 100
+arrayExample3[1].name; // Output: 'John Doe'
+
+// Calling stored functions
+arrayExample3[2](); // Output: hello
+
+let arrayVariable = ['a','b','c', 1, 2, 3];
+arrayVariable[2]; // Output: 'b'
+arrayVariable[2] = 'p';
+arrayVariable[2]; // Output: 'p'
+
+// Returns the length of an array
+arrayVariable.length;
+
+// Adds a new element to the end of the array
+arrayVariable.push(4);
+
+// Retrieves and removes the last element
+arrayVariable.pop();
+
+// Removes the first element
+arrayVariable.shift();
+
+// Add a new element to the start of the array
+arrayVariable.unshift('z');
+
+// Removes x number of elements from an array.
+// Accepts 2 arguments: first specifies the start position, second specifies the number of elements to remove
+arrayVariable.splice(2,5);
+
+// Returns true if a match to the search criteria is found, else false
+arrayVariable.includes('a');
+
+// Returns the index of the match if a match is found
+arrayVariable.lastIndexOf('c');
+
+// Sorts the elements alphabetically
+arrayVariable.sort()
+
+// Returns a single string consisting of every string in the array
+arrayVariable.toString();
+
+// Traversing an array using a for-loop
+for(let i = 0; i < arrayVariable.length; i++){
+    console.log(arrayVariable[i]);
+};
+
+// Traversing an array using an for-of-loop
+for(let currentVar of arrayVariable){
+    console.log(currentVar);
+};
+
+// Traversing an array using a while-loop
+let j = 0;
+while(j < arrayVariable.length){
+    console.log(arrayVariable[j]);
+j += 1;
+};
+
+// Traversing an array using the for-each method
+arrayVariable.forEach(x => console.log(x));
+
+// Applies a function to all elements in the array. The resulting array is the same length as the original
+arrayVariable.map(returnInfo);
+function returnInfo(value, index, array){
+    return `#${index}: ${value}, ${value.length}`;
+};
+
+// Applies a function to all elements in the array. The resulting array can be longer than the original
+arrayVariable.flatMap(stringSplitter);
+function stringSplitter(value, index, array){
+    // This function takes a string, splits it into 2 halves, and returns them
+    let middle = value.length/2;
+    return [value.slice(0, middle), value.slice(middle, value.length)];
+};
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="objects_anchor"><h3>Objects</h3></a>
+        <pre class="mb-0">
+let objectVariable = {
+    first_name:'John',
+    last_name:'Doe',
+    age:100,
+};
+
+// Similar to arrays, objects can also store arrays, other objects, and functions
+let objectExample = {
+    scores:[100,99,95],
+    another_obj: {name:'John Doe', age:100},
+    print_func: function(){console.log('hello')},
+};
+
+// Accessing object elements
+objectVariable['first_name'];         // Output: 'John'
+objectVariable.first_name;            // Output: 'John'
+objectExample.scores;                 // Output: [100, 99, 95]
+objectExample.another_obj.name;       // Output: 'John Doe'
+objectExample.print_func();           // Output: hello
+
+// Retrieves only the keys
+Object.keys(objectVariable);          // Output: ['first_name', 'last_name', 'age']
+Object.keys(objectExample);           // Output: ['scores', 'another_obj', 'print_func']
+
+// Retrieves only the values
+Object.values(objectVariable);        // Output: ['John', 'Doe', 100]
+
+// Retrieves key-value pairs
+Object.entries(objectVariable);       // Output: [Array(2), Array(2), Array(2)]
+Object.entries(objectVariable)[0];    // Output: ['first_name', 'John']
+
+// Adding/removing/editing key-value pairs and other properties (such as 'writable')
+Object.defineProperties(objectVariable, {
+    'first_name':{value:'Jane', writable:true},
+    'last_name':{value:'Johnson'},
+    'age':{value:50}
+});
+
+// Protecting objects by freezing, sealing, or preventing extensions
+Object.freeze(objectVariable);
+Object.seal(objectVariable);
+Object.preventExtensions(objectVariable);
+
+// Checking whether an object is frozen, sealed, or extensible
+Object.isFrozen(objectVariable);
+Object.isSealed(objectVariable);
+Object.isExtensible(objectVariable);
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="maps_anchor"><h3>Maps (similar to Objects but are iterable)</h3></a>
+        <pre class="mb-0">
+let emptyMap = new Map();
+let mapExample = new Map([['a', 1],['b', 2],['c', 3]]);
+
+// Adding new entries or updating existing entries
+mapExample.set('d',4);
+mapExample.set('a',100);
+
+// Checks for a key that meets the search criteria, returns true if found, else false
+mapExample.has('a');                    // Output: true
+
+// Retrieves the value attached to the given key
+mapExample.get('a');                    // Output: 100
+
+// Deletes the key-value pair that matches the given key
+mapExample.delete('a');
+
+// Returns the number of entries in the map
+mapExample.size;
+
+// Iterating through the map using forEach
+mapExample.forEach((k,v) => console.log(`${k} : ${v}`));
+
+// Traversing through the entries using next
+let mapExampleEntries = mapExample.entries();
+mapExampleEntries.next().value          // Output: ['a', 1]
+mapExampleEntries.next().value          // Output: ['b', 2]
+mapExampleEntries.next().value          // Output: ['c', 3]
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="sets_anchor"><h3>Sets (prevents duplicate elements within the array)</h3></a>
+        <pre class="mb-0">
+let emptySetExample = new Set();
+let setExample = new Set([1,2,3,4,5,6,7, 'a','b','c']);
+
+// Returns the size of the set
+setExample.size
+
+// Adding new elements
+setExample.add('d');
+
+// Deleting elements
+setExample.delete(7);
+
+// Checks if an element matches the given criteria, returns true if found, else false
+setExample.has(7);
+
+// Traversing elements using for-of
+for(let setElement of setExample.values()){
+    console.log(setElement);
+};
+
+// Iterating through elements using forEach
+setExample.forEach(y => console.log(y));
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="math_module_anchor"><h2>Math Module</h2></a>
+    <pre class="mb-0">
+// Some Math functions
+Math.random();                          // Output: (The answer will be any value between 0 and 1)
+Math.floor(0.5);                        // Output: 0
+Math.ceil(0.5);                         // Output: 1
+Math.round(0.5);                        // Output: 1
+Math.round(0.4);                        // Output: 0
+Math.max(10,5,1);                       // Output: 10
+Math.min(10,5,1);                       // Output: 1
+Math.trunc(12.345);                     // Output: 12
+Math.trunc(0.1234);                     // Output: 0
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="date_module_anchor"><h2>Date Module</h2></a>
+    <pre class="mb-0">
+// Some Date functions
+new Date().getDate();                   // Returns the day of the month
+new Date().getTime();                   // Returns the time in milliseconds since epoch (1970/1/1)
+new Date().getFullYear();
+new Date().getMonth();
+new Date().getDay();
+new Date().getHours();
+new Date().getMinutes();
+new Date().getSeconds();
+new Date().toDateString();
+    // Output: 'Sun Jan 21 2024'
+new Date().toLocaleDateString();
+    // Output: '1/21/2024' (Because current locale is in the US)
+new Date().toLocaleDateString('en-us');
+    // Output: '1/21/2024'
+new Date().toLocaleDateString('de-DE');
+    // Output: '21.1.2024'
+new Date().toLocaleDateString('en-us', {weekday:'long', year:'numeric', month:'short', day:'numeric'});
+    // Output: 'Sunday, Jan 21, 2024'
+new Date().toLocaleDateString('en-us', {year:'numeric', month:'short', day:'numeric'});
+    // Output: 'Jan 21, 2024'
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="functions_anchor"><h2>Functions</h2></a>
+    <pre>
+function printHello(){
+    console.log('hello');
+};
+printHello();
+
+function printName(name){
+    console.log('Your name is $(name)');
+};
+printName('John Doe');
+
+function returnSum(x, y){
+    return x + y;
+};
+returnSum(1,2);                         // Output: 3
+
+function totalSum(...varnums){
+    let sum_total = 0;
+    for(let i = 0; i < varnums.length; i++){
+        sum_total += varnums[i];
+    };
+    return sum_total;
+};
+totalSum(1,10,100,1000,10000);          // Output: 11111
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="error_handling_anchor"><h2>Error Handling</h2></a>
+    <pre>
+try{
+    (123).toPrecision(101);             // Output: RangeError
+    nonExistentArray[3];                // Output: ReferenceError
+    //"Incomplete string                // Output: SyntaxError (Commented out for testing)
+    (123).toUpperCase();                // Output: TypeError
+}catch(err){
+    console.log(`ERROR MESSAGE: ${err}`);
+}finally{
+    console.log("This statement is always run, even if the exception isn't caught.");
+};
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="classes_anchor"><h2>Classes</h2></a>
+    <pre>
+class ClassName{
+    public_variable = 321;
+    #private_variable = 123;             // Class fields can be designated as private by using '#'
+    static static_variable = 312;
+
+    constructor(first_name, last_name){
+        this.first_name = first_name.toUpperCase();
+        this.last_name = last_name.toUpperCase();
+    }
+
+    get_full_name(){
+        return `${this.last_name}, ${this.first_name}`;
+    }
+
+    set set_first_name(first_name){
+        /*
+            The use of 'set' permits only a single parameter. Value setting syntax: obj.set_first_name = 'name';
+            Note that it does not use () and the value is set using an equality operator.
+        /*
+        this.first_name = first_name.toUpperCase();
+    }
+
+    set set_last_name(last_name){
+        this.last_name = last_name.toUppercase();
+    }
+
+    update_full_name(first_name, last_name){
+        this.first_name = first_name.toUpperCase();
+        this.last_name = last_name.toUpperCase();
+    }
+
+    get get_first_name(){
+        /*
+            The 'get' keyword binds an object property to a function. Usage syntax: obj.get_first_name;
+            Note that it does not use () and it called like a variable.
+        */
+        return this.first_name;
+    }
+
+    get get_last_name(){
+        return this.last_name;
+    }
+
+    // Getting and setting private variables
+    get get_private(){
+        return this.#private_variable;
+    }
+
+    set set_private(new_private){
+        this.#private_variable = new_private;
+    }
+
+    static static_method(upperLimit){
+        return Math.floor(Math.random() * upperLimit);
+    }
+}
+
+class SubClassName extends ClassName{
+    constructor(first_name, last_name, profession){
+        super(first_name, last_name);
+        this.profession = profession.toUpperCase();
+    }
+}
+
+const instantiatedClass = new ClassName('john', 'doe');
+const instantiatedSubClass = new SubClassName('jane', 'doe', 'software engineer');
+
+instantiatedClass.get_full_name();                  // Output: 'DOE, JOHN'
+instantiatedClass.set_first_name = 'Jack';          // Output: 'Jack'
+instantiatedClass.get_first_name;                   // Output: 'JACK'
+instantiatedClass.update_full_name('Jorge', 'Ryo');
+instantiatedClass.get_last_name;                    // Output: 'RYO'
+
+// Calling public fields
+ClassName.public_variable;                          // Output: undefined (Caller must be an instance)
+instantiatedClass.public_variable;                  // Output: 321
+
+// Calling static fields/methods must be done on the Class itself instead of the instance.
+instantiatedClass.static_variable;                  // Output: undefined (Cannot be called this way)
+ClassName.static_variable;                          // Output: 312
+instantiatedClass.static_method;                    // Output: TypeError
+ClassName.static_method(10);                        // Output: (Any value between 0-9)
+
+instantiatedSubClass.get_full_name();               // Output: 'DOE, JANE'
+instantiatedSubClass.get_private;                   // Output: 123
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="local_storage_anchor"><h2>Local Storage</h2></a>
+    <pre class="mb-0">
+localStorage.setItem('first_name', 'John');
+localStorage.setItem('last_name', 'Doe');
+
+localStorage.getItem('first_name');             // Output: 'John'
+localStorage.getItem('last_name');              // Output: 'Doe'
+
+localStorage.clear();
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="bitwise_operators_anchor"><h2>Bitwise Operators</h2></a>
+    <pre class="mb-0">
+5 & 1;                  // Output: 1 (00000101 & 00000001 = 00000001)
+5 | 1;                  // Output: 5 (00000101 | 00000001 = 00000101)
+5 ^ 2;                  // Output: 4 (00000101 ^ 00000001 = 00000100)
+~5;                     // Output: -6 (~00000101 = 11111010)
+5 << 1;                 // Output: 10 (00000101 << 1 = 00001010)
+-5 >> 1;                // Output: -3 (11111011 >> 1 = 11111101)
+5 >>> 1;                // Output: 2 (00000101 >>> 1 = 00000010)
+</pre>
+</div>
+
+<div class="form-control mb-1">
+    <h2>Example Javascript usages:</h2>
+    <pre class="mb-0">
+//alert("Hi, welcome to this page.");
+
+var name = "John Doe";
+var age = 60;
+var weight_in_lbs = 150;
+
+//name = prompt("Name?");
+//age = prompt("Age?");
+//weight_in_lbs = prompts("What is your weight in lbs?");
+
+console.log("Welcome, " + name + ", aged " + age + ".");
+console.log("In five years, you will be " + (age + 5) + ". Where do you see yourself at that age?");
+console.log("Your weight in lbs is " + weight_in_lbs + ". Converted to kilograms, this would be approximately " + Math.round((weight_in_lbs * 0.454)) + " kgs.")
+
+if(age > 65 && age < 100){
+    console.log("It looks like you may be eligible for Social Security benefits.");
+}else if(age >= 100){
+    console.log("Wow, you're over a hundred years ago. Congrats! If you haven't set up your Social Security benefits, we'll set you up now.");
+}else if(age < 18){
+    console.log("This service is only available to adults aged 18 and older.");
+}else{
+    var service_type = "A";
+    //service_type = prompt("Hi, please enter the letter of the desired service: (A) Unemployment benefits, (B) Disability benefits, (C) Other, (Z) Cancel");
+}
+
+var keep_playing = true;
+
+function random_number_between(lowest, highest){
+    lowest = Math.ceil(lowest);
+    highest = Math.floor(highest);
+    // var randomNumber = Math.floor(Math.random() * (highest - lowest) + lowest); // max is exclusive, min is inclusive
+    var randomNumber = Math.floor(Math.random() * (highest - lowest + 1) + lowest); // max and min are inclusive
+    return randomNumber;
+}
+
+var random_number = random_number_between(1,3);
+
+while(keep_playing){
+    var guess = random_number;
+    //guess = parseInt(prompt("Guess a number from 1 to 3"));
+
+    if(guess > 3 || guess < 1){
+        console.log("BAD! The number must be a number from 1 to 3! That means you can pick one of these numbers: 1, 2, or 3.");
+    }else if(guess === random_number){
+        console.log(guess + " is the correct number! Congrats!");
+        keep_playing = false;
+    }else{
+        console.log(guess + " is incorrect! Try again!");
+    }
+}
+
+//Some math operations
+var add_nums = 1 + 2 + 3;
+var subtract_nums = 3 - 2 - 1;
+var multiply_nums = 1 * 2 * 3;
+var divide_nums = 4 / 2;
+var exponents_num = 2**3;
+var modulo_num = 10 % 2;
+var parentheses_nums = 2 * (2 + 3);
+var increment_num = add_nums++;
+var decrement_num = add_nums--;
+
+add_nums += 4;
+subtract_nums -= -1;
+
+
+//comparison operators
+var equal_to = 1 == 1;
+var equal_to_value_and_type = 1 === 1;
+var not_equal = 1 != 2;
+var not_equal_value_or_type = 1 !== 2;
+var greater_than = 2 > 1;
+var less_than = 1 < 2;
+var greater_than_or_equals = 1 >= 1;
+var less_than_or_equals = 1 <= 1;
+var ternary_op = (10 > 5) ? true : false;
+
+
+//string operations
+var a = "A";
+var b = "B";
+var a_b = a > b; // returns false. "A" is less than "B" because they are weighted alphabetically
+
+var ten = "10";
+var three = "3";
+var ten_three = ten > three; // returns false. "3" is greater than "10" alphabetically.
+
+var concatenated_strings = "hello " + "world"; // creates "hello world"
+concatenated_strings = concatenated_strings += "!"; // creates "hello world!"
+
+var nums_only = 5 + 5; // 10
+var num_plus_string = "5" + 5; // "55"
+
+
+//logical operators
+var and_op = true && true;
+var or_op = true || false;
+var not_op = !true;
+
+
+//type operators
+var name_str = "John";
+var age_num = 100;
+console.log(typeof name_str); // "string"
+console.log(typeof age_num); // "number"
+
+//bitwise operators
+// AND. Returns 1 if both bits are 1
+console.log(1 & 1); // 1
+// OR. Returns 1 if one of the bits is 1
+console.log(5 | 1); // 5
+// NOT. Returns the complement (opposite) of a bit
+console.log(~5); // -6
+// XOR. Returns 0 if both are the same, else 1
+console.log(5 ^ 1); // 4
+// left shift. Shifts towards the left by n digits
+console.log(5 << 1); // 10
+// right shift. Shifts right by n digits
+console.log(5 << 1); // 10
+// unsigned right shift
+console.log(5 >>> 1); // 2
+
+
+// var vs let vs const
+var var_num = 1;
+let let_name = 2;
+const const_num = 3;
+
+{
+    console.log("var_num: " + var_num);
+    // console.log("let_num: " + let_num); // Error: not defined
+    console.log("const_num: " + const_num);
+}
+
+var_num = 11;
+let_num = 22;
+// const_num = 33; // Error: assignment to a constant
+
+var var_num = 111;
+// let let_num = 222; // Error: previous declaration (line 136) throws an error: cannot access, not initialized
+// const const_num = 333; // Error: const_num already declared
+
+
+// Functions
+function hello(name){
+    console.log("Hello, " + name + ".");
+    return "wot in tarnation?";
+}
+
+hello("John");
+
+
+// Arrays
+var abcs = ["X", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"];
+console.log(abcs);
+console.log(abcs.length); // returns size of the array
+console.log(abcs.sort()); // sorts the array alphabetically
+
+console.log("---");
+abcs.forEach(x => console.log(x));
+console.log("---");
+
+abcs[0] = "N";
+abcs[1] = "O";
+abcs.push("P"); // add an element to the end of an array
+console.log(abcs);
+console.log("pop: " + abcs.pop());
+
+console.log(abcs.toString()); // converts the entire array into a single string
+
+function exampleFunction(){
+    console.log("HelloHelloHello");
+}
+
+var multiple_types = ["A", 1, Date.now(), exampleFunction, abcs];
+multiple_types[3]();
+
+var another_arr = new Array(1, "A", 3, "C");
+
+// array search functions
+abcs.includes("A"); // returns true if the passed in value can be found in one of the value elements
+abcs.lastIndexOf("Z"); // returns -1 if the value does not match any elements, otherwise, it returns the index of the first match
+
+// shift, unshift, push, pop
+var hello_arr = ["H", "E", "L", "L", "O"];
+console.log("Unmodified array: "+hello_arr);
+hello_arr.shift();
+console.log("Shift removes the first element in an array: " + hello_arr);
+hello_arr.unshift("Y", "O", "J");
+console.log("Unshift adds n number of elements to the beginning of an array: " + hello_arr);
+hello_arr.pop();
+console.log("Pop removes the last element in an array: " + hello_arr);
+hello_arr.push("I", "N", "G");
+console.log("Push adds n number of elements to the end of an array: " + hello_arr);
+
+
+// Objects
+var ex_obj = {letter:"A", age:100, arr:abcs};
+console.log(ex_obj["letter"]);
+console.log(ex_obj["age"]);
+console.log(ex_obj["arr"][4]);
+console.log(Object.keys(ex_obj));
+console.log(Object.values(ex_obj));
+
+
+
+// Using the Storage object to store data in local storage
+localStorage.setItem("name", "John");
+localStorage.setItem("waka_waka", "WAKA");
+
+localStorage.getItem("name"); // "John"
+localStorage.getItem("waka_waka"); // "WAKA"
+
+localStorage.clear(); // deletes all stored key-value pairs
+
+// DOM basics
+var first_p = document.querySelector("p");
+first_p.textContent = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHH!";
+
+var all_li = document.querySelectorAll("li")
+all_li.forEach(element => element.textContent="AHAHAHAHAH!");
+console.log(all_li);
+</pre>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Javascript - Basics
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#javascript_basics_anchor"><strong>Javascript - Basics</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#comments_anchor">Comments</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#variables_anchor">Variables</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#console_log_anchor">Printing to the console - using <em>console.log()</em></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#alerts_confirm_prompts_anchor">Alert, Confirm, and Prompts</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#declare_use_variables_anchor">
+        &nbsp;&nbsp;&nbsp;Declaring and using variables. Variable keywords: let, const, and var
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#primitive_data_types_anchor">
+        &nbsp;&nbsp;&nbsp;Primitive data types: string, number, boolean, bigint, null, undefined, symbol
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#typeof_anchor">
+        &nbsp;&nbsp;&nbsp;Retrieving the data type of a variable using the <em>typeof</em> function
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#string_builtin_methods_anchor">
+        Strings II - Built-in String Methods
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#numbers_builtin_methods_anchr">
+        Numbers II - Built-in Number Methods
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#operators_anchor">Operators</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#math_operators_anchor">&nbsp;&nbsp;&nbsp;Math operators:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#logic_operators_anchor">&nbsp;&nbsp;&nbsp;Logic operators:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#conditionals_anchor">Conditionals</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#ifelse_anchor">&nbsp;&nbsp;&nbsp;If-else Statements:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#switch_anchor">&nbsp;&nbsp;&nbsp;Switch Statements</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#loops_anchor">Loops</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#while_loop_anchor">&nbsp;&nbsp;&nbsp;While loop:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#dowhile_loop_anchor">&nbsp;&nbsp;&nbsp;Do-while loop</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#for_loop_anchor">&nbsp;&nbsp;&nbsp;For loop</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#forof_loop_anchor">&nbsp;&nbsp;&nbsp;For-of loop</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#var_collections_anchor">Variables - Collections</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#arrays_anchor">&nbsp;&nbsp;&nbsp;Arrays</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#objects_anchor">&nbsp;&nbsp;&nbsp;Objects</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#maps_anchor">&nbsp;&nbsp;&nbsp;Maps (similar to Objects but are iterable)</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#sets_anchor">&nbsp;&nbsp;&nbsp;Sets (prevents duplicate elements within the
+        array)</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#math_module_anchor">Math Module</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#date_module_anchor">Date Module</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#functions_anchor">Functions</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#error_handling_anchor">Error Handling</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#classes_anchor">Classes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#local_storage_anchor">Local Storage</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#bitwise_operators_anchor">Bitwise Operators</a>
+</li>
+{% endblock %}

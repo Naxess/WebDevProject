@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base_template_home.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>User Registration</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<h1>User Registration Form</h1>
+    {% if registered %}
+        <h3>You've been registered. Welcome!</h3>
+    {% else %}
+        <h3>To register an account, please fill out and submit the form below:</h3>
+        <form class="form-control p-3" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_info_form.as_p }}
+            {{ user_info_custom_fields_form.as_p }}
+            <input class="btn btn-secondary" type="submit" value="Submit registration form">
+        </form>
+    {% endif %}
+{% endblock %}

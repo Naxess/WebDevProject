@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Form Validation</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_form_validation_anchor"><h1>Django <span class="door">-</span> Form Validation</h1></a>
+<div class="form-control mb-2">
+    <a id="form_field_validation_anchor"><h2>Form and Field Validation</h2></a>
+    <p class="mb-2">
+        Form validation happens when the data is cleaned. This process can be customized to suit additional
+        purposes. There are three types of cleaning methods that are run during form processing. These are normally
+        executed when the <em>is_valid()</em> method is called on a form. Access the <em>errors</em> attribute or
+        calling <em>full_clean()</em> directly can trigger cleaning and validation but normally these are unneeded.
+    </p>
+    <p class="mb-2">
+        In general, any cleaning method can raise a <em>ValidationError</em> if there's a problem with the data being
+        processed. If no error, then the method should return the cleaned (normalized) data as a Python object.
+    </p>
+    <p class="mb-2">
+        Most validation is done using <em>validators</em> - functions (or callables) that take a single argument and
+        raise ValidationError on invalid inputs. Validators are run after the field's <em>to_python</em> and <em>validate</em>
+        methods have been called.
+    </p>
+    <p class="mb-1">
+        Validation of a form is split into several steps, which can be customized or overriden:
+    </p>
+    <ul class="mb-2">
+        <li>
+            The <u><strong>to_python()</strong></u> method on a Field is the first step in every validation. It
+            coerces the value to a correct datatype and raises ValidationError if that is not possible. This method
+            accepts the raw value from the widget and returns the converted value. For example, a FloatField will turn
+            the data into a Python float, or raise a ValidationError.
+        </li>
+        <li>
+            The <u><strong>validate()</strong></u> method on a Field handles field-specific validation that is not
+            suitable for a validator. It takes a value that has been coerced to a correct datatype and raises
+            ValidationError on any error. This method doesn't return anything and shouldn't alter the value. It should
+            be overriden to handle validation logic that we can't or don't want to put in a validator.
+        </li>
+        <li>
+            The <u><strong>run_validators()</strong></u> method on a Field runs all of the field's validators and
+            aggregates all the errors into a single ValidationError. Overriding is unnecessary.
+        </li>
+        <li>
+            The <u><strong>clean()</strong></u> method on a Field subclass is responsible for running <em>to_python(),
+            validate(),</em> and <em>run_validators()</em> in the correct order and propagating their errors. If, at any
+            time, any of the methods raises a ValidationError, the validation stops and that error is raised. This
+            method returns the clean data, which is then inserted into the <em>cleaned_data</em> dictionary of the form.
+        </li>
+        <li>
+            The <u><strong>clean_&lt;fieldname&gt;()</strong></u> method is called on a form subclass - where the
+            fieldname is replaced with the name of the form field attribute. This method does any cleaning that is
+            specific to that particular attribute, unrelated to the type of field that it is. This method does not
+            accept any arguments. The return value of this method replaces the existing value in <em>cleaned_data</em>,
+            so it must be the field's value from <em>cleaned_data</em> (even if this method didn't change it) or a new
+            cleaned value.
+        </li>
+        <li>
+            The form subclass's <u><strong>clean()</strong></u> method can perform validation that requires access to
+            multiple form fields. Filters and conditions can be added as desired. This method can return a completely
+            different dictionary if configured to, which will then be used as the <em>cleaned_data</em>. Any errors
+            raised by our <em>Form.clean()</em> overriden will not be associated with any field in particular. They go
+            into a special "field" called <em>__all__</em>, which can be accessed via the <em>non_field_errors()</em>
+            method.
+        </li>
+    </ul>
+    <p>
+        The above methods are run in the order above, one field at a time. That is, for each field in the form (in the
+        order they are declared in the form definition), the <em>Field.clean()</em> method (or its override) is run,
+        then <em>clean_&lt;fieldname&gt;()</em>. Finally, once those two methods are run for every field, the
+        <em>Form.clean()</em> method, or its override, is executed whether or not the previous methods have raised
+        errors.
+    </p>
+
+    <div class="form-control mb-1">
+        <a id="validation_in_practice_anchor"><h3>Using validation in practice</h3></a>
+        <div class="form-control mb-2">
+            <a id="using_validators_anchor"><h4>Using validators</h4></a>
+            <p class="mb-1">
+                Below example creates a custom field class named "SlugField" that inherits from CharField but is
+                customized to include the <em>validate_slug</em> validator by default. Full list of built-in validators
+                <a href="https://docs.djangoproject.com/en/5.0/ref/validators/#built-in-validators">here</a>.
+            </p>
+            <pre>
+    from django.forms import CharField
+    <mark>from django.core import validators</mark>
+    class SlugField(CharField):
+        <mark>default_validators = [validators.validate_slug]</mark>
+</pre>
+            <p class="mb-1">
+                The below equivalent statements are used to create fields that uses the <em>validate_slug</em>
+                validator. The first statement does not make use of the above custom field class and uses CharField's
+                <em>validators</em> parameter to <strong>manually supply</strong> a validator. The second statement
+                instantiates the above class and does not need to populate the <em>validators</em> parameter because it
+                is already built in.
+            </p>
+            <pre class="mb-1">
+    slug = forms.CharField(<mark>validators=[validators.validate_slug]</mark>)
+    slug = forms.SlugField()
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="form_field_default_cleaning_anchor"><h4>Form field default cleaning</h4></a>
+            <p class="mb-1">
+                The below example creates a custom form field that validates whether the input is a string containing
+                comma-separated email addresses:
+            </p>
+            <pre class="mb-1">
+from django import forms
+from django.core.validators import validate_email
+class MultiEmailField(<mark>forms.Field</mark>):
+    def <mark>to_python</mark>(self, value):
+        if not value:
+            return []
+        return value.split(",")
+
+    def <mark>validate</mark>(self, value):
+        super().validate(value)
+        for email in value:
+            validate_email(email)
+</pre>
+            <p class="mb-1">
+                Every form that uses this field will have these methods run before anything else can be done with the
+                field's data. This is cleaning that is specific to this type of field, regardless of how it is
+                subsequently used.
+                <br>
+                Example usages:
+            </p>
+            <pre class="mb-1">
+    class ExampleForm(forms.Form):
+        last_name = forms.CharField(max_length=20)
+        first_name = forms.CharField(max_length=20)
+        message = forms.CharField(max_length=100)
+        cc_self = forms.BooleanField(required=False)
+        <mark>emails_list = MultiEmailField()</mark>
+</pre>
+            <p class="mb-2">
+                When/if the <em>is_valid()</em> is called on this form, the <em>clean()</em> method
+                will be run as part of the cleaning process and thus call the <em>to_python()</em> and
+                <em>validate()</em> methods.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="cleaning_specific_field_attrs_anchor"><h4>Cleaning a specific field attribute</h4></a>
+            <p class="mb-1">
+                In the example below we utilize the <em>clean_&lt;fieldname&gt;()</em> form method to apply a specific
+                custom cleaning on a specific field. This custom cleaning will check to see if "hello@bye.com" is
+                included in the list of values, raising an error if it's not.
+            </p>
+            <pre class="mb-1">
+    class ExampleForm(forms.Form): # Editing the same form from the previous example
+        last_name = forms.CharField(max_length=20)
+        first_name = forms.CharField(max_length=20)
+        message = forms.CharField(max_length=100)
+        cc_self = forms.BooleanField(required=False)
+        <mark>emails_list</mark> = MultiEmailField()
+
+        def <mark>clean_emails_list</mark>(self):
+            data = self.cleaned_data["emails_list"]
+            if "hello@bye.com" not in data:
+                raise ValidationError("You forgot to include 'hello@bye.com' in the list of emails!")
+            return data
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="cleaning_validating_fields_anchor"><h4>Cleaning and validating fields that depend on each other</h4>
+            </a>
+            <p class="mb-1">
+                In the below example if the <em>cc_self</em> value is <u>True</u>, then the <em>message</em> needs to
+                start with this text: "beepboop". Because validation is being performed on multiple fields
+                simultaneously, the <em>clean()</em> method is an ideal spot to add the validation. Whereas in previous
+                examples we used <em>clean()</em> on the <strong>field</strong>, in this example, it will be used on the
+                <strong>form</strong>. A major distinction is that fields are single data points while forms are a
+                collection of fields.
+            </p>
+            <p class="mb-1">
+                By the time the form's <em>clean()</em> method is called, all of the individual fields' <em>clean()</em>
+                methods will have been run. With that done, <em>self.cleaned_data</em> will be populated with any data
+                that has passed validation.
+            </p>
+            <pre class="mb-1">
+from django import forms
+from django.core.exceptions import ValidationError
+class ExampleForm(forms.Form):
+    last_name = forms.CharField(max_length=20)
+        first_name = forms.CharField(max_length=20)
+        message = forms.CharField(max_length=100)
+        cc_self = forms.BooleanField(required=False)
+        emails_list = MultiEmailField()
+
+        def clean_emails_list(self):
+            data = self.cleaned_data["emails_list"]
+            if "hello@bye.com" not in data:
+                raise ValidationError("You forgot to include 'hello@bye.com' in the list of emails!")
+            return data
+
+        def <mark>clean</mark>(self):
+            <mark>cleaned_data = super().clean()</mark>
+            <mark>cc_self = forms.cleaned_data.get("cc_self")</mark>
+            <mark>message = cleaned_data.get("message")</mark>
+
+            if cc_self and message:
+                if not message.startswith("beepboop"):
+                    raise ValidationError("If you CC yourself, you need to start your message with 'beepboop'!")
+</pre>
+            <p class="mb-1">
+                The <em>super().clean()</em> ensures that any validation logic in parent classes is maintained. If your
+                form inherits another that doesn't return a <em>cleaned_data</em> dictionary in its <em>clean()</em>
+                method, then don't assign <em>cleaned_data</em> to the result of the <em>super()</em> call and use
+                <em>self.cleaned_data</em> instead:
+            </p>
+            <pre>
+    def clean(self):
+        super().clean()
+        cc_self = self.cleaned_data.get("cc_self")
+        ...
+</pre>
+            <p class="mb-1">
+                The second approach to reporting validation errors involves assigning the error message to one of the
+                fields. See example:
+            </p>
+            <pre class="mb-1">
+...
+class ExampleForm(forms.Form):
+    ...
+    def clean(self):
+        cleaned_data = super().clean()
+        cc_self = cleaned_data.get("cc_self")
+        message = cleaned_data.get("message")
+
+        if cc_self and message and not message.startswith("beepboop"):
+            err_msg = "Must start the message with 'beepboop' if CCing yourself"
+            self.add_error("cc_self", err_msg)
+            self.add_error("message", err_msg)
+</pre>
+            <p class="mb-1">
+                The second argument of <em>add_error()</em> can be a string, or preferably an instance of
+                ValidationError.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="form-control">
+    <a id="quick_reference_anchor"><h2>Quick Reference</h2></a>
+    <div class="form-control mb-2">
+        <h3>Using Built-In Validators</h3>
+        <p class="mb-1">
+            To use Django's built-in validators, we need to import <em>validators</em> from the <em>django.core</em>
+            module (<code>from django.core import validators</code>). One such validator is
+            <em>MaxLengthValidator</em>, which raises an error if the length of the value is greater than the
+            specified <em>limit_value</em> parameter.
+            <br>
+            Example usage:
+        </p>
+        <pre class="mb-1">
+    from django.forms import CharField
+    <mark>from django.core import validators</mark>
+    class ExampleForm(forms.Form):
+        username = forms.CharField(required=False,
+                                   <mark>validators=[validators.MaxLengthValidator(10)]</mark>)
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="creating_custom_validators_anchor"><h3>Creating Custom Validators</h3></a>
+        <p class="mb-1">
+            Example of creating and using a custom validator:
+        </p>
+        <pre class="mb-1">
+from django import forms
+from django.core import validators
+def custom_validator_endswith_z(value):
+    if not value.lower().endswith("z"):
+        raise forms.ValidationError("Value needs to end with the letter 'z'")
+
+class SomeForm(forms.Form):
+    name = forms.CharField(max_length=20, validators=[custom_validator_endswith_z])
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="detect_stop_bots_anchor"><h3>Using a Hidden Form to Detect/Stop Bots</h3></a>
+        <p class="mb-1">
+            Bots can be automated to fill out forms - they do this by inspecting the webpage form, locating the input
+            fields and filling them out. These bots can be employed to automatically create accounts and fill out
+            surveys, write messages, etc.. This is usually considered malicious behavior and we can combat this by
+            creating a hidden input field that will throw an error if filled and submitted. Since users can't see the
+            hidden input field (without inspecting), they can't fill it out. Bots, not knowing the field isn't not meant
+            to be filled out, will populate it with data and thus trigger the error. (Not 100% foolproof, but it may
+            stop some simpler bots.)
+        </p>
+        <pre class="mb-1">
+class SomeForm(forms.Form):
+    name = forms.CharField(max_length=20)
+    bot_catcher = forms.CharField(max_length=10,
+                                  required=False,
+                                  widget=forms.HiddenInput) # makes it a hidden form, not visible to users
+
+    def clean_bot_catcher(self):
+        bot_catcher = self.cleaned_data['bot_catcher']
+        if len(bot_catcher) > 0:
+            raise forms.ValidationError('Hidden form was filled with input, bot detected!')
+        return bot_catcher
+</pre>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Form Validation
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_form_validation_anchor"><strong>Django - Form Validation</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_field_validation_anchor">Form and Field Validation</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#validation_in_practice_anchor">&nbsp;&nbsp;&nbsp;Using validation in practice</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#using_validators_anchor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using validators</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_field_default_cleaning_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form field default cleaning
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#cleaning_specific_field_attrs_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cleaning a specific field attribute
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#cleaning_validating_fields_anchor">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cleaning and validating fields that depend on each other
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#quick_reference_anchor">Quick Reference</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#creating_custom_validators_anchor">
+        &nbsp;&nbsp;&nbsp;Creating Custom Validators
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#detect_stop_bots_anchor">
+        &nbsp;&nbsp;&nbsp;Using a Hidden Form to Detect/Stop Bots
+    </a>
+</li>
+{% endblock %}

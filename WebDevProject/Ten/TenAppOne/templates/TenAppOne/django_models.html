@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Models & Databases</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_models_databases_anchor"><h1>Django <span class="door">-</span> Models & Databases</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="intro_models_fields_anchor"><h4>Intro to Models and Fields</h4></a>
+        <p class="mb-2">
+            An essential part of any website is the ability to take information from the user and store it to a
+            database, as well as retrieve from that database to generate content for the user.
+        </p>
+        <p class="mb-1">
+            In Django, models are used to incorporate a database into a Django project. Django comes preinstalled with
+            Sqlite but it is not limited to it - Django can use other SQL engines (PostGreSQL, MySQL, Oracle, etc..). If
+            we want to change the SQL engine, we can do so by editing the <em>settings.py</em>'s <em>DATABASES</em>
+            dictionary.
+        </p>
+    </div>
+    <div class="form-control mb-2">
+        <a id="model_creation_anchor"><h4>Creating a Model</h4></a>
+        <p class="mb-1">
+            Models are created inside the app's <em>models.py</em> file. To create a model, we need to create a class
+            that imports <em>models.Model</em>. The name of the class will be the name of the created table. See example
+            below:
+        </p>
+        <pre class="mb-1">
+<mark>from django.db import models</mark>
+
+class ExampleModel(<mark>models.Model</mark>):
+    ...
+class AnotherExample(<mark>models.Model</mark>):
+    ...
+</pre>
+    </div>
+    <div class="form-control mb-2">
+        <a id="model_types_fields_anchor"><h3>Model Types/Fields</h3></a>
+        <p class="mb-1">
+            To create the fields for the models, we need to determine what data type the column will need to be and then
+            decide which model field object will accomodate that type of data. The variable name will be used as the
+            name of the created column. Due to the large number of different model field types, only some will be listed
+            in the below tables.
+        </p>
+        <p class="mb-3">
+            Note that these fields can have their own set of attributes that varies from one to another. However, there
+            are universal field options, shared by all fields. Common examples include: <em>null, blank, default,
+            primary_key</em>, and <em>unique</em>. See full list below:
+        </p>
+        <a id="universal_field_options_anchor"><h4>Universal Field Options</h4></a>
+        <div class="accordion mb-3">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#field_options_id">
+                        List of Universal Field Options <span class="highlight">(Work in Progress)</span>
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="field_options_id">
+                    <div class="accordion-body">
+                        <table class="table table-bordered">
+                            <tr class="table-primary">
+                                <th>Field Option</th>
+                                <th>Description</th>
+                                <th>Example Usage</th>
+                            </tr>
+                            <tr>
+                                <th>null</th>
+                                <td>
+                                    If True, Django will store empty values as NULL in the database. Default is False.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>blank</th>
+                                <td>If True, the field is allowed to be blank. Default is False.</td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>choices</th>
+                                <td></td>
+                                <td>
+                                    <pre class="mb-0">
+(Django 4.2 and earlier)
+class Example(models.Model):
+    CHILD = "CH"
+    ADULT = "AD"
+    SENIOR = "SR"
+    LIFESTAGE_CHOICES = [
+        (CHILD, "Child"),
+        (ADULT, "Adult"),
+        (SENIOR, "Senior")
+    ]
+    lifestage = models.CharField(max_length=2,
+                                 choices=LIFESTAGE_CHOICES,
+                                 default=ADULT)
+</pre>
+                                    <hr class="my-1">
+                                    <pre class="mb-0">
+(Django 5.0 and later)
+class Example(models.Model):
+    CHILD = "CH"
+    ADULT = "AD"
+    SENIOR = "SR"
+    LIFESTAGE_CHOICES = {
+        CHILD: "Child",
+        ADULT: "Adult",
+        SENIOR: "Senior"
+    }
+    lifestage = models.CharField(max_length=2,
+                                 choices=LIFESTAGE_CHOICES,
+                                 default=ADULT)
+</pre>
+                                    <hr class="my-1">
+                                    <pre class="mb-0">
+from django.utils.translation import gettext_lazy as _
+class AlternativeExampleUsingEnums(models.Model):
+    class LifestageChoices(models.TextChoices):
+        CHILD = "CH", _("Child")
+        ADULT = "AD", _("Adult")
+        SENIOR = "SR", _("Senior")
+    lifestage = models.CharField(max_length=2,
+                                 choices=LifestageChoices.choices,
+                                 default=LifestageChoices.ADULT)
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>db_column</th>
+                                <td>
+                                    The name of the database column to use for this field. If this isn’t given, Django
+                                    will use the field’s name.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>db_comment</th>
+                                <td>
+                                    The comment on the database column to use for this field. It is useful for
+                                    documenting fields for individuals with direct database access who may not be
+                                    looking at your Django code.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>db_default</th>
+                                <td>
+                                    The database-computed default value for this field. This can be a literal value or a
+                                    database function, such as <u>Now</u>.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>db_index</th>
+                                <td>If set to <u>True</u>, a database index will be created for this field.</td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>db_tablespace</th>
+                                <td>
+                                    The name of the database tablespace to use for this field’s index, if this field is
+                                    indexed. The default is the project’s DEFAULT_INDEX_TABLESPACE setting, if set, or
+                                    the db_tablespace of the model, if any. If the backend doesn’t support tablespaces
+                                    for indexes, this option is ignored.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>default</th>
+                                <td>
+                                    The default value for the field. This can be a value or a callable object. If
+                                    callable it will be called every time a new object is created.
+                                    <br>
+                                    The default can’t be a mutable object (model instance, list, set, etc.), as a
+                                    reference to the same instance of that object would be used as the default value in
+                                    all new model instances. Instead, wrap the desired default in a callable.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>editable</th>
+                                <td>
+                                    If <u>False</u>, the field will not be displayed in the admin or any other
+                                    ModelForm. They are also skipped during model validation. Default is <u>True</u>.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>error_messages</th>
+                                <td>
+                                    The error_messages argument lets you override the default messages that the field
+                                    will raise. Pass in a dictionary with keys matching the error messages you want to
+                                    override.
+                                    <br>
+                                    Error message keys include null, blank, invalid, invalid_choice, unique, and
+                                    unique_for_date. Additional error message keys are specified for each field
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>help_text</th>
+                                <td>
+                                    Extra “help” text to be displayed with the form widget. It’s useful for
+                                    documentation even if your field isn’t used on a form.
+                                    <br>
+                                    Note that this value is not HTML-escaped in automatically-generated forms. This lets
+                                    you include HTML in help_text if you so desire.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>primary_key</th>
+                                <td>
+                                    If <u>True</u>, this field is the primary key for the model.
+                                    <br>
+                                    If you don’t specify <em>primary_key=True</em> for any field in your model, Django
+                                    will automatically add a field to hold the primary key, so you don’t need to set
+                                    primary_key=True on any of your fields unless you want to override the default
+                                    primary-key behavior. The type of auto-created primary key fields can be specified
+                                    per app in AppConfig.default_auto_field or globally in the DEFAULT_AUTO_FIELD
+                                    setting.
+                                    <br>
+                                    <em>primary_key=True</em> implies null=False and unique=True. Only one primary key
+                                    is allowed on an object.
+                                    <br>
+                                    The primary key field is read-only. If you change the value of the primary key on an
+                                    existing object and then save it, a new object will be created alongside the old
+                                    one.
+                                    <br>
+                                    The primary key field is set to <u>None</u> when deleting an object.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>unique</th>
+                                <td>
+                                    If True, this field must be unique throughout the table.
+                                    <br>
+                                    This is enforced at the database level and by model validation. If you try to save a
+                                    model with a duplicate value in a unique field, a django.db.IntegrityError will be
+                                    raised by the model’s save() method.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>unique_for_date</th>
+                                <td>
+                                    Set this to the name of a DateField or DateTimeField to require that this field be
+                                    unique for the value of the date field.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>unique_for_month</th>
+                                <td>
+                                    Like unique_for_date, but requires the field to be unique with respect to the month.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>unique_for_year</th>
+                                <td>Like unique_for_date and unique_for_month.</td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>verbose_name</th>
+                                <td>
+                                    A human-readable name for the field. If the verbose name isn’t given, Django will
+                                    automatically create it using the field’s attribute name, converting underscores to
+                                    spaces.
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>validators</th>
+                                <td>A list of validators to run for this field.</td>
+                                <td>
+                                    <pre class="mb-0">
+
+</pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <a id="basic_model_types_fields_anchor"><h4>Basic Model Data Types/Fields</h4></a>
+        <table class="table table-bordered">
+            <tr class="table-primary">
+                <th>Field Name/Type</th>
+                <th>Description</th>
+                <th>Example Usage</th>
+            </tr>
+            <tr>
+                <th>AutoField<br>BigAutoField</th>
+                <td>An IntegerField that automatically increments. BigAutoField is a 64-bit integer variant of
+                    AutoField.
+                </td>
+                <td>
+                    <pre class="mb-0">
+id = models.AutoField(primary_key=True,
+                      **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>CharField</th>
+                <td>A field to store text-based values.</td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.CharField(max_length=200,
+                              **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>TextField</th>
+                <td>A <em>large</em> text field. The default form widget for this field is a <em>Textarea</em>.</td>
+                <td>
+                    <pre class="mb-0">field_name = models.TextField(**options)</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>EmailField</th>
+                <td>A CharField that checks if the value is a valid email address.</td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.EmailField(max_length=200,
+                               **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>URLField</th>
+                <td>A CharField for a URL, validated by URLValidator.</td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.URLField(max_length=200,
+                             **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>DateField</th>
+                <td>A date, represented in Python by a datetime.date instance.</td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.DateField(**options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>DateTimeField</th>
+                <td>Used for date and time, represented in Python by a datetime.datetime instance.</td>
+                <td>
+                    <pre>field_name = models.DateTimeField(**options)</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>TimeField</th>
+                <td>A time, represented in Python by a datetime.time instance.</td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.TimeField(auto_now=False,
+                              auto_now_add=False,
+                              **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>IntegerField<br>BigIntegerField<br>SmallIntegerField</th>
+                <td>An integer field. The default IntegerField takes values from (+/-)2147483648. The default form
+                    widget for this field is a NumberInput. BigIntegerField is a 64-bit integer that takes values
+                    from (+/-)9223372036854775807. SmallIntegerField is a variant that supports values from
+                    (+/-)32767.
+                </td>
+                <td>
+                    <pre>field_name = models.IntegerField()</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>DecimalField</th>
+                <td>Fixed-precision decimal number, represented in Python by a Decimal instance.</td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.DecimalField(max_digits=None,
+                                 decimal_places=None,
+                                 **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>FloatField</th>
+                <td>Floating-point number represented in Python by a float instance.</td>
+                <td>
+                    <pre>field_name = models.FloatField(**options)</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>BooleanField<br>NullBooleanField</th>
+                <td>A true/false field - the default form widget for this field is a CheckboxInput.
+                    NullBooleanField is a variant that allows <em>null</em> as a third option.
+                </td>
+                <td>
+                    <pre>field_name = models.BooleanField(**options)</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>FileField</th>
+                <td>A field-upload field. The default form widget for this field is a ClearableFileInput instance.
+                </td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.FileField(upload_to=None,
+                              max_length=254,
+                              **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>ImageField</th>
+                <td>A FileField that validates that the uploaded file is a valid image. [Requires that the Pillow
+                    library be installed. This library can be installed using this command: <em>pip install
+                        Pillow</em>]
+                </td>
+                <td>
+                    <pre class="mb-0">
+field_name = models.ImageField(upload_to=None,
+                               height_field=None,
+                               width_field=None,
+                               max_length=100,
+                               **options)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <a href="https://docs.djangoproject.com/en/5.0/ref/models/fields/#field-types">
+                        Full List of Model Field Types
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <hr>
+
+        <a id="relationship_types_fields_anchor"><h4>Relationship Types/Fields</h4></a>
+        <p class="mb-3">
+            Models can reference each other using primary and foreign keys. (A foreign key denotes that a column
+            coincides with a primary key column of another table). Relationship field types:
+        </p>
+        <table class="table table-bordered mb-2">
+            <tr class="table-primary">
+                <th>Field Name/Type</th>
+                <th>Description</th>
+                <th>Example Usage:</th>
+            </tr>
+            <tr>
+                <th>ForeignKey</th>
+                <td>A many-to-one relationship. Requires two positional arguments: the class to which the model is
+                    related and the <em>on_delete</em> option. Used when one record of a model A is related to
+                    multiple records of another model B.
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.db import models
+
+class Album(models.Model):
+    title = models.CharField(max_length=100)
+    artist = models.CharField(max_length=100)
+
+class Song(models.Model):
+    title = models.CharField(max_length=100)
+    album = models.ForeignKey(Album,
+                              on_delete=models.CASCADE)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>ManyToManyField</th>
+                <td>A many-to-many relationship. Requires a positional argument: the class to which the model is
+                    related, which works exactly the same as it does for ForeignKey, including recursive and lazy
+                    relationships. Used when one record of a model A is related to multiple records of another model
+                    B and vice versa.
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.db import models
+
+class Author(models.Model):
+    name = models.CharField(max_length=100);
+    desc = models.TextField(max_length=300);
+
+class Book(models.Model):
+    title = models.CharField(max_length=100);
+    desc = models.TextField(max_length=300);
+    authors = models.ManyToManyField(Author)
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>OneToOneField</th>
+                <td>A one-to-one relationship. Conceptually, this is similar to a ForeignKey with
+                    <em>unique=True</em>, but the "reverse" side of the relation will directly return a single
+                    object. Used when one record of a model A is related to exactly one record of another model B.
+                    This field can be useful as a primary key of an object if that object extends another object in
+                    some way.
+                </td>
+                <td>
+                    <pre class="mb-0">
+from django.db import models
+
+class Vehicle(models.Model):
+    reg_no = models.IntegerField()
+    owner = models.CharField(max_length=100)
+
+class Car(models.Model):
+    vehicle = models.OneToOneField(Vehicle,
+                                   on_delete=models.CASCADE,
+                                   primary_key=True)
+    car_model = models.CharField(max_length=100)
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="files_setup_anchor"><h3>Uploading/Storing/Retrieving Files</h3></a>
+        <div class="form-control mb-2">
+            <h4>Setup</h4>
+            <p class="mb-1">Before we can start uploading and storing files, we need to perform some initial steps:</p>
+            <ul class="mb-1">
+                <li>
+                    In the root directory of the project, add a folder named "<em>media</em>".
+                    <br>
+                    <code><em>... / root_dir / media /</em></code>
+                </li>
+                <li>
+                    Next, we need to edit the <em>settings.py</em> file to include three class variables set to
+                    the below values. Note: Place these variables below the BASE_DIR variable. Import the <em>os</em>
+                    module if it is not already present.
+                    <pre class="mb-0">
+...
+import os
+...
+BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR, ]
+<mark>MEDIA_DIR = os.path.join(BASE_DIR, 'media')</mark>
+<mark>MEDIA_ROOT = MEDIA_DIR</mark>
+<mark>MEDIA_URL = '/media/'</mark>
+...
+</pre>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="imagefield_anchor"><h4>Using ImageField</h4></a>
+            <div class="form-control mb-2">
+                <h6 class="mb-1">Example of using ImageField:</h6>
+                <pre class="mb-0">picture = models.ImageField(upload_to='profile_pics', blank=True)</pre>
+            </div>
+            <p class="mb-0">
+                ImageField is a FileField with uploads restricted to image formats only. But before we can start using
+                ImageField, we need to install the Python Imaging Library. We can install this library using the
+                following command in the command prompt (in the virtual environment of choice, ideally):
+            </p>
+            <pre class="mb-2">pip install pillow</pre>
+            <p class="mb-0">Syntax of ImageField:</p>
+            <pre class="mb-2">
+field_name = models.ImageField(upload_to=None,
+                               height_field=None,
+                               width_field=None,
+                               max_length=100,
+                               **options)
+</pre>
+            <p class="mb-0">
+                The <em>upload_to</em> attribute specifies the folder within the MEDIA_ROOT to upload the file to. If we
+                upload an image using the above example, then the destination of the uploaded file will be:
+            </p>
+            <pre class="mb-2">MEDIA_ROOT / profile_pics</pre>
+            <div class="form-control mb-2">
+                <h5>Setting up the project urls.py</h5>
+                <p class="mb-0">
+                    The last step before the files can be rendered as to modify the urls.py file using the below imports
+                    and statements.
+                </p>
+                <ul>
+                    <li>
+                        <pre class="mb-1">
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+</pre>
+                    </li>
+                    <li>
+                        <p class="mb-0">Place the following if-else statement below the <em>urlpatterns</em> list.</p>
+                        <pre class="mb-0">
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()
+</pre>
+                    </li>
+                </ul>
+                <div class="form-control mb-1">
+                    <h6>Example project urls.py</h6>
+                    <pre class="mb-0">
+from django.contrib import admin
+from django.urls import path, include
+from TenAppOne import views
+
+<mark>from django.conf import settings</mark>
+<mark>from django.conf.urls.static import static</mark>
+<mark>from django.contrib.staticfiles.urls import staticfiles_urlpatterns</mark>
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path('', views.home_view, name='home'),
+    path('tenappone/', include('TenAppOne.urls')),
+    path('user_auth/', include('UserAuthentication.urls')),
+    path('hsr/', include('HonkaiStarRail.urls')),
+]
+
+<mark>if settings.DEBUG:</mark>
+    <mark>urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</mark>
+<mark>else:</mark>
+    <mark>urlpatterns += staticfiles_urlpatterns()</mark>
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-1">
+                <h5>Using the uploaded images in a template</h5>
+                <p class="mb-0">
+                    Following the example above, we'll be using <code>/media/profile_pics/</code> as the directory where
+                    the uploaded images are located. Example media directory setup in <em>settings.py</em>:
+                </p>
+                <pre class="mb-0">
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'</pre>
+                <p class="mb-2">(Modify accordingly if using a different name or file structure.)</p>
+                <p class="mb-2">
+                    To retrieve a photo from the directory, we have to use a combination of the <em>MEDIA_URL</em>
+                    template tag, the file path string saved to the model, and the <em>url</em> function. The
+                    <em>MEDIA_URL</em> provides the location of the uploaded photos, such as: <code>/media/</code>.
+                    The file path string should look something like this: <code>upload_folder/imagename.extension</code>.
+                    Finally, the <em>url</em> functions takes the previous two and creates a usable path out of them,
+                    which is then fed into the <em>src</em> attribute of <em>img</em>.
+                </p>
+                <div class="form-control mb-1">
+                    <h6>Example html</h6>
+                    <pre class="mb-1">{% verbatim %}
+...
+{% block body_block %}
+&lt;h1&gt;User Roster&lt;/h1&gt;
+{% if users_list %}
+&lt;table class="table table-bordered row"&gt;
+    &lt;tr class="table-primary"&gt;
+        &lt;th class="col-1 text-center"&gt;&lt;/th&gt;
+        &lt;th class="col-1 text-center"&gt;Username&lt;/th&gt;
+        &lt;th class="col-5 text-center"&gt;Email&lt;/th&gt;
+        &lt;th class="col-5 text-center"&gt;Portfolio&lt;/th&gt;
+    &lt;/tr&gt;
+    {% for user in users_list %}
+    &lt;tr&gt;
+        &lt;td&gt;
+            {% if user.profile_pic %}
+            <mark>&lt;img src="{{ MEDIA_URL }}{{ user.profile_pic.url }}"</mark> alt="Missing picture!" height="100"&gt;
+            {% endif %}
+        &lt;/td&gt;
+        &lt;th&gt;{{ user.user.username }}&lt;/th&gt;
+        &lt;td&gt;{{ user.user.email }}&lt;/td&gt;
+        &lt;td&gt;
+            {% if user.portfolio %}
+            {{ user.portfolio }}
+            {% endif %}
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    {% endfor %}
+&lt;/table&gt;
+{% else %}
+&lt;p&gt;No registered users.&lt;/p&gt;
+{% endverbatim %}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="post_create_update_models_fields_anchor"><h4>After Creating/Updating Models/Fields</h4></a>
+        <p class="mb-0">Register the models in admin.py in order to access them via the Admin interface:</p>
+        <ul>
+            <li>
+                Please refer to this <a href="{% url 'tenappone:django_admin_interface' %}">section</a> for the steps.
+            </li>
+        </ul>
+        <p class="mb-1">
+            The tables/columns will not be usable or updated with the latest changes until a migration is performed.
+            Migrating will have Django do the work of creating/updating the SQL databases that corresponding to the
+            current state of the models.
+        </p>
+        <p class="mb-0">To do this, we need to run the following commands:</p>
+        <ul>
+            <li>
+                <code>python manage.py migrate</code>
+                <ul>
+                    <li>Applies or undoes any migrations.</li>
+                </ul>
+            </li>
+            <li>
+                <code>python manage.py makemigrations <em>app_name</em></code>
+                <ul>
+                    <li>Registers any changes to the app. It creates new migrations based on changes made to the
+                        models.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <code>python manage.py migrate</code>
+                <ul>
+                    <li>Finalizes any and all changes.</li>
+                </ul>
+            </li>
+        </ul>
+        <p class="mb-0">Other commands:</p>
+        <ul class="mb-1">
+            <li>
+                <code>python manage.py sqlmigrate</code>
+                <ul>
+                    <li>Displays the SQL statements for a migration.</li>
+                </ul>
+            </li>
+            <li>
+                <code>python manage.py showmigrations</code>
+                <ul>
+                    <li>Lists a project's migrations and their status.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="str_function_anchor"><h4>The __str__ function</h4></a>
+        <p class="mb-1">
+            The __str__ function allows converting an object into a string representation. We can edit the string output
+            to return any variable or string of choice. See examples below:
+        </p>
+        <pre class="mb-1">
+from django.db import models
+
+class Vehicle(models.Model):
+    reg_no = models.IntegerField()
+    owner = models.CharField(max_length=100)
+
+    <mark>def __str__(self):</mark>
+        <mark>return self.reg_no</mark>
+
+class Car(models.Model):
+    vehicle = models.OneToOneField(Vehicle,
+                                   on_delete=models.CASCADE,
+                                   primary_key=True)
+    car_model = models.CharField(max_length=100)
+
+    <mark>def __str__(self):</mark>
+        <mark>return f'{self.vehicle} {self.car_model}'</mark>
+</pre>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Models
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_models_databases_anchor"><strong>Django - Models & Databases</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#intro_models_fields_anchor">Intro to Models and Fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#model_creation_anchor">Creating a Model</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#model_types_fields_anchor">Model Types/Fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#universal_field_options_anchor">&nbsp;&nbsp;&nbsp;Universal Field Options</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#basic_model_types_fields_anchor">&nbsp;&nbsp;&nbsp;Basic Model Data Types/Fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#relationship_types_fields_anchor">&nbsp;&nbsp;&nbsp;Relationship Types/Fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#files_setup_anchor">Uploading/Storing/Retrieving Files</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#imagefield_anchor">&nbsp;&nbsp;&nbsp;Using ImageField</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#post_create_update_models_fields_anchor">After Creating/Updating Models/Fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#str_function_anchor">The __str__ function</a>
+</li>
+{% endblock %}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>JQuery - Basics</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="dom_basics_anchor"><h1>JQuery <span class="door">-</span> Basics</h1></a>
+<div class="form-control mb-1">
+    <pre class="mb-0">
+var anchor_tags = $('a'); // retrieves all anchor tags
+console.log(anchor_tags);
+
+for(var i = 0; i < anchor_tags.length; i++){
+    console.log(anchor_tags[i].textContent);
+//    console.log(anchor_tags[i].text); // Same as textContent
+}
+
+
+console.log($('#hello_button').text()); // retrieves the text; text seems to retrieve a function though.
+$('#hello_button').text("Aloha"); // Changes the button's text to say 'Aloha'
+console.log($('#hello_button').text());
+
+
+$('button').text("what"); // Changes every buttons' text to say 'what'
+console.log($('#hello_button').textC);
+
+
+$('button').eq(0).text("Hello"); // Selects the first element in the list and changes the text value to 'Hello'
+$('button').eq(1).text("Bye"); // Selects the second element in the list and changes the text value to 'Bye'
+$('button').eq(2).text("*waves*"); // Selects the third element in the list and changes the text value to '*waves*'
+
+
+// EVENT LISTENERS
+$('button').eq(0).click(function(){ // Adds an event listener to the element that performs an action when clicked
+    console.log("HELLO!");
+});
+
+$('button').eq(1).click(function(){
+    $(this).text("Clicked!"); // Using the 'this' keyword to select the current element
+});
+
+$('button').eq(1).dblclick(function(){ // performs an action when a double-click is performed on the element
+    $(this).text("Bye!");
+});
+
+$('#wave_button').mouseover(function(){
+    $(this).css("background-color","yellow"); // the css function allows changing the css properties via javascript
+});
+
+$('#wave_button').mouseout(function(){
+    $(this).css("background-color","inherit"); // the 'inherit' value changes the color back to the default value
+});
+
+$('#hello_button').mouseover(function(){
+    $(this).toggleClass('peepee_poopoo_class');
+});
+
+$('#bye_button').mouseover(function(){
+    $(this).toggleClass('bingbing_bongbong_class');
+});
+
+$('#text_0').keypress(function(){
+    console.log("event.which: " + event.which + "; event.key: " + event.key);
+    $('label').eq(0).text("First name: (" + event.key + ")");
+});
+
+$('#text_1').on('keypress', function(){
+    console.log("event.which: " + event.which);
+}); // Alternate way of writing element.keypress()
+
+$('table').find("td").eq(1).text("yakayaka") //find
+
+
+$('#slideup_p').click(function(){
+    console.log('hello');
+    $(this).slideUp(5000);
+});
+
+$('#fadeout_p').click(function(){
+    $(this).fadeOut(5000);
+});
+
+$('#hide_p').click(function(){
+    $(this).hide(5000);
+});
+</pre>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+JQuery - Basics
+{% endblock %}
+
+{% block glossary_block %}
+{% endblock %}

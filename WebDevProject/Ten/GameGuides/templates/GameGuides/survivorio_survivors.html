@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'base_template_gameguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+<title>Survivor.io - Survivors</title>
+{% endblock %}
+
+{% block body_block %}
+<a id="survivors_anchor"><h1>Survivor.io <span class="door">-</span> Survivors</h1></a>
+<div class="form-control mb-2">
+    <a id="perks_costs_anchor"><h2>Level Up, Upgrade Perks, and Costs</h2></a>
+    <img src="{% static 'media/images/survivorio/survivor_levelup_&upgrade_perks&costs.common&catnips&tsukuyomi.png' %}"
+         alt="survivor_levelup_&upgrade_perks&costs.common&catnips&tsukuyomi.png" width="100%">
+    <img src="{% static 'media/images/survivorio/survivor_levelup_&upgrade_perks&costs.masteryang&sandy&patrick.png' %}"
+         alt="survivor_levelup_&upgrade_perks&costs.masteryang&sandy&patrick.png" width="100%">
+    <img src="{% static 'media/images/survivorio/survivor_levelup_&upgrade_perks&costs.squidward&spongebob&yelena.png' %}"
+         alt="survivor_levelup_&upgrade_perks&costs.squidward&spongebob&yelena.png" width="100%">
+    <img src="{% static 'media/images/survivorio/survivor_levelup_&upgrade_perks&costs.worm&king&wesson.png' %}"
+         alt="survivor_levelup_&upgrade_perks&costs.worm&king&wesson.png" width="100%">
+</div>
+
+<div class="form-control mb-1">
+    <a id="levelup_costs"><h2>Level Up Costs</h2></a>
+    <img src="{% static 'media/images/survivorio/levelup_costs.survivors.jpg' %}" alt="levelup_costs.survivors.jpg"
+         width="100%">
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Survivor.io - Survivors
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#survivors_anchor">Survivor.io - Survivors</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#perks_costs_anchor">&nbsp;&nbsp;&nbsp;Level Up, Upgrade Perks, and Costs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#levelup_costs">&nbsp;&nbsp;&nbsp;Level Up Costs</a>
+</li>
+{% endblock %}

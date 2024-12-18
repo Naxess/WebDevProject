@@ -1,0 +1,962 @@
+{% extends 'base_template_languageguides.html' %}
+{% load static %}
+
+{% block head_block %}
+<title>Bootstrap - Forms</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap_forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="bootstrap_forms_anchor"><h1>Bootstrap <span class="door">-</span> Forms</h1></a>
+<div class="form-control mb-2">
+    <a id="form_control_anchor"><h2>Form Control</h2></a>
+    <div class="form-control mb-2">
+        <a id="input_anchor"><h3>Input</h3></a>
+        <label for="text_one" class="form-label">Enter desired username:</label>
+        <input type="text" class="form-control" id="text_one" placeholder="Placeholder text here...">
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="mb-2"&gt; &lt;!--mb-2 is margin-bottom-3. Adds 3 spacing to the margin-bottom. Allowed values: 0-5.--&gt;
+    &lt;label for="text_one" class="form-label"&gt;Enter desired username:&lt;/label&gt;
+    &lt;input type="text" class="form-control" id="text_one" placeholder="Placeholder text here..."&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="textarea_anchor"><h3>Textarea</h3></a>
+        <label for="textarea_one" class="form-label">Enter a brief description of yourself:</label>
+        <textarea class="form-control" id="textarea_one" rows="3"></textarea>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="mb-2"&gt; &lt;!--Sets margin-bottom spacing to 4--&gt;
+    &lt;label for="textarea_one" class="form-label"&gt;Enter a brief description of yourself:&lt;/label&gt;
+    &lt;textarea class="form-control" id="textarea_one" rows="3"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="additional_sizes_anchor"><h3>Additional Sizes</h3></a>
+        <label for="email_one" class="form-label">Resized to Small</label>
+        <input type="email" class="form-control form-control-sm" id="email_one" placeholder="Small input">
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="mb-0"&gt; &lt;!--Sets margin-bottom spacing to 0--&gt;
+    &lt;label for="email_one" class="form-label"&gt;Resized to Small&lt;/label&gt;
+    &lt;input type="email" class="form-control form-control-sm" id="email_one" placeholder="Small input"&gt;
+&lt;/div&gt;
+</pre>
+        <hr>
+        <label for="number_one" class="form-label">Resized to Large</label>
+        <input type="number" class="form-control form-control-lg" id="number_one" placeholder="Large input">
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="mb-2"&gt; &lt;!--Sets margin-bottom spacing to 0--&gt;
+    &lt;label for="number_one" class="form-label"&gt;Resized to Large&lt;/label&gt;
+    &lt;input type="number" class="form-control form-control-lg" id="number_one" placeholder="Large input"&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="disabled_readonly_anchor"><h3 class="mb-2">Disabled/Read-only Attributes</h3></a>
+        <input type="text" class="form-control mb-2" placeholder="This input is disabled" disabled>
+        <input type="text" class="form-control mb-2" placeholder="This input is set to read-only" readonly>
+        <input type="text" class="form-control" placeholder="Disabled and read-only" disabled readonly>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;input type="text" class="form-control" placeholder="This input is disabled" disabled&gt;
+&lt;input type="text" class="form-control" placeholder="This input is set to read-only" readonly&gt;
+&lt;input type="text" class="form-control" placeholder="Disabled and read-only" disabled readonly&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="file_upload_anchor"><h3>File Upload</h3></a>
+        <label for="file_one" class="form-label">Input for uploading files</label>
+        <input type="file" class="form-control" id="file_one" multiple>
+        <!--multiple is optional but allows uploading of several files-->
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;label for="file_one" class="form-label"&gt;Input for uploading files&lt;/label&gt;
+&lt;input type="file" class="form-control" id="file_one" multiple&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="color_picker_anchor"><h3>Color-Picker</h3></a>
+        <label for="color_one" class="form-label">Pick a color</label>
+        <input type="color" class="form-control form-control-color" id="color_one">
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;label for="color_one" class="form-label"&gt;Pick a color&lt;/label&gt;
+&lt;input type="color" class="form-control form-control-color" id="color_one"&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="datalist_anchor"><h3>Datalist</h3></a>
+        <label for="datalist_one" class="form-label">Datalist is like a Select but with more style options</label>
+        <input class="form-control" list="datalist_options_one" id="datalist_one" placeholder="Click here, pick one">
+        <datalist id="datalist_options_one">
+            <option value="One"></option>
+            <option value="Two"></option>
+            <option value="Three"></option>
+            <option value="Four"></option>
+        </datalist>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;label for="datalist_one" class="form-label"&gt;Datalist is like a Select but with more style options&lt;/label&gt;
+&lt;input class="form-control" list="datalist_options_one" id="datalist_one" placeholder="Click here, pick one"&gt;
+&lt;datalist id="datalist_options_one"&gt;
+    &lt;option value="One"&gt;&lt;/option&gt;
+    &lt;option value="Two"&gt;&lt;/option&gt;
+    &lt;option value="Three"&gt;&lt;/option&gt;
+    &lt;option value="Four"&gt;&lt;/option&gt;
+&lt;/datalist&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="select_anchor"><h2>Select</h2></a>
+    <div class="mb-2">
+        <select class="form-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+        </select>
+    </div>
+    <div class="mb-2">
+        <select class="form-select form-select-sm">
+            <option selected>Smaller select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+        </select>
+    </div>
+    <div class="mb-2">
+        <select class="form-select form-select-lg">
+            <option selected>Bigger select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+        </select>
+    </div>
+    <h5>HTML Code:</h5>
+    <pre class="mb-0">
+&lt;div class="mb-2"&gt;
+    &lt;select class="form-select"&gt;
+        &lt;option selected&gt;Open this select menu&lt;/option&gt;
+        &lt;option value="1"&gt;One&lt;/option&gt;
+        &lt;option value="2"&gt;Two&lt;/option&gt;
+        &lt;option value="3"&gt;Three&lt;/option&gt;
+        &lt;option value="4"&gt;Four&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div class="mb-2"&gt;
+    &lt;select class="form-select form-select-sm"&gt;
+        &lt;option selected&gt;Smaller select menu&lt;/option&gt;
+        &lt;option value="1"&gt;One&lt;/option&gt;
+        &lt;option value="2"&gt;Two&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div class="mb-2"&gt;
+    &lt;select class="form-select form-select-lg"&gt;
+        &lt;option selected&gt;Bigger select menu&lt;/option&gt;
+        &lt;option value="1"&gt;One&lt;/option&gt;
+        &lt;option value="2"&gt;Two&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="checkbox_radio_anchor"><h2>Checkboxes & Radios</h2></a>
+    <div class="form-control mb-2">
+        <h3>Checkboxes</h3>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox_one" checked>
+            <label for="checkbox_one" class="form-check-label">Checkbox checked by default</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox_two" disabled>
+            <label for="checkbox_two" class="form-check-label">Disabled checkbox</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox_three" checked>
+            <label for="checkbox_three" class="form-check-label">Checkbox checked by default</label>
+        </div>
+        <br>
+        <h5>HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="form-control"&gt;
+    &lt;div class="form-check"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="checkbox_one" checked&gt;
+        &lt;label for="checkbox_one" class="form-check-label"&gt;Checkbox checked by default&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-check"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="checkbox_two" disabled&gt;
+        &lt;label for="checkbox_two" class="form-check-label"&gt;Disabled checkbox&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-check"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="checkbox_three" checked&gt;
+        &lt;label for="checkbox_three" class="form-check-label"&gt;Checkbox checked by default&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="radio_buttons_anchor"><h3>Radio buttons</h3></a>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="radio_one" id="radio_one">
+            <label for="radio_one" class="form-check-label">Radio</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="radio_one" id="radio_two" checked>
+            <label for="radio_two" class="form-check-label">Radio checked</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="radio_one" id="radio_three" disabled>
+            <label for="radio_three" class="form-check-label">Disabled radio</label>
+        </div>
+        <br>
+        <h5>HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="form-control"&gt;
+    &lt;div class="form-check"&gt;
+        &lt;input type="radio" class="form-check-input" name="radio_one" id="radio_one"&gt;
+        &lt;label for="radio_one" class="form-check-label"&gt;Radio&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check"&gt;
+        &lt;input type="radio" class="form-check-input" name="radio_one" id="radio_two" checked&gt;
+        &lt;label for="radio_two" class="form-check-label"&gt;Radio checked&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check"&gt;
+        &lt;input type="radio" class="form-check-input" name="radio_one" id="radio_three" disabled&gt;
+        &lt;label for="radio_three" class="form-check-label"&gt;Disabled radio&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="switches_anchor"><h3>Switches</h3></a>
+        <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="switch_one">
+            <label for="switch_one" class="form-check-label">Switch</label>
+        </div>
+        <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="switch_two" checked>
+            <label for="switch_two" class="form-check-label">Switch checked</label>
+        </div>
+        <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="switch_three" disabled checked>
+            <label for="switch_three" class="form-check-label">Checked and disabled switch</label>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="form-control"&gt;
+    &lt;div class="form-check form-switch"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="switch_one"&gt;
+        &lt;label for="switch_one" class="form-check-label"&gt;Switch&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check form-switch"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="switch_two" checked&gt;
+        &lt;label for="switch_two" class="form-check-label"&gt;Switch checked&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check form-switch"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="switch_three" disabled checked&gt;
+        &lt;label for="switch_three" class="form-check-label"&gt;Checked and disabled switch&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inline_checkbox_radio_anchor"><h3>Using Inline on Checkboxes/Radios</h3></a>
+        <div class="form-control mb-2">
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="inline_one" value="1" checked>
+                <label for="inline_one" class="form-check-label">One</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="inline_two" value="2">
+                <label for="inline_two" class="form-check-label">Two</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="inline_three" value="3">
+                <label for="inline_three" class="form-check-label">Three</label>
+            </div>
+            <h5 class="mt-3">HTML Code:</h5>
+            <pre class="mb-0">
+&lt;div class="form-control mb-2"&gt;
+    &lt;div class="form-check form-check-inline"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="inline_one" value="1"&gt;
+        &lt;label for="inline_one" class="form-check-label"&gt;One&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check form-check-inline"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="inline_two" value="2"&gt;
+        &lt;label for="inline_two" class="form-check-label"&gt;Two&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check form-check-inline"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="inline_three" value="3"&gt;
+        &lt;label for="inline_three" class="form-check-label"&gt;Three&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="inline_four" name="inline_radio_one" value="a" checked>
+                <label for="inline_four" class="form-check-label">A</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="inline_five" name="inline_radio_one" value="b">
+                <label for="inline_five" class="form-check-label">B</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="inline_six" name="inline_radio_one" value="c">
+                <label for="inline_six" class="form-check-label">C</label>
+            </div>
+            <h5 class="mt-3">HTML Code:</h5>
+            <pre class="mb-0">
+&lt;div class="form-control mb-2"&gt;
+    &lt;div class="form-check form-check-inline"&gt;
+        &lt;input type="radio" class="form-check-input" id="inline_four" name="inline_radio_one" value="a"&gt;
+        &lt;label for="inline_four" class="form-check-label"&gt;A&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check form-check-inline"&gt;
+        &lt;input type="radio" class="form-check-input" id="inline_five" name="inline_radio_one" value="b"&gt;
+        &lt;label for="inline_five" class="form-check-label"&gt;B&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="form-check form-check-inline"&gt;
+        &lt;input type="radio" class="form-check-input" id="inline_six" name="inline_radio_one" value="c"&gt;
+        &lt;label for="inline_six" class="form-check-label"&gt;C&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="toggleable_checkbox_anchor"><h3>Toggleable (Checkbox) Buttons</h3></a>
+        <input type="checkbox" class="btn-check" id="toggle_button_one">
+        <label for="toggle_button_one" class="btn btn-primary">Toggleable button</label>
+
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;input type="checkbox" class="btn-check" id="toggle_button_one"&gt;
+&lt;label for="toggle_button_one" class="btn btn-primary"&gt;Toggleable button&lt;/label&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="toggleable_radio_anchor"><h3>Toggleable (Radio) Buttons</h3></a>
+        <input type="radio" class="btn-check" id="toggle_radio_one" name="radio_toggle_one">
+        <label for="toggle_radio_one" class="btn btn-danger">Toggleable radio button I</label>
+        <input type="radio" class="btn-check" id="toggle_radio_two" name="radio_toggle_one">
+        <label for="toggle_radio_two" class="btn btn-danger">Toggleable radio button II</label>
+        <input type="radio" class="btn-check" id="toggle_radio_three" name="radio_toggle_one">
+        <label for="toggle_radio_three" class="btn btn-danger">Toggleable radio button III</label>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;input type="radio" class="btn-check" id="toggle_radio_one" name="radio_toggle_one"&gt;
+&lt;label for="toggle_radio_one" class="btn btn-danger"&gt;Toggleable radio button I&lt;/label&gt;
+&lt;input type="radio" class="btn-check" id="toggle_radio_two" name="radio_toggle_one"&gt;
+&lt;label for="toggle_radio_two" class="btn btn-danger"&gt;Toggleable radio button II&lt;/label&gt;
+&lt;input type="radio" class="btn-check" id="toggle_radio_three" name="radio_toggle_one"&gt;
+&lt;label for="toggle_radio_three" class="btn btn-danger"&gt;Toggleable radio button III&lt;/label&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="range_anchor"><h2>Ranges</h2></a>
+    <label for="range_one" class="form-label">Range</label>
+    <input type="range" class="form-range" id="range_one" min="1" max="10" step="0.5" value="1"
+           oninput="this.nextElementSibling.value=this.value">
+    <output>1</output>
+    <h5 class="mt-3">HTML Code:</h5>
+    <pre class="mb-0">
+&lt;label for="range_one" class="form-label"&gt;Range&lt;/label&gt;
+&lt;input type="range" class="form-range" id="range_one" min="1" max="10" step="0.5" value="1" oninput="this.nextElementSibling.value=this.value"&gt;
+&lt;output&gt;1&lt;/output&gt;
+</pre>
+</div>
+
+<div class="form-control mb-2">
+    <a id="inputgroup_anchor"><h2>Input Groups</h2></a>
+    <p class="mb-2">
+        Example usages of input groups:
+    </p>
+    <div class="form-control mb-2">
+        <div class="input-group mb-2">
+            <span class="input-group-text">Username: @</span>
+            <input type="text" class="form-control" placeholder="username">
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="input-group mb-2"&gt;
+    &lt;span class="input-group-text"&gt;Username: @&lt;/span&gt;
+    &lt;input type="text" class="form-control" placeholder="username"&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="username">
+            <span class="input-group-text">@fake.com</span>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="input-group mb-2"&gt;
+    &lt;input type="text" class="form-control" placeholder="username"&gt;
+    &lt;span class="input-group-text"&gt;@fake.com&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <label for="input_group_one" class="form-label">Deposit amount:</label>
+        <div class="input-group mb-2">
+            <span class="input-group-text">$</span>
+            <input type="number" class="form-control" placeholder="0" id="input_group_one">
+            <span class="input-group-text">.00</span>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;label for="input_group_one" class="form-label"&gt;Deposit amount:&lt;/label&gt;
+&lt;div class="input-group mb-2"&gt;
+    &lt;span class="input-group-text"&gt;$&lt;/span&gt;
+    &lt;input type="number" class="form-control" placeholder="0" id="input_group_one"&gt;
+    &lt;span class="input-group-text"&gt;.00&lt;/span&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <div class="input-group input-group-sm mb-2">
+            <!--input-group-sm makes the element smaller-->
+            <input type="text" class="form-control" placeholder="username">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" placeholder="domain">
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="input-group input-group-sm mb-2"&gt;
+    &lt;!--input-group-sm makes the element smaller--&gt;
+    &lt;input type="text" class="form-control" placeholder="username"&gt;
+    &lt;span class="input-group-text"&gt;@&lt;/span&gt;
+    &lt;input type="text" class="form-control" placeholder="domain"&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <div class="input-group input-group-lg mb-2">
+            <!--input-group-sm makes the element smaller-->
+            <span class="input-group-text">Textarea</span>
+            <textarea class="form-control"></textarea>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="input-group input-group-lg mb-2"&gt;
+    &lt;!--input-group-sm makes the element smaller--&gt;
+    &lt;span class="input-group-text"&gt;Textarea&lt;/span&gt;
+    &lt;textarea class="form-control"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inputgroup_checkbox_radio_anchor"><h3>Using Input Groups with Checkboxes and Radios</h3></a>
+        <div class="form-control mb-2">
+            <div class="input-group mb-2">
+                <div class="input-group-text">
+                    <input type="checkbox" class="form-check-input">
+                </div>
+                <input type="text" class="form-control" placeholder="Type text here">
+            </div>
+
+            <h5 class="mt-3">HTML Code:</h5>
+            <pre class="mb-0">
+&lt;div class="input-group mb-2"&gt;
+    &lt;div class="input-group-text"&gt;
+        &lt;input type="checkbox" class="form-check-input"&gt;
+    &lt;/div&gt;
+    &lt;input type="text" class="form-control" placeholder="Type text here"&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <div class="input-group mb-2">
+                <div class="input-group-text">
+                    <input type="radio" class="form-check-input" name="input_group_radios">
+                </div>
+                <input type="text" class="form-control" placeholder="Type text here">
+            </div>
+            <h5 class="mt-3">HTML Code:</h5>
+            <pre class="mb-0">
+&lt;div class="input-group mb-2"&gt;
+    &lt;div class="input-group-text"&gt;
+        &lt;input type="radio" class="form-check-input" name="input_group_radios"&gt;
+    &lt;/div&gt;
+    &lt;input type="text" class="form-control" placeholder="Type text here"&gt;
+&lt;/div&gt;
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inputgroup_multiple_inputs"><h3>Input Groups with Multiple Inputs</h3></a>
+        <div class="mb-2">
+            <div class="input-group mb-2">
+                <span class="input-group-text">Enter full name here</span>
+                <input type="text" class="form-control" placeholder="First name">
+                <input type="text" class="form-control" placeholder="Last name">
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="input-group mb-2"&gt;
+    &lt;span class="input-group-text"&gt;Enter full name here&lt;/span&gt;
+    &lt;input type="text" class="form-control" placeholder="First name"&gt;
+    &lt;input type="text" class="form-control" placeholder="Last name"&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inputgroup_buttons_anchor"><h3>Input Groups with Buttons</h3></a>
+        <div class="col-sm-3 mb-2">
+            <div class="input-group mb-2">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" placeholder="0">
+                <button type="button" class="btn btn-outline-primary">Enter</button>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="col-sm-3 mb-2"&gt;
+    &lt;div class="input-group mb-2"&gt;
+        &lt;span class="input-group-text"&gt;$&lt;/span&gt;
+        &lt;input type="number" class="form-control" placeholder="0"&gt;
+        &lt;button type="button" class="btn btn-outline-primary"&gt;Enter&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inputgroup_dropdown_anchor"><h3>Input Groups with Dropdown Buttons</h3></a>
+        <div class="col-sm-6 mb-2">
+            <div class="input-group mb-2">
+                <span class="input-group-text">Commit message</span>
+                <input type="text" class="form-control" placeholder="Enter commit message here">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">Select
+                    action:
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item">Commit</a></li>
+                    <li><a class="dropdown-item">Commit and Push</a></li>
+                </ul>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="col-sm-6 mb-2"&gt;
+    &lt;div class="input-group mb-2"&gt;
+        &lt;span class="input-group-text"&gt;Commit message&lt;/span&gt;
+        &lt;input type="text" class="form-control" placeholder="Enter commit message here"&gt;
+        &lt;button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"&gt;Select
+            action:
+        &lt;/button&gt;
+        &lt;ul class="dropdown-menu"&gt;
+            &lt;li&gt;&lt;a class="dropdown-item"&gt;Commit&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a class="dropdown-item"&gt;Commit and Push&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inputgroup_select_anchor"><h3>Input Groups with Select Menu</h3></a>
+        <div class="col-sm-6 mb-2">
+            <div class="input-group mb-2">
+                <label for="input_group_select_one" class="input-group-text">Options</label>
+                <select id="input_group_select_one" class="form-select">
+                    <option selected>Select one...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="col-sm-6 mb-2"&gt;
+    &lt;div class="input-group mb-2"&gt;
+        &lt;label for="input_group_select_one" class="input-group-text"&gt;Options&lt;/label&gt;
+        &lt;select id="input_group_select_one" class="form-select"&gt;
+            &lt;option selected&gt;Select one...&lt;/option&gt;
+            &lt;option value="1"&gt;One&lt;/option&gt;
+            &lt;option value="2"&gt;Two&lt;/option&gt;
+            &lt;option value="3"&gt;Three&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inputgroup_file_upload_anchor"><h3>Input Groups with File Inputs</h3></a>
+        <div class="col-sm-6 mb-2">
+            <div class="input-group mb-2">
+                <input type="file" class="form-control" id="input_group_file_one" multiple>
+                <label for="input_group_file_one" class="input-group-text">Upload file(s)</label>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="col-sm-6 mb-2"&gt;
+    &lt;div class="input-group mb-2"&gt;
+        &lt;input type="file" class="form-control" id="input_group_file_one" multiple&gt;
+        &lt;label for="input_group_file_one" class="input-group-text"&gt;Upload file(s)&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-2">
+    <a id="floatinglabel_anchor"><h2>Floating Labels</h2></a>
+    <div class="form-control mb-2">
+        <div class="form-floating mb-2">
+            <input type="text" class="form-control" id="floating_one" placeholder="username">
+            <label for="floating_one">Enter Username</label>
+        </div>
+        <div class="form-floating mb-2">
+            <input type="password" class="form-control" id="floating_two" placeholder="username">
+            <label for="floating_two">Enter Password</label>
+        </div>
+        <div class="form-floating mb-2">
+            <input type="email" class="form-control" id="floating_three" placeholder="username"
+                   value="username@fake.com">
+            <!--Predefined values can be supplied as well-->
+            <label for="floating_three">Enter Email</label>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="form-floating mb-2"&gt;
+    &lt;input type="text" class="form-control" id="floating_one" placeholder="username"&gt;
+    &lt;label for="floating_one"&gt;Enter Username&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class="form-floating mb-2"&gt;
+    &lt;input type="password" class="form-control" id="floating_two" placeholder="username"&gt;
+    &lt;label for="floating_two"&gt;Enter Password&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class="form-floating mb-2"&gt;
+    &lt;input type="email" class="form-control" id="floating_three" placeholder="username" value="username@fake.com"&gt;
+    &lt;!--Predefined values can be supplied as well--&gt;
+    &lt;label for="floating_three"&gt;Enter Email&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="floatinglabel_textarea_anchor"><h3>Floating Labels with Textareas</h3></a>
+        <div class="form-floating mb-2">
+            <textarea class="form-control" id="floating_textarea_one" placeholder="Type some text"></textarea>
+            <label for="floating_textarea_one">Textarea</label>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="form-floating mb-2"&gt;
+    &lt;textarea class="form-control" id="floating_textarea_one" placeholder="Type some text"&gt;&lt;/textarea&gt;
+    &lt;label for="floating_textarea_one"&gt;Textarea&lt;/label&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="floatinglabel_grid_anchor"><h3>Floating Labels with the Grid System</h3></a>
+        <div class="row g-2 mb-2">
+            <!--'g' is short for 'gutter'. It's a modifier that represents the padding between columns. Variants: gx, gy-->
+            <div class="col-md">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floating_grid_one" value="Hi">
+                    <label for="floating_grid_one">Hello</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floating_grid_two" value="Fly">
+                    <label for="floating_grid_two">Mellow</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="floating_grid_three" value="Guy">
+                    <label for="floating_grid_three">Fellow</label>
+                </div>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="row g-2 mb-2"&gt;
+    &lt;!--'g' is short for 'gutter'. It's a modifier that represents the padding between columns. Variants: gx, gy--&gt;
+    &lt;div class="col-md"&gt;
+        &lt;div class="form-floating"&gt;
+            &lt;input type="text" class="form-control" id="floating_grid_one" value="Hi"&gt;
+            &lt;label for="floating_grid_one"&gt;Hello&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md"&gt;
+        &lt;div class="form-floating"&gt;
+            &lt;input type="text" class="form-control" id="floating_grid_two" value="Fly"&gt;
+            &lt;label for="floating_grid_two"&gt;Mellow&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md"&gt;
+        &lt;div class="form-floating"&gt;
+            &lt;input type="text" class="form-control" id="floating_grid_three" value="Guy"&gt;
+            &lt;label for="floating_grid_three"&gt;Fellow&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+</div>
+
+<div class="form-control mb-1">
+    <a id="bootstrap_layout_anchor"><h2>Layout</h2></a>
+    <p>Utilizing Bootstrap's grid system: rows (row) and columns (col)</p>
+    <div class="form-control mb-2">
+        <a id="grid_anchor"><h3>Basic Grid</h3></a>
+        <p class="mb-2">
+            Using "col" without specifying sizing (e.g. col-) will result in equal-width columns that span the full
+            width of container.
+        </p>
+        <div class="container grid_example">
+            <div class="row">
+                <div class="col">Column One</div>
+                <div class="col">Column Two</div>
+                <div class="col">Column Three</div>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="row"&gt;
+    &lt;div class="col"&gt;Column One&lt;/div&gt;
+    &lt;div class="col"&gt;Column Two&lt;/div&gt;
+    &lt;div class="col"&gt;Column Three&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="grid_column_sizing_anchor"><h3>Grid with Column-Sizing</h3></a>
+        <p class="mb-2">
+            The grid system has 12 slots for columns. These slots are divided up amongst the supplied columns evenly if
+            the columns do not explicitly request <em>x</em> number of slots. Each column can request a single slot or
+            up to a maximum of 12 slots.
+        </p>
+        <div class="container grid_example">
+            <div class="row">
+                <div class="col-8">col-8</div>
+                <div class="col-3">col-3</div>
+                <div class="col-1">col-1</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-8">col-8</div>
+                <div class="col-4">col-2</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2">col-2</div>
+                <div class="col-2">col-2</div>
+                <div class="col-4">col-4</div>
+                <div class="col-2">col-2</div>
+                <div class="col-2">col-2</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-6">col-6</div>
+                <div class="col-6">col-6</div>
+            </div>
+        </div>
+        <h5 class="mt-3">HTML Code:</h5>
+        <pre class="mb-0">
+&lt;div class="row"&gt;
+    &lt;div class="col-8"&gt;col-8&lt;/div&gt;
+    &lt;div class="col-3"&gt;col-3&lt;/div&gt;
+    &lt;div class="col-1"&gt;col-1&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="col-8"&gt;col-8&lt;/div&gt;
+    &lt;div class="col-4"&gt;col-2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="col-2"&gt;col-2&lt;/div&gt;
+    &lt;div class="col-2"&gt;col-2&lt;/div&gt;
+    &lt;div class="col-4"&gt;col-4&lt;/div&gt;
+    &lt;div class="col-2"&gt;col-2&lt;/div&gt;
+    &lt;div class="col-2"&gt;col-2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="row"&gt;
+    &lt;div class="col-6"&gt;col-6&lt;/div&gt;
+    &lt;div class="col-6"&gt;col-6&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+    </div>
+</div>
+<!--<h2>Validation</h2>-->
+<!--<script src="{% static 'js/bootstrap_forms.js' %}"></script>-->
+<!--<div class="mb-2">-->
+<!--    <form class="row g-3 validate-me-please" novalidate>-->
+<!--        <div class="col-sm mb-2">-->
+<!--            <div class="has-validation">-->
+<!--                <label for="validation_one" class="form-label">Username</label>-->
+<!--                <input type="text" class="form-control" id="validation_one" required>-->
+<!--                <div class="invalid-feedback">-->
+<!--                    Please provide a username.-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-sm mb-2">-->
+<!--            <label for="validation_two" class="form-label">Country</label>-->
+<!--            <select name="valid_select_name" id="validation_two" class="form-select" required>-->
+<!--                <option selected disabled>...</option>-->
+<!--                <option value="us">United States</option>-->
+<!--                <option value="uk">United Kingdom</option>-->
+<!--                <option value="ca">Canada</option>-->
+<!--                <option value="cn">China</option>-->
+<!--                <option value="fr">France</option>-->
+<!--            </select>-->
+<!--            <div class="invalid-feedback">-->
+<!--                Please select a country.-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <input type="submit" class="btn btn-primary" value="Submit form">-->
+<!--    </form>-->
+<!--</div>-->
+{% endblock %}
+
+{% block chapter_block %}
+Bootstrap - Forms
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#bootstrap_forms_anchor"><strong>Bootstrap - Forms</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_control_anchor">Form Control</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#textarea_anchor">&nbsp;&nbsp;&nbsp;Textarea</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#additional_sizes_anchor">&nbsp;&nbsp;&nbsp;Additional Sizes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#disabled_readonly_anchor">&nbsp;&nbsp;&nbsp;Disabled/Read-only Attributes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#file_upload_anchor">&nbsp;&nbsp;&nbsp;File Upload</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#color_picker_anchor">&nbsp;&nbsp;&nbsp;Color-Picker</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#datalist_anchor">&nbsp;&nbsp;&nbsp;Datalist</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#select_anchor">Select</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#checkbox_radio_anchor">Checkboxes & Radios</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#radio_buttons_anchor">&nbsp;&nbsp;&nbsp;Radio buttons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#switches_anchor">&nbsp;&nbsp;&nbsp;Switches</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inline_checkbox_radio_anchor">
+        &nbsp;&nbsp;&nbsp;Using Inline on Checkboxes/Radios
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#toggleable_checkbox_anchor">&nbsp;&nbsp;&nbsp;Toggleable (Checkbox) Buttons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#toggleable_radio_anchor">&nbsp;&nbsp;&nbsp;Toggleable (Radio) Buttons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#range_anchor">Ranges</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_anchor">Input Groups</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_checkbox_radio_anchor">
+        &nbsp;&nbsp;&nbsp;Using Input Groups with Checkboxes and Radios
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_multiple_inputs">&nbsp;&nbsp;&nbsp;Input Groups with Multiple Inputs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_buttons_anchor">&nbsp;&nbsp;&nbsp;Input Groups with Buttons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_dropdown_anchor">&nbsp;&nbsp;&nbsp;Input Groups with Dropdown Buttons</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_select_anchor">&nbsp;&nbsp;&nbsp;Input Groups with Select Menu</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inputgroup_file_upload_anchor">&nbsp;&nbsp;&nbsp;Input Groups with File Inputs</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#floatinglabel_anchor">Floating Labels</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#floatinglabel_textarea_anchor">&nbsp;&nbsp;&nbsp;Floating Labels with Textareas</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#floatinglabel_grid_anchor">
+        &nbsp;&nbsp;&nbsp;Floating Labels with the Grid System
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#bootstrap_layout_anchor">Layout</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#grid_anchor">&nbsp;&nbsp;&nbsp;Basic Grid</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#grid_column_sizing_anchor">&nbsp;&nbsp;&nbsp;Grid with Column-Sizing</a>
+</li>
+{% endblock %}

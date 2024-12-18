@@ -1,0 +1,671 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <title>Express - Node.js Web App Framework</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id=""><h1>Express - Node.js Web Application Framework</h1></a>
+    <div class="form-control mb-2">
+        <a id=""><h2>Introduction</h2></a>
+        <p class="mb-3">
+            Express.js (AKA Express) is a minimalist web framework for Node.js that provides a robust set of
+            features for web and mobile applications.
+        </p>
+
+        <div class="form-control mb-2">
+            <a id=""><h3>Initial Setup</h3></a>
+            <ul class="mb-1">
+                <li>Node.js must be installed on your system</li>
+                <li>Create the Node project</li>
+                <li>...</li>
+            </ul>
+
+        </div>
+
+        <div class="form-control mb-2">
+            <a id=""><h3>The Express App</h3></a>
+            <p class="mb-0">
+                In the main JavaScript file, create an Express app object:
+            </p>
+            <pre>
+let express = require('express');
+let app = express();
+</pre>
+            <p class="mb-0">
+                This Express app object has several built-in methods, one of which is <i>listen(port)</i>. This tells
+                the server to listen on the supplied port number.
+            </p>
+            <pre>
+let port = 3000;
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
+</pre>
+            <p class="mb-0">Lastly, the JavaScript file must be concluded with an export of the <i>app</i> object.</p>
+            <pre class="mb-1">
+module.exports = app;
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id=""><h3>Static Files Setup</h3></a>
+            <p class="mb-0">
+                Create a folder named <i>static</i> in the base directory of the project. This folder will house any
+                media/css/other files that may be needed by the website for whatever reason. Running this setup will
+                enable webpages to access those files.
+            </p>
+            <pre class="mb-1">
+app.use('/static', express.static(__dirname + '/static/'))
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id=""><h3>Routing</h3></a>
+            <div class="form-control mb-2">
+                <a id=""><h4>Router and Handler Syntaxes</h4></a>
+                <p class="mb-0">
+                    App routes typically follow this syntax: <i>app.&lt;method&gt;(&lt;path&gt;, &lt;handler&gt;);</i>
+                </p>
+                <ul class="mb-2">
+                    <li>
+                        The <i><u>method</u></i> must be an HTTP method, such as <i>get(), post(), put()</i>. See <a
+                            href="https://expressjs.com/en/api.html#routing-methods">here</a> for additional routing
+                        methods.
+                    </li>
+                    <li>
+                        The <i><u>path</u></i> is a relative path on the server, which can be a string or regular
+                        expression.
+                    </li>
+                    <li>
+                        The <i><u>handler</u></i> (AKA <i><u>callback</u></i>) function is what Express calls when the
+                        route is matched. Handlers follow this syntax: <i>function(&lt;request&gt;, &lt;response&gt;){...}</i>.
+                        Example handler function:
+                        <ul class="mb-2">
+                            <li>
+                            <pre class="mb-1">function (req, res) {
+    res.send('Hello World!');
+}
+</pre>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="form-control mb-1">
+                    <a id=""><h5>Example Router Function</h5></a>
+                    <p class="mb-0">This router returns a string <i>'Hello World!'</i> when its route
+                        <i>/hello_world</i> is matched.</p>
+                    <pre class="mb-1">
+app.get('/hello_world', function (req, res) {
+    res.send('Hello World!');
+});
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Serving an HTML Page</h4></a>
+                <p class="mb-1">
+                    Below are examples of router functions that respond to user requests that match a path by serving
+                    the user with an HTML page. Essentially what these methods do is to set the appropriate headers to
+                    instruct the browser on how to handle the file you want to send (differs depending on its type),
+                    reads it, then sends the file. These methods require an absolute file path to the requested file.
+                    It's recommended to use the Node global variable <i>__dirname</i> to calculate the path, like so:
+                    <i>absolutePath = __dirname + '/relativePath/file.extension'</i>
+                </p>
+                <pre class="mb-0">
+app.get('/', function (req, res) {
+    let html_page = __dirname + "/views/index.html";
+    res.sendFile(html_page);
+});</pre>
+                <hr>
+                <pre class="mb-0">
+app.get('/list', function (req, res) {
+    let list_page = __dirname + "/views/inputs.html";
+    res.sendFile(list_page);
+});
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Serving a JSON Object</h4></a>
+                <p class="mb-2">
+                    While HTML servers serve HTML, APIs serve data. A REST (Representational State Transfer) API allows
+                    data exchange with the client without requiring that the client know any details about the server.
+                    The client only requires the URL and the HTTP action verb that it wants to perform. The GET verb,
+                    for instance, is used for fetching information only; no modification of the data is performed. As
+                    of this writing, the preferred format for the transferred data is JSON, due to it being a convenient
+                    way to represent a JavaScript object as a string, thus easy transmission.
+                </p>
+                <p class="mb-2">
+                    The below example responds with JSON at the <i>/json</i> path. This is completed using the
+                    <i>app.get()</i> method. In the handler/callback function, we call the <i>res</i> object's
+                    <i>json()</i>, passing in a JavaScript object as the argument. This method closes the
+                    request-response loop, returning the data.
+                </p>
+                <p class="mb-2">
+                    (Essentially, what's happening is that the method converts JavaScript object into a string, edited
+                    to use the appropriate headers (that tell the browser it is being served JSON), and then finally
+                    sending the data. A valid object has the following key-value pair structure: <i>{key:value}</i>. The
+                    value can be a number, string, nested object, or an array. It can also be a variable or the result
+                    of a function call, in which case it will be evaluated before it is converted into a string.
+                </p>
+                <pre class="mb-0">
+app.get('/json', function (req, res) {
+    let json_obj = {"fav_color": "blue", "fav_food": "lobster", "fav_number": "3"}
+    res.json(json_obj);
+});
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Handling POST Requests</h4></a>
+                <p class="mb-0">
+                    Another commonly used HTTP verb is POST. This is the default method used to send client data (to the
+                    server) via HTML forms. In REST, POST is used to send data to create new items in the database. In
+                    these requests, the data doesn't appear in the URL but is instead sent in the request body. This
+                    body is a part of the HTTP request, also known as a 'payload'. The payload is not visible in the URL
+                    but that doesn't mean it is private either. If we look at the raw content of an example HTTP POST
+                    request, you may see something like below:
+                </p>
+                <pre class="mb-2" style="color:black;font-style: italic;">
+    POST /path/subpath HTTP/1.0
+    From: johndoe@example.com
+    User-Agent: someBrowser/1.0
+    Content-Type: application/x-www-form-urlencoded
+    Content-Length: 20
+
+    name=John+Doe&age=100
+</pre>
+                <p class="mb-2">
+                    As we can see, the body is encoded like a query string. This is the default format syntax used by
+                    HTML forms. With Ajax, we can also use JSON to handle data having a more complex structure. There is
+                    also another type of encoding: <i>multipart/form-data</i> that is used to upload binary files
+                    (useful for images/videos/etc..). We can parse this data coming from POST requests by importing and
+                    using the <i>body-parser</i> package. This package allows us to use a series of middleware, which
+                    can decode the data in different formats.
+                </p>
+                <p class="mb-2">
+                    In the below example, we import the <i>body-parser</i> package (using the <i>require</i> method),
+                    then create an object from it, which we name '<i>bodyParser</i>'. The <i>body-parser</i> object has
+                    a function named <i>urlencoded()</i> that is a middleware responsible for handling URL encoded data.
+                    This middleware can be configured by passing it a dictionary containing key-value pairs of the
+                    setting and the desired value. In this case, we will pass <i>{extended: false)</i> into it. This
+                    makes it so that the only allowed values are strings or arrays. (If set to <i>true</i>, then it uses
+                    the <i>qs</i> library for parsing). We then mount this middleware (making it available to any routes
+                    that may depend on it) by passing this middleware into <i>app.use()</i> as an argument.
+                </p>
+                <p class="mb-0">
+                    With this middleware mounted, we can now use it to parse the input values from the request body:
+                </p>
+                <pre class="mb-0">
+...
+let bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded());
+app.post('/list', function (req, res) {
+    // To parse inputs from the HTML body, we need to import 'body-parser', then mount it using app.use()
+    let first_name_value = <mark style="background-color:cyan;">req.body.first_name</mark>;
+    let last_name_value = <mark style="background-color:greenyellow;">req.body.last_name</mark>;
+    let json_obj = {"firstName": first_name_value, "lastName": last_name_value};
+    console.log(json_obj);
+    res.json(json_obj);
+});
+</pre>
+                <hr>
+                <pre class="mb-0">(HTML file)
+...
+&lt;form action="" method="POST"&gt;
+    &lt;label for="first_name_input"&gt;First name: &lt;/label&gt;
+    &lt;input type="text" <mark style="background-color:cyan;">name="first_name</mark>" id="first_name_input"/&gt;
+    &lt;label for="last_name_input"&gt;Last name: &lt;/label&gt;
+    &lt;input type="text" <mark style="background-color:greenyellow;">name="last_name</mark>" id="last_name_input"/&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+...
+</pre>
+
+
+            </div>
+            <div class="form-control mb-1">
+                <a id=""><h4>Handling PUT Requests</h4></a>
+                <p class="mb-0">
+                    PUT requests are used for updating/replacing existing data on the server.
+                </p>
+                <pre class="mb-0">
+app.put('/list', function (req, res) {
+    // WIP
+});
+</pre>
+            </div>
+        </div>
+        <div class="form-control mb-2">
+            <a id=""><h3>Using the .env file</h3></a>
+            <p class="mb-2">
+                The .env is a hidden file that is used to pass environment variables to your application. This file
+                is only meant to be accessible to the developer and can be used to store data that is meant to be
+                private/hidden. For example, it can be used to store API keys from external services or your
+                database URI. It can also be used to store configuration options which can be used to change the
+                behavior of your application, without needing to rewrite the code. Before we can use this .env file,
+                we first need to import the <i>dotenv</i> package.
+            </p>
+            <p class="mb-2">
+                Environmental variables are accessible from within the app using the following syntax: 'process.env.
+                &lt;VAR_NAME&gt;'. The 'process.env' object is a global Node object and the variables are passed as
+                strings.
+            </p>
+            <p class="mb-0">
+                Naming conventions/requirements:
+            </p>
+            <ul class="mb-1">
+                <li>
+                    Variable names should be in uppercase with each word separated by an underscore, for example:
+                    'WORD_WORD2_WORD3'. The .env file is a shell file, so names and values do not need to be wrapped
+                    in quotes.
+                </li>
+                <li>
+                    There should be no empty spaces in the statement. For example, this is incorrect: 'SOME_NUMBER =
+                    123' but this is correct: 'SOME_NUMBER=123'.
+                </li>
+            </ul>
+            <p class="mb-0">Example:</p>
+            <pre class="mb-0">
+require('dotenv').config();
+...
+app.get('/env', function (req, res) {
+    // Requires that the 'dotenv' package be imported first
+    res.send(`User details: ${process.env.FIRST_NAME} ${process.env.LAST_NAME}`)
+});
+</pre>
+            <hr>
+            <pre class="mb-0">(Example .env file)
+FIRST_NAME=John
+LAST_NAME=Doe
+BIRTH_YEAR=2000
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id=""><h3>Using Mongoose/MongoDB</h3></a>
+            <p class="mb-2">
+                MongoDB is a source-available, cross-platform, document-oriented database program. It is classified as a
+                NoSQL database product that utilizes JSON-like documents with optional schemas.
+            </p>
+            <p class="mb-3">
+                Mongoose is a JavaScript object-oriented programming library that creates a connection between MongoDB
+                and the Node.js JavaScript runtime environment. It provides a straightforward, schema-based solution to
+                model application data. Includes built-in type casting, validation, query building, business logic
+                hooks, etc., out of the box.
+            </p>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>MongoDB Database Connection Setup</h4></a>
+                <p class="mb-2">
+                    Before starting, decide on whether to utilize a local MongoDB database or alternatively, a MongoDB
+                    Atlas cluster, which is essentially a cloud database that has an integrated suite of data services.
+                    If using the latter, refer to this <a href="https://www.mongodb.com/docs/atlas/getting-started/">
+                    guide</a> that details how to set up an account (unpaid versions available).
+                </p>
+                <p class="mb-2">
+                    Before we establish a connection to the database, we need to first import the <i>mongoose</i>
+                    package, saving it to an object. Then, to connect, we need to call that object's <i>connect()</i>
+                    method, passing the location/url of the database into it.
+                </p>
+                <pre class="mb-0">
+let monGoose = require('mongoose');
+// import mongoose from 'mongoose'; //Alternative to the require() method
+monGoose.connect(&lt;MongoDB_path&gt;);
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Creating a Schema and Model</h4></a>
+                <p class="mb-2">
+                    After connecting to the database, the next thing we need to do is to create schema and model
+                    objects from the <i>mongoose</i> object we created. In the below examples, the schema is created
+                    using the <i>Schema()</i> method and this is then passed as an argument into the <i>model()</i>
+                    method to create the model:
+                </p>
+
+                <div class="form-control mb-2">
+                    <h5>Example #1:</h5>
+                    <pre class="mb-0">
+import monGoose from 'mongoose';
+let personSchema = new monGoose.Schema({
+    first_name: {
+        type: String,
+        required: true,
+    },
+    last_name: {
+        type: String,
+        required: true,
+    },
+    birth_year: Number,
+    favorite_foods: [String],
+});
+
+let Person = monGoose.model('Person', personSchema);
+export default Person;
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h5>Example #2:</h5>
+                    <pre class="mb-0">
+const vehicleSchema = new Schema({
+    vin_number: Number,
+    build_date: Date,
+    current_owner: String,
+    previous_owners: [String],
+    is_active: Boolean
+    recalled_parts: [{
+        defective_part: [String],
+        criticality: String,
+    }]
+});
+
+let Vehicle = monGoose.model('Vehicle', vehicleSchema);
+export default Vehicle;
+</pre>
+                </div>
+
+                <p class="mb-1">
+
+                </p>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Inserting Data (2 methods)</h4></a>
+                <p class="mb-2">
+                    With the schema and model set up, we can now insert data into the database. If the model was created
+                    in an external JavaScript file, then import the model, otherwise continue to the next step).
+                </p>
+                <p class="mb-0">
+                    In the below example, we create an dictionary that has the desired values supplied for each key,
+                    modeled after the object's schema. Once that is done, we save it to the database using the
+                    <i>save()</i>method.
+                </p>
+                <pre class="mb-2">
+const newPerson = new Person({
+    first_name: 'John',
+    last_name: 'Doe',
+    birth_year: '2024-09-01',
+    favorite_foods: ['lobster', 'chinese takeout'],
+});
+
+await newPerson.save();
+</pre>
+                <p class="mb-0">
+                    In the below example, instead of creating an object, we call its <i>create()</i> method and pass in
+                    the populated dictionary as an argument:
+                </p>
+                <pre class="mb-0">
+const newPerson = await Person.create({
+    first_name: 'John',
+    last_name: 'Doe',
+    birth_year: '2024-09-01',
+    favorite_foods: ['lobster', 'chinese takeout'],
+});
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Searching the Database</h4></a>
+                <p class="mb-2">
+                    There are multiple built-in methods to search the database, including (but not limited to):
+                    <i>find(), findById()</i>, and <i>findOne()</i>.
+                </p>
+
+                <div class="form-control mb-2">
+                    <h5>Using the <i>find()</i> method:</h5>
+                    <p class="mb-0">
+                        Returns all entries:
+                    </p>
+                    <pre class="mb-2">
+// Returns all Person entries, if any
+const findAllPersons = await Person.find({}).exec();
+</pre>
+                    <p class="mb-0">
+                        Returns all entries that match the provided key-value pair(s) argument(s). In the below example,
+                        query casting is used to search for values greater than or equal to the specified value:
+                    </p>
+                    <pre class="mb-2">
+// Returns all entries whose 'first_name' matches 'John' and 'birth_year' is greater than or equal to '2024-09-01'
+const findPersons = await Person.find({first_name:'John', birth_year: { $gte: '2024-09-01' }}).exec();
+</pre>
+                    <div class="form-control mb-2">
+                        <h5>Query Casting</h5>
+                        <p class="mb-2">
+                            Query casting can be applied to the filters that allows matching to values that are greater
+                            than, less than, etc.. Below is a list of some of the operators. The full list of query
+                            operators can be found <a
+                                href="https://www.mongodb.com/docs/manual/reference/operator/query/">here</a>.
+                        </p>
+
+                        <table class="table table-bordered mb-1">
+                            <tr class="table-dark">
+                                <th>Comparison Operators</th>
+                                <th>Meaning</th>
+                            </tr>
+                            <tr>
+                                <td>$eq</td>
+                                <td>Matches the specified value</td>
+                            </tr>
+                            <tr>
+                                <td>$gt</td>
+                                <td>Matches values greater than the specified value</td>
+                            </tr>
+                            <tr>
+                                <td>$gte</td>
+                                <td>Matches values greater than or equal to the specified value</td>
+                            </tr>
+                            <tr>
+                                <td>$lt</td>
+                                <td>Matches values less than the specified value</td>
+                            </tr>
+                            <tr>
+                                <td>$lte</td>
+                                <td>Matches values less than or equal to the specified value</td>
+                            </tr>
+                            <tr>
+                                <td>$in</td>
+                                <td>Matches any of the values in the specified array of values</td>
+                            </tr>
+                            <tr>
+                                <td>$ne</td>
+                                <td>Matches any values that don't match the specified value</td>
+                            </tr>
+                            <tr>
+                                <td>$nin</td>
+                                <td>Matchs none of the values in the specified array of values</td>
+                            </tr>
+                            <tr class="table-dark">
+                                <th>Logical Operators</th>
+                                <th>Meaning</th>
+                            </tr>
+                            <tr>
+                                <td>$and</td>
+                                <td>
+                                    Joins query clauses with a logical <i>AND</i> returns all documents that match the
+                                    conditions of both clauses
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>$not</td>
+                                <td>
+                                    Inverts the effect of a query predicate and returns documents that do not match the
+                                    query predicate
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>$nor</td>
+                                <td>Joins query clauses with a logical <i>NOR</i> returns all documents that fail to
+                                    match
+                                    both clauses
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>$or</td>
+                                <td>Joins query clauses with a logical <i>OR</i> returns all documents that match the
+                                    conditions of either clause
+                                </td>
+                            </tr>
+
+                            <tr class="table-dark">
+                                <th>Element Operators</th>
+                                <th>Meaning</th>
+                            </tr>
+                            <tr>
+                                <td>$exists</td>
+                                <td>Matches documents that have the specified field</td>
+                            </tr>
+                            <tr>
+                                <td>$type</td>
+                                <td>Selects documents if a field is of the specified type</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p class="mb-0">
+                        Returns all entries whose column value is comprised of or contains the specified value:
+                    </p>
+                    <pre class="mb-1">
+// Functions similarly as the above example but only returns the 'first_name' and 'last_name' columns
+const findPerson = await Person.find({first_name: /john/i}).exec();
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h5>Using the <i>findById()</i> method:</h5>
+                    <p class="mb-0">
+                        Searches for a single entry that matches the provided <i>id</i> argument:
+                    </p>
+                    <pre class="mb-2">
+// Locates a single Person whose <i>id</i> matches <i>123</i>, returns <i>null</i> if no match is found
+const onePerson = await Person.findById(123).exec();
+</pre>
+                    <p class="mb-0">
+                        Searches for a single entry that matches the provided <i>id</i> value but limits the returned
+                        column data to the column(s) in the second argument (multiple columns delimited by an a empty
+                        space):
+                    </p>
+                    <pre class="mb-2">
+// Functions similarly as the above example but only returns the 'first_name' and 'last_name' columns
+const onePerson = await Person.findById(123, 'first_name last_name').exec();
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h5>Using the <i>findOne()</i> method:</h5>
+                    <p class="mb-0">
+                        Searches for a single entry that matches the provided key-value pair(s):
+                    </p>
+                    <pre class="mb-2">
+// Locates a single Person whose 'first_name' matches 'John', returns <i>null</i> otherwise
+const onePerson = await Person.findOne({first_name: 'John'}).exec();
+</pre>
+                    <p class="mb-0">
+                        Searches for a single entry that matches the provided key-value pair(s) but limits the returned
+                        column data to the column(s) in the second argument (multiple columns delimited by an a empty
+                        space):
+                    </p>
+                    <pre class="mb-2">
+// Functions similarly as the above example but only returns the 'first_name' and 'last_name' columns
+const onePerson = await Person.findOne({first_name: 'John'}, 'first_name last_name').exec();
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Updating Data</h4></a>
+                <p class="mb-0">
+                    The contents of an entry object can be changed by calling one of its columns like a method, then
+                    specifying the new desired value. Finally, complete it by calling the entry's <i>save()</i> method.
+                </p>
+                <pre class="mb-2">
+const updatePerson = await Person.findById(0).exec();
+
+updatePerson.first_name = "Jane";
+updatePerson.birth_date = "2000-01-01";
+
+await updatePerson.save();
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Deleting Data</h4></a>
+                <div class="form-control mb-2">
+                    <h5>Using the <i>deleteOne()</i> method:</h5>
+                    <p class="mb-0">
+                        Deletes a single entry that matches the specified criteria.
+                    </p>
+                    <pre class="mb-1">
+const deletePerson = await Person.deleteOne({last_name: 'Doe'});
+</pre>
+                </div>
+                <div class="form-control mb-1">
+                    <h5>Using the <i>deleteMany()</i> method:</h5>
+                    <p class="mb-0">
+                        Deletes any entries that match the specified critera.
+                    </p>
+                    <pre class="mb-1">
+const deletePersons = await Person.deleteMany({last_name: 'Doe'});
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Full List of Queries</h4></a>
+                <p class="mb-0">
+                    The full list of query functions can be found <a href="https://mongoosejs.com/docs/queries.html">
+                    here</a>. These include:
+                </p>
+                <ul>
+                    <li><i>Model.deleteMany()</i></li>
+                    <li><i>Model.deleteOne()</i></li>
+                    <li><i>Model.find()</i></li>
+                    <li><i>Model.findById()</i></li>
+                    <li><i>Model.findByIdAndDelete()</i></li>
+                    <li><i>Model.findByIdAndRemove()</i></li>
+                    <li><i>Model.findByIdAndUpdate()</i></li>
+                    <li><i>Model.findOne()</i></li>
+                    <li><i>Model.findOneAndDelete()</i></li>
+                    <li><i>Model.findOneAndReplace()</i></li>
+                    <li><i>Model.findOneAndUpdate()</i></li>
+                    <li><i>Model.replaceOne()</i></li>
+                    <li><i>Model.updateMany()</i></li>
+                    <li><i>Model.updateOne()</i></li>
+                </ul>
+            </div>
+
+            <div class="form-control mb-2">
+                <a id=""><h4>Validation</h4></a>
+                <p class="mb-0">
+                    WIP
+                </p>
+                <pre class="mb-2">
+
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <a id=""><h4>Other</h4></a>
+                {# https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/#}
+                <p class="mb-0">
+                    WIP
+                </p>
+                <pre class="mb-2">
+
+</pre>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+{% endblock %}
+
+{% block glossary_block %}
+{% endblock %}

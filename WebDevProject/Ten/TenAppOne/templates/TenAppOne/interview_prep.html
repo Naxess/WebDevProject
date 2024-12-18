@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Interview Prep - Potential Topics & Questions</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="interview_pre_anchor"><h1>Interview Prep <span class="door">-</span> Potential Topics & Questions</h1></a>
+{#<a href="https://hackr.io/blog/top-django-interview-questions-and-answers">https://hackr.io/blog/top-django-interview-questions-and-answers</a>#}
+<div class="form-control mb-1">
+    <h2>Django</h2>
+    <ul class="">
+        <li>
+            <h5>What is Django?</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        Django is an open-source web development framework based on the Python language, allowing Python
+                        developers to create database-driven websites.
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Create a simple program that prints "Hello World!"</h5>
+            <ul>
+                <li>
+                    <p class="mb-0">
+                        Step 1: Create a new project in the Command Prompt using the following command:
+                    </p>
+                    <pre class="mb-1">
+django-admin startproject &lt;project_name&gt;
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Step 2: Change directory to the project's root directory:
+                    </p>
+                    <pre class="mb-1">
+cd &lt;root_dir_of_project&gt;
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Step 3: Create and/or open a file named <i>views.py</i>. Add a function that returns an
+                        HttpResponse. See code below:
+                    </p>
+                    <pre class="mb-1">
+from django.shortcuts import HttpResponse
+
+def hello_world_view(request):
+    return HttpResponse("Hello World!")
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Step 4: Create and/or open a file named <i>urls.py</i>. Add a path object to urlpatterns list
+                        that contains a reference to the view function we created. See code below:
+                    </p>
+                    <pre class="mb-1">
+from django.contrib import admin
+from django.urls import path
+from &lt;project_name&gt; import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.hello_world, name='hello_world')
+]
+</pre>
+                </li>
+                <li>
+                    <p class="mb-0">
+                        Step 5: In the Command Prompt, run the server using the following command:
+                    </p>
+                    <pre class="mb-1">
+python manage.py runserver
+</pre>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        The default url is <code>128.0.0.1</code>. Opening this url in a browser should display a page
+                        with the text: "Hello World!"
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Name some advantages of using Django:</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        High computational and statistical capabilities.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Django follows the "Batteries Included" philosophy - which means it has a standard unified
+                        library. Any developers using Django will already have access to a built-in, massive, versatile
+                        library of features, all without needing to download separate packages.
+
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Most packages in Python's standard library are open-source. Some included features in these
+                        packages that we can implement are: authentication, admin interfacing, session management, etc..
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Python and Django are core technologies in IT giants, such as IoT (Internet of Things), and blue
+                        chip companies (companies with a long track record of financial stability, such as Coca Cola,
+                        Apple, IBM, Amex, McDonald's, etc.).
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Django has built-in security that protects its applications against SQL injection, clickjacking,
+                        XSS, and CSRF attacks, etc..
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        The built-in template language promotes the process of building applications.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Enables developers to create applications and configure frameworks "on-the-go". It also offers
+                        support for external libraries and packages. Django focuses on explicit programming, allowing
+                        developers to create applications that require changes.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Assists in faster developement and is thus used by most companies. If configured correctly,
+                        Django can be used to optimize web applications.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Has a REST framework, a python library that helps develop APIs for many applications. Developers
+                        can use these APIs to add advanced functionalities to their applications.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Comes with Machine Learning capabilities and libraries such as PyTorch, NumPy, etc..
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Name some disadvantages of Django:</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        Django lacks conventions that can be followed by developers for web development.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        It is not ideal for smaller projects have fewer requirements because it has a vast structure and
+                        heavy functionalities.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Django is monolithic, i.e., developers have to work on the given patterns.
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Name some applications of Django:</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        Financial platforms with various features, such as analyzing and calculating output based on the
+                        data.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Customized CRM (Customer Relationship Management) system for the internal data.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        B2B (Business to Business) CRM system, assisting in handling communications within an
+                        organization.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Shopping websites.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Real-estate property evaluation system.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Document-managing system.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Creating an e-mail system for sending notifications.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Verification system based on photos.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Investment fund management platform.
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Name some features of Django:</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        Compared to other Python frameworks, Django is the most well documented.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        It is a Python-based framework that offers all Python libraries for use in an application for
+                        additional functionality.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Django primarily maintains a website using URLs rather than its IP address on the server, making
+                        it easier for SEO engineers to add the website to the servers.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        It is highly versatile and scalable.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        It is highly secure and thoroughly tested.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Ensures rapid development.
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Describe Django's architecture.</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        Django follows the Model-View-Template (MVT) architecture, which is based on the
+                        Model-View-Controller (MVC) pattern. However, in MTV, our 'views' are referred to as
+                        'controllers' in MVC. In MVC, they have a 'controller' but in MTV, our 'controller' is the
+                        framework itself - it is responsible for sending the request to the appropriate view, according
+                        to the URL configuration.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">Django's MVT architecture is divided into 3 major components:</p>
+                    <img src="{% static 'media/images/examples/interview_prep.mvt.png' %}" alt="interview_pre.mvt.png"
+                         width="450px">
+                    <ul>
+                        <li>
+                            <strong>Model</strong>
+                            <p class="mb-1">
+                                The model handles the database schema for the web applications. It maintains and
+                                represents the complete application data into the database. The default relational
+                                database used by the model is SQLite, which is generally used in development, but in
+                                production can transition to MySQL and PostgreSQL.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>View</strong>
+                            <p class="mb-1">
+                                The view component manages all of the logic of the application that we want to render on
+                                the user's browser. In Django, the view acts as a bridge between the models and
+                                templates. It's there that it fetches the data from the models and renders that data to
+                                the templates.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Template</strong>
+                            <p class="mb-1">
+                                The template component is the collection os the static parts of the application, such as
+                                the HTML, CSS, JavaScript, and image files. The view uses the template as a the base on
+                                which the data should be presented, because at the end, the web-application uses the
+                                static files to represent the content on the users' browser.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Describe the project directory structure in Django.</h5>
+            <ul>
+                <li>
+                    <strong>manage.py</strong>
+                    <p class="mb-1">
+                        Command-line utility that allows users to interact with their Django project.
+                    </p>
+                </li>
+                <li>
+                    <strong>__init__.py</strong>
+                    <p class="mb-1">
+                        An empty file specifying to Python that the current directory is a Python package.
+                    </p>
+                </li>
+                <li>
+                    <strong>settings.py</strong>
+                    <p class="mb-1">
+                        Contains the necessary project configurations such as database connections.
+                    </p>
+                </li>
+                <li>
+                    <strong>urls.py</strong>
+                    <p class="mb-1">
+                        Contains all of the URLs of the project.
+                    </p>
+                </li>
+                <li>
+                    <strong>wsgi.py</strong>
+                    <p class="mb-1">
+                        The application's entry point, used by web servers to serve the project.
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Describe the purpose of a model in Django.</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        A model is a class that maps to a database table or collection. Model classes contain attributes
+                        representing a database field, defined within the models.py file. These models act as the
+                        abstraction layer, assisting in structuring and manipulating data. The models are the subclass
+                        of the django.db.models.Model class.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">Example models.py class:</p>
+                    <pre>
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=30)
+    price = models.IntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}'
+</pre>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Describe Django's admin interface.</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        The admin interface is the interface already available in Django. It helps developers save time
+                        by eliminating the need to create another admin panel. It can be imported from the
+                        django.contrib package. It comes with user authentication and other features such as management
+                        of various models and CMS, etc..
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        The admin interface has two default models: Groups and Users. These are included in the admin
+                        interface after migrating the project and creating a new superuser. Both models fall under the
+                        Authentication and Authorization module.
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Groups</strong>
+                            <p class="mb-1">
+                                This table defines the permissions for each group of Users.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Users</strong>
+                            <p class="mb-1">
+                                This table stores the details of each User.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Code reusability is a feature of Django. Describe how Django espouses this concept.</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+                        Django offers better reusuability than other Python-based web frameworks. It is a collection of
+                        various applications, such as login applications, signup, etc.. These applications can be copied
+                        from one project to another, requiring only some changes in the settings.py file, thus avoiding
+                        the issue of rewriting the entire code from scratch. This is one of the reasons why web
+                        applications can be developed quickly in Django.
+                    </p>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Django is a batteries-included web framework. This means it comes with a variety of build-in
+                        common components such as login, signup, session, and authentication features. The code for
+                        these pre-written components can imported into our scripts.
+                    </p>
+                </li>
+                <li>
+                    <p>In the below example, we create a built-in login form instead of creating it manually:</p>
+                    <p class="mb-1">Example urls.py:</p>
+                    <pre>
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('account/', include('django.contrib.auth.urls')),
+]
+</pre>
+
+                    <p class="mb-1">Example example.html</p>
+                    <pre>{% verbatim %}
+...
+&lt;h2&gt;Login Page&lt;/h2&gt;
+&lt;form method="POST"&gt;
+    {% csrf_token %}
+    {{ form.as_p }}
+    &lt;button type="submit"&gt;Log In&lt;/button&gt;
+&lt;/form&gt;
+...
+{% endverbatim %}</pre>
+
+                    <p class="mb-1">Example settings.py:</p>
+                    <pre>
+...
+TEMPLATES = [
+    {
+        ...
+        'DIRS': [BASE_DIR / 'templates'],
+        ...
+    },
+]
+
+LOGIN_REDIRECT_URL = '/'
+...
+</pre>
+
+                    <p class="mb-1">
+                        Now, if we open http://127.0.0.1:8000/accounts/login/ in the browser, we should see two text
+                        fields ('Username' and 'Password') as well as a button that we created ourselves. The text
+                        fields were generated automatically, reducing the amount of manually written code. This is one
+                        of the ways that Django implements code reusability.
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Describe what happens when a Django website receives a request.</h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5></h5>
+            <ul>
+                <li>
+                    <p class="mb-1">
+
+                    </p>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Interview Prep - Potential Topics & Questions
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#interview_pre_anchor">
+        <strong>Interview Prep - Potential Topics & Questions</strong>
+    </a>
+</li>
+<li>
+
+</li>
+<li>
+
+</li>
+<li>
+
+</li>
+{% endblock %}

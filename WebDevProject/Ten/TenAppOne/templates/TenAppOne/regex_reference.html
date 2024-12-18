@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Python</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<h1>Regex <span class="door">-</span> Reference</h1>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <h2>Basics</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">*</p></td>
+                <td><p class="mb-0">
+                    Matches the preceding character 0 or more times.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">+</p></td>
+                <td><p class="mb-0">
+                    Matches the preceding character 1 or more times.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">.</p></td>
+                <td><p class="mb-0">Wildcard. Matches any single character.</p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">x|y</p></td>
+                <td><p class="mb-0">Or. Matches either <em>x</em> or <em>y</em>.</p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\</p></td>
+                <td><p class="mb-0">Escapes a <u>special</u> character. See <a href="?">here</a></p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">x</p></td>
+                <td><p class="mb-0">Matches the <em>x</em> character.</p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">xyz</p></td>
+                <td><p class="mb-0">Matches the <em>xyz</em> string.</p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <h2>Character Classes</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\d</p></td>
+                <td><p class="mb-0">
+                    Matches a numeric character.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\D</p></td>
+                <td><p class="mb-0">
+                    Matches a non-numeric character.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\s</p></td>
+                <td><p class="mb-0">
+                    Matches a single whitespace cahracter (space, tab, form feed, or line feed).
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\S</p></td>
+                <td><p class="mb-0">
+                    Matches a single non-whitespace character.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\w</p></td>
+                <td><p class="mb-0">
+                    Matches any alphanumeric character (including underscores).
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\W</p></td>
+                <td><p class="mb-0">
+                    Matches any non-word character. "word" characters are defined as a letter, digit, or underscore.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">[xyz]</p></td>
+                <td><p class="mb-0">
+                    Matches any of the characters within the brackets.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">[^xyz]</p></td>
+                <td><p class="mb-0">
+                    Matches anything <strong>not</strong> within the brackets.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">[\b]</p></td>
+                <td><p class="mb-0">
+                    Matches a backspace.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <h2>Assertions</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">^</p></td>
+                <td><p class="mb-0">
+                    Matches the beginning of the input.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">$</p></td>
+                <td><p class="mb-0">
+                    Matches the end of the input.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\b</p></td>
+                <td><p class="mb-0">
+                    Matches a word boundary.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\B</p></td>
+                <td><p class="mb-0">
+                    Matches a non-word boundary.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?=</p></td>
+                <td><p class="mb-0">
+                    Lookahead.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?!</p></td>
+                <td><p class="mb-0">
+                    Negative lookahead.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?<=</p></td>
+                <td><p class="mb-0">
+                    Lookbehind.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?<!</p></td>
+                <td><p class="mb-0">
+                    Negative lookbehind.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?></p></td>
+                <td><p class="mb-0">
+                    Once-only subexpression.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?()</p></td>
+                <td><p class="mb-0">
+                    If-then condition.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?()|</p></td>
+                <td><p class="mb-0">
+                    If-then-else condition.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?#</p></td>
+                <td><p class="mb-0">
+                    Comment.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <h2>Quantifiers</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">{n}</p></td>
+                <td><p class="mb-0">
+                    Matches exactly <strong>n</strong> occurences of the preceding character.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">{n,m}</p></td>
+                <td><p class="mb-0">
+                    Matches at least <strong>n</strong> and a maximum of <strong>m</strong> occurences of the preceding
+                    character.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">?</p></td>
+                <td><p class="mb-0">
+                    Matches 0 or 1.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <h2>Special Characters</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\cX</p></td>
+                <td><p class="mb-0">
+                    Matches the control character, X, in a string.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\n</p></td>
+                <td><p class="mb-0">
+                    Matches a line feed.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\r</p></td>
+                <td><p class="mb-0">
+                    Matches a carriage return.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\t</p></td>
+                <td><p class="mb-0">
+                    Matches a tab.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\0</p></td>
+                <td><p class="mb-0">
+                    Matches a NULL.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\f</p></td>
+                <td><p class="mb-0">
+                    Matches a form feed.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\v</p></td>
+                <td><p class="mb-0">
+                    Matches a vertical tab.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\xhh</p></td>
+                <td><p class="mb-0">
+                    Matches a character with the code <em>hh</em> (2 hex digits).
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\uhhhh</p></td>
+                <td><p class="mb-0">
+                    Matches a character with the code <em>hhhh</em> (4 hex digits).
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <h2>Flags</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">g</p></td>
+                <td><p class="mb-0">
+                    Enables global search.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">i</p></td>
+                <td><p class="mb-0">
+                    Enables case-insensitive search.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">m</p></td>
+                <td><p class="mb-0">
+                    Enables multi-line search.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">y</p></td>
+                <td><p class="mb-0">
+                    Enables a "sticky" search starting at the current position in the target string.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mt-1 mb-2">
+        <h2>Groups</h2>
+        <table class="table table-bordered">
+            <tr class="table-dark">
+                <th><p class="mb-0">Pattern</p></th>
+                <th><p class="mb-0">Description</p></th>
+                <th><p class="mb-0">Example Usage</p></th>
+            </tr>
+            <tr>
+                <td><p class="mb-0">(x)</p></td>
+                <td><p class="mb-0">
+                    Matches <em>x</em> and remembers the match.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">(?:x)</p></td>
+                <td><p class="mb-0">
+                    Matches <em>x</em> but does not remember the match.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="mb-0">\n</p></td>
+                <td><p class="mb-0">
+                    A back reference to the last substring matching the <em>n</em> parenthetical in the regex.
+                </p></td>
+                <td>
+                    <pre class="mb-0">
+
+</pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Regex - Reference
+{% endblock %}
+
+{% block glossary_block %}
+<li><a class="dropdown-item" href="#">Regex - Reference</a></li>
+{% endblock %}

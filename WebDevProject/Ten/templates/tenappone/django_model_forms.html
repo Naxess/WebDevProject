@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Model Forms</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_model_forms_anchor"><h1>Django <span class="door">-</span> Model Forms</h1></a>
+<div class="form-control">
+    <div class="form-control mt-1 mb-2">
+        <a id="modelform_anchor"><h3>Using ModelForm to create forms from Models</h3></a>
+        <p class="mb-1">
+            ModelForm is a helper class that allows creating a Form class from a Django model. Example:
+        </p>
+        <pre>
+    from django.forms import ModelForm
+    from my_app.models import Article
+
+    class ArticleForm(ModelForm):
+        class Meta:
+            model = Article
+            fields = ["pub_date", "headline", "content", "reporter"]
+
+    # Creates a form to add an article
+    <mark>form = ArticleForm()</mark>
+
+    # Creates a form to change an existing article
+    <mark>article = Article.objects.get(pk=1)</mark>
+    <mark>form = ArticleForm(instance=article)</mark>
+</pre>
+        <div class="form-control mb-2">
+            <a id="field_types_anchor"><h4>Field Types</h4></a>
+            <p>
+                The generated Form classes has a form field for every model field specified, in the order specified in
+                the <em>fields</em> attribute. Each model field has a corresponding default form field. (e.g. a
+                CharField on a model is represented as a CharField on a form. A ManyToManyField is represented as a
+                MultipleChoiceField.
+            </p>
+            <div class="accordion mb-2">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#field_types_id">
+                            Model Field to Form Field Conversions
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="field_types_id">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <table class="table table-bordered">
+                                    <tr class="table-primary">
+                                        <th class="col-4">Model Field</th>
+                                        <th class="col-8">Form Field</th>
+                                    </tr>
+                                    <tr>
+                                        <td>AutoField</td>
+                                        <td>Not represented in the form</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BigAutoField</td>
+                                        <td>Not represented in the form</td>
+                                    </tr>
+                                    <tr>
+                                        <td>BigIntegerField</td>
+                                        <td>IntegerField with min_value set to -9223372036854775808 and max_value set
+                                            to 9223372036854775807.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>BinaryField</td>
+                                        <td>CharField, if editable is set to True on the model field, otherwise not
+                                            represented in the form.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>BooleanField</td>
+                                        <td>BooleanField, or NullBooleanField if null=True.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CharField</td>
+                                        <td>CharField with max_length set to the model field’s max_length and
+                                            empty_value set to None if null=True.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>DateField</td>
+                                        <td>DateField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DateTimeField</td>
+                                        <td>DateTimeField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DecimalField</td>
+                                        <td>DecimalField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DurationField</td>
+                                        <td>DurationField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EmailField</td>
+                                        <td>EmailField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FileField</td>
+                                        <td>FileField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FilePathField</td>
+                                        <td>FilePathField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FloatField</td>
+                                        <td>FloatField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ForeignKey</td>
+                                        <td>
+                                            ModelChoiceField.
+                                            <br>
+                                            (ForeignKey is represented by django.forms.ModelChoiceField, which is a
+                                            ChoiceField whose choices are a model QuerySet)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ImageField</td>
+                                        <td>ImageField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IntegerField</td>
+                                        <td>IntegerField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IPAddressField</td>
+                                        <td>IPAddressField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GenericIPAddressField</td>
+                                        <td>GenericIPAddressField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>JSONField</td>
+                                        <td>JSONField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ManyToManyField</td>
+                                        <td>
+                                            ModelMultipleChoiceField.
+                                            <br>
+                                            (ManyToManyField is represented by django.forms.ModelMultipleChoiceField,
+                                            which is a MultipleChoiceField whose choices are a model QuerySet.)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PositiveBigIntegerField</td>
+                                        <td>IntegerField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PositiveIntegerField</td>
+                                        <td>IntegerField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PositiveSmallIntegerField</td>
+                                        <td>IntegerField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SlugField</td>
+                                        <td>SlugField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SmallAutoField</td>
+                                        <td>Not represented in the form</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SmallIntegerField</td>
+                                        <td>IntegerField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TextField</td>
+                                        <td>CharField with widget=forms.Textarea</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TimeField</td>
+                                        <td>TimeField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>URLField</td>
+                                        <td>URLField</td>
+                                    </tr>
+                                    <tr>
+                                        <td>UUIDField</td>
+                                        <td>UUIDField</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mb-1">In addition, each generated form field has attributes set as follows:</p>
+            <ul class="mb-1">
+                <li>
+                    If the model field has <em>blank=True</em>, then <em>required</em> is set to <u>False</u> on the
+                    form field. Otherwise <em>required=True</em>.
+                </li>
+                <li>
+                    The form field's <em>label</em> is set to the <em>verbose_name</em> of the model field, with the
+                    first character capitalized.
+                </li>
+                <li>
+                    The form field's <em>help_text</em> is set to the <em>help_text</em> of the model field.
+                </li>
+                <li>
+                    If the model field has <em>choices</em> set, then the form field's <em>widget</em> will be set to
+                    <em>Select</em>, with choices coming from the model field's <em>choices</em>. The choices normally
+                    include the blank choice which is selected by default. The blank choice will not be included if the
+                    model field has <em>blank=False</em> and an explicit <em>default</em> value.
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="example_usage_modelform_anchor"><h4>Example Usage of ModelForm</h4></a>
+            <p class="mb-1">Example models.py:</p>
+            <pre>
+    from django.db import models
+    from django.forms import ModelForm
+
+    TITLE_CHOICES = {"MR":"Mr.", "MRS":"Mrs.", "MS":"Ms."}
+
+    class Author(models.Model):
+        name = models.CharField(max_length=100)
+        title = models.CharField(max_length=3, choices=TITLE_CHOICES)
+        birth_date = models.DateField(blank=True, null=True)
+        def __str__(self):
+            return self.name
+
+    class Book(models.Model):
+        name = models.CharField(max_length=100)
+        authors = models.ManyToManyField(Author)
+</pre>
+            <p class="mb-1">Below examples are forms created from the models above using the ModelForm class:</p>
+            <pre>
+    from django import forms
+    from django.models import Author, Book
+
+    class AuthorForm(forms.ModelForm):
+        class Meta:
+            model = Author
+            fields = ["name", "title", "birth_date"]
+
+    class BookForm(forms.ModelForm):
+        class Meta:
+            model = Book
+            fields = ["name", "authors"]
+</pre>
+            <p class="mb-1">The below examples are the manually created equivalents of the above ones:</p>
+            <pre class="mb-1">
+    from django import forms
+    from django.models import Author, Book
+
+    TITLE_CHOICES = {"MR":"Mr.", "MRS":"Mrs.", "MS":"Ms."}
+
+    class AuthorForm(forms.Form):
+        name = forms.CharField(max_length=100)
+        title = forms.CharField(max_length=3,
+                                widget=forms.Select(choices=TITLE_CHOICES)
+        birth_date = forms.DateField(required=False)
+
+    class BookForm(forms.Form):
+        name = forms.CharField(max_length=100)
+        authors = forms.ModelMultipleChoiceField(queryset=Author.objects.all())
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="validating_modelform_anchor"><h4>Validation on a ModelForm</h4></a>
+            <p class="mb-1">There are 2 main steps involved in validating a ModelForm:</p>
+            <ul class="mb-2">
+                <li><a href="{% url 'tenappone:django_form_validation' %}">Validating the form</a></li>
+                <li><a href="https://docs.djangoproject.com/en/5.0/ref/models/instances/#validating-objects">Validating
+                    the model instance</a></li>
+            </ul>
+            <p class="mb-2">
+                Like normal form validation, model form validation is trigger implicity when calling <em>is_valid()</em>
+                or accessing the <em>errors</em> attribute and explicitly when calling <em>full_clean()</em>, although
+                you will typically not use the latter in practice. Model validation (<em>Model.full_clean()</em>) is
+                triggered from within the form validaiton step, right after the form's <em>clean()</em> method is
+                called.
+            </p>
+            <div class="form-control mb-2">
+                <h5>Interaction with model validation</h5>
+                <p class="mb-2">
+                    As part of the validation process, <em>ModelForm</em> will call the <em>clean()</em> method of each
+                    field on your model that has a corresponding field on your form. If any models fields have been
+                    excluded, validation will not be run on those fields. The model's <em>clean()</em> method will be
+                    called before any uniqueness checks are made.
+                </p>
+            </div>
+            <div class="form-control mb-1">
+                <h5>Considerations regarding model's <em>error_messages</em></h5>
+                <p class="mb-2">
+                    Error messages defined at the form field level or at the form Meta level always take precendence
+                    over the error messages defined at the model field level. Error messages defined at the model fields
+                    level are only used when the ValidationError is raised during the model validation step and no
+                    corresponding messages are defined at the form level.
+                </p>
+                <p class="mb-1">
+                    Error messages from <em>NON_FIELD_ERRORS</em> raised by model validation can be overriden by adding
+                    the <em>NON_FIELD_ERRORS</em> key to the <em>error_messages</em> dictionary of the the ModelForm's
+                    inner Meta class:
+                </p>
+                <pre class="mb-2">
+    from django.core.exceptions import NON_FIELD_ERRORS
+    from django.forms import ModelForm
+
+    class ArticleForm(ModelForm):
+        class Meta:
+            error_messages = {
+                NON_FIELD_ERRORS: {
+                    "unique_together": "%(mdoel_name)s' %(field_labels)s are not unique."
+                }
+            }
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="save_method_anchor"><h4>The <em>save()</em> method</h4></a>
+            <p class="mb-1">
+                Every ModelForm has a <em>save()</em> method. This method creates and saves a database object from the
+                data bound to the form. A subclass of ModelForm can accept an existing model instance as the keyword
+                argument instance; if this is supplied, <em>save()</em> will update that instance. If not supplied,
+                <em>save()</em> will create a new instance of the specified model:
+            </p>
+            <pre class="mb-2">
+    from myapp.models import Article
+    from myapp.forms import ArticleForm
+
+    # Creates a form instance from POST data
+    f = ArticleForm(request.POST)
+
+    # Saves a new Article object from the form's data
+    new_article = f.save()
+
+    # Creates a form to edit an existing Article but uses POST data to populate the form
+    a = Article.objects.get(pk=1)
+    f = ArticleForm(request.POST, instance=a)
+    f.save()
+</pre>
+            <p class="mb-2">
+                If the form hasn't been validated, calling <em>save()</em> will do it by checking <em>form.errors</em>.
+                If the form doesn't validate, a <em>ValueError</em> is raised.
+            </p>
+            <p class="mb-2">
+                If an optional field doesn't appear in the form's data, the resulting model uses the model field's
+                <em>default</em>. This doesn't apply to CheckboxInput, CheckboxSelectMultiple, or SelectMultiple.
+            </p>
+            <p class="mb-2">
+                The <em>save()</em> method accepts an optional <em>commit</em> keyword argument (set to <u>True</u> by
+                default), which accepts a boolean (True or False). If we call <em>save()</em> with <em>commit=False</em>,
+                then it will return an object that hasn't yet been saved to the database. In this scenario, we can call
+                <em>save()</em> on the resulting model instance immediately or do some custom processing on the object
+                first.
+            </p>
+            <p class="mb-2">
+                Another side effect of using <em>commit=False</em> is seen when your model has a many-to-many relation
+                with another model. If we specify <em>commit=False</em> when saving a form, Django cannot immediately
+                save the form data for the many-to-many relation. This is because it isn't possible to save many-to-many
+                data for an instance until the instance exists in the database. The workaround for this problem is to
+                call the <em>save_m2m()</em> method to your ModelForm subclass.
+            </p>
+            <pre class="mb-2">
+    # Create a form instance with POST data
+    f = AuthorForm(request.POST)
+
+    # Creates, but doesn't save the new author instance
+    new_author = f.save(commit=False)
+
+    # Modifies the author in some way
+    new_author.some_field = "some_value"
+
+    # Saves the new instance
+    new_author.save()
+
+    # Saves the many-to-many for the form
+    f.save_m2m()
+</pre>
+            <p class="mb-2">
+                Calling <em>save_m2m()</em> is only required if you use <em>save(commit=False)</em>. When you use a
+                <em>save()</em> on a form, all data (including many-to-many data) is saved without the need for any
+                additional method calls. Example:
+            </p>
+            <pre class="mb-1">
+    # Creates a form instance with POST data
+    a = Author()
+    f = AuthorForm(request.POST, instance=a)
+
+    # Creates and saves the new author instance
+    new_author = f.save()
+</pre>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="field_options_anchor"><h4>Selecting the fields to use</h4></a>
+            <p class="mb-2">
+                It is strongly recommended to explicitly set all fields that should be edited in the form using the
+                <em>fields</em> attribute. Failure to do so can easily lead to security problems whena form unexpectedly
+                allows a user to set certain fields, especially when new fields ar added to a model. Depending on how
+                the form is rendered, the problem may not even be visible on the web page.
+            </p>
+            <p class="mb-2">
+                The alternative approach would be to include all fields automatically, or remove only some. This
+                fundamental approach is known to be much less secure and has led to serious exploits on major websites.
+            </p>
+
+            <h5>Field Options</h5>
+            <div class="form-control mb-2">
+                <h6>Option #1: <em>fields = '__all__'</em></h6>
+                <p class="mb-1">
+                    Setting fields to '__all__' will take <em>all</em> of the fields from the model and
+                    render them on the form.
+                </p>
+                <pre>
+class SomeForm(forms.ModelForm):
+    class Meta:
+        model = YourModel
+        fields = '__all__'
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h6>Option #2: <em>exclude = ['dont_use_1', 'dont_use_2', ...]</em></h6>
+                <p class="mb-1">
+                    This option will use all fields <strong>except</strong> for the ones specified in the
+                    <em>exclude</em> list.
+                </p>
+                <pre>
+class SomeForm(forms.ModelForm):
+    class Meta:
+        model = YourModel
+        exclude = ['social_security_num', 'bank_account_number']
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h6>Option #3: <em>fields = ('use_this_1', 'use_this_2', ...)</em></h6>
+                <p class="mb-1">
+                    This option will prevent all fields from being render <strong>except</strong> for the ones specified
+                    in the <em>fields</em> tuple.
+                </p>
+                <pre class="mb-2">
+class SomeForm(forms.ModelForm):
+    class Meta:
+        model = YourModel
+        fields = ('first_name', 'last_name', 'email')
+</pre>
+            </div>
+
+            <p class="mb-1">
+                Note: If the model field has the <em>editable</em> argument set to <u>False</u>, then any form created
+                from the model via ModelForm will exclude that field.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="override_default_fields_anchor"><h4>Overriding the default fields</h4></a>
+            <p class="mb-2">
+                In the <a href="#field_types_anchor">Field Types</a> section, we have a table that lists all default
+                Model field to Form field conversions. ModelForm allows us to override the default conversion so that it
+                uses the Form field that we specify instead.
+            </p>
+            <p class="mb-1">
+                To specify a custom widget for a field, we need to use the <em>widgets</em> attribute of the inner
+                <em>Meta</em> class. For example, if we want the CharField to be represented by a &lt;textarea&gt;
+                instead of its default &lt;input type="text"&gt;, we can override the field's widget:
+            </p>
+            <pre class="mb-2">
+    from django.forms import ModelForm, Textarea
+    from myapp.models import Author
+
+    class AuthorForm(ModelForm):
+        class Meta:
+            model = Author
+            fields = ["name", "title", "birth_date"]
+            widgets = {"name": Textarea(attrs={"cols":80, "rows":20})}
+</pre>
+            <p class="mb-2">
+                The <em>widgets</em> dictionary accepts either widget instances (e.g. <em>Textarea(...))</em> or classes
+                (e.g. <em>Textarea</em>). Note: the <em>widgets</em> dictionary will not work with model fields with a
+                non-empty <em>choices</em> attribute, unless we override the form field to use a different widget.
+            </p>
+            <p class="mb-1">
+                The attributes of a field can also be customized. Attributes like <em>label, help_text</em> and
+                <em>error_message</em> can be changed. The below example changes the wording of all user-facing for the
+                <em>name</em> field:
+            </p>
+            <pre>
+    from django.utils.translation import gettext_lazy as _
+    class AuthorForm(ModelForm):
+        class Meta:
+            model = Author
+            fields = ["name", "title", "birth_date"]
+            labels = {
+                "name": _("Writer"),
+            }
+            help_texts = {
+                "name": _("Some useful help text."),
+            }
+            error_messages = {
+                "name": {
+                    "max_length": _("This writer's name is too long."),
+                },
+            }
+</pre>
+            <p class="mb-1">
+                We can also specify <em>field_classes</em> or <em>formfield_callback</em> to customize the type of
+                fields instantiated by the form. Below examples demonstrate editing the field (slug) to use a alternate
+                field (MySlugFormField):
+            </p>
+            <pre>
+    from django.forms import ModelForm
+    from myapp.models import Article
+
+    class ArticleForm(ModelForm):
+        class Meta:
+            model = Article
+            fields = ["pub_date", "headline", "content", "reporter", "slug"]
+            field_clases = {
+                "slug": MySlugFormField,
+            }
+</pre>
+            <p class="mb-1">
+                Equivalent statement of the above example below:
+            </p>
+            <pre>
+    from django.forms import ModelForm
+    from myapp.models import Article
+
+    def formfield_for_dbfield(db_field, **kwargs):
+        if db_field.name == "slug":
+            return MySlugFormField()
+        return db_field.formfield(**kwargs)
+
+    class ArticleForm(ModelForm):
+        class Meta:
+            model = Article
+            fields = ["pub_date", "headline", "content", "reporter", "slug"]
+            formfield_callback = formfield_for_dbfield
+</pre>
+            <p class="mb-1">
+                For <strong>complete</strong> control over a field (including its type, validators, required, etc.), we
+                can achieve this by declaratively specifying fields like in a regular Form. If we want to specify a
+                field's validators, we can do it by defining the field declaratively and setting its <em>validators</em>
+                parameter:
+            </p>
+            <pre>
+    from django.forms import CharField, ModelForm
+    from myapp.models import Article
+
+    class ArticleForm(ModelForm):
+        slug = CharField(validators=[validate_slug])
+
+        class Meta:
+            model = Article
+            fields = ["pub_date", "headline", "content", "reporter", "slug"]
+</pre>
+            <div class="form-control mb-1">
+                <h5>Note:</h5>
+                <p>
+                    When explicitly instantiating a form field, it is important to understand how ModelForm and regular
+                    Form are related. ModelForm is a regular Form which can automatically generate certain fields. The
+                    fields that are automatically generated depend on the content of the Meta class and on which fields
+                    have already been defined declaratively.
+                </p>
+                <p>
+                    Fields defined declaratively are left as-is, therefore any customizations made to Meta attributes
+                    such as widgets, labels, help_texts, or error_messages are ignored; these only apply to fields that
+                    are generated automatically.
+                </p>
+                <p>
+                    Similarly, fields defined declaratively don't draw their attributes like max_length or required from
+                    the corresponding model. If you want to maintain the behavior specified in the model, we need to set
+                    the relevant arguments explicitly when declaring the form field.
+                    <br>
+                    For example, if the Article model looks like this:
+                </p>
+                <pre>
+    class Article(models.Model):
+        headline = models.CharField(
+            max_length=200,
+            null=True,
+            black=True,
+            help_text="Use puns liberally"
+        )
+        content = models.TextField()
+</pre>
+                <p>
+                    Then in order to do some custom validation for headline while keeping the blank and help_text values
+                    as specified, we can define ArticleForm like this:
+                </p>
+                <pre class="mb-1">
+    class ArticleForm(ModelForm):
+        headline = <mark>MyFormField</mark>(
+            max_length=200,
+            required=False,
+            help_text="Use puns liberally"
+        )
+        class Meta:
+            model = Article
+            fields = ["headline", "content"]
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="field_localization_anchor"><h4>Enabling localization of fields</h4></a>
+            <p class="mb-1">
+                By default, the fields in a ModelForm will not localize their data. To enable localization for fields,
+                you can use the <em>localized_fields</em> attribute on the Meta class:
+            </p>
+            <pre class="mb-1">
+from django.forms import ModelForm
+from myapp.models import Author
+class AuthorForm(ModelForm):
+    class Meta:
+        model = Author
+        localized_fields = ['birth_date']
+</pre>
+            <p class="mb-1">
+                If <em>localized_fields</em> is set to the special value '__all__', all fields will be localized.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="form_inheritance_anchor"><h4>Form inheritance</h4></a>
+            <p class="mb-1">
+                As with basic forms, we can extend and reuse ModelForms by inheriting from them. This can allow us to
+                declare extra fields/methods on a parent class for use in a number of forms derived from models.
+            </p>
+            <pre class="mb-1">
+class ArticleForm(forms.ModelForm):
+    headline = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+        help_text="Use puns liberally"
+    )
+    content = models.TextField()
+
+<mark>class EnhancedArticleForm(ArticleForm):</mark>
+    <mark>def clean_pub_date(self):</mark>
+        ...
+</pre>
+            <p class="mb-1">
+                The <em>EnhancedArticleForm</em> that we created from <em>ArticleForm</em>, behaves identically to its
+                parent except that there's additional validation and cleaning for the <em>pub_date</em> field.
+                <br>
+                We can also subclass the parent's Meta inner class if we want to change the <em>Meta.fields</em> or <em>Meta.exclude</em>
+                lists:
+            </p>
+            <pre class="mb-1">
+class RestrictedArticleForm(EnhancedArticleForm):
+    class Meta(ArticleForm.Meta):
+        exclude = ["body"]
+</pre>
+            <p class="mb-1">
+                The above example adds the extra method from the <em>EnhancedArticleForm</em> and modifies the original
+                <em>ArticleForm.Meta</em> to remove one field.
+                <br>
+                Some things to note:
+            </p>
+            <ul class="mb-2">
+                <li>
+                    Normal Python name resolution rules apply. If multiple base classes declare a Meta inner class, only
+                    the first one will be used. This means that the child's Meta, if it exists, otherwise the Meta of
+                    the first parent, etc..
+                </li>
+                <li>
+                    It's possible to inherit from both Form and ModelForm simultaneously, however, we need to ensure
+                    that ModelForm appears first in the MRO. This is because these classes rely on different
+                    metaclasses and a class can only have one metaclass.
+                </li>
+                <li>
+                    It's possible to declaratively remove a Field inherited from a parent class by setting the name to
+                    be None on the subclass.
+                </li>
+            </ul>
+            <p class="mb-1">
+                This technique can only be used once to opt out from a field defined declaratively by a parent class; it
+                won't prevent the ModelForm metaclass from generating a default field.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="initial_values_anchor"><h4>Providing initial values</h4></a>
+            <p class="mb-1">
+                The <em>initial</em> parameter allows the specification of initial data for forms. These will
+                override both initial values from the form field and values from an attached model instance:
+            </p>
+            <pre class="mb-1">
+article = Article.objects.get(pk=1)
+article.headline
+>>>'My headline'
+
+form = ArticleForm(initial={"headline": "Initial headline"}, instance=article)
+form["headline"].value()
+>>> 'Initial headline'
+</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <h4>ModelForm factory function</h4>
+            <p>
+                <mark>(Work in Progress)</mark>
+            </p>
+            <!--https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#modelform-factory-function-->
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <h3>Model Formsets</h3>
+        <p>
+            <mark>(Work in Progress)</mark>
+        </p>
+        <!--https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#model-formsets-->
+    </div>
+
+    <div class="form-control mb-1">
+        <h3>Inline Formsets</h3>
+        <p>
+            <mark>(Work in Progress)</mark>
+        </p>
+        <!--https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/#inline-formsets-->
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block chapter_block %}
+Django - Model Forms
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_model_forms_anchor"><strong>Django - Model Forms</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#modelform_anchor">Using ModelForm to create forms from Models</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#field_types_anchor">&nbsp;&nbsp;&nbsp;Field Types</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#example_usage_modelform_anchor">&nbsp;&nbsp;&nbsp;Example Usage of ModelForm</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#validating_modelform_anchor">&nbsp;&nbsp;&nbsp;Validation on a ModelForm</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#save_method_anchor">&nbsp;&nbsp;&nbsp;The <em>save()</em> method</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#field_options_anchor">&nbsp;&nbsp;&nbsp;Selecting the fields to use</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#override_default_fields_anchor">&nbsp;&nbsp;&nbsp;Overriding the default fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#field_localization_anchor">&nbsp;&nbsp;&nbsp;Enabling localization of fields</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#form_inheritance_anchor">&nbsp;&nbsp;&nbsp;Form inheritance</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#initial_values_anchor">&nbsp;&nbsp;&nbsp;Providing initial values</a>
+</li>
+
+{% endblock %}

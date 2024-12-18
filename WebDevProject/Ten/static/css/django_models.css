@@ -1,0 +1,18 @@
+body{
+    margin:15px;
+}
+
+strong{
+    background-color:lightyellow;
+}
+
+pre{
+    color:crimson;
+    font-size:0.8em;
+}
+
+.dev_comment{
+    background-color:lightyellow;
+    color:red;
+    border:dotted red 2px;
+}

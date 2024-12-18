@@ -1,0 +1,1794 @@
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+    <title>TypeScript - Basics</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <a id="TOPIC_anchor"><h1>TypeScript <span class="door">-</span> Basics</h1></a>
+    <div class="form-control mb-2">
+        <div class="form-control mt-1 mb-2">
+            <h2>Introduction</h2>
+            <p class="mb-2">
+                TypeScript is a syntactic superset (shares the same base syntax) of JavaScript which adds static typing.
+                Simply put, TypeScript is JavaScript but with added syntax for types.
+            </p>
+            <p class="mb-1">
+                JavaScript is a loosely typed language, which means it can be difficult to understand what types of data
+                are being passed around. Additionally, function parameters and variables do not contain any information
+                about this either, thus forcing the developer to refer to the documentation or infer based on the
+                implementation. TypeScript alleviates these issues by allowing specifying the types of data being passed
+                around within the code and reports errors when there is a type mismatch. For example, TypeScript will
+                report an error when passing a string into a function that expects a number whereas JavaScript will not.
+            </p>
+        </div>
+        <div class="form-control mb-2">
+            <h2>Relationship between TypeScript (TS) & JavaScript (JS)</h2>
+            <ul class="mb-0">
+                <li>
+                    Syntax:
+                    <ul>
+                        <li>TS is a language that is a superset of JS and uses its syntax.</li>
+                    </ul>
+                </li>
+                <li>
+                    Types:
+                    <ul>
+                        <li>
+                            TypeScript is a <strong>typed</strong> superset, meaning that it adds rules about how
+                            different kinds of values can be used. TypeScript will check its programs for errors before
+                            execution. This is done based on the kind of values, thus making it a <strong>static type
+                            checker</strong>.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Runtime Behavior:
+                    <ul>
+                        <li>
+                            TypeScript preserves the runtime behavior of JavaScript. This is an advantage of
+                            TypeScript in that it means that developers can easily transition between the languages
+                            without worrying about any subtle differences that may prevent the program from working.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Erased Types:
+                    <ul>
+                        <li>
+                            Once TypeScript has completed checking the code, it erases the types to produce the
+                            resulting <strong>compiled</strong> code. After compilation, the resulting code is plain
+                            JavaScript code that has no type information. Additionally, this means that TypeScript will
+                            never change the behavior of the program based on the types it inferred. Any type errors
+                            encountered during compilation will have no bearing on how the program works when it is run.
+                            Lastly, TypeScript does no provide any additional runtime libraries. Programs will use the
+                            same standard library (or external libraries) as JavaScript programs, no there are no
+                            TypeScript-specific frameworks to learn.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <h2>TypeScript Typing</h2>
+            <div class="form-control mb-2">
+                <h3>Types by Inference:</h3>
+                <p class="mb-1">
+                    TS will generate types for variables automatically as variables are initialized. Based on
+                    the initial value, TS will determine which type to assign to that variable. In this
+                    example: let abc = "abcdefghi";, the 'abc' variable will automatically be typed by TS as a
+                    'string'.
+                </p>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>(Explicitly) Defining Types:</h3>
+                <p class="mb-0">
+                    In some scenarios, it may be difficult for TS to infer a variable's type. In these
+                    scenarios, there is an extension of the JS language - interface, that allows the
+                    developer to dictate to TS, what the type(s) should be.
+
+                    In the below example, we create an object with an inferred types that where 'name' is a
+                    string and 'id' is a number:
+                </p>
+                <pre class="mb-0">
+    const user = {
+        name: "John Doe",
+        id: 12,
+    }</pre>
+                <p class="mb-0">
+                    However, if we want to explicitly describe the object's shape, then we need to use an
+                    interface declaration. Like so:
+                </p>
+                <pre class="mb-0">
+    interface User {
+        name: string;
+        id: number;
+    }</pre>
+                <p class="mb-2">
+                    We can then utilize the interface by passing it to the variable using the following
+                    syntax:
+                    <br>
+                    <strong>&lt;declarationType&gt; &lt;variableName&gt;: &lt;interfaceName&gt; =
+                        &lt;valuesDict&gt;.</strong>
+                    <br>
+
+                </p>
+                <p class="mb-0">
+                    Example usage of the interface:
+                </p>
+                <pre class="mb-0">
+    const user: User = {
+        name: "John Doe",
+        id: 12,
+    }
+</pre>
+                <p>
+                    Essentially, if an argument is provided that doesn't contain the types as a subset, then
+                    TS will throw an error.
+                </p>
+                <p class="mb-0">
+                    Interface declaration will also work with classes. JS supports classes and
+                    object-oriented programming, so TS also supports these features. In the below example,
+                    we create an interface and class, then when creating an object from the class, we set
+                    the interface as its type:
+                </p>
+                <pre class="mb-0">
+    interface <mark style="background-color:cyan;">User</mark> {
+        name: string;
+        id: number;
+    }
+
+    class <mark style="background-color:greenyellow;">UserAccount</mark> {
+        name: string;
+        id: number;
+        constructor(name: string, id: number){
+            this.name = name;
+            this.id = id;
+        }
+    }
+
+    const user: <mark style="background-color:cyan;">User</mark> = new <mark style="background-color:greenyellow;">UserAccount</mark>("John Doe", 12);
+</pre>
+                <p class="mb-0">
+                    Interfaces can also be used to annotate parameters and return values to functions. See
+                    examples below:
+                </p>
+                <pre class="mb-0">
+    function deleteUser(user: User) { ... }; // argument must be of type User
+
+    function getAdminUser(): User { ... }; // Returns a value of type User</pre>
+
+                <p class="mb-0">The base JS primitive types has these primitive types:</p>
+                <ul class="mb-2">
+                    <li><i>boolean</i></li>
+                    <li><i>bigint</i></li>
+                    <li><i>null</i></li>
+                    <li><i>number</i></li>
+                    <li><i>string</i></li>
+                    <li><i>symbol</i></li>
+                    <li><i>undefined</i></li>
+                </ul>
+
+                <p class="mb-0">
+                    TS extends this list to include:
+                </p>
+                <ul class="mb-2">
+                    <li><i>any</i> (allows anything)</li>
+                    <li><i>unknown</i> (ensures that the developer that is using this type declares what the type is)
+                    </li>
+                    <li><i>never</i> (impossible for that type to happen)</li>
+                    <li><i>void</i> (a function which returns undefined or has no return value)</li>
+                </ul>
+
+                <p class="mb-2">
+                    As shown above, there are two methods for building types: <strong>interfaces</strong> and
+                    <strong>Types</strong> (each with their own syntaxes). Of these, <strong>interface</strong> is the
+                    preferred method. Use <strong>type</strong> only when you need specific features.
+                </p>
+            </div>
+
+            <div class="form-control mb-1">
+                <h3>Composing Types:</h3>
+                <p class="mb-2">
+                    In TS, developers can create complex types by combining simple ones. There are two popular methods
+                    for doing this: <strong>unions</strong> and <strong>generics</strong>.
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Unions</h4>
+                    <p class="mb-0">
+                        With unions, developers can declare that a type can be one of many types. For example, a
+                        <strong>boolean</strong> can be described as either <i>true</i> or <i>false</i>. See example:
+                    </p>
+                    <pre class="mb-2">  type booboo = true | false;</pre>
+                    <p class="mb-0">
+                        Another popular use-case for union types is to describe the set of <strong>string</strong>
+                        or <strong>number</strong> literals that a value is allowed to be. (Similar to <i>enums</i> in
+                        other programming languages such as Python). See examples below:
+                    </p>
+                    <pre class="mb-2">
+    type WindowStates = "open" | "closed" | "minimized";
+    type LockStates = "locked" | "unlocked";
+    type PositiveOddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
+</pre>
+                    <p class="mb-0">
+                        Unions also enable functions to accept different types of arguments. For instance, we can create
+                        a function that accepts either a <strong>string</strong> argument or an <strong>array</strong>
+                        argument. See example below:
+                    </p>
+                    <pre class="mb-2">
+    function getLength(objL string | string[]) {
+        return obj.length;
+    }
+</pre>
+                    <p class="mb-1">
+                        The <strong>typeof</strong> operator can be used to check the type of a variable:
+                    </p>
+                    <table class="table table-bordered mb-1">
+                        <thead>
+                        <tr class="table-dark">
+                            <th>Type</th>
+                            <th>Predicate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>string</td>
+                            <td>typeof s === "string"</td>
+                        </tr>
+                        <tr>
+                            <td>number</td>
+                            <td>typeof n === "number"</td>
+                        </tr>
+                        <tr>
+                            <td>boolean</td>
+                            <td>typeof b === "boolean"</td>
+                        </tr>
+                        <tr>
+                            <td>undefined</td>
+                            <td>typeof undefined === "undefined"</td>
+                        </tr>
+                        <tr>
+                            <td>function</td>
+                            <td>typeof f === "function"</td>
+                        </tr>
+                        <tr>
+                            <td>array</td>
+                            <td>Array.isArray(a)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="mb-0">
+                        This is useful in that it allows the function to behave differently based on the tested type,
+                        like so:
+                    </p>
+                    <pre class="mb-2">
+    function exampleTypeof(obj: string | string[]) {
+        if(typeof obj === "string") {
+            // Do this
+        } else {
+            // Do this instead
+        }
+    }
+</pre>
+                </div>
+                <div class="form-control mb-2">
+                    <h4>Generics</h4>
+                    <p class="mb-0">
+                        Generics provide variables to types. Generics are commonly applied to <i>arrays</i>. The reason
+                        being that arrays (without generics applied) can contain any type and any combination of types
+                        as items. Using generics on an array will force it to accept only values whose type matches the
+                        applied generic type. Examples below:
+                    </p>
+                    <pre class="mb-2">
+    type StringArray = Array&lt;string&gt;;
+    type NumberArray = Array&lt;number&gt;;
+    type ObjectWithNameArray = Array&lt;{ name: string }&gt;;
+</pre>
+                    <p class="mb-0">We can also declare custom types using generics. Example below:</p>
+                    <pre class="mb-1">
+    interface Backpack&lt;Type&gt; {
+        add: (obj: Type) =&gt; void;
+        get: () =&gt; Type;
+    }
+
+    // Essentially tells TS that there is a constant named 'backpack' and sets the type to 'string'
+    declare const backpack: Backpack&lt;string&gt;;
+
+    // The 'object' must be a string because we set the type to 'string' when we declared 'backpack'
+    const object = backpack.get();
+
+    // TS will mark this as an error because 123 is a 'number' and 'backpack' only accepts 'string' values
+    backpack.add(123); // will produce an error
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Structural Type System:</h4>
+                    <p class="mb-1">
+                        One of TS's core principles is that type checking focuses on the "shape" that values have. This
+                        is also known as "duck typing" or "structural typing". In a Structural Type system, if two
+                        objects have the same "shape", then they are considered to be of the same type. Example:
+                    </p>
+                    <pre class="mb-1">
+    interface Point {
+        x: number;
+        y: number;
+    }
+
+    function logPointFunction(p: Point) {
+        console.log(`${p.x}, ${p.y}`);
+    }
+
+    const point2 = { x: 12, y: 26 };
+    logPointFunction(point2);
+    // This function is able to take point2 because it has the same structure as a Point object
+
+
+    const point3 = { first_name: 'John', last_name: 'Doe'};
+    logPointFunction(point3); // will produce an error
+    // This function won't take point3 because the variable's structure is different from a Point type
+</pre>
+                    <p class="mb-0">
+                        In the above example, the 'point2' variable is never declared to be a 'Point' type, but because
+                        TS compares the shape of 'point2' to the shape of 'Point' and determined it to be a structural
+                        match, that variable is deemed acceptable as a value to the 'logPointFunction(p: Point)'
+                        function. The structure of the variable does not need to match the object exactly, however. The
+                        variable only requires a subset of the object's fields to match. So in the above example, if the
+                        variable is a dict and has at least a variable of type 'number' named 'x' and a variable of type
+                        'number' named 'y', then it is still deemed as acceptable. See below examples:
+                    </p>
+                    <pre class="mb-2">
+    ...
+    const point4 = { x: 12, y: 26, z: 30 };
+    logPointFunction(point4);
+    // The existence of the 'z' variable in 'point4' does not make it ineligible for use in the function
+
+    const point5 = { x: 12, y: 26, first_name: 'Jane', last_name: 'Doe' };
+    logPointFunction(point5);
+    // The additional variables' typings are ignored by the function as it only checks for 'x' and 'y'
+
+    const point6 = { hex_color: "#000000" };
+    logPointFunction(point6); // will produce an error
+    // No 'x' and 'y' variables of type 'number' are found in the variable, so the function rejects it</pre>
+                    <p class="mb-0">
+                        There's no difference between how classes and objects conform to shapes. If the object or class
+                        has all of the required properties, then TS will say they match, regardless of the
+                        implementation details. See example below:
+                    </p>
+                    <pre class="mb-1">
+    class PointTwo {
+        x: number;
+        y: number;
+
+        constructor(x: number, y: number) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    const pointTwoVar = new PointTwo(10, 20);
+    logPointFunction(pointTwoVar);</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-control mb-2">
+            <h2>TypeScript Quick Reference</h2>
+            <div class="form-control mb-2">
+                <h3>Simple Types</h3>
+                <p class="mb-1">
+                    There are 3 main primitives in JS and TS:
+                </p>
+                <table class="table table-bordered">
+                    <tr class="table-dark">
+                        <th class="text-center">Primitive</th>
+                        <th class="text-center">Values</th>
+                    </tr>
+                    <tr>
+                        <td>boolean</td>
+                        <td><i>true</i> or <i>false</i> values</td>
+                    </tr>
+                    <tr>
+                        <td>number</td>
+                        <td>whole numbers and floating point values</td>
+                    </tr>
+                    <tr>
+                        <td>string</td>
+                        <td>text values</td>
+                    </tr>
+                    <tr>
+                        <td>bigint</td>
+                        <td>whole numbers and floating point values, but allows significantly larger negative and
+                            positive numbers than the <strong>number</strong> primitive allows
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>symbol</td>
+                        <td>used to create globally unique identifiers</td>
+                    </tr>
+                </table>
+
+                <p class="mb-0">
+                    When a variable is created, TypeScript assigns a type to it in one of two ways:
+                </p>
+                <ul class="mb-2">
+                    <li>Explicit</li>
+                    <li>Implicit</li>
+                </ul>
+
+                <div class="form-control mb-2">
+                    <h4>Explicit Typing</h4>
+                    <p class="mb-0">
+                        This refers to when the developer explicitly specifies the type during declarations. Like so:
+                    </p>
+                    <pre class="mb-1">
+    let name<mark>: string</mark> = "Daniel";
+
+    let age<mark>: number</mark> = 25;</pre>
+                    <p class="mb-1">
+                        This kind of typing is more readable and deliberate.
+                    </p>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Implicit Typing</h4>
+                    <p class="mb-0">
+                        This refers to when TS infers the type of the variable based on the assigned value. Like so:
+                    </p>
+                    <pre class="mb-1">
+    let name = "Daniel"; // TS will infer the 'name' variable's type to be 'string'
+
+    let age = 25; // TS will infer the 'age' variable's type to be 'number'</pre>
+                    <p class="mb-1">
+                        This kind of type assignment is shorter and faster to type but forces TS to infer the type and
+                        requires new developers to infer the type from either documentation or inference, which can be
+                        time consuming and/or confusing.
+                    </p>
+                </div>
+
+                <p class="mb-0">
+                    Sometimes TS can encounter issues when attempting to assign a type to a variable or is unable to
+                    infer to type. In the first scenario, TS will throw an error. In the below example, we explicitly
+                    specify the type as a <strong>string</strong> and then attempt to assign a <strong>number</strong>
+                    value, thus causing an error to be thrown:
+                </p>
+                <pre class="mb-2">
+    let name: string = "Daniel"; // Explicitly typed to 'string'
+    name = 25; // Attempts to change the type to 'number' and thus TS throws an error
+</pre>
+                <p class="mb-0">
+                    This following example uses <i>implicit typing</i> and results in the same error:
+                </p>
+                <pre class="mb-2">
+    let name = "Daniel"; // Implicitly typed to 'string'
+    name = 25; // Attempts to change the type to 'number' and thus TS still throws an error
+</pre>
+                <p class="mb-2">
+                    This may seem like a bad thing, but it's actually quite useful. JavaScript will not throw an error
+                    in these scenarios and thus when/if an unexpected result occurs, debugging the issue may be
+                    significantly more difficult.
+                </p>
+
+                <p class="mb-2">
+                    In scenario #2 (where TS is unable to infer a type), it will set the variable's type to
+                    <strong>any</strong>, which disables type checking. See example below:
+                </p>
+                <pre class="mb-2">
+    let json = JSON.parse("55"); // Implicitly typed as 'any' because it doesn't know the return type
+    console.log(typeof json); // Prints 'number'
+</pre>
+
+                <p class="mb-1">
+                    This behavior can be disabled by enabling <i>noImplicitAny</i> as an option in a TypeScript's
+                    project <i>tsconfig.json</i>, which is a JSON configuration file for customizing TS's behavior.
+                </p>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Special Types</h3>
+                <p class="mb-1">
+                    TypeScript has special types (not native to JavaScript) that don't refer to any specific type of
+                    data, such as <i>any, unknown, never, undefined, </i> and <i>null</i>.
+                </p>
+
+                <div class="form-control mb-2">
+                    <h4>any</h4>
+                    <p class="mb-0">
+                        <i>any</i> is a type that disables type checking and effectively allows all types to be used.
+                        The example below does not use <i>any</i> and thus throws an error:
+                    </p>
+                    <pre class="mb-1">
+    let isHappy = false;
+    isHappy = "Hello"; // This will result in an error because it is typed to 'boolean' and "Hello" is a string
+    Math.round(isHappy); // This will also result in an error because the 'round()' function only works on 'number' types
+</pre>
+                    <p class="mb-0">
+                        However, if we set the type of the example variable to <i>any</i>, then there's no error:
+                    </p>
+                    <pre class="mb-1">
+    let isHappy: <mark>any</mark> = false;
+    isHappy = "Hello"; // No error, since the variable is typed as 'any'
+    Math.round(isHappy); // No error again, since the variable is typed as 'any'
+</pre>
+                    <p class="mb-1">
+                        While <i>any</i> can be useful for bypassing errors, TypeScript will not be able to provide type
+                        safety. Additionally, any tools which rely on type data, such as auto-completion will not work.
+                        <mark>It is <strong>NOT RECOMMENDED</strong> to use this typing</mark>
+                        .
+                    </p>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>unknown</h4>
+                    <p class="mb-0">
+                        <i>unknown</i> is a similar, but safer alternative to <i>any</i>. TypeScript will prevent
+                        <i>unknown</i> types from being used, as shown in the below example:
+                    </p>
+                    <pre class="mb-1">
+    let fuzzy: <mark>unknown</mark> = 1;
+    fuzzy = "hello"; // No errors, since the variable is typed as 'unknown'
+    fuzzy = {
+        nonExistentMethod: () => {
+            console.log("Hello, world!");
+        }
+    } as { nonExistentMethod: () => void }
+
+    fuzzy.nonExistentMethod(); // Results in an error since 'object' is of type 'unknown'.
+    // To avoid the error from this method call, we can comment it out and run the below function instead
+
+    // This function will check the typing first before running it if safe and ignoring it if unsafe
+    if(typeof fuzzy === 'object' && fuzzy !== null) {
+        (fuzzy as { nonExistentMethod: Function }).nonExistentMethod();
+    }
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>never</h4>
+                    <p class="mb-0">
+                        <i>never</i> throws an error when/if it is defined. This is rarely used, especially by itself -
+                        it's primary use is in advanced generics.
+                    </p>
+                    <pre class="mb-1">
+    let isHappy: never = true; // Results in an error because it attempted to assign a value to a variable of type 'never'
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>undefined & null</h4>
+                    <p class="mb-0">
+                        <i>undefined</i> and <i>null</i> are types that refer to the JavaScript primitives
+                        <i>undefined</i> and <i>null</i>, respectively. These types serve little to no use unless
+                        the <i>strictNullChecks</i> options is enabled in TS's <i>tsconfig.json</i> file.
+                    </p>
+                    <pre class="mb-1">
+    let x: undefined = undefined;
+    let y: null = null;
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Arrays</h3>
+                <p class="mb-0">
+                    TypeScript has a specific syntax for typing arrays. See below:
+                </p>
+                <pre class="mb-2">
+    const names: string[] = [];
+    names.push("Daniel"); // Works without error
+
+    names.push(25); // Produces an error because the array is typed to accept 'string' values only
+</pre>
+                <div class="form-control mb-2">
+                    <h4>Readonly</h4>
+                    <p class="mb-0">
+                        The <i>readonly</i> keyword can be used to prevent an array from being changed. See below:
+                    </p>
+                    <pre class="mb-1">
+    const names: readonly string[] = ["Daniel"];
+    names.push("Samantha"); // Attempting to add a value produces an error because the array has been set to 'readonly'
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Type Inference</h4>
+                    <p class="mb-0">
+                        TS can infer the type of an array if it has values.
+                    </p>
+                    <pre class="mb-1">
+    const numbers = [1, 2, 3]; // TS infers the type as 'number[]'
+    numbers.push(4);
+
+    numbers.push("Hello"); // Attempting to add a string causes an error because the array only accepts 'number' values
+
+    let pointer: number = numbers[2]; // Works without error
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Tuples</h3>
+                <div class="form-control mb-2">
+                    <h4>Typed Arrays</h4>
+                    <p class="mb-0">
+                        A <strong>tuple</strong> is a typed <i>array</i> with a pre-defined length and types for each
+                        index. They're useful because they allow each element in the array to be a known type of value.
+                        To define a tuple, you need to specify the type of each element in the array. See below:
+                    </p>
+                    <pre class="mb-1">
+    let toople: [number, boolean, string]; // Defining a tuple
+    toople = [25, false, "Daniel"]; // Initializing the tuple
+</pre>
+
+                    <p class="mb-0">
+                        In the below example, the values are in the wrong order and thus do not match the tuple
+                        definition, which produces an error:
+                    </p>
+                    <pre class="mb-1">
+    let toople: [number, boolean, string]; // Defining a tuple
+    <span style="text-decoration: underline wavy red">toople = ["Daniel", 25, false];</span> // Produces an error because the values don't match the defined types. i.e. "Daniel" isn't a 'number' type
+</pre>
+
+                    <p class="mb-0">
+                        NOTE: Tuples only have strongly defined types for the initial values. Values added later do not
+                        need to match the order of the typing specified during the tuple's definition. They still need
+                        to match one of the types though (just ignore the order):
+                    </p>
+                    <pre class="mb-1">
+    let toople: [number, boolean, string];
+    toople = [25, false, "Daniel"];
+    toople.push("abc"); // No error. The order no longer matters after the initial values
+    toople.push(123); // No error. The order no longer matters after the initial values
+    toople.push(true); // No error. The order no longer matters after the initial values
+    <span style="text-decoration: underline wavy red">toople.push([1,2,3]);</span> // Produces an error because new values still need to match one of the defined types. Array isn't a defined type here
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Readonly Tuple</h4>
+                    <p class="mb-0">
+                        The <i>readonly</i> keyword can be used to prevent the tuple from being changed. See below:
+                    </p>
+                    <pre class="mb-1">
+    let toople: <mark>readonly</mark> [number, boolean, string] = [25, false, "Daniel"];
+    toople.push("Grapes"); // Produces an error because the tuple is set to 'readonly'
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Named Tuples</h4>
+                    <p class="mb-0">
+                        <i>Named tuples</i> allow developers to provide context for the values at each index.
+                    </p>
+                    <pre class="mb-1">
+    const coords: [x: number, y: number] = [24.6, 35.7];
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Destructuring Tuples</h4>
+                    <p class="mb-0">
+                        Tuples are arrays and can thus be destructured.
+                    </p>
+                    <pre class="mb-2">
+    const coords: [x: number, y: number] = [24.6, 35.7];
+    const [x_coord, y_coord] = coords;
+</pre>
+                    <div class="form-control mb-1">
+                        <h5>Destructuring</h5>
+                        <p class="mb-0">
+                            The <i>destructuring assignment</i> syntax is a JS expression that makes it possible to
+                            unpack values from arrays, or properties from objects, into distinct variables.
+                        </p>
+                        <pre class="mb-0">
+    const names = ['John', 'Jeremy', 'Jason'];
+    const [person_1, person_2, person_3] = names;
+</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Object Types</h3>
+                <p class="mb-0">
+                    Typing for <i>objects</i> is done by supplying a dict of key-value pairs where the key is the name
+                    of the variable and the value is the type. Object types like the one in the example below can be
+                    written separately, and reused.
+                </p>
+                <pre class="mb-2">
+    const car: <mark>{ make: string, model: string, year: number }</mark> = {
+      make: "Honda",
+      model: "Civic",
+      year: 2024
+    };
+</pre>
+                <div class="form-control mb-2">
+                    <h4>Type Inference</h4>
+                    <p class="mb-2">
+                        TS can infer the types of the object's properties based on their values.
+                    </p>
+                    <pre class="mb-1">
+    const car = {
+      make: "Honda",
+    };
+    car.make = "Toyota"; // no error
+    car.make = 2; // Returns an error because this property has already been typed as a 'string'
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Optional Properties</h4>
+                    <p class="mb-1">
+                        <i>Optional properties</i> are properties that don't have to be defined in the object
+                        definition. Below are two examples: the first one doesn't use optional properties but the second
+                        one does.
+                    </p>
+                    <p class="mb-0">Example that doesn't use optional properties:</p>
+                    <pre class="mb-2">
+    const car: { type: string, mileage: number } = {
+      type: "Toyota",
+    };
+    // Returns an error because 'mileage' is defined but it hasn't been supplied as a property in the object
+
+    car.mileage = 2000;
+</pre>
+                    <p class="mb-0">Example that uses optional properties:</p>
+                    <pre class="mb-1">
+    const car: { type: string, <mark>mileage?</mark>: number } = {
+      type: "Toyota"
+    };
+
+    car.mileage = 2000;
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Index Signatures</h4>
+                    <p class="mb-2">
+                        <i>Index signatures</i> can be used for objects without a defined list of properties.
+                    </p>
+                    <pre class="mb-1">
+    const profile: { [index: string]: number } = {};
+
+    profile.Jack = 25;
+    profile.Mark = "Fifty"; // Returns an error because 'number' is the expected type for this property
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Enums</h3>
+                <p class="mb-1">
+                    An <i>enum</i> is a special class that represents a group of constants (unchangeable variables).
+                    Enums can be typed as strings or numerics.
+                </p>
+
+                <div class="form-control mb-2">
+                    <h4>Numeric Enums - Default</h4>
+                    <p class="mb-0">
+                        <i>Enums</i> will, by default, initialize the first value to 0 and then automatically increment
+                        by 1 for each additional value.
+                    </p>
+                    <pre class="mb-1">
+enum CardinalDirections {
+    North,  <span class="comment">// 0</span>
+    East,   <span class="comment">// 1</span>
+    South,  <span class="comment">// 2</span>
+    West,   <span class="comment">// 3</span>
+}
+
+console.log(CardinalDirections.East); <span class="comment">// This will print 1</span>
+
+let currentDirection = CardinalDirections.North; <span class="comment">// Sets it as an 'enum' type of 'CardinalDirections'; other enums will not work</span>
+console.log(currentDirection); <span class="comment">// This will print 0</span>
+
+<span class="error_underline">currentDirection = 'North';</span> <span class="comment">// Produces an error because 'North' is not a valid value</span>
+
+enum TestTest {
+    Test,
+}
+<span class="error_underline">currentDirection = TestTest.Test;</span> <span class="comment">// Produces an error because the value's 'enum' type is not 'CardinalDirections'</span>
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Numeric Enums - Initialized</h4>
+                    <p class="mb-0">
+                        We can manually specify the number for the initial value and TS will automatically increment
+                        from that number for subsequent values.
+                    </p>
+                    <pre class="mb-1">
+enum CardinalDirections {
+    North = 2,    <span class="comment">// Manually specified the initial number as 2</span>
+    East,         <span class="comment">// 3</span>
+    South,        <span class="comment">// 4</span>
+    West,         <span class="comment">// 5</span>
+}
+
+console.log(CardinalDirections.North); <span class="comment">// Prints 2</span>
+
+console.log(CardinalDirections.West);  <span class="comment">// Prints 5</span>
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Numeric Enums - Fully Initialized</h4>
+                    <p class="mb-0">
+                        We can also manually specify the number for all enum values and TS will no longer automatically
+                        increment the numbers for each new value.
+                    </p>
+                    <pre class="mb-1">
+enum StatusCodes {
+    NotFound = 404,
+    Success = 200,
+    Accepted = 202,
+    BadRequest = 400
+}
+
+console.log(StatusCodes.NotFound); <span class="comment">// Prints 404</span>
+
+console.log(StatusCodes.Success);  <span class="comment">// Prints 200</span>
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>String Enums</h4>
+                    <p class="mb-0">
+                        <i>Enums</i> can also contain 'strings'. This is actually more common than numeric enums due to
+                        improved readability. String and numeric enums can both be used in the same enum but it is not
+                        recommended.
+                    </p>
+                    <pre class="mb-1">
+enum CardinalDirections {
+  North = 'North',
+  East = "East",
+  South = "South",
+  West = "West"
+};
+
+console.log(CardinalDirections.North); <span class="comment">// Prints 404</span>
+
+console.log(CardinalDirections.West);  <span class="comment">// Prints 404</span>
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Aliases & Interfaces</h3>
+                <p class="mb-1">
+                    TS allows types to be defined separately from the variables that use them. <i>Aliases</i> and
+                    <i>interfaces</i> allow types to be easily shared between different variables/objects.
+                </p>
+
+                <div class="form-control mb-2">
+                    <h4>Type Aliases</h4>
+                    <p class="mb-1">
+                        <i>Type aliases</i> allow defining types with a custom name (AKA "alias"). They can be used for
+                        primitives like <i>string</i> and <i>number</i> or more complex types like <i>objects</i> and
+                        <i>arrays</i>.
+                    </p>
+                    <pre class="mb-1">
+type CarYear = number;
+type CarType = string;
+type CarModel = string;
+type Car = {
+    year: CarYear,
+    type: CarType,
+    model: CarModel
+}
+
+const carYear: CarYear = 2001;
+const carType: CarType = "Toyota";
+const carModel: CarModel = "Corolla";
+const car: Car = {
+    year: carYear,
+    type: carType,
+    model: carModel
+};
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Interfaces</h4>
+                    <p class="mb-1">
+                        <i>Interfaces</i> are similar to type aliases, except they only apply to <i>object</i> types.
+                    </p>
+                    <pre class="mb-1">
+interface Rectangle {
+    height: number,
+    width: number
+}
+
+const rectangle: Rectangle = {
+    height: 20,
+    width: 10
+};
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Extending Interfaces</h4>
+                    <p class="mb-1">
+                        <i>Interfaces</i> can extend each other's definition. (Reminder: "extending" an interface means
+                        that you are creating a new interface with the same properties as the original but with your new
+                        changes added).
+                    </p>
+                    <pre class="mb-1">
+interface <span class="highlight_4">Rectangle</span> {
+    height: number,
+    width: number
+}
+
+interface <span class="highlight_2">ColoredRectangle</span> <span class="highlight_3">extends</span> <span
+                            class="highlight_4">Rectangle</span> {
+    color: string
+}
+
+const coloredRectangle: <span class="highlight_2">ColoredRectangle</span> = {
+    height: 20,
+    width: 10,
+    color: "red"
+};
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Union Types</h3>
+                <p class="mb-1">
+                    <i>Union types</i> are used when a value can be more than a single type, such as when a property
+                    could be a <i>string</i> or <i>number</i>.
+                </p>
+
+                <div class="form-control mb-2">
+                    <h4>Union | (OR)</h4>
+                    <p class="mb-1">
+                        We can specify that a parameter can be multiple types by using the <strong>|</strong> operator.
+                        Each type needs to be delimited by the OR operator.
+                    </p>
+                    <pre class="mb-1">
+function printStatusCode(code<mark>: string | number</mark>) {
+    console.log(`Status code: ${code}.`)
+}
+
+printStatusCode(404);
+printStatusCode('404');
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Union Type Errors</h4>
+                    <p class="mb-1">
+                        You need to know what your type is when using <i>union types</i> in order to avoid type errors.
+                        In the below example, the parameter has been enabled to accept either <i>strings</i> or
+                        <i>numbers</i> - but then calls a string-only function (<i>toUpperCase()</i>) the parameter. If
+                        the variable is holding a <i>number</i> when that function is called, then it will cause an
+                        error.
+                    </p>
+                    <pre class="mb-1">
+function printStatusCode(code: string | number) {
+    <span class="error_underline">console.log(`My status code is ${code.toUpperCase()}.`)</span> <span class="comment">// Produces an error if a number-typed value is passed into the 'code' variable</span>
+}
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Functions</h3>
+                <p class="mb-1">
+
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Return Type</h4>
+                    <p class="mb-1">
+                        In TS, we can explicitly specify the return type of the function. If no return type is defined,
+                        then TS will attempt to infer it through the types of variables or expressions returned.
+                    </p>
+                    <pre class="mb-1">
+function getTime()<mark>: number</mark> {
+    return new Date().getTime();
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Void Return Type</h4>
+                    <p class="mb-1">
+                        The <i>void</i> type can be used to indicate that a function doesn't return any value.
+                    </p>
+                    <pre class="mb-1">
+function printHello(): void {
+    console.log('Hello!');
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Parameters</h4>
+                    <p class="mb-1">
+                        Function parameters can be typed with a similar syntax as variable declarations. If no parameter
+                        type is specified, then TS will default to using <i>any</i>, unless additional information is
+                        available (see Default Parameters and Type Alias sections)
+                    </p>
+                    <pre class="mb-1">
+function multiply(a: number, b: number) {
+    return a * b;
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Optional Parameters</h4>
+                    <p class="mb-1">
+                        TS assumed all parameters are required by default, but they can be marked as optional by using
+                        the <strong>?</strong> operator on the target variable.
+                    </p>
+                    <pre class="mb-1">
+function add(a: number, b: number, c?: number) {
+    return a + b + (c || 0);
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Default Parameters</h4>
+                    <p class="mb-1">
+                        We can specify default values for parameters so that if no value is supplied during the function
+                        call, then the default value will be used.
+                    </p>
+                    <pre class="mb-1">
+function pow(value: number, exponent: number = 10) {
+    return value ** exponent;
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Named Parameters</h4>
+                    <p class="mb-1">
+                        Typing named parameters follows the same pattern as typing normal parameters.
+                    </p>
+                    <pre class="mb-1">
+function divide({ dividend, divisor }: { dividend: number, divisor: number }) {
+    return dividend / divisor;
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Rest Parameters</h4>
+                    <p class="mb-1">
+                        <i>Rest parameters</i> are typed like normal parameters, but the type must be an array as
+                        <i>rest parameters</i> are <u>always</u> arrays.
+                    </p>
+                    <pre class="mb-1">
+function add(a: number, b: number, ...rest: number[]) {
+    return a + b + rest.reduce((p, c) => p + c, 0);
+}
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Type Alias</h4>
+                    <p class="mb-1">
+                        Function types can be specified separately from functions with type aliases. These are written
+                        similarly to arrow functions.
+                    </p>
+                    <pre class="mb-2">
+    type numType = (value: number) => number;
+
+    const negateFunc: numType = (value) => value * -1; <span class="comment">// the `value` parameter's type is automatically typed as `number` from the type `Negate`</span>
+</pre>
+                    <div class="form-control mb-1">
+                        <h5>Arrow Functions</h5>
+                        <p class="mb-2">
+                            Arrow functions are (normal) functions that are rewritten using the arrow function syntax.
+                            These allow us to write simpler, shorter functions.
+                        </p>
+                        <p class="mb-0">Normal (non-arrow) function:</p>
+                        <pre class="mb-2">
+    hello = function() {
+        return "Hello World!";
+    }
+</pre>
+                        <p class="mb-0">Arrow function:</p>
+                        <pre class="mb-1">
+    hello = () => {
+        return "Hello World!";
+    }
+</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Casting</h3>
+                <p class="mb-1">
+                    <i>Casting</i> allows developers to override the type of a variable. This can be necessary in
+                    scenarios such as when the incorrect types may be provided by a library. Note that casting does not
+                    change the type of the data within the variable. Also, TS will still attempt to typecheck casts to
+                    prevent casts that it deems to be incorrect - this can be overriden.
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Casting with <i>as</i></h4>
+                    <p class="mb-1">
+                        The <strong>as</strong> keyword is used to directly change the type of a given variable.
+                    </p>
+                    <pre class="mb-1">
+    let x: unknown = 'hello';
+    console.log((x as string).length);
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Casting with <i>&lt;&gt;</i></h4>
+                    <p class="mb-1">
+                        Works the same as casting with <i>as</i>. (This type of casting will not work with TSX React
+                        files).
+                    </p>
+                    <pre class="mb-1">
+    let x: unknown = 'hello';
+    console.log((&lt;string&gt;x).length);
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Force Casting</h4>
+                    <p class="mb-1">
+                        <i>Force casting</i> allows developers to override TS errors that can occur when casting.
+                        <i>Force casting</i> is done by casting the type to <i>unknown</i>, then casting again but to
+                        the desired type.
+                    </p>
+                    <pre class="mb-1">
+    let x = 'hello';
+    console.log(((x as unknown) as number).length);
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Classes</h3>
+                <p class="mb-1">
+                    TS adds types and visibility modifiers to JS classes.
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Members: Types</h4>
+                    <p class="mb-1">
+                        The members of a class (properties and methods) are typed using type annotations.
+                    </p>
+                    <pre class="mb-1">
+    class Person {
+        name: string;
+    }
+
+    const person = new Person();
+    person.name = "Jane";
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Members: Visibility</h4>
+                    <p class="mb-1">
+                        Class members can be given special modifiers that will affect visibility.
+                    </p>
+                    <table class="table table-bordered">
+                        <tr class="table-dark">
+                            <th>Modifier</th>
+                            <th>Visibility</th>
+                        </tr>
+                        <tr>
+                            <td>public</td>
+                            <td>(Default) Allows access to the class member from anywhere</td>
+                        </tr>
+                        <tr>
+                            <td>private</td>
+                            <td>Only allows access to the class member from within the class</td>
+                        </tr>
+                        <tr>
+                            <td>protected</td>
+                            <td>Only allow access to the class member from within the class or any classes that inherit
+                                this class
+                            </td>
+                        </tr>
+                    </table>
+                    <pre class="mb-1">
+    class Person {
+        <mark>private</mark> name: string;
+
+        <mark>public</mark> constructor(name: string) {
+            this.name = name;
+        }
+
+        <mark>public</mark> getName(): string {
+            return this.name;
+        }
+    }
+
+    const person = new Person("Jane");
+    console.log(person.getName());
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Parameter Properties</h4>
+                    <p class="mb-1">
+                        TS provides a convenient way to define class members in the constructor by adding visibility
+                        modifiers to the parameter.
+                    </p>
+                    <pre class="mb-1">
+    class Person {
+        public constructor(<mark>private</mark> name: string) {} // 'name' has been set to private
+
+        public getName(): string {
+            return this.name;
+        }
+    }
+
+    const person = new Person("Jane");
+    console.log(person.getName());
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Readonly</h4>
+                    <p class="mb-1">
+                        The <i>readonly</i> keyword prevents any changes to the class member it is applied to.
+                    </p>
+                    <pre class="mb-1">
+    class Person {
+        private <mark>readonly</mark> name: string;
+
+        public constructor(name: string) {
+            this.name = name; // 'name' can't be changed after this initialization, which is only allowed at declaration or in the constructor
+        }
+
+        public getName(): string {
+            return this.name;
+        }
+    }
+
+    const person = new Person("Jane");
+    console.log(person.getName());
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Inheritance: Implements</h4>
+                    <p class="mb-1">
+                        Interfaces can be used to define the type a class must follow. This is done via the
+                        <i>implements</i> keyword. A class can <i>implement</i> multiple interfaces unlike
+                        <i>extends</i> which only allows a single parent.
+                    </p>
+                    <pre class="mb-1">
+    interface Shape {
+        getArea: () => number;
+    }
+
+    class Rectangle <mark>implements</mark> Shape {
+        public constructor(protected readonly width: number, protected readonly height: number) {}
+
+        public getArea(): number {
+            return this.width * this.height;
+        }
+    }
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Inheritance: Extends</h4>
+                    <p class="mb-1">
+                        Classes can inherit from each other using the <i>extends</i> keyword followed by the desired
+                        parent class. A class can only inherit from a single other class in this way.
+                    </p>
+                    <pre class="mb-1">
+    interface Shape {
+        getArea: () => number;
+    }
+
+    class Rectangle implements Shape {
+        public constructor(protected readonly width: number, protected readonly height: number) {}
+
+        public getArea(): number {
+            return this.width * this.height;
+        }
+    }
+
+    class Square <mark>extends</mark> Rectangle {
+        public constructor(width: number) {
+            super(width, width);
+        }
+    }
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Override</h4>
+                    <p class="mb-1">
+                        When a class extends another class, it can overwrite the inherited members of the parent class.
+                        This is done by defining members in the child class by using the same method signature as the
+                        inherited member and then applying the <i>override</i> keyword.
+                    </p>
+                    <pre class="mb-1">
+    interface Shape {
+        getArea: () => number;
+    }
+
+    class Rectangle implements Shape {
+        public constructor(protected readonly width: number, protected readonly height: number) {}
+
+        public getArea(): number {
+            return this.width * this.height;
+        }
+
+        public toString(): string {
+            return `Rectangle[width=${this.width}, height=${this.height}]`;
+        }
+    }
+
+    class Square extends Rectangle {
+        public constructor(width: number) {
+            super(width, width);
+        }
+
+        public <mark>override</mark> toString(): string {
+            return `Square[width=${this.width}]`;
+        }
+    }
+</pre>
+                    <p class="mb-1">
+                        Note: The <i>override</i> keyword is actually optional and is only meant to help prevent
+                        accidentally overriding a method that doesn't exist. Enable <i>noImplicitOverride</i> in the TS
+                        config file if you want to force it to be a requirement when overriding.
+                    </p>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Abstract Classes</h4>
+                    <p class="mb-1">
+                        Classes can be written in a way that allows them to be used as a base class for other classes
+                        without having to implement all the members. This is done by using the <i>abstract</i> keyword.
+                        Members left unimplemented also use the <i>abstract</i> keyword. Note: abstract classes cannot
+                        be directly instantiated.
+                    </p>
+                    <pre class="mb-1">
+    <mark>abstract</mark> class Polygon {
+        public <mark>abstract</mark> getArea(): number;
+
+        public toString(): string {
+            return `Polygon[area=${this.getArea()}]`;
+        }
+    }
+
+    class Rectangle extends Polygon {
+        public constructor(protected readonly width: number, protected readonly height: number) {
+            super();
+        }
+
+        public getArea(): number {
+            return this.width * this.height;
+        }
+    }
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Basic Generics</h3>
+                <p class="mb-2">
+                    Generics allow creating <i>type variables</i> which can be used to create classes, functions, and
+                    type aliases that don't need to explicitly define the types that they use. They make it easier to
+                    write reusable code.
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Functions</h4>
+                    <p class="mb-1">
+                        Generics with function assist in making more generalized methods which more accurately represent
+                        the types used and returned. TS can also infer the type of the generic parameter from the
+                        function parameters.
+                    </p>
+                    <pre class="mb-1">
+    function createPair<mark>&lt;S, T&gt;</mark>(v1: <mark>S</mark>, v2: <mark>T</mark>): [<mark>S</mark>, <mark>T</mark>] {
+        return [v1, v2];
+    }
+
+    console.log(createPair&lt;string, number&gt;('hello', 42)); // Returns ['hello', 42]
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Classes</h4>
+                    <p class="mb-1">
+                        Generics can be used to create generalized classes like Map.
+                    </p>
+                    <pre class="mb-1">
+class NamedValue<mark>&lt;T&gt;</mark> {
+    private _value: <mark>T</mark> | undefined;
+
+    constructor(private name: string) {}
+
+    public setValue(value: <mark>T</mark>) {
+        this._value = value;
+    }
+
+    public getValue(): <mark>T</mark> | undefined {
+        return this._value;
+    }
+
+    public toString(): string {
+        return `${this.name}: ${this._value}`;
+    }
+}
+
+let value = new NamedValue&lt;number&gt;('Ben');
+value.setValue(10);
+
+console.log(value.toString()); // Prints 'Ben: 10'
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Type Aliases</h4>
+                    <p class="mb-1">
+                        Generics in type aliases allow creating types that are more reusable.
+                    </p>
+                    <pre class="mb-1">
+    type Wrapped&lt;T&gt; = { value: T };
+
+    const wrappedValue: Wrapped&lt;number&gt; = { value: 10 };
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Default Value</h4>
+                    <p class="mb-1">
+                        Generics can be assigned default values which apply if no other value is specified or inferred.
+                    </p>
+                    <pre class="mb-1">
+class NamedValue&lt;T <mark>= string</mark>&gt; {
+    private _value: T | undefined;
+
+    constructor(private name: string) {}
+
+    public setValue(value: T) {
+        this._value = value;
+    }
+
+    public getValue(): T | undefined {
+        return this._value;
+    }
+
+    public toString(): string {
+        return `${this.name}: ${this._value}`;
+    }
+}
+
+let value = new NamedValue('Ben');
+value.setValue('Ten');
+
+console.log(value.toString()); // Prints 'Ben: Ten'
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Extends</h4>
+                    <p class="mb-1">
+                        Constraints can be added to generics to limit what value types are allowed. The constraints make
+                        it possible to rely on a more specific type when using the generic type.
+                    </p>
+                    <pre class="mb-1">
+    function createLoggedPair&lt;S <mark>extends string</mark> | number, T <mark>extends string</mark> | number&gt;(v1: S, v2: T): [S, T] {
+        console.log(`creating pair: v1='${v1}', v2='${v2}'`);
+        return [v1, v2];
+    }
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Utility Types</h3>
+                <p class="mb-1">
+
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Partial</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Required</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Record</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Omit</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Pick</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Exclude</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>ReturnType</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Parameters</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Readonly</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Keyof</h3>
+                <p class="mb-1">
+
+                </p>
+                <div class="form-control mb-2">
+                    <h4><i>keyof</i> with explicit keys</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4><i>keyof</i> with index signatures</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Null</h3>
+                <p class="mb-1">
+
+                </p>
+                <div class="form-control mb-2">
+                    <h4>Types</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Optional Chaining</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Nullish Coalescence</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-2">
+                    <h4>Null Assertion</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+
+                <div class="form-control mb-1">
+                    <h4>Array bounds handling</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+            </div>
+
+            <div class="form-control mb-1">
+                <h3>Definitely Typed</h3>
+                <p class="mb-1">
+
+                </p>
+                <div class="form-control mb-1">
+                    <h4>Using non-typed NPM packages in TypeScript</h4>
+                    <p class="mb-1">
+
+                    </p>
+                    <pre class="mb-1">
+
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <h2>TypeScript Version 5.0 Updates</h2>
+            <div class="form-control mb-2">
+                <h3>Template Literal Types</h3>
+                <p class="mb-1">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+            </div>
+
+            <div class="form-control mb-2">
+                <h3>Index Signature Labels</h3>
+                <p class="mb-1">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-2">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+            </div>
+
+            <div class="form-control mb-1">
+                <h3>Private Fields</h3>
+                <p class="mb-1">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-0">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-0">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+                <p class="mb-0">
+
+                </p>
+                <pre class="mb-1">
+
+</pre>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block chapter_block %}
+    TypeScript - Basics
+{% endblock %}
+
+{% block glossary_block %}
+    <li>
+        <a class="dropdown-item" href="#SECTION_NAME_anchor">SECTION_NAME</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#SUBSECTION_anchor">&nbsp;&nbsp;&nbsp;SUBSECTION_NAME</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#SUBSECTION_2_anchor">&nbsp;&nbsp;&nbsp;SUBSECTION_2_NAME</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#SUBSECTION_3_anchor">&nbsp;&nbsp;&nbsp;SUBSECTION_3_NAME</a>
+    </li>
+{% endblock %}

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<head>
+    <title>Git - Advanced</title>
+    <link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+    <link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+</head>
+{% endblock %}
+
+
+{% block body_block %}
+<a id="git_advanced_anchor"><h1>Git <span class="door">-</span> Advanced</h1></a>
+<div class="form-control">
+    <div class="form-control mb-2">
+        <a id="repo_setup_anchor"><h2>How to set up a repository:</h2></a>
+        <p class="mb-2">
+            A <u>Git repository</u> is a virtual storage of your project. It allows developers to save versions of the
+            code for later access.
+        </p>
+
+        <div class="form-control mb-2">
+            <a id="init_repo_anchor"><h3>Initializing a new repository: <em>git init</em></h3></a>
+            <p class="mb-1">First navigate to the desired directory, then execute the <em>git init</em> command.</p>
+            <pre class="mb-0">git init &#8249project_directory&#8250</pre>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="clone_repo_anchor"><h3>Cloning an existing repository: <em>git clone</em></h3></a>
+            <p class="mb-1">
+                If a project has already been set up with a (central) repository. We can use the <em>git clone</em>
+                command to obtain a copy of the repository locally (local copy AKA working copy). This is typically a
+                one-time operation. Once a local repository has been created, all version control operations are managed
+                through this local repo.
+            </p>
+            <pre>git clone &#8249repo_url&#8250</pre>
+            <p class="mb-1">
+                The <em>git clone</em> command is used to create a copy or clone of a remote repository. Repository URLs
+                follow this template: <em>git@HOSTNAME:USERNAME/REPONAME.git.</em>
+            </p>
+            <p class="mb-1">Example: <em>git@bitbucket.org:mario/super-mario-bros.git</em></p>
+            <ul class="mb-1">
+                <li>Hostname: <em>bitbucket.org</em></li>
+                <li>Username: <em>mario</em></li>
+                <li>Reponame: <em>super-mario-bros</em></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="save_changes_repo_anchor"><h2>Saving changes to the repo: <em>git add</em> and <em>git commit</em></h2>
+        </a>
+        <p class="mb-0">
+            After the repo has been cloned and initialized, we can then commit file version changes to it. After a file
+            has been created. We need to add it to the list of files in the repository staging area using the <em>git
+            add</em> command.
+        </p>
+        <pre>git add &#8249changed_file&#8250</pre>
+
+        <p class="mb-0">If we want to add a directory instead, we can substitute the file for a directory:</p>
+        <pre>git add &#8249directory&#8250</pre>
+
+        <p class="mb-0">
+            Alternatively, if we want to add any and all changed and untracked files in the repo, we can use the --all
+            flag instead of a specific file.</p>
+        <pre>git add --all</pre>
+
+        <p class="mb-1">The primary function of the <em>git add</em> command is to promote pending changes in the
+            working
+            directory to the <em>git staging</em> area.</p>
+        <p class="mb-0">
+            After this it has been added to the staging area, we then need to commit the file so it will be added to the
+            history so future updates to the file will be tracked. To do this we need to use the <em>git commit</em>
+            command.
+        </p>
+        <pre>git commit -m "&#8249your_message&#8250"</pre>
+
+        <p class="mb-1">
+            Git commits capture the state of a project at that point in time - a snapshot. These snapshots are committed
+            to the local directory rather than the central repo.
+        </p>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_push_anchor"><h2>Repo-to-repo collaboration: <em>git push</em></h2></a>
+        <p class="mb-2">
+            The <em>git push</em> command is used to update the remote repo with your local changes. It takes the
+            commits
+            you created and transfers it to the remote repo.
+        </p>
+
+        <div class="form-control mb-1">
+            <a id="bare_vs_cloned_repos_anchor"><h3>Bare vs cloned repos:</h3></a>
+            <p class="mb-2">
+                If your repository was created using the <em>git clone</em> command, then it is already configured for
+                remote collaboration. It is already pointed at the Git URL that you cloned it from. This means that once
+                you make changes to a file and commit them, you can <em>git push</em> those changed to the remote repo.
+            </p>
+            <p class="mb-2">
+                If your repo was created using the <em>git init</em> command, then there's no remote repo to push your
+                changes to. What you can do is use a service like Bitbucket and create the repo there. This service will
+                provide a Git URL that you can add to your local repo thus allowing you to push the changes to the repo
+                (on Bitbucket). But before we can do this, some configuration changes need to be done. (see
+                <em>Configuration % setup section</em>)
+            </p>
+            <p class="mb-0">
+                A 'bare' repository refers to a repo created using the <em>git init</em> or <em>git clone</em> commands
+                with
+                a --bare flag. This allows users to use this bare repo as a remote repo. The most common use for bare
+                repos is to create a remote central Git repo.</p>
+            <pre class="mb-1">git init --bare</pre>
+            <pre class="mb-0">git clone --bare</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="config_setup_anchor"><h2>Configuration & setup: <em>git config</em> and <em>git remote</em></h2></a>
+        <p class="mb-0">
+            Once the remote repo has been set up, we need to add this repo's URL to your local git config and set up an
+            upstream branch for your local branches. We can do this using the <em>git remote</em> command:
+        </p>
+        <pre>git remote add &#8249remote_name&#8250 &#8249report_repo_url&#8250</pre>
+
+        <p class="mb-0">
+            This command will map the remote repo url to a ref in your local repo under the designated
+            remote name. Once this has been mapped, you can push local branches to it using the <em>git push</em>
+            command:
+        </p>
+        <pre>git push -u &#8249remote_name&#8250 &#8249local_branch_name&#8250</pre>
+
+        <p class="mb-1">
+            This command pushes the local repo branch under <em>local_branch_bane</em> to the remote repo at
+            <em>remote_name</em>.
+        </p>
+        <p class="mb-0">Define the author for <b>all</b> commits by using the --global flag:</p>
+        <pre>git config --global user.name &#8249name&#8250</pre>
+
+        <p class="mb-0">
+            Define the author for the current local repo by using the --local flag or by not passing a
+            config level
+            option:</p>
+        <pre class="mb-1">git config --local user.name &#8249name&#8250</pre>
+        <pre>git config user.name &#8249name&#8250</pre>
+
+        <p class="mb-0">Define the author email for commits by the current user:</p>
+        <pre class="mb-0">git config --local user.email &#8249email&#8250</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_add_anchor"><h2>Git add</h2></a>
+        <p class="mb-1">
+            This command adds a change in the working directory to the staging area. It tells Git that you want to
+            include updates to a particular file in the next commit. However, git add doesn't really affect the repo in
+            any significant way. Those changes are not actually recorded until you run <em>git commit</em>.
+        </p>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_commit_anchor"><h2>Git commit</h2></a>
+        <p class="mb-1">This command captures a snapshot of the project's current staged changes.</p>
+    </div>
+
+
+    <div class="form-control mb-2">
+        <a id="git_diff_anchor"><h2>Comparing changes: <em>git diff</em></h2></a>
+        <p class="mb-1">
+            Diffing is a function that takes two input data sets and outputs the changes between them. <em>git diff</em>
+            is a multi-use command that when executed will run a diff function on Git data sources. These data sources
+            can be commits, branches, files, etc..
+        </p>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_stash_anchor"><h2>Git stash</h2></a>
+        <p class="mb-0">
+            The <em>git stash</em> command temporarily shelves changes you've made (can be both staged and unstaged) to
+            your working copy so you can work on something else. It's still there so you can come back and re-apply it
+            later on. It is handy if you need to quickly switch context and work on something else, but you're mid-way
+            through a code change and aren't quite ready to commit.
+        </p>
+        <pre>git stash</pre>
+
+        <p class="mb-2">This default option doesn't include unstaged changes</p>
+        <p class="mb-0">To re-apply stashed changes, we can use the <em>git stash pop</em> command.</p>
+        <pre class="mb-0">git stash pop</pre>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="gitignore_anchor"><h2>.gitignore</h2></a>
+        <p class="mb-1">
+            Git can be explicitly told to ignore files. Using wildcards, we can have Git ignore all files with certain
+            extensions such as log files (*.log).
+        </p>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="inspect_repo_anchor"><h2>Inspecting a Repository</h2></a>
+        <div class="form-control mb-2">
+            <a id=""><h3>Git status</h3></a>
+            <p class="mb-1">
+                Displays the state of the working directory and the staging area. It allows you to see which changes
+                have been staged, which haven't, and which files aren't being tracked by Git.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_tag_anchor"><h3>Git tag</h3></a>
+            <p class="mb-1">
+                Tags are references to specific points in Git history. This command is gnerally used to capture a point
+                in history that is used for a marked version release.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_blame_anchor"><h3>Git blame</h3></a>
+            <p class="mb-1">
+                Displays the author metadata attached to specific committed lines in a file. This can allows us to
+                explore the history of specific code and answer questions about what, how, and why the code was added to
+                a repo.
+            </p>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="git_log_anchor"><h3>Git log</h3></a>
+            <p class="mb-1">
+                This command displays committed snapshots. It allows you to list the project history, filter
+                it, and search for specific changes.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="undo_changes_anchor"><h2>Undoing Changes</h2></a>
+        <div class="form-control mb-2">
+            <a id="git_checkout_anchor"><h3>Git checkout</h3></a>
+            <p class="mb-1">
+                This command can be used to visit a particular commit. Every commit has a unique SHA-1
+                identifying hash. It is an easy way to load any saved snapshots onto your development timeline.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_revert_anchor"><h3>Git revert</h3></a>
+            <p class="mb-2">
+                This command functions like an "undo" command for tracked files. However, it is not a
+                traditional "undo" operation in that instead of removing the commit from the project history, it figures
+                out how to invert the changes introduced by the commit and appends a new commit with the resulting
+                inverse content. Basically, it is used for undoing changes to a repo's commit history. <em>git
+                checkout</em> and <em>git reset</em> are also "undo" commands but they move the HEAD and branch ref
+                points
+                to a specified commit. While <em>git revert</em> also takes a specified commit, it does not move the ref
+                points to this commit. It will take the specified commit, inverse the changes from that commit, and
+                create a new "revert commit". The ref pointers are then updated to point at the new revert commit,
+                making it the tip of the branch.
+            </p>
+            <p class="mb-1">Revert has 2 advantages over resetting:</p>
+            <ul class="mb-1">
+                <li>
+                    It doesn't change the project history, which makes it a relatively safe operation for commits that
+                    have already been published to a shared repo.
+                </li>
+                <li>
+                    Second is that it is able to target an individual commit at an arbirary point in the history whereas
+                    <em>git reset</em> can only work backward from the current commit. For example, if you want to undo
+                    an
+                    old commit with <em>git reset</em>, you would have to remove ALL of the commits that occurred after
+                    the target commit, remove it, then re-commit all of the subsequent commits.
+                </li>
+            </ul>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_reset_anchor"><h3>Git reset</h3></a>
+            <p class="mb-1">
+                This command reverts to a previous state of a project by removing ALL subsequent commits from the
+                specified commit. This is different from a <em>git revert</em> which undoes a single commit.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_clean_anchor"><h3>Git clean</h3></a>
+            <p class="mb-1">
+                This command functions like an "undo" command but operates on untracked files. Untracked files being
+                files that have been created within your repo's working directory but have not yet been added to the
+                repo's tracking index using the <em>git add</em> command.
+            </p>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="git_rm_anchor"><h3>Git rm</h3></a>
+            <p class="mb-1">
+                This command is used to remove individual files or a collection of files. The primary function of <em>git
+                rm</em> is to remove tracked files from the Git index. It can also be used to remove files from both the
+                staging index and working directory. There is no option to remove from only the working directory. The
+                files being operated on must be identical to the files in the current HEAD. If there is a discrepancy
+                between the HEAD version of a file and the staging index or working tree version, Git will block the
+                removal. This is a safety mechanism to prevent removal of in-progress changes. Does not remove branches.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="rewriting_history_anchor"><h2>Rewriting History</h2></a>
+        <div class="form-control mb-2">
+            <a id="git_commit_amend_anchor"><h3>Git commit --amend</h3></a>
+            <p class="mb-2">
+                This command allows the user to modify the most recent commit. It let you combine staged changes with
+                the previous commit instead of creating an entirely new commit. It can also be used to simply edit the
+                previous commit message without changing its snapshot. Amending does not just alter the most recent
+                commit, it replaces it entirely, meaning the amended commit will be a new entity with its own ref. To
+                Git, it will look like a brand new commit.
+            </p>
+            <p class="mb-0">
+                These commands allows you to edit the previous commit's message without altering its snapshot. The first
+                one will open an editor while second one allows you to add a message in-line:
+            </p>
+            <pre class="mb-1">git commit --amend</pre>
+            <pre>git commit --amend -m "&#8249new_message&#8250"</pre>
+
+            <p class="mb-0">
+                Adding the --no-edit flag to the command allows you to amend the previous commit without changing the
+                message:
+            </p>
+            <pre>git commit --amend --no-edit</pre>
+
+            <p class="mb-0">Example usage of --amend:</p>
+            <pre>
+git add file1of2.py
+git commit
+# Forgot to add file2of2.py!
+git add file2of2.py
+git commit --amend -m "Forgot to add file2of2.py. Added it into the latest commit."</pre>
+
+            <p class="mb-1">
+                In short, this command allows you to take the most recent commit and add new staged changes to it. You
+                can add OR remove changes from the Git staging area to apply with a --amend commit. If there are no
+                changes staged, then it will prompt you to edit the last commit message.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_rebase_anchor"><h3>Git rebase</h3></a>
+            <p class="mb-1">
+                Refers to the process of moving or combining a sequence of commits to a new base commit. From a content
+                perspective, it is changing the base of your branch from one commit to another, making it appear as if
+                you created your branch from a different commit. Git accomplishes this by creating new commits and
+                applying them to the specified base.
+            </p>
+        </div>
+
+        <div class="form-control mb-2">
+            <a id="git_rebase_i_anchor"><h3>Git rebase -i</h3></a>
+            <p class="mb-1">
+                Adding the -i flag allows you to run rebase interactive. This gives you the opportunity to alter
+                individual commits in the process, rather than moving all commits. It gives a finer grained control over
+                history modifications than a standard git rebase.
+            </p>
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="git_reflog_anchor"><h3>Git reflog</h3></a>
+            <p class="mb-1">
+                Reference logs, or "reflogs" are a mechanism Git uses to record updates applied to tips of branches and
+                other commit references. Reflog allows you go back to commits even though they are not referenced by any
+                branch or tag. After rewriting history, the reflog contains information about the old state of branches
+                and allows you to go back to that state if necessary.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_terms_anchor"><h2>Git Terminology</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Term</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th>Repository ("Repo")</th>
+                <td>
+                    Can be thought of as a directory that stores all of the files, folders, and content needed for your
+                    project. What it actually is, is the object database of the project, storing everything from the
+                    files themselves, to the version of thsoe files, comits, deletions, et cetera. Repos are not limited
+                    by the user, and can be shared and copied.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Remote</th>
+                <td>
+                    A copy of the original branch. When cloning a branch, that new branch is a remote, or clone. Remotes
+                    can talk to the origin branch, as well as other rmeotes for the repo, to making communication
+                    between working branches easiers.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Branch</th>
+                <td>
+                    A version of the repository that diverges from the main working project. Can be a new version of a
+                    repo, experimental changes, or personal forks of a repo for users to alter and test changes.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Git Checkout</th>
+                <td>Command use to switch branches in a repo.</td>
+            </tr>
+
+            <tr>
+                <th>Master</th>
+                <td>
+                    Refers to the primary branch of all repos. All committed and accepted changes should be on the
+                    master branch. You can work directly from the master branch, or create other branches.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Origin</th>
+                <td>
+                    The conventional name for the primary version of a repo. It is the alias to the remote url. Git also
+                    uses "origin" as a system alias for pushing and fetching data to and from the primary branch. For
+                    example, <em>git push origin master</em>, when run on remote, will push the changes to the master
+                    branch of the primary repo database.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Main</th>
+                <td>Refers to a local branch.</td>
+            </tr>
+
+            <tr>
+                <th>HEAD</th>
+                <td>
+                    Refers to the currently checked-out branch's latest commit. Represents the default branch on the
+                    remote.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Detached HEAD</th>
+                <td>
+                    Refers to when the HEAD does not point to any branch, but instead points to a specific commit or the
+                    remote repository.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Index</th>
+                <td>
+                    Refers to the working, or staging, area of Git. Files that have been cahnged, added, and deleted
+                    will be staged within the index until you are ready to commit the files. To see what is set in your
+                    Git index, run <em>git status</em> within your repo. The green files are staged and ready to commit,
+                    whereas the red files have not yet been addedto staging for the next commit.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Fork</th>
+                <td>Refers to the action of creating a copy of a repo.</td>
+            </tr>
+
+            <tr>
+                <th>Rebase</th>
+                <td>
+                    Refers to integrating changes from one branch onto another. The difference between this and <em>git
+                    merge</em> is that <em>git rebase</em> creates a new set of commits applied on top of the largest
+                    branch, while <em>git merge</em> creates a new merge commit that combines the changes from both
+                    branches.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Fetch</th>
+                <td>
+                    The act of downloading and copying that branch's files to your workstation. Multiple branches can be
+                    fetched at once and you can rename the branches whenr unning the command to suit your needs.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Pull/Pull Request</th>
+                <td>
+                    If someone has changed code on a separate branch of a project and wants it to be review to add to
+                    the master branch, that someone needs to submit a pull request. These are request to ask the repo
+                    owners/maintainers to review the commits made, and then, if accepted, the commits are merged
+                    upstream (usually into the master branch). A pull happens when adding the changes to the master
+                    branch.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Push</th>
+                <td>
+                    Updates a remote branch with the commits made to the current branch. You are "pushing" your changes
+                    onto the remote.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Cherry-picking</th>
+                <td>
+                    Refers to taking an older commit, and rerunning it at a defined location. Git copies the changes
+                    from the original commit, then adds them to the current location. It is a command that enables
+                    arbitrary commits to be picked by reference and appended to the current working HEAD. It is the act
+                    of picking a commit from a branch and apply it to another.
+                </td>
+            </tr>
+
+            <tr>
+                <th>Stash</th>
+                <td>Refers to the act of setting aside the current changes for later use.</td>
+            </tr>
+
+            <tr>
+                <th>Tag</th>
+                <td>
+                    Used to define which portions of a project's Git history is the most important. Typically used to
+                    note point releases of a project. Tags can be added to the commit while it is still being worked on
+                    or added after it has been pushed.
+                </td>
+            </tr>
+        </table>
+        <p class="mb-1 text-end">
+            (<a href="https://www.pluralsight.com/resources/blog/cloud/git-terms-explained#master">Source</a>)
+        </p>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="common_git_cmds_anchor"><h2>Common Git Commands</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git init [<em>directory_path</em>]</td>
+                <td>Initializes an existing directory as a Git repository.</td>
+            </tr>
+            <tr>
+                <td>git clone [<em>repo_url</em>]</td>
+                <td>Creates a clone of the specified repo onto the local machine. The repo can be remote or local.</td>
+            </tr>
+            <tr>
+                <td>git config user.name <em>name</em></td>
+                <td>Defines the author name to be used for all commits in the current repo.</td>
+            </tr>
+            <tr>
+                <td>git add <em>directory</em> or <em>file</em></td>
+                <td>Stage all changes in the directory or file for the next commit.</td>
+            </tr>
+            <tr>
+                <td>git commit -m "<em>message</em>"</td>
+                <td>Commits the staged snapshot.</td>
+            </tr>
+            <tr>
+                <td>git status</td>
+                <td>Lists which files are stages, unstaged, and untracked.</td>
+            </tr>
+            <tr>
+                <td>git log</td>
+                <td>Displays the entire commit history.</td>
+            </tr>
+            <tr>
+                <td>git diff</td>
+                <td>Shows the unstaged changes between your index and the working directory.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="undo_changes_pt2_anchor"><h2>Undoing Changes</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git revert <em>commit</em></td>
+                <td>
+                    Creates a new commit that undoes all of the changes made in the selected commit, then applies it to
+                    the current branch.
+                </td>
+            </tr>
+            <tr>
+                <td>git reset <em>file</em></td>
+                <td>
+                    Removes the file from the staging area, but leaves the working directory unchanged. Unstages a file
+                    without overwriting any changes.
+                </td>
+            </tr>
+            <tr>
+                <td>git clean -n</td>
+                <td>Shows which files would be removed from the working directory.</td>
+            </tr>
+            <tr>
+                <td>git clean -f</td>
+                <td>Removes the selected files from the working directory.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="rewriting_history_anchor_pt2_anchor"><h2>Rewriting Git History</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git commit --amend</td>
+                <td>Replaces the last commit with the staged changes and last commit combined.</td>
+            </tr>
+            <tr>
+                <td>git rebase <em>base</em></td>
+                <td>Rebases the current branch onto the base.</td>
+            </tr>
+            <tr>
+                <td>git reflog</td>
+                <td>
+                    Shows a log of changes to the local repo's HEAD. Flags: --relative-date (shows dates), --all (shows
+                    all refs)
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_branches_anchor"><h2>Git Branches</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git branch</td>
+                <td>Lists all of the branches in the repo.</td>
+            </tr>
+            <tr>
+                <td>git branch <em>branch_name</em></td>
+                <td>Creates a new branch with the given name.</td>
+            </tr>
+            <tr>
+                <td>git checkout <em>branch_name</em></td>
+                <td>Checks out the branch with the given name.</td>
+            </tr>
+            <tr>
+                <td>git checkout -b <em>branch_name</em></td>
+                <td>Creates and checks out a new branch with the given name.</td>
+            </tr>
+            <tr>
+                <td>git merge <em>desired_branch</em></td>
+                <td>Merges the desired branch into the current branch.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="remote_repos_anchor"><h2>Remote Repositories</h2></a>
+        <table class="table table-bordered w-100 mb-1">
+            <tr class="table-dark">
+                <th class="col-2">Command</th>
+                <th class="col-10">Explanation</th>
+            </tr>
+            <tr>
+                <td>git remote add <em>name</em> <em>url</em></td>
+                <td>
+                    Creates a new connection to a remote repo. After adding a remote, you can use the given name as a
+                    shortcut for url in the other commands.
+                </td>
+            </tr>
+            <tr>
+                <td>git fetch <em>remote</em></td>
+                <td>
+                    Fetches all of the branches from the remote repo. This also downloads all of the required commits
+                    and files from the remote repo.
+                </td>
+            </tr>
+            <tr>
+                <td>git fetch <em>remote</em> <em>branch</em></td>
+                <td>Fetches only the specific branch from the remote repo.</td>
+            </tr>
+            <tr>
+                <td>git pull <em>remote</em></td>
+                <td>
+                    Fetches the specified remote's copy of the current branch and immediately merges it into the local
+                    copy.
+                </td>
+            </tr>
+            <tr>
+                <td>git push <em>remote</em> <em>branch</em></td>
+                <td>
+                    Pushes the branch to the remote repo, along with the commits and objects. Creates a name branch in
+                    the remote repo if it doesn't exist already.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_reset_pt2_anchor"><h2>Git Reset</h2></a>
+        <table class="table table-bordered w-100 mb-1">
+            <tr class="table-dark">
+                <th class="col-2">Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git reset</td>
+                <td>
+                    Resets the staging area to match the most recent commit, but leaves the working directory unchanged.
+                </td>
+            </tr>
+            <tr>
+                <td>git reset --hard</td>
+                <td>
+                    Resets the staging area and working directory to match the most recent commit and overwrites all
+                    changes in the working directory.
+                </td>
+            </tr>
+            <tr>
+                <td>git reset <em>commit</em></td>
+                <td>
+                    Moves the current branch tip backwards to the specified commit, resets the staging area to match,
+                    but leaves the working directory alone.
+                </td>
+            </tr>
+            <tr>
+                <td>git reset --hard <em>commit</em></td>
+                <td>
+                    Moves the current branch tip backwards to the specified commit, then resets both the staging area
+                    and working directory to match. Deletes uncommitted changes and all commits after the specified
+                    commit.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_rebase_pt2_anchor"><h2>Git Rebase</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git rebase -i <em>base</em></td>
+                <td>
+                    Interactive rebases the current branch on the specified base. Launches an editor to specify commands
+                    for how each commit will be transferred onto the new base.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_pull_anchor"><h2>Git Pull</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git pull --rebase <em>remote</em></td>
+                <td>
+                    Fetches the remote's copy of the current branch and rebases it into the local copy. Uses git rebase
+                    instead of merge to integrate the branches.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_push_pt2_anchor"><h2>Git Push</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git push <em>remote</em> <em>local_branch</em> [--force]</td>
+                <td>Uploads the local branch onto a remote repo.</td>
+            </tr>
+            <tr>
+                <td>git push <em>remote</em> --force</td>
+                <td>
+                    Forces the local repo onto a remote repo. It forces the push even if it results in a
+                    non-fast-forward merge.
+                </td>
+            </tr>
+            <tr>
+                <td>git push <em>remote</em> --all</td>
+                <td>Pushes all of the local branches onto the specified remote.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="git_diff_pt2_anchor"><h2>Git Diff</h2></a>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git diff HEAD</td>
+                <td>Shows the differences between the working directory and the last commit.</td>
+            </tr>
+            <tr>
+                <td>git diff --cached</td>
+                <td>Shows the differences between the staged changes and the last commit.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="git_force_flag_anchor"><h2>Some useful commands:</h2></a>
+        <p class="mb-2">
+            First command forces the remote repo to discard any uncommitted changes and is updated with changes from the
+            local repo. Second command forces the local repo to discard any local changes since the last commit and
+            updates itself to match the last commit.
+        </p>
+        <table class="table table-bordered mb-1">
+            <tr class="table-dark">
+                <th>Command</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td>git push origin --force</td>
+                <td>
+                    Forces the local repo onto a remote repo. It forces the push even if it results in a
+                    non-fast-forward merge.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    git reset --hard HEAD
+                    <br>
+                    git pull
+                </td>
+                <td>Discards local changes, then overwrites the local repo with the remote repo.</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Git - Advanced
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#git_advanced_anchor"><strong>Git - Advanced</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#repo_setup_anchor">How to set up a repository:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#init_repo_anchor">
+        &nbsp;&nbsp;&nbsp;Initializing a new repository: <em>git init</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#clone_repo_anchor">
+        &nbsp;&nbsp;&nbsp;Cloning an existing repository: <em>git clone</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#save_changes_repo_anchor">
+        Saving changes to the repo: <em>git add</em> and <em>git commit</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_push_anchor">Repo-to-repo collaboration: <em>git push</em></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#bare_vs_cloned_repos_anchor">&nbsp;&nbsp;&nbsp;Bare vs cloned repos:</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#config_setup_anchor">
+        Configuration & setup: <em>git config</em> and <em>git remote</em>
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_add_anchor">Git add</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_commit_anchor">Git commit</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_diff_anchor">Comparing changes: <em>git diff</em></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_stash_anchor">Git stash</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#gitignore_anchor">.gitignore</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#inspect_repo_anchor">Inspecting a Repository</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_tag_anchor">&nbsp;&nbsp;&nbsp;Git tag</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_blame_anchor">&nbsp;&nbsp;&nbsp;Git blame</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_log_anchor">&nbsp;&nbsp;&nbsp;Git log</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_checkout_anchor">&nbsp;&nbsp;&nbsp;Git checkout</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#undo_changes_anchor">Undoing Changes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_revert_anchor">&nbsp;&nbsp;&nbsp;Git revert</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_reset_anchor">&nbsp;&nbsp;&nbsp;Git reset</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_clean_anchor">&nbsp;&nbsp;&nbsp;Git clean</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_rm_anchor">&nbsp;&nbsp;&nbsp;Git rm</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#rewriting_history_anchor">Rewriting History</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_commit_amend_anchor">&nbsp;&nbsp;&nbsp;Git commit --amend</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_rebase_anchor">&nbsp;&nbsp;&nbsp;Git rebase</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_rebase_i_anchor">&nbsp;&nbsp;&nbsp;Git rebase -i</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_reflog_anchor">&nbsp;&nbsp;&nbsp;Git reflog</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_terms_anchor">Git Terminology</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#common_git_cmds_anchor">Common Git Commands</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#undo_changes_pt2_anchor">Undoing Changes</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#rewriting_history_anchor_pt2_anchor">Rewriting Git History</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_branches_anchor">Git Branches</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#remote_repos_anchor">Remote Repositories</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_reset_pt2_anchor">Git Reset</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_rebase_pt2_anchor">Git Rebase</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_pull_anchor">Git Pull</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_push_pt2_anchor">Git Push</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#git_diff_pt2_anchor">Git Diff</a>
+</li>
+
+{% endblock %}

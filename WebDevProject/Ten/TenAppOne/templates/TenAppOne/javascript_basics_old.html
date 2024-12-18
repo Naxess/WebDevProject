@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block%}
+<title>Javascript - Basics</title>
+<style>body{margin:10px;}</style>
+{% endblock %}
+
+{% block body_block %}
+<h1>Javascript - Basics</h1>
+<div class="mb-3">
+    <h2>Strings</h2>
+    <pre>
+    "This is a string."
+    'This is a "quote" within a string.'
+    "This is another \"quote\" within a string."
+
+    '0123456789'.length // Output: 10
+    'ABC'.toLowerCase() // Output: 'abc'
+    'abc'.toUpperCase() // Output: 'ABC'
+    '    xyz   '.trim() // Output: 'xyz'
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Numbers</h2>
+    <pre>
+    12345
+    12.34
+    -10
+    10 + 0.99               // Output: 10.99
+    10 / 3                  // Output: 3.3333333333333335
+    10 + (2/3)              // Output: 10.666666666666666
+    1 - 10                  // Output: -9
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Booleans</h2>
+    <pre>
+    var lightsOn = false;
+    lightsOn = true;
+    lightsOn;               // Output: true
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Operators</h2>
+    <pre>
+    // Addition
+    1 + 1                   // Output: 2
+    // Subtraction
+    1 - 1                   // Output: 0
+    // Multiplication
+    2 * 3                   // Output: 6
+    // Division
+    10 / 2                  // Output: 5
+    // Order of Operations
+    10 + 100 / 5 - 2;       // Output: 28
+    // Parentheses
+    ((1 + 8) / (4 - 1)) * 5 // Output: 15
+    // Concatenation
+    "one" + "two" + "three" // Output: 'onetwothree'
+    // Assignment
+    var name = 'John Doe'
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Variables</h2>
+    <pre>
+    var x = 10;
+    x + 1;                  // Output: 11
+    x;                      // Output: 10
+
+    // Reassigning variables
+    var y = 100;
+    y = x + 0.1;
+    y;                      // Output: 10.1
+
+    var weather = "rainy";
+    weather = "sunny";
+
+    // Naming conventions
+    var camelCase = "lowercase word, then uppercase"
+    var cantStartWithNumber = "3cantStartWithNumber would be invalid"
+    var ALL_CAPS = "all_uppercase_is_fine"
+    var _underscore_ = 'starting a variable with an underscore is also fine'
+    var $_$ = 'wow, this works too'
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Functions</h2>
+    <pre>
+    function helloAlert(){
+        alert('Hello');
+    }
+    helloAlert();
+
+    function addNumbers(x, y){
+        return x + y;
+    }
+    addNumbers(10, 100);
+
+    function printAll(...unlimitedArgs){
+        console.log(unlimitedArgs);
+    }
+    printAll('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I')
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Conditionals</h2>
+    <pre>
+    if(isHappy === true){
+        console.log("They're happy!");
+    }else if(isHappy === false){
+        console.log("They're not happy!");
+    }else{
+        console.log("Unknown emotion");
+    }
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Arrays</h2>
+    <pre>
+    var letters = ['A', 'B', 'C']
+    letters;                // Output: ['A', 'B', 'C']
+    letters[1];             // Output: 'B'
+    letters[1] = 'smol b';
+    letters[1];             // Output: 'smol b'
+
+    var mixed_array = ['A', true, 123, ['x', 'y', 'z'], [2, 4 ,6]]
+
+    // Array Length
+    letters.length;         // Output: 3
+    [1,2,3,4].length;       // Output: 4
+
+    // Concatenation
+    var combined_arrays = ['a', 'b'].concat(['c', 'd']);
+    combined_arrays;        // Output: ['a', 'b', 'c', 'd']
+
+    // Adding new elements
+    [1,2,3,4,5,6].push(7);  // Output: 7 (The push() method returns the length of the array.)
+    ['a','b'].push('c');    // Output: 3
+
+    // Removing elements. Pop removes the last element from the array
+    var abc = ['a','b','c'];
+    abc.pop();              // Output: 'c'
+
+    // Reverses the order of the elements
+    var reversed_arr = ['c','d','a','b'].reverse();
+    reversed_arr;           // Output: ['b', 'a', 'd', 'c']
+
+    // Sorts the elements in an array
+    var sorted_arr = ['c','d','a','b'].sort();
+    sorted_arr;           // Output: ['a', 'b', 'c', 'd']
+    </pre>
+</div>
+
+<div class="mb-3">
+    <h2>Objects</h2>
+    <pre>
+    var example_obj = {
+        first_name:'Jim',
+        last_name:'Johnson',
+        age:88,
+        getFullName: function(){
+            return this.last_name + ', ' + this.first_name;
+        }
+    }
+
+    // Two ways of retrieving the values assigned to each property
+    example_obj.first_name;     // Output: 'Jim'
+    example_obj['last_name'];   // Output: 'Johnson'
+
+    // Updating property values
+    example_obj.age = 102;
+
+    // Calling the function assigned to an object's property
+    example_obj.getFullName();  // Output: 'Johnson, Jim'
+    </pre>
+</div>
+
+<script>
+    // PRINT TO THE CONSOLE
+    console.log('hello hello')
+
+    // COMMENTS
+    // This is a comment
+    /*
+        This is a
+        multiline comment.
+    */
+
+    // STRINGS AND THEIR BUILT-IN METHODS
+    "This is a string."
+    'This is a "quote" within a string.'
+    "This is another \"quote\" within a string."
+
+    '0123456789'.length     // Output: 10
+    'ABC'.toLowerCase()     // Output: 'abc'
+    'abc'.toUpperCase()     // Output: 'ABC'
+    '    xyz   '.trim()     // Output: 'xyz'
+
+    // NUMBERS AND THEIR BUILT-IN METHODS
+    12345
+    12.34
+    -10
+    10 + 0.99               // Output: 10.99
+    10 / 3                  // Output: 3.3333333333333335
+    10 + (2/3)              // Output: 10.666666666666666
+    1 - 10                  // Output: -9
+
+    // BOOLEANS AND THEIR BUILT-IN METHODS
+    var lightsOn = false;
+    lightsOn = true;
+    lightsOn;               // Output: true
+
+    // OPERATORS
+    // Addition
+    1 + 1                   // Output: 2
+    // Subtraction
+    1 - 1                   // Output: 0
+    // Multiplication
+    2 * 3                   // Output: 6
+    // Division
+    10 / 2                  // Output: 5
+    // Order of Operations
+    10 + 100 / 5 - 2;        // Output: 28
+    // Parentheses
+    ((1 + 8) / (4 - 1)) * 5 // Output: 15
+    // Concatenation
+    "one" + "two" + "three" // Output: 'onetwothree'
+    // Assignment
+    var name = 'John Doe'
+
+    // VARIABLES
+    var x = 10;
+    x + 1;                  // Output: 11
+    x;                      // Output: 10
+
+    // Reassigning variables
+    var y = 100;
+    y = x + 0.1;
+    y;                      // Output: 10.1
+
+    var weather = "rainy";
+    weather = "sunny";
+
+    // Naming conventions
+    var camelCase = "lowercase word, then uppercase"
+    var cantStartWithNumber = "3cantStartWithNumber would be invalid"
+    var ALL_CAPS = "all_uppercase_is_fine"
+    var _underscore_ = 'starting a variable with an underscore is also fine'
+    var $_$ = 'wow, this works too'
+
+    // FUNCTIONS
+    function helloAlert(){
+        alert('Hello');
+    }
+    helloAlert();
+
+    function addNumbers(x, y){
+        return x + y;
+    }
+    addNumbers(10, 100);
+
+    function printAll(...unlimitedArgs){
+        console.log(unlimitedArgs);
+    }
+    printAll('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I');
+
+    // CONDITIONALS
+    if(10 > 6){
+        console.log('Ten is greater than six.');
+    }
+
+    if('cat' === 'dog'){
+        console.log('Cats are the same as dogs');
+    }else{
+        console.log('Cats are not the same as dogs');
+    }
+
+    var isHappy = false;
+    if(isHappy === true){
+        console.log("They're happy!");
+    }else if(isHappy === false){
+        console.log("They're not happy!");
+    }else{
+        console.log("Unknown emotion");
+    }
+
+    // ARRAYS
+    var letters = ['A', 'B', 'C']
+    letters;                // Output: ['A', 'B', 'C']
+    letters[1];             // Output: 'B'
+    letters[1] = 'smol b';
+    letters[1];             // Output: 'smol b'
+
+    var mixed_array = ['A', true, 123, ['x', 'y', 'z'], [2, 4 ,6]]
+
+    // Array Length
+    letters.length;         // Output: 3
+    [1,2,3,4].length;       // Output: 4
+
+    // Concatenation
+    var combined_arrays = ['a', 'b'].concat(['c', 'd']);
+    combined_arrays;        // Output: ['a', 'b', 'c', 'd']
+
+    // Adding new elements
+    [1,2,3,4,5,6].push(7);  // Output: 7 (The push() method returns the length of the array.)
+    ['a','b'].push('c');    // Output: 3
+
+    // Removing elements. Pop removes the last element from the array
+    var abc = ['a','b','c'];
+    abc.pop();              // Output: 'c'
+
+    // Reverses the order of the elements
+    var reversed_arr = ['c','d','a','b'].reverse();
+    reversed_arr;           // Output: ['b', 'a', 'd', 'c']
+
+    // Sorts the elements in an array
+    var sorted_arr = ['c','d','a','b'].sort();
+    sorted_arr;             // Output: ['a', 'b', 'c', 'd']
+
+    // OBJECTS
+    var example_obj = {
+        first_name:'Jim',
+        last_name:'Johnson',
+        age:88,
+        getFullName: function(){
+            return this.last_name + ', ' + this.first_name;
+        }
+    }
+
+    // Two ways of retrieving the values assigned to each property
+    example_obj.first_name;     // Output: 'Jim'
+    example_obj['last_name'];   // Output: 'Johnson'
+
+    // Updating property values
+    example_obj.age = 102;
+
+    // Calling the function assigned to an object's property
+    example_obj.getFullName();  // Output: 'Johnson, Jim'
+
+</script>
+{% endblock %}

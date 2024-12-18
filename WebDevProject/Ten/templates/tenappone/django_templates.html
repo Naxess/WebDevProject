@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Templates</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_templates_anchor"><h1>Django <span class="door">-</span> Templates</h1></a>
+<div class="form-control">
+    <p class="mb-2">Templates contain the static parts of an HTML page - these are the parts that are
+        always the same, no matter which page is opened. It is a convenient way to generate HTML dynamically.
+    </p>
+    <div class="form-control mb-2">
+        <a id="templates_initial_setup_anchor"><h4>Template Initial Setup:</h4></a>
+        <ul class="mb-1">
+            <li>
+                <p class="mb-2">
+                    Before we can start using templates, we need to create a directory to store them. This directory
+                    needs to be created at the root directory of the project and named '<em>templates</em>'. For each
+                    app in the project, we need to create a subdirectory, named after each app. For example, if we have
+                    an app named 'first_app', then we need to create a folder named 'first_app' in the 'templates'
+                    directory.
+                </p>
+                <img src="{% static 'media/images/examples/django_templates.templates_directory.png' %}"
+                     alt="django_templates.templates_directory.png" class="mb-2">
+            </li>
+            <li>
+                <p class="mb-1">
+                    The next step is to register the templates directory. Open the <em>settings.py</em> file, and run
+                    the following steps:
+                </p>
+                <ul>
+                    <li>
+                        <p class="mb-1">
+                            Import the <em>os</em> module (if it hasn't been imported already). (Alternatively, can
+                            import just the <em>path</em> function from the <em>os</em> module. If you do this, adjust
+                            the value in the next step accordingly.)
+                        </p>
+                        <pre class="mb-1">import os</pre>
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            Next, locate a variable named <em>BASE_DIR</em>. Directly below this variable, create
+                            another variable named <em>TEMPLATE_DIR</em>. Set the value equal to
+                            <em>os.path.join(BASE_DIR, 'templates')</em>.
+                        </p>
+                        <pre class="mb-2">
+BASE_DIR = Path(__file__).resolve().parent.parent
+<mark>TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')</mark>
+</pre>
+                        <h6>(Optional) Breakdown of BASE_DIR:</h6>
+                        <table class="table table-bordered mb-2">
+                            <tr>
+                                <th>__file__</th>
+                                <td>Outputs the path and name of the current file</td>
+                            </tr>
+                            <tr>
+                                <th>Path(__file__)</th>
+                                <td>Creates a Path object, on which built-in methods can be run</td>
+                            </tr>
+                            <tr>
+                                <th>Path(__file__).resolve()</th>
+                                <td>Returns the Path object with all symlinks removed</td>
+                            </tr>
+                            <tr>
+                                <th>Path(__file__).resolve().parent.parent</th>
+                                <td>The <em>parent</em> function returns the directory above the current one. It is run
+                                    twice in this example, so it returns a directory from two levels above the current
+                                    one.
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li>
+                        Next, locate the <em>TEMPLATES</em> list object. There should be a dictionary inside, which
+                        should contain a key named <em>"DIRS"</em> with the value being a list object. Add
+                        <em>TEMPLATE_DIR</em> to it.
+                        <pre class="mb-0">
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [<mark>TEMPLATE_DIR</mark>, ],
+...
+</pre>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="creating_mapping_template_anchor"><h4>Creating a template and mapping it:</h4></a>
+        <ul class="mb-1">
+            <li>
+                When creating a template for an app, then it should be created within that app's directory, otherwise
+                the root directory of the templates folder is fine. With that determined, we can create the HTML
+                files that we'll use as our templates. We'll also make the necessary changes in mapping to accommodate
+                the template.
+                <ul>
+                    <li>
+                        <p class="mb-1">
+                            Example template:
+                            <br>
+                            <em>[.../first_project/templates/first_app/index.html]</em>
+                        </p>
+                        <pre class="mb-1">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;First App&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello, this is the index.html page!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            Example view function:
+                            <br>
+                            <em>[.../first_project/first_app/views.py]</em>
+                        </p>
+                        <pre class="mb-1">
+...
+def index(request):
+&nbsp;&nbsp;&nbsp;return render(request, <mark>'first_app/index.html'</mark>)
+...
+</pre>
+                    </li>
+                    <li>
+                        <p class="mb-1">
+                            Example path:
+                            <br>
+                            <em>[.../first_project/first_app/urls.py]</em>
+                        </p>
+                        <pre class="mb-1">
+urlpatterns = [
+    <mark>path('home/', views.index),</mark>
+]</pre>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="template_variables_anchor"><h3>Template Variables</h3></a>
+        <p>
+            Template variables are a feature that renders data from the view onto the HTML page. The data sent to the
+            template from the view is formatted as a dictionary (list of key-value pairs; aka map in other programming
+            languages). One way to render the data is to select a key associated with the desired data, add it to the
+            template in the desired location and enclose it in double brackets, like so: {{"{"}}{{"{"}} key
+            {{"}"}}{{"}"}}.
+        </p>
+        <div class="form-control mb-2">
+            <h4>Template Tag Lookups</h4>
+            <table class="table table-bordered mb-1">
+                <tr>
+                    <td>Dictionary lookup</td>
+                    <th>{{"{"}}{{"{"}} key {{"}"}}{{"}"}}</th>
+                </tr>
+                <tr>
+                    <td>Dictionary lookup</td>
+                    <th>{{"{"}}{{"{"}} example_dict.key {{"}"}}{{"}"}}</th>
+                </tr>
+                <tr>
+                    <td>Attribute lookup</td>
+                    <th>{{"{"}}{{"{"}} example_object.attribute {{"}"}}{{"}"}}</th>
+                </tr>
+                <tr>
+                    <td>List-index lookup</td>
+                    <th>{{"{"}}{{"{"}} example_list.0 {{"}"}}{{"}"}}</th>
+                </tr>
+            </table>
+        </div>
+        <h5>Send data from the view to the template:</h5>
+        <ul class="mb-1">
+            <li>In views.py, we need to modify the view function associated with the template.
+                <ul>
+                    <li>
+                        <p class="mb-1">
+                            In the body of the function create a dictionary, then populate it with key-value pairs.
+                            <br>
+                            Example:
+                        </p>
+                        <pre class="mb-1">
+def index(request):
+    <mark>example_dict = {'first_name':'John', 'last_name':'Doe', 'scores':[100, 90, 95, 100, 92]}</mark>
+    return render(request, 'first_app/index.html')
+</pre>
+                    </li>
+                    <li>
+                        In the return statement, the render function needs to be modified to include another argument:
+                        <em>context</em>. Set the value of <em>context</em> to the dictionary object that was just
+                        created.
+                        <br>
+                        Example:
+                        <pre class="mb-1">
+def index(request):
+    example_dict = {'first_name':'John', 'last_name':'Doe', 'scores':[100, 90, 95, 100, 92]}
+    return render(request, 'first_app/index.html', <mark>context=example_dict</mark>)
+</pre>
+                        With that done, every time the view function is called, it sends the dictionary to the template.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                On the HTML page, render the desired value(s) by writing the associated key (or other lookup type) to
+                the desired place(s), then enclosing that key in double brackets, like this: {{"{"}}{{"{"}} key
+                {{"}"}}{{"}"}}.
+                <br>
+                Example:
+
+                <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;First App&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello, this is the index.html page!&lt;/h1&gt;
+        <mark>&lt;p&gt;Name: {{"{"}}{{"{"}} last_name {{"}"}}{{"}"}}, {{"{"}}{{"{"}} first_name {{"}"}}{{"}"}}&lt;/p&gt;</mark>
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                When the above example webpage is loaded in a browser, you should see the below:
+                <div style="border:1px solid black;padding:5px;">
+                    <h1>Hello, this is the index.html page!</h1>
+                    <p>Name: Doe, John</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="template_tags_reference_anchor"><h3>Template Tags</h3></a>
+        <p>
+            Template tags allow the use of programming logic on the data from the view. Tags are identified by the way
+            they are enclosed with single-bracket, single percentage signs, like so:
+            <br>
+            <code>{% verbatim %}{% if first_name == "John" %} ... {% endif %}{% endverbatim %}</code>.
+            <br>
+            Examples of logic: loops, if-else, with, include, etc..
+        </p>
+        <h4>Tag References</h4>
+        <div class="accordion mb-2">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#tag_references_id">
+                        List of Tag References
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="tag_references_id">
+                    <div class="accordion-body">
+                        <table class="table table-bordered">
+                            <tr class="table-primary">
+                                <th class="col-1">Tag</th>
+                                <th class="col-4">Description</th>
+                                <th class="col-3">Syntax</th>
+                                <th class="col-4">Example Usage</th>
+                            </tr>
+                            <tr>
+                                <th>if</th>
+                                <td>Specifies an <em>if</em> statement that evaluates a condition(s).
+                                    <br><br>
+                                    Operators:
+                                    <br>
+                                    ==, !=, <, <=, >, >=, and, or, in, is, is not, not in
+                                </td>
+                                <td>
+                                    <pre>
+{{"{"}}% if <em>condition</em> %{{"}"}}
+    ...
+{{"{"}}% elif <em>condition1</em> and <em>condition2</em> %{{"}"}}
+    ...
+{{"{"}}% else %{{"}"}}
+    ...
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% if first_name == "John" %{{"}"}}
+    &lt;p&gt;Hello, John&lt;/p&gt;
+{{"{"}}% elif first_name is "Jane" and id != 0 %{{"}"}}
+    &lt;p&gt;Hello, Jane&lt;/p&gt;
+{{"{"}}% elif username in members_list and username not in ban_list %{{"}"}}
+    &lt;p&gt;Welcome back, honored member&lt;/p&gt;
+{{"{"}}% else %{{"}"}}
+    &lt;p&gt;Hello, stranger&lt;/p&gt;
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>for</th>
+                                <td>Iterates through the list variable's items.
+                                    <br><br>
+                                    For-loop variables:
+                                    <br>
+                                    counter, counter0, first, last, parentloop, revcounter, revcounter0
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% for <em>item</em> in <em>object</em> %{{"}"}}
+    {{"{"}}{{"{"}} <em>item</em> {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} forloop.counter0 {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} forloop.first {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} forloop.last {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} forloop.parentloop {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} forloop.revcounter {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} forloop.revcounter0 {{"}"}}{{"}"}}
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% for <em>username</em> in <em>members_list</em> %{{"}"}}
+    &lt;p&gt;Hello, {{"{"}}{{"{"}} <em>username</em> {{"}"}}{{"}"}}
+    &lt;p&gt;
+        Counting from the top, starting at 1,
+        you're #{{"{"}}{{"{"}} forloop.counter {{"}"}}{{"}"}}
+    &lt;/p&gt;
+    &lt;p&gt;
+        Counting from the top, starting at 0,
+        you're #{{"{"}}{{"{"}} forloop.counter0 {{"}"}}{{"}"}}
+    &lt;/p&gt;
+
+    {{"{"}}% if {{"{"}}{{"{"}} forloop.first {{"}"}}{{"}"}} %{{"}"}}
+        &lt;p&gt;You are the first member to join!&lt;/p&gt;
+    {{"{"}}% elif {{"{"}}{{"{"}} forloop.last {{"}"}}{{"}"}} %{{"}"}}
+        &lt;p&gt;You are the most recent member to join!&lt;/p&gt;
+    {{"{"}}% endif %{{"}"}}
+
+    &lt;p&gt;
+        Iteration # of the parent loop:
+        {{"{"}}{{"{"}} forloop.parentloop.counter {{"}"}}{{"}"}}
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        Counting from the bottom, ending at 1,
+        you're #{{"{"}}{{"{"}} forloop.counter {{"}"}}{{"}"}}
+    &lt;/p&gt;
+    &lt;p&gt;
+        Counting from the bottom, ending at 0,
+        you're #{{"{"}}{{"{"}} forloop.counter0 {{"}"}}{{"}"}}
+    &lt;/p&gt;
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>with</th>
+                                <td>Defines and initializes a variable for use in the template.</td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% with <em>var1</em>=<em>val1</em> <em>var2</em>=<em>val2</em> <em>var3</em>=<em>val3</em> %{{"}"}}
+    {{"{"}}{{"{"}} var1 {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} var2 {{"}"}}{{"}"}}
+    {{"{"}}{{"{"}} var3 {{"}"}}{{"}"}}
+{{"{"}}% endwith %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% with <em>var1</em>=<em>val1</em> <em>var2</em>=<em>val2</em> <em>var3</em>=<em>val3</em> %{{"}"}}
+    &lt;p&gt;Value #1: {{"{"}}{{"{"}} val1 {{"}"}}{{"}"}}&lt;/p&gt;
+    &lt;p&gt;Value #2: {{"{"}}{{"{"}} val2 {{"}"}}{{"}"}}&lt;/p&gt;
+    &lt;p&gt;Value #3: {{"{"}}{{"{"}} val3 {{"}"}}{{"}"}}&lt;/p&gt;
+{{"{"}}% endwith %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>now</th>
+                                <td>Outputs the current date/time in the specified format.
+                                    <br><br>
+                                    Date format reference:
+                                    <a href="https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#date">Full
+                                        list here</a>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% now <em>format</em> %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% now "Y-m-d G:i:s:u T" %{{"}"}}
+Example output: 2000-12-31 12:00:00:000000 EST
+
+{{"{"}}% now "Y-m-d" %{{"}"}}
+Example output: 2000-12-31
+
+{{"{"}}% now "G:i:s" %{{"}"}}
+Example output: 12:00:00
+
+{{"{"}}% now "Y" %{{"}"}}
+Example output: 2000
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>filter</th>
+                                <td>
+                                    <p class="mb-2">Filters the contents of the block through one or more filters.</p>
+                                    <p class="mb-0">
+                                        Some filter keywords:
+                                        <br>
+                                        add, length, upper, lower, title, first, last, random, join, slice, wordcount,
+                                        force_escape
+                                    </p>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% filter <em>keyword</em> %{{"}"}}
+    ...
+{{"{"}}% endfilter %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% filter <em>lower</em> %{{"}"}}
+    &lt;p&gt;THIS HAS BEEN CONVERTED TO LOWERCASE.&lt;/p&gt;
+{{"{"}}% endfilter %{{"}"}}
+
+{{"{"}}% filter <em>force_escape|upper</em> %{{"}"}}
+    &lt;p&gt;This will be HTML-escaped & converted to uppercase.&lt;/p&gt;
+{{"{"}}% endfilter %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>extends <br>& <br>block</th>
+                                <td>
+                                    <p class="mb-1">
+                                        The <em>extends</em> tag signals that this template inherits the format of a
+                                        master template.
+                                    </p>
+                                    <hr class="my-1">
+                                    <p class="mb-0">
+                                        <em>block</em> tags, when placed inside of a master template (parent), signal
+                                        that the inheriting template (child) should supply the content for that section.
+                                        Once the inheritor has created a section and populated it, then needs to enclose
+                                        that section with the <em>block</em> tags. The block tags in both the master
+                                        template and inheritor are named so that the program knows which block
+                                        corresponds with which.
+                                    </p>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% extends <em>parent_template</em> %{{"}"}}
+
+{{"{"}}% block <em>name</em> %{{"}"}}
+    ...
+{{"{"}}% endblock %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <p class="mb-1">[../master_template.html]</p>
+                                    <pre class="mb-1">
+&lt;html&gt;
+    &lt;head&gt;
+        {{"{"}}% block <em>head_block</em> %{{"}"}}
+        {{"{"}}% endblock %{{"}"}}
+    &lt;/head&gt;
+    &lt;body&gt;
+        {{"{"}}% block <em>body_block</em> %{{"}"}}
+        {{"{"}}% endblock %{{"}"}}
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                                    <hr class="my-1">
+                                    <p class="mb-1">[../child_template.html]</p>
+                                    <pre class="mb-0">
+{{"{"}}% extends <em>master_template.html</em> %{{"}"}}
+
+{{"{"}}% block <em>head_block</em> %{{"}"}}
+    &lt;title&gt;Le Title&lt;/title&gt;
+{{"{"}}% endblock %{{"}"}}
+
+{{"{"}}% block <em>body_block</em> %{{"}"}}
+    &lt;h1&gt;Le Header&lt;/h1&gt;
+{{"{"}}% endblock %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>include</th>
+                                <td>Loads an external template and renders it within the current template.</td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% include <em>template</em> %{{"}"}}
+or
+{{"{"}}% include <em>template</em> with <em>key=value</em> %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <p class="mb-1">[../ex_template.html]</p>
+                                    <pre class="mb-0">
+&lt;p&gt;
+    {{"{"}}{{"{"}} name {{"}"}}{{"}"}}
+    &lt;br&gt;
+    {{"{"}}{{"{"}} email {{"}"}}{{"}"}}
+&lt;/p&gt;
+</pre>
+
+                                    <hr class="my-1">
+                                    <p class="mb-1">[../contact_info.html]</p>
+                                    <pre class="mb-0">
+...
+&lt;h1&gt;Our Contact Information:&lt;/h1&gt;
+{{"{"}}% include <em>ex_template.html</em> with <em>name="McD"</em> <em>email="mcd@go.com"</em> %{{"}"}}
+...
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>lorem</th>
+                                <td>
+                                    <p class="mb-2">
+                                        Displays random 'lorem ipsum' Latin text. Used to generate sample filler text.
+                                        It can 3 arguments: count, method, and random.
+                                    </p>
+                                    <p class="mb-2">
+                                        <em><u>count</u></em>: optional, specifies the number of words or paragraphs to
+                                        generate
+                                    </p>
+                                    <p class="mb-2">
+                                        <em><u>method</u></em>: optional, specifies content type: <u>w</u> for words,
+                                        <u>p</u> for paragraphs, <u>b</u>for plain-text paragraph blocks.
+                                    </p>
+                                    <p class="mb-0">
+                                        <em><u>random</u></em>: optional, if provided, then does not use the 'lorem
+                                        ipsum'
+                                        for filler text.
+                                    </p>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% lorem <em>count</em> <em>method</em> random %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% lorem %{{"}"}}
+{{"{"}}% lorem 10 b %{{"}"}}
+{{"{"}}% lorem 2 p %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>ifchanged</th>
+                                <td>Checks if a value has changed from the last iteration of a loop. (Personal
+                                    understanding is that it only returns true if the current item is different from the
+                                    previous item.). It can also be used to check a particular <em>property</em> of a
+                                    value has changed.
+                                </td>
+                                <td>
+                                    <pre>
+{{"{"}}% for <em>item</em> in <em>object</em> %{{"}"}}
+    {{"{"}}% ifchanged <em>property</em> %{{"}"}}
+        ...
+    {{"{"}}% else <em>property</em> %{{"}"}}
+        ...
+    {{"{"}}% endifchanged %{{"}"}}
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <p>[1, 2, 1, 2, 2]</p>
+                                    <pre>
+{{"{"}}% for <em>id_number</em> in <em>id_list</em> %{{"}"}}
+    {{"{"}}% ifchanged %{{"}"}}
+        &lt;span&gt;New id: {{"{"}}{{"{"}} id_number {{"}"}}{{"}"}}&lt;/span&gt;
+    {{"{"}}% else <em>property</em> %{{"}"}}
+        &lt;span&gt;Duplicate id: {{"{"}}{{"{"}} id_number {{"}"}}{{"}"}}&lt;/span&gt;
+    {{"{"}}% endifchanged %{{"}"}}
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                    {% for id_number in ifchanged_dict %}
+                                    {% ifchanged id_number %}
+                                    <span>New: {{id_number}},</span>
+                                    {% else %}
+                                    <span>Old: {{id_number}},</span>
+                                    {% endifchanged %}
+                                    {% endfor %}
+                                    <hr>
+                                    <pre class="mb-0">
+{{"{"}}% for <em>user</em> in <em>user_list</em> %{{"}"}}
+    {{"{"}}% ifchanged <em>user.fav_color</em> %{{"}"}}
+        &lt;p&gt;{{"{"}}{{"{"}} user.fav_color {{"}"}}{{"}"}}&lt;/p&gt;
+    {{"{"}}% endifchanged %{{"}"}}
+{{"{"}}% endif %{{"}"}}
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>spaceless</th>
+                                <td>Removes any and all whitespaces, newlines, and tabs.</td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% spaceless %{{"}"}}
+    ...
+{{"{"}}% endspaceless %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% spaceless %{{"}"}}
+    &lt;p&gt;Lorem   ipsum   dolor   sit   amet,
+            consectetur   adipisicing   elit.&lt;/p&gt;
+{{"{"}}% endspaceless %{{"}"}}
+</pre>
+                                    {% spaceless %}
+                                    <span>Lorem   ipsum   dolor   sit   amet,
+                            consectetur   adipisicing   elit.</span>
+                                    {% endspaceless %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>verbatim</th>
+                                <td>This tag is used to prevent Django from executing the enclosed code.</td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% verbatim <em>name</em> %{{"}"}}
+    ...
+{{"{"}}% endverbatim <em>name</em> %{{"}"}}
+</pre>
+                                </td>
+                                <td>
+<pre>{% verbatim outer %}
+{% verbatim uno %}
+    <span>{{ lorem }}</span>
+{% endverbatim uno %}
+{% endverbatim outer %}</pre>
+                                    <span>{{"{"}}{{"{"}} lorem {{"}"}}{{"}"}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>comment</th>
+                                <td>This tag marks the enclosed text as a comment.</td>
+                                <td>
+                                    <pre class="mb-0">
+{{"{"}}% comment <em>description</em> %{{"}"}}
+    ...
+{{"{"}}% endcomment %{{"}"}}
+or
+{{"{"}}# ... #{{"}"}}
+</pre>
+                                </td>
+                                <td>
+                                    <pre>{% verbatim outer %}
+{% comment "optional description here" %}
+    &lt;p&gt;This won't be visible on the page.&lt;/p&gt;
+{% endcomment %}
+{% endverbatim outer %}</pre>
+                                    <pre class="mb-0">{% verbatim outer %}
+&lt;p&gt;Hello, {# This is a "small" comment. #} everyone!&lt;/p&gt;
+{% endverbatim outer %}</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">Full list of built-in tags and filters <a
+                                        href="https://docs.djangoproject.com/en/5.0/ref/templates/builtins/">here</a>.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="example_template_tag"><h4>Example of Template Tag Usage</h4></a>
+        <div class="form-control mb-2">
+            <h5>Example views.py:</h5>
+            <pre class="mb-1">
+from django.shortcuts import render
+from django.models import ExampleModel
+
+def example_view(request):
+    example_1_list = [100,200,300,400,500]
+    example_2_list = ExampleModel.objects.all()
+
+    context = {
+        'example_1': example_1_list,
+        'example_2': example_2_list,
+    }
+return render(request, 'example.html', context=context)
+</pre>
+        </div>
+        <div class="form-control mb-1">
+            <h5>Example html:</h5>
+            <pre class="mb-1">{% verbatim %}
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Example HTML&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="example_one"&gt;
+            {% if example_1 %}
+                &lt;h3&gt;Example 1&lt;/h3&gt;
+                &lt;ul&gt;
+                    {% for num in example_1 %}
+                        &lt;li&gt;{{ num }}&lt;/li&gt;
+                    {% endfor %}
+                &lt;/ul&gt;
+            {% else %}
+                &lt;h3&gt;Examples 1 list is empty.&lt;/h3&gt;
+            {% endif %}
+        &lt;/div&gt;
+
+        &lt;div class="example_two"&gt;
+            {% if example_2 %}
+                &lt;h3&gt;Example 2&lt;/h3&gt;
+                &lt;table class="table table-bordered"&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Name&lt;/th&gt;
+                        &lt;th&gt;Description&lt;/th&gt;
+                    &lt;/tr&gt;
+                    {% for item in example_2 %}
+                        &lt;tr&gt;
+                            &lt;td&gt;{{ item.name }}&lt;/td&gt;
+                            &lt;td&gt;{{ item.description }}&lt;/td&gt;
+                        &lt;/tr&gt;
+                    {% endfor %}
+                &lt;/table&gt;
+            {% else %}
+                &lt;h3&gt;No items in Examples 2 database.&lt;/h3&gt;
+            {% endif %}
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+{% endverbatim %}</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="builtin_template_filters_anchor"><h4>Built-in Template Filters</h4></a>
+        <p class="mb-1">
+            Django's Template Engine provides filters that are used to transform or filter the values or variables and
+            tag arguments. Syntax:
+            <br>
+            <code>{% verbatim %}{{ <em>variable_name</em>|<em>filter_name</em> }}{% endverbatim %}</code>
+        </p>
+        <p class="mb-1">
+            Filters can be chained, with the output of one filter applied to the next. See example below:
+        </p>
+        <pre>
+{% verbatim %}{{ <em>scores_list</em>|random|add:"1"|divisibleby:"2" }}{% endverbatim %}
+</pre>
+        <div class="accordion mb-1">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#common_filters_id">
+                        Common Template Filters
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="common_filters_id">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Filter</th>
+                                    <th>Description</th>
+                                    <th>Example usage</th>
+                                </tr>
+                                <tr>
+                                    <th>add</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            It is used to add an argument to the value. If that value is a list, then it
+                                            appends the argument. The argument can be another list.
+                                        </p>
+                                    </td>
+                                    <td>
+                                    <pre class="mb-0">{% verbatim %}
+# score = 2
+{{ <em>score</em>|add:"5" }}
+>> score = 7
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+# [100,90,85]
+{{ <em>scores_list</em>|add:"95" }}
+>> scores_list = [100,90,85,95]
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>addslashes</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Adds slashes before quotes. Useful for escaping strings in CSV.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+# some_string = "Where's the Queen's crown?!"
+{{ <em>some_string</em>|addslashes }}
+>> # some_string = "Where\'s the Queen\'s crown?!"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>capfirst</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Capitalizes the first character of the value. If the first character is not
+                                            a letter, this filter has no effect.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ <em>some_value</em>|capfirst }}
+# abc --> Abc
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>center</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Centers the value in a field of a given width. To use it, you specify a
+                                            minimum desired length for the given string, and if it's larger than the
+                                            string, whitespaces will be created around the string (front and back) until
+                                            the total length of the string matches the desired length and the original
+                                            string is centered between the whitespaces.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+"{{ value|center:"15" }}"
+# "Django" --> "     Django    "
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>cut</th>
+                                    <td>
+                                        <p class="mb-1">Removes all values of the argument from the given string.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|cut:" " }}
+# "This string has spaces." --> "Thisstringhasspaces."
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>date</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Formats a date according to the given format. Please refer to this
+                                            <a href="https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#date">
+                                                reference chart</a> for a full list of format strings.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-1">{% verbatim %}
+{{ value|date:"D d M Y" }}
+# If <em>value</em> is a datetime object, example output:
+"Wed 09 Jan 2008"
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-1">
+{{ value|date:"Y-m-d [F]" }}
+# "2023-12-31 [January]"
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|date:"SHORT_DATE_FORMAT" }}
+# "09/01/2008"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>default</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            If the value evaluates to <u>False</u>, uses the specified default, else
+                                            returns the value.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|default:"Nothing here." }}
+# "" (empty string) --> "Nothing here."
+# "abc" --> "abc"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>default_if_none</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            If, and only if, the value is <u>None</u>, uses the specified default, else
+                                            returns the value.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|default:"Nothing here." }}
+# "" (empty string) --> ""
+# "abc" --> "abc"
+# None --> "Nothing here"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>dictsort</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Takes a list of dictionaries and returns that list sorted by the key given
+                                            in the argument.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-1">{% verbatim %}
+{{ value|dictsort:"name" }}
+# if the value is:
+[
+    {"name": "zed", "age": 19},
+    {"name": "amy", "age": 22},
+    {"name": "joe", "age": 31},
+]
+# the output will be:
+[
+    {"name": "amy", "age": 22},
+    {"name": "joe", "age": 31},
+    {"name": "zed", "age": 19},
+]
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-1">
+# Also works on nested dictionaries
+{{ value|dictsort:"author.age" }}
+# if the value is:
+[
+    {"title": "1984", "author": {"name": "George", "age": 45}},
+    {"title": "TimeQ", "author": {"name": "Kurt", "age": 75}},
+    {"title": "Alice", "author": {"name": "Lewis", "age": 33}},
+]
+# the output will be:
+[
+    {"title": "Alice", "author": {"name": "Lewis", "age": 33}},
+    {"title": "1984", "author": {"name": "George", "age": 45}},
+    {"title": "TimeQ", "author": {"name": "Kurt", "age": 75}},
+]
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+# Works on a list of items, just use an index instead of key
+{{ values|dictsort:0 }}
+# if the value is:
+[
+    ("a", "42"),
+    ("c", "string"),
+    ("b", "foo"),
+]
+# the output will be:
+[
+    ("a", "42"),
+    ("b", "foo"),
+    ("c", "string"),
+]
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>dictsortreversed</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Works the same as <em>dictsort</em>, but the returned value will be in
+                                            reverse order.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|dictsortreverse:"name" }}
+# if the value is:
+[
+    {"name": "zed", "age": 19},
+    {"name": "amy", "age": 22},
+    {"name": "joe", "age": 31},
+]
+# the output will be:
+[
+    {"name": "zed", "age": 19},
+    {"name": "joe", "age": 31},
+    {"name": "amy", "age": 22},
+]
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>divisibleby</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Returns <u>True</u> if the value is divisible by the argument.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|divisibleby:"3" }}
+# if the value is <u>21</u>, then returns <u>True</u>
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>escape</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Escapes a string's HTML. It makes the following replacements:
+                                        </p>
+                                        <ul class="mb-0">
+                                            <li><b>&lt;</b> is converted to <b>&amp;lt;</b></li>
+                                            <li><b>&gt;</b> is converted to <b>&amp;gt;</b></li>
+                                            <li><b>'</b> is converted to <b>&amp;x27;</b></li>
+                                            <li><b>"</b> is converted to <b>&amp;quot;</b></li>
+                                            <li><b>&amp;</b> is converted to <b>&amp;amp;</b></li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{% autoescape off %}
+    {{ title|escape }}
+{% endautoescape %}
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>escapejs</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Escapes characters for use as a whole Javascript string literal, within
+                                            single or double quotes. (Does not make the string safe for use in
+                                            "Javascript template literals" (the Javascript backtick syntax). Any other
+                                            uses not listed are not supported.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+&lt;script&gt;
+let myValue = '{{ value|escapejs }}'
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>filesizeformat</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Formats the value in a 'human-readable' file size (e.g. '13 KB', '4.1 MB',
+                                            '102' bytes, etc.).
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|filesizeformat }}
+# 123456789 --> 117.7 MB
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>first</th>
+                                    <td>
+                                        <p class="mb-1">Returns the first item in the given list.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|first }}
+# ['a', 'b', 'c'] --> 'a'
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>floatformat</th>
+                                    <td>
+                                        <p class="mb-1">
+                                            Rounds a floating-point number to the desired decimal place. If the decimal
+                                            place argument is not specified, then by default, it will round to one
+                                            decimal place.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-1">{% verbatim %}
+{{ value|floatformat }}
+# 34.23234 --> 34.2
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-1">
+{{ value|floatformat:3 }}
+# 34.23234 --> 34.232
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|floatformat:"0" }}
+# 34.23234 --> 34
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>force_escape</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Applies HTML escaping to a string (see <em>escape</em>). This filter is
+                                            applied immediately and returns a new, escaped string. This is useful in the
+                                            scenario in which you need multiple escaping or want to apply other filters
+                                            to the escaped results. In most cases, however, you will want to use the
+                                            <em>escape</em> filter.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{% autoescape off %}
+    {{ body|linebreaks|force_escape }}
+{% endautoescape %}
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>get_digit</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Given a whole number, returns the requested digit, where 1 is the right-most
+                                            digit, 2 is the second-most digit, etc.. Returns the original value for
+                                            invalid inputs (i.e. not an integer or is less than 1). Otherwise, output is
+                                            always an integer.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|get_digit:"2" }}
+# 123456789 --> 8
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>iriencode</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Converts an IRI (Internationalized Resource Identifier) to a string that is
+                                            suitable for including in a URL.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|iriencode }}
+# "?test=1&me=2" --> "?test=1&amp;amp;me=2"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>join</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Joins elements of a list together using the specified string, into a single
+                                            string.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|join:" // " }}
+# ['a', 'b', 'c'] --> "a // b // c"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>json_script</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Safely outputs a Python object as JSON, wrapped in a &lt;script&gt; tag,
+                                            ready for use with Javascript.
+                                            <br>
+                                            Argument: the optional HTML "<em>id</em>" of the &lt;script&gt; tag.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|json_script:"hello-data" }}
+
+# If the value is {'hello': 'world'}, the output will be:
+&lt;script id="hello-data" type="application/json">
+    {"hello": "world"}
+&lt;/script&gt;
+
+# Resulting data can then be accessed in JavaScript like so:
+const value = JSON.parse(document.getElementById('hello-data')
+                                 .textContent);
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>last</th>
+                                    <td>
+                                        <p class="mb-0">Returns the last item in a list.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|last }}
+# ['a', 'b', 'c', 'd'] --> "d"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>length</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Returns the length/size of a value. Works for both strings and lists.
+                                            Returns <u>0</u> if the value is undefined.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|length }}
+# ['a', 'b', 'c', 'd'] --> 4
+# "abcd" --> 4
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>length_is</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            (Deprecated)
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+                                            
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>linebreaks</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Replaces lines breaks in plain text with appropriate HTML; a single newline
+                                            becomes an HTML line break (&lt;br&gt;) and a new line followed by a blank
+                                            line because a paragraph break (&lt;/p&gt;).
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|linebreaks }}
+# "Joel\nis a slug" --> &lt;p&gt;Joel&lt;br&gt;is a slug&lt;/p&gt;
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>linebreaksbr</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Converts all newlines in a piece of plain text to HTML line breaks
+                                            (&lt;br&gt;).
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|linebreaksbr }}
+# "Joel\nis a slug" --> Joel&lt;br&gt;is a slug
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>linenumbers</th>
+                                    <td>
+                                        <p class="mb-0">Displays text with line numbers.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|linenumbers }}
+# if the value is:
+one
+two
+three
+# the output will be:
+1. one
+2. two
+3. three
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>ljust</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Left-aligns the value in a field of given width. Argument: field size. If
+                                            the string is shorter than the specified length, then it adds whitespaces to
+                                            the end of the string until it matches the specified length.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+"{{ value|ljust:"10" }}"
+# "Django" --> "Django    "
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>lower</th>
+                                    <td>
+                                        <p class="mb-0">Converts the value into all lowercase.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|lower }}
+# AbcDef --> abcdef
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>make_list</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Returns the value turned into a list. For a string, it returns a list of
+                                            characters. For an integer, the argument is cast into a string before
+                                            creating a list.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|make_list }}
+# "Joel" --> ['J', 'o', 'e', 'l']
+# 123 --> ['1', '2', '3']
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>phone2numeric</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Converts a phone number to its numerical equivalent. The value doesn't
+                                            necessarily need to be a valid phone number.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|phone2numeric }}
+# 800-COLLECT --> 800-2655328
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>pluralize</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Returns a plural suffix if the value is not 1, '1', or an object of length
+                                            <u>1</u>. By default, this suffix is 's'. For words that require a suffix
+                                            other than 's', we can specify an alternate suffix. For words that don't
+                                            pluralize by a simple suffix, we can specify both a singular and plural
+                                            suffix, separated by a comma.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ num_messages }} message{{ num_messages|pluralize }}.
+# 1 --> "1 message."
+# 3 --> "3 messages."
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ num_walruses }} walrus{{ num_walruses|pluralize:"es" }}.
+# 1 --> "1 walrus."
+# 3 --> "3 walruses."
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
+# 1 --> "1 cherry."
+# 3 --> "3 cherries."
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>pprint</th>
+                                    <td>
+                                        <p class="mb-0">A wrapper around <em>pprint.pprint()</em>. For debugging.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+                                            
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>random</th>
+                                    <td>
+                                        <p class="mb-0">Returns a random item from the given list.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|random }}
+# ['a', 'b', 'c', 'd'] --> "b"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>rjust</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Right-aligns the value in a field of a given width. Argument: field size. If
+                                            the specified length is greater than the string, then whitespaces are added
+                                            to the front of the string until its length matched the specified length.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+"{{ value|rjust:"10" }}"
+# "Django" --> "    Django"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>safe</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Marks a string as not requiring further HTML escaping prior to output. When
+                                            autoescaping is off, this filter has no effect.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>safeseq</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Applies the <em>safe</em> filter to each element of a sequence. Useful in
+                                            conjunction with other filters that operate on sequences, such as
+                                            <em>join</em>.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ some_list|safeseq|join:", " }}
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>slice</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Returns a slice of the list. Uses the same syntax as Python's slice. Does
+                                            not accept negative integers.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ some_list|slice:":2" }}
+# ['a', 'b', 'c'] --> ['a', 'b']
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>slugify</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Converts to ASCII. Converts spaces to hyphens. Removes characters that
+                                            aren't alphanumerics, underscores, or hyphens. Converts to lowercase. Also
+                                            strips leading and trailing whitespaces.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|slugify }}
+# "Joel is a slug" --> "joel-is-a-slug"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>stringformat</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Formats the variable according to the argument, a string formatting
+                                            specifier. This specifier uses syntax based on C's <em>printf()</em> syntax.
+                                            Refer to this <a
+                                                href="https://docs.python.org/3/library/stdtypes.html#old-string-formatting">
+                                            site</a> for additional details.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|stringformat:"E" }}
+# 10 --> 1.000000E+01
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>striptags</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Makes all possible efforts to strip all [X]HTML tags.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|striptags }}
+# if the value is:
+"&lt;b&gt;Joel&lt;/b&gt; &lt;button&gt;is&lt;/button&gt; a &lt;span&gt;slug&lt;/span&gt;"
+# the output will be:
+"Joel is a slug"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>time</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Formats a time according to the given format. Given format can be the
+                                            predefined one <u>TIME_FORMAT</u>, or a custom format, similar to the
+                                            <em>date</em> filter.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|time:"H:i" }}
+# "23:55"
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|time:"H\h i\m" }}
+# “23h 55m”
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|time:"h:i:s:u|A|T" }}
+# "12:55:00:999999|PM|EST"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>timesince</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Formats a date as the time since that date. Takes an optional argument that
+                                            is a variable containing the date to use as the comparison point (without
+                                            the argument, the default point is set to <u>now</u>).
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ blog_date|timesince }}
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ blog_date|timesince:comment_date }}
+# if the values are:
+<em>blog_date</em> is 1pm on 1 June 2006
+<em>comment_date</em> is 9pm on 1 June 2006
+# the output will be:
+"8 hours"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>timeuntil</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Similar to <em>timesince</em>, except it measures the time from now until
+                                            the specified date/datetime. Can take an optional argument that is a
+                                            variable containing the date to use as the comparison point (instead of the
+                                            default <u>now</u>).
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ conference_date|timeuntil:from_date }}
+# if the values are:
+<em>conference_date</em> is 29 June 2006
+<em>from_date</em> is 1 June 2006
+# the output will be:
+"4 weeks"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>title</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Converts a string into titlecase by making words start with an uppercase
+                                            character and the remaining characters lowercase.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|title }}
+# "onE tWO tHrEE" --> "One Two Three"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>truncatechars</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Truncates a string if it is longer than the specified number of characters.
+                                            Truncated stnings will end with a translatable ellipsis character ("…"). (It
+                                            is not 3 period characters but a single character.)
+                                            <br>
+                                            <span style="color:lightgray;">
+                                                [The character code for an ellipsis is &amp;#8230;]</span>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|truncatechars:7 }}
+# "Joel is a slug" --> "Joel i…".
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>truncatechars_html</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Similar to <em>truncatechars</em>, except that it is aware of HTML tags. Any
+                                            tags that are opened in the string and not closed before the truncation
+                                            point are closed immediately after the truncation. Newlines in the HTML
+                                            content will be preserved.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|truncatechars_html:7 }}
+# "&lt;p&gt;Joel is a slug&lt;/p&gt;" --&gt; "&lt;p&gt;Joel i…&lt;/p&gt;".
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>truncatewords</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Truncates a string after a certain number of words. Argument: number of
+                                            words to truncate after. Newlines within the string will be removed.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|truncatewords:2 }}
+# "Joel is a slug" --> "Joel is …".
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>truncatewords_html</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Similar to <em>truncatewords</em>, except that it is aware of HTML tags. Any
+                                            tags that are opened in the string and not closed before the truncation
+                                            point are closed immediately after the truncation. This is less efficient
+                                            than <em>truncatewords</em>, so it should only be used when it is being
+                                            passed HTML text. Newlines in the HTML content will be preserved.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|truncatewords_html:2 }}
+# "&lt;p&gt;Joel is a slug&lt;/p&gt;" --> "&lt;p&gt;Joel is …&lt;/p&gt;"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>unordered_list</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Recursively takes a self-nested list and returns an HTML unordered list -
+                                            without opening and closing &lt;ul&gt; tags. The list is assumed to be in
+                                            the proper format.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ some_list|unordered_list }}
+# if the list elements are:
+['States', ['Kansas', ['Lawrence', 'Topeka'], 'Illinois']]
+# expanded view of above list elements:
+[
+    'States',
+    [
+        'Kansas',
+        [
+            'Lawrence',
+            'Topeka'
+        ],
+        'Illinois'
+    ]
+]
+# the output will be:
+&lt;li&gt;States
+&lt;ul&gt;
+        &lt;li&gt;Kansas
+        &lt;ul&gt;
+                &lt;li&gt;Lawrence&lt;/li&gt;
+                &lt;li&gt;Topeka&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Illinois&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>upper</th>
+                                    <td>
+                                        <p class="mb-0">Converts a string into all uppercase.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|upper }}
+# "Joel is a slug" --> "JOEL IS A SLUG"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>urlencode</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Escapes a value for use in a URL. An optional argument containing the
+                                            characters which should not be escaped can be provided. If not provided, the
+                                            (" / ") character is assumed safe. An empty string can be provided when <em>ALL</em>
+                                            characters should be escaped.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|urlencode }}
+# if the value is:
+"https://www.example.org/foo?a=b&c=d"
+# the output will be:
+"https%3A//www.example.org/foo%3Fa%3Db%26c%3Dd"
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|urlencode:"" }}
+# if the value is:
+"https://www.example.org/"
+# the output will be:
+"https%3A%2F%2Fwww.example.org%2F"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>urlize</th>
+                                    <td>
+                                        <p>
+                                            Converts URLs and email addresses in text into clickable links. This works
+                                            on linked prefixed with "http://", "https://", or "www" but won't work on
+                                            links like "goo.gl/aia1t". It also supports domain-only links ending in one
+                                            of the original top level domains (such as ".com", ".edu", ".gov", ".int",
+                                            ".mil", ".net", and ".org").
+                                        </p>
+                                        <p>
+                                            Also converts email addresses into <em>mailto:</em> links. <em>urlize</em>
+                                            can also take an optional parameter: <em>autoescape</em>. If
+                                            <em>autoescape</em> is set to <u>True</u>, the link text and URLs will be
+                                            escaped using Django's <em>escape</em> filter. The default value is set to
+                                            <u>True</u>.
+                                        </p>
+                                        <p class="mb-0">
+                                            Links can have trailing punctuation (periods, commas, close-parens) and
+                                            leading punctuation (opening parens). Links generated by <em>urlize</em>
+                                            have a <em>rel="nofollow"</em> attribute added to them. This filter should
+                                            only be applied to plain text.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|urlize }}
+# if the value is:
+"Site: www.djangoproject.com"
+# the output will be:
+"Site: &lt;a href="http://www.djangoproject.com"
+             rel="nofollow"&gt;www.djangoproject.com&lt;/a&gt;"
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|urlize }}
+# if the value is:
+"Email: foo@example.com"
+# the output will be:
+"Email: &lt;a href="mailto:foo@example.com"&gt;foo@example.com&lt;/a&gt;"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>urlizetrunc</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Converts URLs and email address into clickable links just like
+                                            <em>urlize</em>, but truncates URLs longer than the given character limit.
+                                            Argument: number of characters that link text should be truncated to,
+                                            including the ellipsis ( … ) that's added if truncation is necessary. Should
+                                            only be applied to plain text.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|urlizetrunc:15 }}
+# if the value is:
+"Site: www.djangoproject.com"
+# the output will be:
+"Site: &lt;a href="http://www.djangoproject.com"
+             rel="nofollow"&gt;www.djangoproj…&lt;/a&gt;"
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>wordcount</th>
+                                    <td>
+                                        <p class="mb-0">Returns the number of words.</p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|wordcount }}
+# "Joel is a slug" --> 4
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>wordwrap</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Wraps words at specified line length. Argument: number of characters at
+                                            which to wrap the text.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|wordwrap:5 }}
+# if value is:
+Joel is a slug
+# the output will be:
+Joel
+is a
+slug
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>yesno</th>
+                                    <td>
+                                        <p class="mb-0">
+                                            Maps values for <u>True, False</u> and (optionally) <u>None</u>, to the
+                                            strings: <u>"yes"</u>, <u>"no"</u>, <u>"maybe"</u>, or a custom mapping
+                                            passed as a comma-separated list, and returns one of those strings according
+                                            to the value.
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <pre class="mb-0">{% verbatim %}
+{{ value|yesno }}
+# True --> 'yes'
+# False --> 'no'
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|yesno:"yeah,no,maybe" }}
+# True --> 'yeah'
+# False --> 'no'
+# None --> 'maybe'
+</pre>
+                                        <hr class="my-1">
+                                        <pre class="mb-0">
+{{ value|yesno:"yeah,no" }}
+# None --> 'no' (converts <u>None</u> to <u>False</u> if not mapped)
+{% endverbatim %}</pre>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="custom_template_filter_anchor"><h4>Custom Template Filters</h4></a>
+        <div class="form-control mb-2">
+            <h5>Setup</h5>
+            <p class="mb-1">
+                If the built-in filters don't match what we need, we can create our own. This requires going through a
+                setup process that involves creating a directory and some py files. Please follow the initial steps
+                below:
+            </p>
+            <ul class="mb-1">
+                <li>
+                    <p class="mb-1">
+                        Create a folder named <em>"templatetags"</em> in the root directory of the app (<b>not</b> the
+                        project):
+                    </p>
+                    <pre class="mb-0">
+( ... / <em>app_dir</em> / <mark>templatetags</mark> / )
+</pre>
+                </li>
+                <li>
+                    <p class="mb-1">Inside our newly created folder, create a py file named <em>"__init__"</em>.</p>
+                    <pre class="mb-0">
+( ... / <em>app_dir</em> / templatetags / <mark>__init__.py</mark> )
+</pre>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        Then create another py file in the same directory. This file can be named anything, but for our
+                        example we will use <em>"custom_filters"</em>.
+                    </p>
+                    <pre class="mb-0">
+( ... / <em>app_dir</em> / templatetags / <mark>custom_filters.py</mark> )
+</pre>
+                </li>
+            </ul>
+            <p class="mb-1">The next steps involve editing our <em>custom_filters.py</em> file:</p>
+            <ul>
+                <li>
+                    <p class="mb-1">Import <em>template</em> from the <em>django</em> module.</p>
+                    <pre class="mb-0">
+from django import template
+</pre>
+                </li>
+                <li>
+                    <p class="mb-1">Instantiate a variable from the <em>template.Library()</em></p>
+                    <pre class="mb-0">
+register = template.Library()
+</pre>
+                </li>
+                <li>
+                    <p class="mb-1">Create a custom filter:</p>
+                    <ul>
+                        <li>
+                            <p class="mb-1">
+                                Create a function that accepts "value" as a parameter. A second optional parameter can
+                                be added, as needed. Example:
+                            </p>
+                            <pre class="mb-0">
+def bonkai(value, arg):
+</pre>
+                        </li>
+                        <li>
+                            <p class="mb-1">
+                                Create the body of the function so that it performs the desired operation on the value,
+                                then returning the result. Example:
+                            </p>
+                            <pre class="mb-0">
+def bonkai(value, arg):
+    <mark>return str(value).upper() * int(arg)</mark>
+</pre>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="mb-1">
+                        The last step before the filter can be used is to register the function. For this step we'll use
+                        the variable that we used to instantiate the template.Library(). We need to call its
+                        <em>filter()</em> function and pass in two arguments: the name of the function cast as a
+                        string, and then the function itself. Alternatively, use the variable as a decorator on the
+                        function. See below for example:
+                    </p>
+                    <pre class="mb-0">
+register.filter('bonkai', bonkai)
+</pre>
+                    <hr class="my-1">
+                    <pre class="mb-0">
+# using the template.Library() variable as a decorator
+@register.filter('bonkai')
+def bonkai(value, arg):
+    ...
+</pre>
+                </li>
+            </ul>
+
+            <div class="form-control mb-1">
+                <h6>Example custom filter Python script:</h6>
+                <pre class="mb-1">
+from django import template
+register = template.Library()
+
+@register.filter('bonkai')
+def bonkai(value, arg):
+    return str(value).upper() * int(arg)
+
+# register.filter('bonkai', bonkai) # Can use this or the decorator, not both
+</pre>
+            </div>
+        </div>
+
+        <div class="form-control mb-1">
+            <h5>Using custom filters</h5>
+            <p class="mb-1">
+                For a webpage to use a custom filter, we need to load the custom filter py file using a template tag.
+                Our example custom filter py script is named "custom_filters", so that's what we need to pass into the
+                template tag, see below:
+            </p>
+            <pre>{% verbatim %}
+{% load custom_filters %}
+{% endverbatim %}</pre>
+            <p class="mb-1">
+                To use a filter from our py script, simply call it as you would with a built-in template filter.
+            </p>
+            <pre>{% verbatim %}
+{{ example_value|bonkai:"5" }}
+{% endverbatim %}</pre>
+
+            <div class="form-control mb-1">
+                <h6>Example of webpage using built-in and custom filters:</h6>
+                <pre class="mb-1">{% verbatim %}
+{% extends 'basic_app/base.html' %}
+{% load custom_filters %}
+{% block title_uno %}
+    &lt;title&gt;Index&lt;/title&gt;
+{% endblock %}
+{% block block_one %}
+    &lt;h1&gt;Welcome to the Index&lt;/h1&gt;
+    &lt;h2&gt;text: {{ text }}&lt;/h2&gt;
+    &lt;h2&gt;text|upper: {{ text|upper }}&lt;/h2&gt;
+    &lt;h2&gt;text|length: {{ text|length }}&lt;/h2&gt;
+    &lt;h2&gt;number: {{ number }}&lt;/h2&gt;
+    &lt;h2&gt;number|add:"23": {{ number|add:"23" }}&lt;/h2&gt;
+    &lt;h2&gt;text|bonkai:"5": {{ text|bonkai:"5" }}&lt;/h2&gt;
+{% endblock %}
+{% endverbatim %}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - Templates
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_templates_anchor"><strong>Django - Templates</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#templates_initial_setup_anchor">Template Initial Setup</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#creating_mapping_template_anchor">Creating/Mapping Templates</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#template_variables_anchor">Template Variables</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#template_tags_reference_anchor">Template Tags</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#example_template_tag">Example of Template Tag Usage</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#builtin_template_filters_anchor">Built-in Template Filters</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#custom_template_filter_anchor">Custom Template Filters</a>
+</li>
+{% endblock %}

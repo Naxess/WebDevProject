@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Model-Template-View Paradigm</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_mtv_paradigm_anchor"><h1>Django <span class="door">-</span> Model-Template-View Paradigm</h1></a>
+<div class="form-control">
+    <p class="mb-1">
+        Django operates on the Model Template View (MTV) Paradigm - a software pattern, similar to MVC (Model View
+        Controller). The goal of which is to serve dynamic content to the user based off of the connection between the
+        models, views, and templates.
+    </p>
+    <ul class="mb-3">
+        <li>
+            The <strong><u>view</u></strong> describes the data that gets presented to the user. It is responsible for
+            rendering a page. It's not necessarily <em>how</em> the data looks but <em>which</em> data is presented. The
+            view describes <em>which</em> data you see, not <em>how</em> you see it. In Django, the '<em>view</em>' is
+            the Python callback function for a particular URL, because that callback function describes which data is
+            presented. It normally delegates to a template.
+        </li>
+        <li>
+            The <strong><u>template</u></strong> describes how the data is presented. It is a chunk of text that acts as
+            formatting for representing data. A template helps to abstract the presentation of data from the data
+            itself.
+        </li>
+        <li>
+            The <strong><u>model</u></strong> is what stores the application's data.
+        </li>
+    </ul>
+    <div class="form-control mb-2">
+        <a id="mtv_vs_mvc_anchor"><h3>Differences between an MTV and MVC:</h3></a>
+        <p class="mb-1">
+            In the MTV framework, what we describe as our 'view' is what the MVC framework would refer to as a
+            'controller' and what we describe as our 'template' is what MVC would describe as a 'view'. In MTV, our
+            'controller' is the framework itself - it is responsible for sending the request to the appropriate view,
+            according to the URL configuration.
+        </p>
+    </div>
+    <div class="form-control mb-2">
+        <a id="views_anchor"><h3>Views - Importing Models, Querying, and Passing Data to the Template</h3></a>
+        <div class="form-control mb-2">
+            <h6>Example models.py from example app named 'first_app':</h6>
+            <img src="{% static 'media/images/examples/django_mtv.example_modelspy.png' %}"
+                 alt="django_mtv.example_modelspy.png" class="mb-1">
+        </div>
+        <ol>
+            <li>
+                <p class="mb-1">
+                    Before a model from the <em>models.py</em> file can be used, it first needs to be imported into the
+                    <em>views.py</em> file.
+                </p>
+                <p class="mb-1">
+                    In the example below, we importing models from the app named 'first_app':
+                </p>
+                <pre class="mb-1">
+from first_app.models import Topic, Webpage, AccessRecord
+</pre>
+            </li>
+            <li>
+                <p class="mb-1">
+                    Once imported, the model can now be queried for the desired data. We can filter, order, and
+                    manipulate it as needed.
+                </p>
+                <p class="mb-1">
+                    In the below example, we retrieve data from AccessRecord, reorder the items by the '<em>date</em>'
+                    field, and assign it to a variable:
+                </p>
+                <pre>
+webpages_list = AccessRecord.objects.order_by('date')
+</pre>
+            </li>
+            <li>
+                <p class="mb-1">
+                    Once the data is ready, it can be passed from the view to the template, where the data will be
+                    displayed. To pass this data to the template, we need to use the <em>render()</em> method's optional
+                    <em>context</em> parameter. This parameter accepts a dictionary of key-value pairs, consisting of a
+                    string name and the set of data to be sent.
+                </p>
+                <p class="mb-1">
+                    In the below example, we create a dictionary into which we pass a key-value pair consisting of
+                    "access_records" as the key name, and <u>webpages_list</u> as the value. Then we assign the this
+                    dictionary to the <em>context</em> parameter. Optionally, add another key-value pair to the dict:
+                    {'some_numbers': [3,1,4,1,5,9]}.
+                </p>
+                <pre>
+date_dict = {'access_records': webpages_list, 'some_numbers': [3,1,4,1,5,9]}
+return render(request, 'first_app/index.html', context=date_dict)
+</pre>
+            </li>
+        </ol>
+        <div class="form-control mb-1">
+            <h6>Example views.py:</h6>
+            <pre class="mb-0">
+from django.shortcuts import render
+from first_app.models import Topic, Webpage, AccessRecord
+
+def index(request):
+    webpages_list = AccessRecord.objects.order_by('date')
+    date_dict = {'access_records': webpages_list, 'some_numbers': [3,1,4,1,5,9]}
+    return render(request, 'first_app/index.html', context=date_dict)
+</pre>
+        </div>
+    </div>
+    <div class="form-control mb-1">
+        <a id="templates_access_display_data_anchor"><h3>Templates - Accessing and Displaying the Data</h3></a>
+        <ul class="mb-1">
+            <li>
+                <p class="mb-1">
+                    In order to access a particular set of data sent from the view, we need to know the name of the key
+                    that was assigned to that set. Once known, the associated data can be displayed on the page by using
+                    the template tag lookup syntax: <code>{{"{"}}{{"{"}} key {{"}"}}{{"}"}}</code>. This template tag
+                    will print out the entire content of the data set at once.
+                </p>
+                <p class="mb-1">
+                    Refer to this <a href="{% url 'tenappone:django_templates' %}#template_variables_anchor">section</a>
+                    for additional template tag syntaxes. Two commonly used ones below:
+                </p>
+                <table class="table table-bordered mb-2">
+                    <tr class="table-dark">
+                        <th class="col-1 text-center">Tag</th>
+                        <th class="col-5">Description</th>
+                        <th class="col-5">Syntax & Example Usage</th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">if</th>
+                        <td>
+                            <p>
+                                Specifies an <em>if</em> statement that evaluates a condition(s). <em>if</em> statements
+                                must be terminated with an <em>endif</em> tag. The <em>elif</em> and <em>else</em> are
+                                optional. There's no limit on the number of <em>elif</em> tags or conditions per
+                                <em>if</em> and <em>elif</em> tag.
+                            </p>
+                            <p>
+                                Operators:
+                                <br>
+                                ==, !=, <, <=, >, >=, and, or, in, is, is not, not in
+                            </p>
+                        </td>
+                        <td>
+                            <pre class="mb-0">{% verbatim %}
+Syntax:
+{% <mark>if</mark> <em>condition</em> %}
+    ...
+{% <mark>elif</mark> <em>condition_1</em> <em>logical_operator</em> <em>condition_2</em> %} # optional
+    ...
+{% <mark>else</mark> %} # optional
+    ...
+{% <mark>endif</mark> %}
+{% endverbatim %}</pre>
+                            <hr class="my-1">
+                            <pre class="mb-0">{% verbatim %}
+Example usage:
+{% if <em>first_name == "John" and last_name == "Doe"</em> %}
+    &lt;p&gt;John Doe? Who are you, really?&lt;/p&gt;
+{% elif <em>id < 10</em> %}
+    &lt;p&gt;Welcome, founder.&lt;/p&gt;
+{% else %}
+    &lt;p&gt;Welcome, user.&lt;/p&gt;
+{% endif %}
+{% endverbatim %}</pre>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">for</th>
+                        <td>
+                            <p>Iterates through a collection of items.</p>
+                            <p>
+                                For-loop variables (not covered here):
+                                <br>
+                                counter, counter0, first, last, parentloop, revcounter, revcounter()
+                                <br>
+                                (Refer to the template tag section for examples of usage)
+                            </p>
+                        </td>
+                        <td>
+                            <pre class="mb-0">{% verbatim %}
+Syntax:
+{% for <em>item_name</em> in <em>collection_object</em> %}
+    {{ <em>item_name</em> }}        # technically optional
+    {{ forloop.counter0 }}          # optional
+    {{ forloop.first }}             # optional
+    {{ forloop.last }}              # optional
+    {{ forloop.parentloop }}        # optional
+    {{ forloop.revcounter }}        # optional
+    {{ forloop.revcounter0 }}       # optional
+{% endfor %}
+{% endverbatim %}</pre>
+                            <hr class="my-1">
+                            <pre class="mb-0">{% verbatim for_tag %}
+Example usage:
+{% for <em>person</em> in <em>team_roster</em> %}
+    &lt;p&gt;Name:{{ <em>person.last_name</em> }}, {{ <em>person.first_name</em> }}&lt;/p&gt;
+{% endfor %}
+{% endverbatim for_tag %}</pre>
+                        </td>
+                    </tr>
+                </table>
+                <p class="mb-1">
+                    In the example below, we enable the the data set (<em>webpages_list</em>) to be displayed by
+                    supplying the associated key (<em>access_records</em>) into the template tag.
+                </p>
+                <pre>{% verbatim example_one %}
+&lt;body&gt;
+    &lt;p&gt;
+        {{ access_records }}
+    &lt;/p&gt;
+&lt;/body&gt;
+{% endverbatim example_one %}</pre>
+            </li>
+            <li>
+                <p class="mb-1">
+                    If the data set is a collection-type variable, then it can be iterated through, instead of printing
+                    the contents all at once. This is done using the <em>for</em> template tag. It can used to
+                    dynamically generate HTML elements as well, so for each item in our variable, it can create new HTML
+                    elements alongside it, provided that they are created inside of the <em>for</em>/<em>endfor</em>
+                    template tags. Before a variable is accessed, it's recommended to check to see if it exists first.
+                    This is where the <em>if</em> template tag is useful - if the supplied key doesn't exist or has no
+                    data, an alternative set of code/scripts can be provided for it to run.
+                </p>
+                <p class="mb-1">
+                    In the example below, we use the <em>if</em> template tag to check if a key with the name
+                    <u>some_numbers</u> exists and checks if the associated value is empty. If false, then it will
+                    output a <em>p</em> element with a message. If true, then it creates a <em>ul</em> element. Inside
+                    of this element, the <em>for</em> template tag will be called. It will iterate through the contents
+                    of the <u>some_numbers</u> list, creating a <em>li</em> element for each one and supplying it with
+                    the current iteration's item.
+                </p>
+                <pre class="mb-0">{% verbatim example_two %}
+&lt;body&gt;
+    ...
+    {% if some_numbers %}
+        &lt;ul&gt;
+            {% for number in some_numbers %}
+                &lt;li&gt;Score #: {{ number }}&lt;/li&gt;
+            {% endfor %}
+        &lt;/ul&gt;
+    {% else %}
+        &lt;p&gt;
+            You're seeing this because there's either no data for the
+            supplied key, or the key-value pair does not exist.
+        &lt;/p&gt;
+    {% endif %}
+&lt;/body&gt;
+{% endverbatim example_two %}</pre>
+            </li>
+        </ul>
+    </div>
+
+    {% verbatim test_area %}
+    <!--        <h1>TEST AREA</h1>-->
+    <!--        {{ test_one }}-->
+    <!--        {% for num in test_one %}-->
+    <!--        <p>{{ num }}</p>-->
+    <!--        {% endfor %}-->
+    <!--        {% if test_two %}-->
+    <!--        <p>included</p>-->
+    <!--        {% else %}-->
+    <!--        <p>not included</p>-->
+    <!--        {% endif %}-->
+    {% endverbatim test_area %}
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - MTV Paradigm
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_mtv_paradigm_anchor"><strong>Django - Model-Template-View Paradigm</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#mtv_vs_mvc_anchor">
+        Differences between an MTV and MVC
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#views_anchor">
+        Views - Importing Models, Querying, and Passing Data to the Template
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#templates_access_display_data_anchor">
+        Templates - Accessing and Displaying the Data
+    </a>
+</li>
+{% endblock %}

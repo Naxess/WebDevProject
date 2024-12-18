@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+{% extends 'base_template_languageguides.html' %}
+
+{% load static %}
+
+{% block head_block %}
+<title>Django - Users</title>
+<link rel="stylesheet" href="{% static 'css/global_styling.css' %}">
+<link rel="stylesheet" href="{% static 'css/effects_styling.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<a id="django_user_model_anchor"><h1>Django <span class="door">-</span> User Model</h1></a>
+<h4>Topics: Users Model, User Model Forms</h4>
+<div class="form-control">
+    <p class="mb-1">
+        In another section (<a href="{% url 'tenappone:django_admin_interface' %}">Admin Interface</a>), we learned how
+        to use the Admin interface to view any models we created. This time we're not interested in the models we
+        created but in the built-in ones. The first page that appears after logging in displays a section called
+        "Authentication and Authorization", under which we can see two rows: <em>Groups</em> and <em>Users</em>. These
+        are built into Django and are created at the same time the project itself is created.
+    </p>
+    <img src="{% static 'media/images/examples/django_user_models.users.png' %}" alt="django_user_models.users.png"
+         class="mb-1">
+    <p class="mb-2">
+        In this guide, we'll cover using Django's built-in tools to create User Authorization Models, how to edit these
+        to include custom fields, and to create forms from the models.
+    </p>
+    <div class="form-control mb-2">
+        <a id="user_model_anchor"><h2>The User Model</h2></a>
+        <!--Tutorial lacks detail, refer to this: https://docs.djangoproject.com/en/5.0/ref/contrib/auth/-->
+        <p class="mb-2">
+            The <em>User</em> class has some built-in fields such as: <em>username, email, password, first name,
+            surname, is_active, is_staff</em>, and <em>is_superuser</em>. We can further customize the User by adding
+            custom fields like links, profile image, etc..
+        </p>
+        <div class="accordion mb-3">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#user_model_fields_id">
+                        List of Built-in Fields
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="user_model_fields_id">
+                    <div class="accordion-body">
+                        <h5 class="mb-3">class models.User</h5>
+                        <table class="table table-bordered">
+                            <tr class="table-primary">
+                                <th>Built-in Field</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <th>username</th>
+                                <td>
+                                    Required. 150 characters or fewer. Usernames may contain alphanumeric, _, @, +, .
+                                    and - characters. The max_length should be sufficient for most use cases. If you
+                                    need a longer length, please use a custom user model.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>first_name</th>
+                                <td>Optional (blank=True). 150 characters or fewer.</td>
+                            </tr>
+                            <tr>
+                                <th>last_name</th>
+                                <td>Optional (blank=True). 150 characters or fewer.</td>
+                            </tr>
+                            <tr>
+                                <th>email</th>
+                                <td>Optional (blank=True). Email address.</td>
+                            </tr>
+                            <tr>
+                                <th>password</th>
+                                <td>
+                                    Required. A hash of, and metadata about, the password. (Django doesn’t store the raw
+                                    password.) Raw passwords can be arbitrarily long and can contain any character. See
+                                    the password documentation.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>groups</th>
+                                <td>Many-to-many relationship to Group</td>
+                            </tr>
+                            <tr>
+                                <th>user_permissions</th>
+                                <td>Many-to-many relationship to Permission</td>
+                            </tr>
+                            <tr>
+                                <th>is_staff</th>
+                                <td>Boolean. Allows this user to access the admin site.</td>
+                            </tr>
+                            <tr>
+                                <th>is_active</th>
+                                <td>
+                                    Boolean. Marks this user account as active. We recommend that you set this flag to
+                                    False instead of deleting accounts. That way, if your applications have any foreign
+                                    keys to users, the foreign keys won’t break.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>is_superuser</th>
+                                <td>
+                                    Boolean. Treats this user as having all permissions without assigning any permission
+                                    to it in particular.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>last_login</th>
+                                <td>A datetime of the user’s last login.</td>
+                            </tr>
+                            <tr>
+                                <th>date_joined</th>
+                                <td>The date/time when the account was created.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#user_model_attributes">
+                        List of Built-in Attributes
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="user_model_attributes">
+                    <div class="accordion-body">
+                        <h5 class="mb-3">class models.User</h5>
+                        <table class="table table-bordered">
+                            <tr class="table-primary">
+                                <th>Attributes</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <th>is_authenticated</th>
+                                <td>
+                                    Read-only attribute which is always True (as opposed to
+                                    AnonymousUser.is_authenticated which is always False). This is a way to tell if the
+                                    user has been authenticated. This does not imply any permissions and doesn’t check
+                                    if the user is active or has a valid session. Even though normally you will check
+                                    this attribute on request.user to find out whether it has been populated by the
+                                    AuthenticationMiddleware (representing the currently logged-in user), you should
+                                    know this attribute is True for any User instance.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>is_anonymous</th>
+                                <td>
+                                    Read-only attribute which is always False. This is a way of differentiating User and
+                                    AnonymousUser objects. Generally, you should prefer using is_authenticated to this
+                                    attribute.
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#user_model_methods">
+                        List of Built-in Methods
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="user_model_methods">
+                    <div class="accordion-body">
+                        <h5 class="mb-3">class models.User</h5>
+                        <table class="table table-bordered">
+                            <tr class="table-primary">
+                                <th>Method</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <th>get_username()</th>
+                                <td>
+                                    Returns the username for the user. Since the User model can be swapped out, you
+                                    should use this method instead of referencing the username attribute directly.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>get_full_name()</th>
+                                <td>Returns the first_name plus the last_name, with a space in between.</td>
+                            </tr>
+
+                            <tr>
+                                <th>get_short_name()</th>
+                                <td>Returns the first_name.</td>
+                            </tr>
+
+                            <tr>
+                                <th>set_password(raw_password)</th>
+                                <td>
+                                    Sets the user’s password to the given raw string, taking care of the password
+                                    hashing. Doesn’t save the User object. When the raw_password is None, the password
+                                    will be set to an unusable password, as if set_unusable_password() were used.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>check_password(raw_password)<br>acheck_password(raw_password)</th>
+                                <td>
+                                    Asynchronous version: acheck_password()
+                                    <br>
+                                    Returns True if the given raw string is the correct password for the user. (This
+                                    takes care of the password hashing in making the comparison.)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>set_unusable_password()</th>
+                                <td>
+                                    Marks the user as having no password set. This isn’t the same as having a blank
+                                    string for a password. check_password() for this user will never return True.
+                                    Doesn’t save the User object.
+                                    <br>
+                                    You may need this if authentication for your application takes place against an
+                                    existing external source such as an LDAP directory.
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th>has_usable_password()</th>
+                                <td>Returns False if set_unusable_password() has been called for this user.</td>
+                            </tr>
+
+                            <tr>
+                                <th>get_user_permissions(obj=None)</th>
+                                <td>
+                                    Returns a set of permission strings that the user has directly.If obj is passed in,
+                                    only returns the user permissions for this specific object.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>get_group_permissions(obj=None)</th>
+                                <td>
+                                    Returns a set of permission strings that the user has, through their groups. If obj
+                                    is passed in, only returns the group permissions for this specific object.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>get_all_permissions(obj=None)</th>
+                                <td>
+                                    Returns a set of permission strings that the user has, both through group and user
+                                    permissions. If obj is passed in, only returns the permissions for this specific
+                                    object.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>has_perm(perm, obj=None)</th>
+                                <td>
+                                    Returns True if the user has the specified permission, where perm is in the format
+                                    "&lt;app label&gt;.&lt;permission codename&gt;". (see documentation on permissions).
+                                    If the user is inactive, this method will always return False. For an active
+                                    superuser, this method will always return True. If obj is passed in, this method
+                                    won’t check for a permission for the model, but for this specific object.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>has_perms(perm_list, obj=None)</th>
+                                <td>
+                                    Returns True if the user has each of the specified permissions, where each perm is
+                                    in the format "&lt;app label&gt;.&lt;permission codename&gt;". If the user is
+                                    inactive, this method will always return False. For an active superuser, this method
+                                    will always return True. If obj is passed in, this method won’t check for
+                                    permissions for the model, but for the specific object.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>has_module_perms(package_name)</th>
+                                <td>
+                                    Returns True if the user has any permissions in the given package (the Django app
+                                    label). If the user is inactive, this method will always return False. For an active
+                                    superuser, this method will always return True.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th>email_user(subject, message, from_email=None, **kwargs)</th>
+                                <td>
+                                    Sends an email to the user. If from_email is None, Django uses the
+                                    DEFAULT_FROM_EMAIL. Any **kwargs are passed to the underlying send_mail() call.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#user_model_manager_methods">
+                        List of Built-in Manager Methods
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="user_model_manager_methods">
+                    <div class="accordion-body">
+                        <h5 class="mb-1">class models.UserManager</h5>
+                        <p class="mb-3">
+                            The User model has a custom manager that has the following helper methods (in addition to
+                            the methods provided by BaseUserManager):
+                        </p>
+                        <table class="table table-bordered">
+                            <tr class="table-primary">
+                                <th>Manager Method</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <th>create_user(username, email=None, password=None, **extra_fields)</th>
+                                <td>
+                                    <p class="mb-1">Creates, saves and returns a User.</p>
+                                    <p class="mb-1">
+                                        The username and password are set as given. The domain portion of email is
+                                        automatically converted to lowercase, and the returned User object will have
+                                        is_active set to True.
+                                    </p>
+                                    <p class="mb-1">
+                                        If no password is provided, set_unusable_password() will be called.
+                                    </p>
+                                    <p class="mb-1">
+                                        The extra_fields keyword arguments are passed through to the User’s __init__
+                                        method to allow setting arbitrary fields on a custom user model.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>create_superuser(username, email=None, password=None, **extra_fields)</th>
+                                <td>Same as create_user(), but sets is_staff and is_superuser to True.</td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    with_perm(perm, is_active=True, include_superusers=True, backend=None, obj=None)
+                                </th>
+                                <td>
+                                    <p class="mb-1">
+                                        Returns users that have the given permission perm either in the
+                                        "&lt;app label&gt;.&lt;permission codename&gt;" format or as a Permission
+                                        instance. Returns an empty queryset if no users who have the perm found.
+                                    </p>
+                                    <p class="mb-1">
+                                        If is_active is True (default), returns only active users, or if False, returns
+                                        only
+                                        inactive users. Use None to return all users irrespective of active state.
+                                    </p>
+                                    <p class="mb-1">
+                                        If include_superusers is True (default), the result will include superusers.
+                                    </p>
+                                    <p class="mb-1">
+                                        If backend is passed in and it’s defined in AUTHENTICATION_BACKENDS, then this
+                                        method will use it. Otherwise, it will use the backend in
+                                        AUTHENTICATION_BACKENDS, if there is only one, or raise an exception.
+                                    </p>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-control mb-1">
+            <a id="adding_custom_fields_user_anchor"><h3>Adding Custom Fields to the User Model</h3></a>
+            <p class="mb-1">
+                In the below example, we add two extra fields: a ImageField and a URLField. But we cannot add it to
+                the User model directly, so we create another model instead, that has a one-to-one relationship with
+                User. See below for a demonstration on how to do this:
+            </p>
+            <ul>
+                <li>
+                    In your models.py, import <em>User</em> from <em>django.contrib.auth.models</em>, like so:
+                    <br>
+                    <code>from django.contrib.auth.models import User</code>
+                </li>
+                <li>
+                    Create a model by creating a class that inherits from <em>models.Model</em>. Example:
+                    <br>
+                    <code>class ExampleUserModel(models.Model)</code>
+                </li>
+                <li>
+                    Establish a relationship with the User model by creating a first with one-to-one relationship to the
+                    User model by using <em>models.OneToOneField(User, on_delete=models.CASCADE)</em>. The
+                    <em>on_delete</em> attribute has been set to <em>models.CASCADE</em> which means if the related User
+                    is deleted, so will the current entry. Other possible values for <em>on_delete</em>: <u>PROTECT</u>,
+                    <u>RESTRICT</u>, <u>SET_NULL</u>, <u>SET_DEFAULT</u>, <u>SET()</u>, and <u>DO_NOTHING</u>. See
+                    details for each <a
+                        href="https://docs.djangoproject.com/en/5.0/ref/models/fields/#django.db.models.ForeignKey.on_delete">here</a>.
+                    <br>
+                    Example:
+                    <br>
+                    <code>user = models.OneToOneField(User, on_delete=models.CASCADE)</code>
+                </li>
+                <li>
+                    Add any desired fields. Example:
+                    <br>
+                    <pre class="mb-1">
+portfolio = models.URLField(blank=True)
+picture = models.ImageField(upload_to='profile_pics', blank=True) # see this <a
+                            href="{% url 'tenappone:django_models' %}#files_setup_anchor">section</a> for ImageField guide
+</pre>
+                </li>
+                <li>
+                    Lastly, import, then register the model in the <em>admin.py</em> file. Example:
+                    <br>
+                    <pre>
+from first_app.models import ExampleUserModel
+...
+admin.site.register(ExampleUserModel)
+</pre>
+                </li>
+            </ul>
+
+            <div class="form-control mb-1">
+                <h6>Models.py Example:</h6>
+                <pre class="mb-1">
+from django.db import models
+from django.contrib.auth.models import User
+
+class ExampleUserModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    portfolio = models.URLField(blank=True)
+    picture = models.ImageField(upload_to='profile_pics', blank=True)
+
+    # Optional
+    def __str__(self):
+        return self.user.username
+</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="creating_forms_from_modelforms_anchor"><h2>Creating Forms from User Models</h2></a>
+        <p class="mb-1">Steps to creating a form from our User model:</p>
+        <ul>
+            <li>
+                In the <em>forms.py</em> file, import <em>forms</em> from <em>django</em>, if it isn't already imported.
+                See example:
+                <br>
+                <code>from django import forms</code>
+            </li>
+            <li>
+                In the <em>forms.py</em> file, import <em>User</em> from <em>django.contrib.auth.models</em>. See
+                example:
+                <br>
+                <code>from django.contrib.auth.models import User</code>
+            </li>
+            <li>
+                Next, import the User model we created from <em>models.py</em>. Example:
+                <br>
+                <code>from first_app.models import ExampleUserModel</code>
+            </li>
+            <li>
+                Creating the form for the <em>User</em>'s built-in fields:
+                <ul>
+                    <li>
+                        Create a class that inherits from <em>forms.ModelForm</em>. Name it as desired. See example:
+                        <br>
+                        <code>class ExampleUserModelForm(forms.ModelForm):</code>
+                    </li>
+                    <li>
+                        Create a field for this ModelForm, named "password". Set the type as <em>CharField</em>, set its
+                        <em>widget</em> attribute to <em>forms.PasswordInput</em>. The reason why we're explicitly
+                        adding and editing the password field in spite of it being an built-in field is because we want
+                        to make use of the <em>forms.PasswordInput</em> widget. This is what hides the password from
+                        being displayed in plain text while it is being entered. This step is technically optional but
+                        is highly recommended. See below example:
+                        <br>
+                        <pre>
+class ExampleUserModelForm(forms.ModelForm):
+    <mark>password = forms.CharField(widget=forms.PasswordInput)</mark>
+</pre>
+                    </li>
+                    <li>
+                        Within the ModelForm, create an inner class named "Meta". See example:
+                        <br>
+                        <pre class="mb-0">
+class ExampleUserModelForm(forms.ModelForm):
+    ...
+    <mark>class Meta:</mark>
+</pre>
+                    </li>
+                    <li>
+                        Create a variable within the Meta class named "model" and set the value equal to the import
+                        "User" model. See below example:
+                        <br>
+                        <pre class="mb-0">
+class Meta:
+    <mark>model = User</mark>
+</pre>
+                    </li>
+                    <li>
+                        Create another variable within the Meta class named "fields". There are several options here -
+                        we can choose to include all fields or only some fields or exclude fields. Refer to this <a
+                            href="{% url 'tenappone:django_model_forms' %}#field_options_anchor">section</a> for a
+                        detailed guide. For our example, we will specify exactly which fields to use (excluding anything
+                        not explicitly added):
+                        <br>
+                        <code>fields = ('username', 'email', 'password')</code>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Creating the form for our <em>User</em>'s custom fields (not required if no custom fields were added):
+                <ul>
+                    <li>
+                        Create a ModelForm by creating a class that inherits from <em>forms.ModelForm</em>. Name as
+                        desired, but differentiate it from the modelform we created in the previous step. Example:
+                        <br>
+                        <code>class ExampleUserModelExtrasForm(forms.ModelForm):</code>
+                    </li>
+                    <li>
+                        Within this modelform, create an inner class called "Meta". Example:
+                        <br>
+                        <pre class="mb-0">
+class ExampleUserExtrasModelForm(forms.ModelForm):
+    ...
+    <mark>class Meta:</mark>
+</pre>
+                    </li>
+                    <li>
+                        Create a variable within the Meta class called "model". Instead of setting the value equal to
+                        "User" as we did in the previous steps, we need to set it to the User model that we created.
+                        The reason being that it is where we declared the custom fields. Example:
+                        <br>
+                        <code>model = ExampleUserModel</code>
+                    </li>
+                    <li>
+                        Create another variable within the Meta class named "fields". Set the value to a tuple that
+                        includes the string names of the desired custom fields as items.
+                        <br>
+                        <code>fields = ('portfolio', 'picture')</code>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="form-control mb-2">
+            <h6>Forms.py Example:</h6>
+            <pre>
+from django import forms
+from django.contrib.auth.models import <span style="background-color:red;color:white;"><strong> User </strong></span>
+from first_app.models import <span
+                    style="background-color:green;color:white;"><strong> ExampleUserModel </strong></span>
+
+class ExampleUserModelForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = <span style="background-color:red;color:white;"><strong> User </strong></span>
+        fields = ('username', 'email', 'password')
+
+# Not required if no custom fields were added to the User model (ExampleUserModel)
+class ExampleUserExtrasModelForm(forms.ModelForm):
+    class Meta:
+        model = <span style="background-color:green;color:white;"><strong> ExampleUserModel </strong></span>
+        fields = ('portfolio', 'picture')
+</pre>
+        </div>
+        <div class="form-control mb-1">
+            <h6>Forms.py Example#2 (using the <em>attrs</em> parameter to improve appearance):</h6>
+            <p class="mb-1">
+                The optional <em>attrs</em> attribute is a dict that takes in HTML tag element attributes, like
+                <em>class</em>, <em>href</em>, <em>src</em>, etc. as key values. For the values, supplied the desired
+                value. In the example below, we supply the <em>class</em> attribute as the key and
+                <em>"form-control"</em> (a Bootstrap class) as the desired value.
+            </p>
+            <pre class="mb-1">
+from django import forms
+from django.contrib.auth.models import <span style="background-color:red;color:white;"><strong> User </strong></span>
+from first_app.models import <span
+                    style="background-color:green;color:white;"><strong> ExampleUserModel </strong></span>
+
+class ExampleUserModelForm(forms.ModelForm):
+    username = forms.CharField(widget=forms.TextInput(<mark>attrs={'class': 'form-control'}</mark>))
+    email = forms.EmailField(widget=forms.EmailInput(<mark>attrs={'class': 'form-control'}</mark>))
+    password = forms.CharField(widget=forms.PasswordInput(<mark>attrs={'class': 'form-control'}</mark>))
+    class Meta:
+        model = <span style="background-color:red;color:white;"><strong> User </strong></span>
+        fields = ('username', 'email', 'password')
+
+# Not required if no custom fields were added to the User model (ExampleUserModel)
+class ExampleUserExtrasModelForm(forms.ModelForm):
+    picture = forms.ImageField(widget=<mark><u>forms.ClearableFileInput</u></mark>(<mark>attrs={'class': 'form-control'}</mark>), required=False)
+                # Note that we use <em>forms.ClearableFileInput</em> for ImageField widget. A <em>FileInput</em> widget will not work here.
+    portfolio = forms.URLField(widget=forms.URLInput(<mark>attrs={'class': 'form-control'}</mark>), required=False)
+    class Meta:
+        model = <span style="background-color:green;color:white;"><strong> ExampleUserModel </strong></span>
+        fields = ('portfolio', 'picture')
+</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-2">
+        <a id="using_created_modelforms_anchor"><h2>User registration view - using the created ModelForms</h2></a>
+        <p class="mb-1">
+            To use the created ModelForms from the previous section in the desired template/webpage, we need to first
+            import the forms into the associated view function. Then we need to edit the view function to handle
+            POST/GET requests. Depending on the request, it can be edited to display the form or something else. See
+            below for an example of a view function:
+        </p>
+        <div class="form-control mb-2">
+            <h6>Example views.py function:</h6>
+            <pre class="mb-1">
+from first_app.forms import ExampleUserModelForm, ExampleUserExtrasModelForm
+
+def register(request):
+    registered = False
+
+    if request.method == 'POST': <mark># Processes the forms' data, if it's a POST request</mark>
+        <mark># Creates a form instance of ExampleUserModelForm and populates its with data from the request</mark>
+        user_form = ExampleUserModelForm(data=request.POST)
+
+        <mark># Creates a form instance of ExampleUserExtrasModelForm and populates its with data from the request</mark>
+        user_extras_form = ExampleUserExtrasModelForm(data=request.POST)
+
+        if user_form.is_valid() and user_extras_form.is_valid():  <mark># Checks whether the form instances' fields are valid</mark>
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = user_extras_form.save(commit=False)  <mark># Set to false for now to provent collisions with user</mark>
+            profile.user = user  <mark># Sets a 1-to-1 relationship with the User</mark>
+
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+
+            profile.save()  <mark># Once the relationship and the values are set, then it's safe to save</mark>
+
+            registered = True
+        else:
+            print(user_form.errors, user_extras_form.errors)
+    else: <mark># If its a GET request, then we return the unpopulated forms</mark>
+        user_form = ExampleUserModelForm()
+        user_extras_form = ExampleUserExtrasModelForm()
+
+    register_dict = {'user_form': user_form, 'user_extras_form': user_extras_form, 'registered': registered}
+    return render(request, 'first_app/registration.html', context=register_dict)
+</pre>
+        </div>
+
+        <p class="mb-2">
+            Below is an example of a HTML webpage that uses the forms we created. Note that we need to supply both
+            forms to get both the in-built fields (<em>username, email</em>, and <em>password</em>) as well as the
+            custom ones (e.g. <em>portfolio</em> and <em>picture</em>).
+        </p>
+        <div class="form-control mb-1">
+            <h6>Example HTML webpage:</h6>
+            <pre class="mb-1">{% verbatim %}
+&lt;!DOCTYPE html&gt;
+&lt;head&gt;
+    &lt;title&gt;Registration&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Registration&lt;/h1&gt;
+    {% if registered %}
+        &lt;h1&gt;Thanks for registering!&lt;/h1&gt;
+    {% else %}
+        &lt;h1&gt;Register Here!&lt;/h1&gt;
+        &lt;h2&gt;Please fill out the form below:&lt;/h2&gt;
+        &lt;form method="POST" enctype="multipart/form-data"&gt; <mark>&lt;!-- <em>enctype</em> required because it handles multimedia types --&gt;</mark>
+            {% csrf_token %} <mark>&lt;!-- Required. token used to prevent CSRF attacks --&gt;</mark>
+            {{ user_form.as_p }} <mark>&lt;!-- The <em>as_p</em> function is optional, it renders the form as a paragraph, improving appearance --&gt;</mark>
+            {{ user_extras_form.as_p }}
+            &lt;input type="submit" value="Register"&gt;
+        &lt;/form&gt;
+    {% endif %}
+&lt;/body&gt;
+{% endverbatim %}</pre>
+        </div>
+    </div>
+
+    <div class="form-control mb-1">
+        <a id="create_superuser_anchor"></a>
+        <h2>Creating a Superuser</h2>
+        <p class="mb-1">
+            Create a superuser using the following <em>createsuperuser</em> command in the command prompt:
+        </p>
+        <pre class="mb-1">
+python manage.py createsuperuser --username=&lt;<em>desired_username</em>&gt; --email=&lt;<em>email</em>&gt;
+</pre>
+        <p class="mb-0">
+            It will then prompt you for a password. After it's been successfully supplied, it will create the account.
+            Note: The <em>username</em> and <em>email</em> options are not optional, they must both be supplied.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block chapter_block %}
+Django - User Model
+{% endblock %}
+
+{% block glossary_block %}
+<li>
+    <a class="dropdown-item" href="#django_user_model_anchor"><strong>Django - User Model</strong></a>
+</li>
+<li>
+    <a class="dropdown-item" href="#user_model_anchor">The User Model</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#adding_custom_fields_user_anchor">
+        &nbsp;&nbsp;&nbsp;Adding Custom Fields to the User Model
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#creating_forms_from_modelforms_anchor">Creating Forms from User Models</a>
+</li>
+<li>
+    <a class="dropdown-item" href="#using_created_modelforms_anchor">
+        User registration view - using the created ModelForms
+    </a>
+</li>
+<li>
+    <a class="dropdown-item" href="#create_superuser_anchor">Creating a Superuser</a>
+</li>
+{% endblock %}
